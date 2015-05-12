@@ -1,0 +1,101 @@
+// Name:            Switch
+//
+// Description:     Display checkboxes as on/off switches
+//
+// Component:       `data-switch`
+//
+// Sub-objects:     `switch-container`
+//                  `switch-label`
+//                  `switch-handle`
+//
+// States:          `on`
+//                  `off`
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@switch-width: 75px;
+@switch-height: 30px;
+@switch-container-width: 120px;
+@switch-container-height: 100%;
+
+@switch-background-color: @color-primary-background;
+@switch-label-background-color: #fff;
+@switch-handle-color: #fff;
+@switch-off-background-color: #777;
+
+// ========================================================================
+// Component: Sticky
+// ========================================================================
+
+.switch {
+	.size(@switch-width, @switch-height);
+	display: inline-block;
+	background-color: @switch-background-color;
+	.transition(350ms ease-in-out);
+	.border-radius(15px);
+	overflow: hidden;
+	position: relative;
+	.user-select(none);
+
+	input {
+		&[type="checkbox"] {
+			clip: rect(0, 0, 0, 0);
+			position: absolute;
+			.size(1);
+			margin: -1px;
+			overflow: hidden;
+		}
+	}
+
+	// Sub-object `switch-container`
+	// ========================================================================
+
+	&-container {
+		.size(@switch-container-width, @switch-container-height);
+		position: relative;
+		.transition(350ms ease-in-out);
+		left: 0;
+		cursor: pointer;
+		> * {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	// Sub-object `switch-label`
+	// ========================================================================
+
+	&-label {
+		.size(24);
+		margin: 3px;
+		background-color: @switch-label-background-color;
+		.border-radius(50%);
+	}
+
+	// Sub-object `switch-handle`
+	// ========================================================================
+
+	&-handle {
+		line-height: 22px;
+		.size(45, 30);
+		padding: 4px;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 14px;
+		color: @switch-handle-color;
+	}
+
+	&.off {
+
+		background-color: @switch-off-background-color;
+		.switch-container {
+			left: -45px;
+		}
+	}
+}

@@ -1,0 +1,148 @@
+// Name:            Subnav
+//
+// Description:     Defines styles for the sub navigation
+//
+// Component:       `subnav`
+//
+// Modifiers:       `subnav-line`
+//                  `subnav-pill`
+//
+// States:          `active`
+//
+// Markup:
+// <!-- subnav -->
+// <ul class="subnav">
+//     <li><a href=""></a></li>
+// </ul>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@subnav-margin-horizontal: 10px;
+@subnav-margin-vertical: @subnav-margin-horizontal;
+
+@subnav-color: #444;
+@subnav-hover-color: @link-color;
+@subnav-hover-text-decoration: none;
+@subnav-active-color: @link-color;
+
+@subnav-line-border-height: 10px;
+@subnav-line-border: @base-border-color;
+@subnav-line-border-width: 1px;
+
+@subnav-pill-padding-vertical: 3px;
+@subnav-pill-padding-horizontal: 9px;
+@subnav-pill-hover-background: #eee;
+@subnav-pill-hover-color: #444;
+@subnav-pill-active-background: @color-primary-background;
+@subnav-pill-active-color: @color-white;
+
+@subnav-disabled-color: #999;
+
+// ========================================================================
+// Component: Subnav
+// ========================================================================
+
+.subnav {
+	.display(flex);
+	.flex-wrap(wrap);
+	margin-top: -@subnav-margin-vertical;
+	padding: 0;
+	list-style: none;
+	.clearfix();
+
+	> * {
+		.flex(none);
+		margin-top: @subnav-margin-vertical;
+		position: relative;
+		float: left;
+
+		+ * {
+			padding-left: @subnav-margin-horizontal;
+		}
+
+		> * {
+			display: inline-block;
+			color: @subnav-color;
+
+			// Hover/Focus
+			&:hover,
+			&:focus {
+				color: @subnav-hover-color;
+				text-decoration: @subnav-hover-text-decoration;
+			}
+		}
+	}
+
+	// Active
+	> .active {
+		> * {
+			color: @subnav-active-color;
+		}
+	}
+
+	// Modifier: "subnav-line"
+	// ========================================================================
+
+	&-line {
+		> :before {
+			content: "";
+			display: inline-block;
+			height: @subnav-line-border-height;
+			vertical-align: middle;
+		}
+		> :nth-child(n+2) {
+			&:before {
+				margin-right: @subnav-margin-horizontal;
+				border-left: @subnav-line-border-width solid @subnav-line-border;
+			}
+		}
+	}
+
+	// Modifier: "subnav-pill"
+	// ========================================================================
+
+	&-pill {
+		> * {
+			> * {
+				padding: @subnav-pill-padding-vertical @subnav-pill-padding-horizontal;
+
+				// Hover
+				&:hover,
+				&:focus {
+					background-color: @subnav-pill-hover-background;
+					color: @subnav-pill-hover-color;
+					text-decoration: none;
+					outline: none;
+				}
+			}
+		}
+
+		// Active
+		> .active {
+			> * {
+				background-color: @subnav-pill-active-background;
+				color: @subnav-pill-active-color;
+				box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+			}
+		}
+	}
+
+
+	// Disabled state
+	// ========================================================================
+
+	> .disabled {
+		> * {
+			background-color: transparent;
+			color: @subnav-disabled-color;
+			text-decoration: none;
+			cursor: text;
+			box-shadow: none;
+		}
+	}
+}

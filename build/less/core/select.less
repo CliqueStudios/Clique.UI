@@ -1,0 +1,65 @@
+// Name:            Select
+//
+// Description:     Defines styles for the Select Component
+//
+// Component:       `select`
+//
+// Sub-objects:     `select-link`
+//
+// Markup:
+// <select data-select>
+//     <option value="">...</option>
+//     <option value="">...</option>
+//     <option value="">...</option>
+// </select>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+// ========================================================================
+// Component: Select
+// ========================================================================
+
+.select {
+	position: relative;
+	> .dropdown {
+		width: 100%;
+	}
+
+	&-link {
+		height: 30px;
+		line-height: 22px;
+		max-width: 100%;
+		padding: 4px 6px;
+		border: 1px solid #ddd;
+		background: #fff;
+		width: 100%;
+		display: block;
+		.transition(linear 200ms);
+
+		&:after {
+			content: "\e9be";
+			font-family: "icomoon";
+			position: absolute;
+			right: 15px;
+			top: 50%;
+			transform: translate(0, -50%);
+		}
+
+		&,
+		&:hover,
+		&:focus {
+			color: #444;
+			text-decoration: none;
+		}
+
+		.open & {
+			border-color: #99baca;
+			background: #f5fbfe;
+		}
+	}
+}

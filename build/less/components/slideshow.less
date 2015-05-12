@@ -1,0 +1,140 @@
+// Name:            Slideshow
+//
+// Description:     Defines styles for a slideshow
+//
+// Component:       `slideshow`
+//
+// Modifiers:       `slideshow-fullscreen`
+//
+// Sub-modifier:    `slideshow-fade-out`
+//                  `slideshow-scroll-forward-in`
+//                  `slideshow-scroll-forward-out`
+//                  `slideshow-scroll-backward-in`
+//                  `slideshow-scroll-backward-out`
+//                  `slideshow-scale-out`
+//                  `slideshow-swipe-forward-in`
+//                  `slideshow-swipe-forward-out`
+//                  `slideshow-swipe-backward-in`
+//                  `slideshow-swipe-backward-out`
+//
+// States:          `active`
+//
+// Uses:            Cover (JS)
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Component: Slideshow
+// ========================================================================
+
+.slideshow {
+	position: relative;
+	z-index: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+	touch-action: pan-y;
+}
+
+// Sub-object `slides`
+// ========================================================================
+
+.slideshow {
+	> li {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		opacity: 0;
+		> img {
+			visibility: hidden;
+		}
+	}
+
+	// Active
+	> .active {
+		z-index: 10;
+		opacity: 1;
+	}
+}
+
+// Pointer for controls
+[data-slideshow-slide] {
+	cursor: pointer;
+}
+
+
+// Modifier: `slideshow-fullscreen`
+// ========================================================================
+
+.slideshow-fullscreen {
+	&,
+	> li {
+		height: 100vh;
+	}
+}
+
+// Animations
+// ========================================================================
+
+// Fade
+.slideshow-fade-out {
+	.animation(fade 0.5s linear reverse);
+}
+
+// Scroll
+.slideshow-scroll-forward-in {
+	.animation(slide-right 0.5s ease-in-out);
+}
+
+.slideshow-scroll-forward-out {
+	.animation(slide-left 0.5s ease-in-out reverse);
+}
+
+.slideshow-scroll-backward-in {
+	.animation(slide-left 0.5s ease-in-out);
+}
+
+.slideshow-scroll-backward-out {
+	.animation(slide-right 0.5s ease-in-out reverse);
+}
+
+// Scale
+.slideshow-scale-out {
+	.animation(fade-scale-15 0.5s ease-in-out reverse);
+}
+
+// Swipe
+.slideshow-swipe-forward-in {
+	.animation(slide-left-33 0.5s ease-in-out);
+}
+
+.slideshow-swipe-forward-out {
+	.animation(slide-left 0.5s ease-in-out reverse);
+}
+
+.slideshow-swipe-backward-in {
+	.animation(slide-right-33 0.5s ease-in-out);
+}
+
+.slideshow-swipe-backward-out {
+	.animation(slide-right 0.5s ease-in-out reverse);
+}
+
+.slideshow-swipe-forward-in,
+.slideshow-swipe-backward-in {
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		background-color: rgba(0, 0, 0, 0.6);
+		.animation(fade 0.5s ease-in-out reverse);
+	}
+}

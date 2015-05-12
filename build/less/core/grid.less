@@ -1,0 +1,344 @@
+// Name:            Grid
+//
+// Description:     Provides a responsive, fluid and nestable row
+//
+// Component:       `row`
+//                  `col-*`
+//                  `push-*`
+//                  `pull-*`
+//
+// Modifiers:       `row-collapse`
+//                  `row-small`
+//                  `row-medium`
+//                  `row-divider`
+//                  `row-margin`
+//                  `row-match`
+//                  `row-col-*`
+//
+// Uses:            Panel: `panel`
+//
+// Used by:         Dropdown
+//
+// Markup:
+// <div class="row">
+//     <div class="col-1-2"></div>
+//     <div class="col-1-2"></div>
+// </div>
+// <!-- row-divider -->
+// <div class="row row-divider">
+//     <div class="col-1-2"></div>
+//     <div class="col-1-2"></div>
+// </div>
+// <hr class="row-divider">
+// <div class="row row-divider">
+//     <div class="col-1-2"></div>
+//     <div class="col-1-2"></div>
+// </div>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@row-gutter-horizontal: 		20px;
+@row-gutter-vertical: 			20px;
+
+@row-gutter-large-horizontal: 	30px;
+@row-gutter-large-vertical: 	30px;
+
+@row-gutter-small-horizontal: 	10px;
+@row-gutter-small-vertical: 	10px;
+
+@row-divider-border: 			#ddd;
+@row-divider-border-width: 		1px;
+
+// ========================================================================
+// Component: Grid
+// ========================================================================
+
+[class*="row"] {
+	> * {
+		max-width: 100%;
+	}
+}
+.row {
+	.display(flex);
+	.flex-wrap(wrap);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	margin-left: -@row-gutter-horizontal;
+	.noflex & {
+		display: block;
+		&:before,
+		&:after {
+			content: "";
+			display: block;
+			overflow: hidden;
+		}
+		&:after {
+			clear: both;
+		}
+		> * {
+			float: left;
+			&:only-child {
+				float: none;
+			}
+		}
+	}
+	> * {
+		.flex(none);
+		margin: 0;
+		padding-left: @row-gutter-horizontal;
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.row + .row,
+.row-margin,
+.row > * > .panel + .panel {
+	margin-top: @row-gutter-vertical;
+}
+
+// Large screen and bigger
+@media (min-width: @breakpoint-xlarge) {
+	.row {
+		margin-left: -@row-gutter-large-horizontal;
+		> * {
+			padding-left: @row-gutter-large-horizontal;
+		}
+	}
+	.row + .row,
+	.row-margin,
+	.row > * > .panel + .panel {
+		margin-top: @row-gutter-large-vertical;
+	}
+}
+
+.row-collapse {
+	margin-left: 0;
+	> * {
+		padding-left: 0;
+	}
+}
+
+// Vertical
+.row-collapse + .row-collapse,
+.row-collapse > .row-margin,
+.row-collapse > * > .panel + .panel {
+	margin-top: 0;
+}
+
+// Horizontal
+.row-small {
+	margin-left: -@row-gutter-small-horizontal;
+}
+
+.row-small > * {
+	padding-left: @row-gutter-small-horizontal;
+}
+
+// Vertical
+.row-small + .row-small,
+.row-small > .row-margin,
+.row-small > * > .panel + .panel {
+	margin-top: @row-gutter-small-vertical;
+}
+
+// Horizontal
+.row-medium {
+	margin-left: -@row-gutter-horizontal;
+}
+
+.row-medium > * {
+	padding-left: @row-gutter-horizontal;
+}
+
+// Vertical
+.row-medium + .row-medium,
+.row-medium > .row-margin,
+.row-medium > * > .panel + .panel {
+	margin-top: @row-gutter-vertical;
+}
+
+
+// Modifier: `row-divider`
+// ========================================================================
+
+// Horizontal divider
+// Only works with the default gutter. Does not work with gutter collapse, small or large.
+// Does not work with `push-*`, `pull-*` and not if the columns float into the next row.
+.row-divider {
+	&:not(:empty) {
+		margin-left: -@row-gutter-horizontal;
+		margin-right: -@row-gutter-horizontal;
+	}
+	> * {
+		padding-left: @row-gutter-horizontal;
+		padding-right: @row-gutter-horizontal;
+	}
+	> [class*="col-1-"] {
+		&:not(.col-1-1) {
+			&:nth-child(n+2) {
+				border-left: @row-divider-border-width solid @row-divider-border;
+			}
+		}
+	}
+	> [class*="col-2-"],
+	> [class*="col-3-"],
+	> [class*="col-4-"],
+	> [class*="col-5-"],
+	> [class*="col-6-"],
+	> [class*="col-7-"],
+	> [class*="col-8-"],
+	> [class*="col-9-"] {
+		&:nth-child(n+2) {
+			border-left: @row-divider-border-width solid @row-divider-border;
+		}
+	}
+}
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	.row-divider {
+		> [class*="col-medium-"] {
+			&:not(.col-medium-1-1) {
+				&:nth-child(n+2) {
+					border-left: @row-divider-border-width solid @row-divider-border;
+				}
+			}
+		}
+	}
+}
+
+// Desktop and bigger
+@media (min-width: @breakpoint-large) {
+	.row-divider {
+		> [class*="col-large-"] {
+			&:not(.col-large-1-1) {
+				&:nth-child(n+2) {
+					border-left: @row-divider-border-width solid @row-divider-border;
+				}
+			}
+		}
+	}
+}
+
+// Large screen and bigger
+@media (min-width: @breakpoint-xlarge) {
+	.row-divider {
+		&:not(:empty) {
+			margin-left: -@row-gutter-large-horizontal;
+			margin-right: -@row-gutter-large-horizontal;
+		}
+		> * {
+			padding-left: @row-gutter-large-horizontal;
+			padding-right: @row-gutter-large-horizontal;
+		}
+		&:empty {
+			margin-top: @row-gutter-large-vertical;
+			margin-bottom: @row-gutter-large-vertical;
+		}
+	}
+}
+
+.row-divider {
+	&:empty {
+		margin-top: @row-gutter-vertical;
+		margin-bottom: @row-gutter-vertical;
+		border-top: @row-divider-border-width solid @row-divider-border;
+	}
+}
+
+.row-match {
+	> * {
+		.display(flex);
+		> * {
+			.flex(none);
+			width: 100%;
+		}
+	}
+}
+
+// Base 12 Rows
+.make-row-grid(12);
+
+// Phone landscape and bigger
+@media (min-width: @breakpoint-small) {
+	.make-row-grid(12, small);
+}
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	.make-row-grid(12, medium);
+}
+
+// Desktop and bigger
+@media (min-width: @breakpoint-large) {
+	.make-row-grid(12, large);
+}
+
+// Large screen and bigger
+@media (min-width: @breakpoint-xlarge) {
+	.make-row-grid(12, xlarge);
+}
+
+
+// Sub-objects: `col-*`
+// ========================================================================
+
+[class*="col"] {
+}
+
+// 12 Column Grid
+.make-col-grid(12);
+
+// 10 Column Grid
+.make-col-grid(10);
+
+@media (min-width: @breakpoint-small) {
+
+	// 12 Column Grid
+	.make-col-grid(12, small);
+
+	// 10 Column Grid
+	.make-col-grid(10, small);
+}
+
+@media (min-width: @breakpoint-medium) {
+
+	// 12 Column Grid
+	.make-col-grid(12, medium);
+
+	// 10 Column Grid
+	.make-col-grid(10, medium);
+}
+
+@media (min-width: @breakpoint-large) {
+
+	// 12 Column Grid
+	.make-col-grid(12, large);
+
+	// 10 Column Grid
+	.make-col-grid(10, large);
+}
+
+// Sub-object: `push-*` and `pull-*`
+// ========================================================================
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	[class*="push-"],
+	[class*="pull-"] {
+		position: relative;
+	}
+	.make-push-grid(12);
+	.make-push-grid(10);
+
+	.make-pull-grid(12);
+	.make-pull-grid(10);
+}

@@ -1,0 +1,75 @@
+// Name:            Thumbnav
+//
+// Description:     Defines styles for a thumbnail navigation
+//
+// Component:       `thumbnav`
+//
+// States:          `active`
+//
+// Markup:
+// <!-- thumbnav -->
+// <ul class="thumbnav">
+//     <li class="active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@thumbnav-margin-horizontal: 10px;
+@thumbnav-margin-vertical: @thumbnav-margin-horizontal;
+@thumbnav-background: @color-white;
+@thumbnav-opacity: 0.7;
+@thumbnav-hover-opacity: 1;
+@thumbnav-active-opacity: 1;
+
+// ========================================================================
+// Component: Thumbnav
+// ========================================================================
+
+.thumbnav {
+	.display(flex);
+	.flex-wrap(wrap);
+	margin-left: -@thumbnav-margin-horizontal;
+	margin-top: -@thumbnav-margin-vertical;
+	padding: 0;
+	list-style: none;
+
+	// Items
+	// ========================================================================
+
+	> * {
+		.flex(none);
+		padding-left: @thumbnav-margin-horizontal;
+		margin-top: @thumbnav-margin-vertical;
+		> * {
+			display: block;
+			background-color: @thumbnav-background;
+			> img {
+				opacity: @thumbnav-opacity;
+				.transition(opacity 150ms linear);
+			}
+
+			// Hover
+			&:hover,
+			&:focus {
+				> img {
+					opacity: @thumbnav-hover-opacity;
+				}
+			}
+		}
+	}
+
+	// Active
+	> .active {
+		> * {
+			> img {
+				opacity: @thumbnav-active-opacity;
+			}
+		}
+	}
+}

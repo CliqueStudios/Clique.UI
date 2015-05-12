@@ -1,0 +1,92 @@
+// Name:            Close
+//
+// Description:     Defines styles for a close button
+//
+// Component:       `close`
+//
+// Modifiers:       `close-alt`
+//
+// Uses:            Icon: "icomoon"
+//
+// Used by:         Alert
+//                  Modal
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@close-size: 20px;
+@close-alt-padding: 2px;
+@close-alt-background: #eee;
+
+// ========================================================================
+// Component: Close
+// ========================================================================
+
+.close {
+	margin: 0;
+	border: none;
+	overflow: visible;
+	font: inherit;
+	color: inherit;
+	text-transform: none;
+	padding: 0;
+	background-color: transparent;
+	display: inline-block;
+	.size(@close-size);
+	min-height: 0;
+	line-height: 1;
+	text-align: center;
+	vertical-align: middle;
+	opacity: 0.3;
+	position: relative;
+
+	&:hover,
+	&:focus {
+		opacity: 0.5;
+		outline: none;
+		color: inherit;
+		text-decoration: none;
+		cursor: pointer;
+		background-color: transparent;
+	}
+
+	&:after {
+		display: block;
+		content: "\ea0f";
+		font-family: "icomoon";
+		.center-vertically();
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+}
+
+// Modifier
+// ========================================================================
+
+.close-alt {
+	padding: @close-alt-padding;
+	.border-radius(50%);
+	background-color: @close-alt-background;
+	opacity: 1;
+
+	&:hover,
+	&:focus {
+		opacity: 1;
+		background-color: @close-alt-background;
+
+		&:after {
+			opacity: 0.8;
+		}
+	}
+
+	&:after {
+		opacity: 0.5;
+	}
+}

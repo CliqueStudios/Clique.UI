@@ -1,0 +1,43 @@
+// Name:            Form select
+//
+// Description:     Extends form component
+//
+// Component:       `form`
+//
+// Sub-objects:     `form-select`
+//
+// Markup:
+// <!-- form-select -->
+// <div class="form-select" data-form-select>
+//     <span></span>
+//     <select>
+//         <option value=""></option>
+//     </select>
+// </div>
+// ========================================================================
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Component: Form select
+// ========================================================================
+
+.form-select {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	.border-radius(3px);
+
+	select {
+		position: absolute;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		cursor: pointer;
+		left: 0;
+	}
+}

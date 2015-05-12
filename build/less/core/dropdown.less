@@ -1,0 +1,249 @@
+// Name:            Dropdown
+//
+// Description:     Defines styles for a toggleable dropdown
+//
+// Component:       `dropdown`
+//
+// Modifiers:       `dropdown-flip`
+//                  `dropdown-center`
+//                  `dropdown-justify`
+//                  `dropdown-up`
+//                  `dropdown-grid`
+//                  `dropdown-col-2`
+//                  `dropdown-col-3`
+//                  `dropdown-col-4`
+//                  `dropdown-col-5`
+//                  `dropdown-stack`
+//                  `dropdown-small`
+//                  `dropdown-navbar`
+//                  `dropdown-scrollable`
+//
+// States:          `open`
+//
+// Uses:            Animation
+//                  Grid: `col-*`
+//                  Panel: `panel`
+//                  Nav: `nav`
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@dropdown-z-index: 970;
+@dropdown-width: 200px;
+@dropdown-margin-top: 5px;
+@dropdown-padding: 15px;
+@dropdown-background: @color-white;
+@dropdown-color: #444;
+@dropdown-font-size: 1rem;
+@dropdown-animation: fade;
+@dropdown-divider-border-width: 1px;
+@dropdown-divider-border: @base-border-color;
+@dropdown-small-padding: 5px;
+@dropdown-navbar-margin: 0;
+@dropdown-navbar-background: #f5f5f5;
+@dropdown-navbar-color: #444;
+@dropdown-navbar-animation: slide-top-fixed;
+@dropdown-scrollable-height: 200px;
+
+// New
+@dropdown-border: @global-border;
+
+// ========================================================================
+// Component: Dropdown
+// ========================================================================
+
+.dropdown {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: @dropdown-z-index;
+	width: @dropdown-width;
+	margin-top: @dropdown-margin-top;
+	padding: @dropdown-padding;
+	background-color: @dropdown-background;
+	color: @dropdown-color;
+	font-size: @dropdown-font-size;
+	vertical-align: top;
+	border: 1px solid @dropdown-border;
+
+	.open > & {
+		display: block;
+		.animation(@dropdown-animation 200ms ease-in-out);
+		.transform-origin(0 0);
+	}
+}
+
+// Alignment modifiers
+// ========================================================================
+
+// Modifier `dropdown-flip`
+// ========================================================================
+
+.dropdown-flip {
+	left: auto;
+	right: 0;
+}
+
+// Modifier `dropdown-up`
+// ========================================================================
+
+.dropdown-up {
+	top: auto;
+	bottom: 100%;
+	margin-top: auto;
+	margin-bottom: @dropdown-margin-top;
+}
+
+// Nav in dropdown
+// ========================================================================
+
+.dropdown {
+	.nav {
+		margin: 0 (-@dropdown-padding);
+	}
+}
+
+// Grid and panel in dropdown
+// ========================================================================
+
+.row {
+	.dropdown-grid {
+		+ .dropdown-grid {
+			margin-top: @dropdown-padding;
+		}
+	}
+}
+
+// Panels
+.dropdown-grid {
+	> [class*="col-"] {
+		> .panel {
+			+ .panel {
+				margin-top: @dropdown-padding;
+			}
+		}
+	}
+}
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	// * Horizontal gutter
+	:not(.dropdown-stack) {
+		.dropdown& {
+			> .dropdown-grid {
+				margin-left: -@dropdown-padding;
+				margin-right: -@dropdown-padding;
+				> [class*="col-"] {
+					padding-left: @dropdown-padding;
+					padding-right: @dropdown-padding;
+					&:nth-child(n+2) {
+						border-left: @dropdown-divider-border-width solid @dropdown-divider-border;
+					}
+				}
+			}
+		}
+		.dropdown& {
+			> .dropdown-grid {
+				margin-left: -@dropdown-padding;
+				margin-right: -@dropdown-padding;
+				> [class*="col-"] {
+					padding-left: @dropdown-padding;
+					padding-right: @dropdown-padding;
+					&:nth-child(n+2) {
+						border-left: @dropdown-divider-border-width solid @dropdown-divider-border;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Width multiplier for dropdown columns
+:not(.dropdown-stack) {
+	.dropdown-col-2& {
+		width: (@dropdown-width * 2);
+	}
+	.dropdown-col-3& {
+		width: (@dropdown-width * 3);
+	}
+	.dropdown-col-4& {
+		width: (@dropdown-width * 4);
+	}
+	.dropdown-col-5& {
+		width: (@dropdown-width * 5);
+	}
+}
+
+// Phone landscape and smaller
+@media (max-width: @breakpoint-small-max) {
+	// * Stack columns and take full width
+	.dropdown-grid {
+		> [class*="col-"] {
+			width: 100%;
+			&:nth-child(n+2) {
+				margin-top: @dropdown-padding;
+			}
+		}
+	}
+}
+
+.dropdown-stack {
+	> .dropdown-grid {
+		> [class*="col-"] {
+			width: 100%;
+			&:nth-child(n+2) {
+				margin-top: @dropdown-padding;
+			}
+		}
+	}
+}
+
+
+// Modifier `dropdown-small`
+// ========================================================================
+
+// Set min-width and text expands dropdown if needed
+.dropdown-small {
+	min-width: 150px;
+	width: auto;
+	padding: @dropdown-small-padding;
+	white-space: nowrap;
+	.nav {
+		margin: 0 -@dropdown-small-padding;
+	}
+}
+
+
+// Modifier: `dropdown-navbar`
+// ========================================================================
+
+.dropdown-navbar {
+	margin-top: @dropdown-navbar-margin;
+	background-color: @dropdown-navbar-background;
+	color: @dropdown-navbar-color;
+	left: -1px;
+	border: 1px solid @dropdown-border;
+	.open {
+		> & {
+			.animation(@dropdown-navbar-animation 200ms ease-in-out);
+		}
+	}
+}
+
+
+// Modifier `dropdown-scrollable`
+// ========================================================================
+
+.dropdown-scrollable {
+	overflow-y: auto;
+	max-height: @dropdown-scrollable-height;
+}
+
+.dropdown-navbar.dropdown-flip {
+	left: auto;
+}

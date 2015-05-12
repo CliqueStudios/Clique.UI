@@ -1,0 +1,46 @@
+// Name:            Cover
+//
+// Description:     Defines styles for images and videos to cover their container in a centered position
+//
+// Component:       `cover-*`
+//
+// Used by:         Slideshow
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Component: Cover
+// ========================================================================
+
+// Background image always covers and centers its element
+.cover-background {
+	background-position: 50% 50%;
+	.background-size(cover);
+	background-repeat: no-repeat;
+}
+
+// Emulates image cover, works with video and image elements
+.cover {
+	overflow: hidden;
+}
+
+.cover-object {
+	width: auto;
+	height: auto;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: none;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	.transform(translate(-50%, -50%));
+}
+
+// To center iframes use `data-cover` JavaScript
+[data-cover] {
+	position: relative;
+	left: 50%;
+	top: 50%;
+	.transform(translate(-50%, -50%));
+}

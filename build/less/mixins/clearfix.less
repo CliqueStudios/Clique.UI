@@ -1,0 +1,30 @@
+//
+// Mixin:           Clearfix
+// Description:     Creates a micro-clearfix
+//
+// ========================================================================
+
+.clearfix() {
+	&:before,
+	&:after {
+		content: "";
+	}
+	&:before {
+		display: table-cell;
+	}
+	&:after {
+		display: table;
+		clear: both;
+	}
+}
+
+.micro-clearfix() {
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}

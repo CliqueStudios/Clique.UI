@@ -1,0 +1,253 @@
+// Name:            Search
+//
+// Description:     Defines a search component
+//
+// Component:       `search`
+//
+// Sub-objects:     `search-field`
+//
+// Modifier:        (Nav) `nav-search`
+//                  (Dropdown) `dropdown-search`
+//
+// States:          `active`
+//                  `loading`
+//
+// Uses:            Animation
+//                  Icon: "icomoon"
+//                  Navbar: `navbar-flip`
+//
+// Used by:         Off-canvas
+//
+// Markup:
+// <!-- search -->
+// <form class="search" data-search>
+//     <input class="search-field" type="search" placeholder="">
+// </form>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@search-width: 120px;
+@search-focus-width: 180px;
+@search-height: 30px;
+@search-padding: 30px;
+@search-border: rgba(0, 0, 0, 0);
+@search-border-width: 1px;
+@search-background: rgba(0, 0, 0, 0);
+@search-color: #444;
+@search-placeholder-color: #999;
+@search-icon: "\e9be";
+@search-icon-size: 14px;
+@search-icon-color: rgba(0, 0, 0, 0.2);
+
+// Dropdown modifier
+@dropdown-search-width: 300px;
+@dropdown-search-margin-top: 0;
+@dropdown-search-background: #f5f5f5;
+@dropdown-search-color: #444;
+@dropdown-search-animation: slide-top-fixed;
+@dropdown-search-navbar-margin-top: 5px;
+@dropdown-search-navbar-margin-right: -15px;
+
+// Nav modifier
+@nav-search-color: #444;
+@nav-search-active-background: @color-primary-background;
+@nav-search-active-color: #fff;
+@nav-search-header-color: #999;
+@nav-search-divider-border: @base-border-color;
+@nav-search-divider-border-width: 1px;
+@nav-search-nested-color: @link-color;
+@nav-search-nested-hover-color: #059;
+
+// Search in offcanvas
+@offcanvas-search-margin: 20px 15px;
+@offcanvas-search-background: #1a1a1a;
+@offcanvas-search-border: rgba(0, 0, 0, 0);
+@offcanvas-search-color: #ccc;
+@offcanvas-search-placeholder-color: #777;
+@offcanvas-search-icon-color: #777;
+
+// New
+@nav-search-active-text-shadow: @global-contrast-text-shadow;
+
+// ========================================================================
+// Component: Search
+// ========================================================================
+
+.search {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	&:before {
+		content: @search-icon;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: @search-padding;
+		line-height: @search-height;
+		text-align: center;
+		font-family: "icomoon";
+		font-size: @search-icon-size;
+		color: @search-icon-color;
+	}
+}
+
+// Sub-object `search-field`
+// ========================================================================
+
+.search-field {
+	margin: 0;
+	.border-radius(0);
+	font: inherit;
+	color: @search-color;
+	width: @search-width;
+	height: @search-height;
+	padding: 0 0 0 @search-padding;
+	border: @search-border-width solid @search-border;
+	background-color: @search-background;
+	.transition(all linear 200ms);
+	vertical-align: middle;
+
+	// Removes inner padding and border in Firefox 4+.
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+	// Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
+	&::-webkit-search-cancel-button,
+	&::-webkit-search-decoration {
+		.appearance(none);
+	}
+
+	// Removes cancel button in IE10
+	&::-ms-clear {
+		display: none;
+	}
+
+	// Removes placeholder transparency in Firefox.
+	&::-moz-placeholder {
+		opacity: 1;
+	}
+
+	// Placeholder
+	&:-ms-input-placeholder {
+		color: @search-placeholder-color !important;
+	}
+	&::-moz-placeholder {
+		color: @search-placeholder-color;
+	}
+	&::-webkit-input-placeholder {
+		color: @search-placeholder-color;
+	}
+
+	// Focus
+	&:focus {
+		outline: 0;
+	}
+	&:focus,
+	.search.active & {
+		width: @search-focus-width;
+	}
+}
+
+// Dropdown modifier: `dropdown-search`
+// ========================================================================
+
+.dropdown-search {
+	width: @dropdown-search-width;
+	margin-top: @dropdown-search-margin-top;
+	background-color: @dropdown-search-background;
+	color: @dropdown-search-color;
+	.open > & {
+		.animation(@dropdown-search-animation 200ms ease-in-out);
+	}
+	.navbar-flip & {
+		margin-top: @dropdown-search-navbar-margin-top;
+		margin-right: @dropdown-search-navbar-margin-right;
+	}
+}
+
+// Nav modifier `nav-search`
+// ========================================================================
+
+// Items
+.nav-search {
+	> li {
+		> a {
+			color: @nav-search-color;
+		}
+	}
+
+	// Active
+	&i.active {
+		> a {
+			background-color: @nav-search-active-background;
+			color: @nav-search-active-color;
+			outline: none;
+			box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+		}
+	}
+}
+
+// Sub-object: `nav-header`
+// ========================================================================
+
+.nav-search {
+	.nav-header {
+		color: @nav-search-header-color;
+	}
+}
+
+// Sub-object: `nav-divider`
+// ========================================================================
+
+.nav-search {
+	.nav-divider {
+		border-top: @nav-search-divider-border-width solid @nav-search-divider-border;
+	}
+}
+
+// Nested items
+.nav-search {
+	ul {
+		a {
+			color: @nav-search-nested-color;
+			&:hover {
+				color: @nav-search-nested-hover-color;
+			}
+		}
+	}
+}
+
+// Search in offcanvas
+// ========================================================================
+
+.offcanvas {
+	.search {
+		display: block;
+		margin: @offcanvas-search-margin;
+		&:before {
+			color: @offcanvas-search-icon-color;
+		}
+	}
+	.search-field {
+		width: 100%;
+		border-color: @offcanvas-search-border;
+		background-color: @offcanvas-search-background;
+		color: @offcanvas-search-color;
+		&:-ms-input-placeholder {
+			color: @offcanvas-search-placeholder-color !important;
+		}
+		&::-moz-placeholder {
+			color: @offcanvas-search-placeholder-color;
+		}
+		&::-webkit-input-placeholder {
+			color: @offcanvas-search-placeholder-color;
+		}
+	}
+}

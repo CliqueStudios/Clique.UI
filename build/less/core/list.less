@@ -1,0 +1,112 @@
+// Name:            List
+//
+// Description:     Defines styles for ordered and unordered lists
+//
+// Component:       `list`
+//
+// Modifiers:       `list-line`
+//                  `list-striped`
+//                  `list-space`
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@list-nested-padding-left: 20px;
+
+@list-line-margin-top: 5px;
+@list-line-border: @base-border-color;
+@list-line-border-width: 1px;
+
+@list-striped-padding-vertical: 5px;
+@list-striped-padding-horizontal: 5px;
+@list-striped-background: #f5f5f5;
+
+@list-space-margin-top: 10px;
+
+// New
+@list-striped-border: @global-border;
+
+// ========================================================================
+// Component: List
+// ========================================================================
+
+.list-unstyled,
+.list {
+	padding: 0;
+	list-style: none;
+	> li {
+
+		.micro-clearfix();
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Nested lists
+	ul {
+		margin: 0;
+		padding-left: @list-nested-padding-left;
+		list-style: none;
+	}
+}
+
+
+// Modifier: `list-line`
+// ========================================================================
+
+.list-inline {
+	.display(flex);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	> li {
+		.flex(0 1 auto);
+	}
+}
+
+.list-line {
+	> li {
+		&:nth-child(n+2) {
+			margin-top: @list-line-margin-top;
+			padding-top: @list-line-margin-top;
+			border-top: @list-line-border-width solid @list-line-border;
+		}
+	}
+}
+
+
+// Modifier: `list-striped`
+// ========================================================================
+
+.list-striped {
+	> li {
+		padding: @list-striped-padding-vertical @list-striped-padding-horizontal;
+		border-bottom: 1px solid @list-striped-border;
+
+		&:first-child {
+			border-top: 1px solid @list-striped-border;
+		}
+
+		&:nth-of-type(odd) {
+			background-color: @list-striped-background;
+		}
+	}
+}
+
+
+// Modifier: `list-space`
+// ========================================================================
+
+.list-space {
+	> li {
+		&:nth-child(n+2) {
+			margin-top: @list-space-margin-top;
+		}
+	}
+}

@@ -1,0 +1,243 @@
+// Name:            Flex
+//
+// Description:     Defines styles to create layouts with flexbox
+//
+// Component:       `flex-*`
+//
+// Used by:         Caption
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Component: Flex
+// ========================================================================
+
+.flex {
+	.display(flex);
+
+	.noflex & {
+		display: table;
+		width: 100%;
+	}
+}
+
+.flex-inline {
+	.display(inline-flex);
+
+	.noflex & {
+		display: inline-table;
+		width: auto;
+	}
+}
+
+// Fixes initial flex-shrink value in IE10
+.flex,
+.flex-inline {
+	> * {
+		.flex(0 1 auto);
+		-ms-flex-negative: 1;
+	}
+
+	.noflex & {
+		display: table-cell;
+		float: none;
+	}
+
+}
+
+
+// Alignment
+// ========================================================================
+
+// Vertical alignment
+.flex-top {
+	.align-items(flex-start);
+
+	.noflex & {
+		> * {
+			vertical-align: top;
+		}
+	}
+}
+
+.flex-middle {
+	.align-items(center);
+
+	.noflex & {
+		> * {
+			vertical-align: middle;
+		}
+	}
+}
+
+.flex-bottom {
+	.align-items(flex-end);
+
+	.noflex & {
+		> * {
+			vertical-align: bottom;
+		}
+	}
+}
+
+// Horizontal alignment
+.flex-center {
+	.justify-content(center);
+
+	.noflex & {
+		width: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.flex-right {
+	.justify-content(flex-end);
+
+	.noflex & {
+		width: auto;
+		float: right;
+	}
+}
+
+.flex-space-between {
+	.justify-content(space-between);
+}
+
+.flex-space-around {
+	.justify-content(space-around);
+}
+
+// Direction
+// ========================================================================
+
+.flex-row-reverse {
+	.flex-direction(row-reverse);
+}
+
+.flex-column {
+	.flex-direction(column);
+}
+
+.flex-column-reverse {
+	.flex-direction(column-reverse);
+}
+
+// Wrap
+// ========================================================================
+
+.flex-wrap {
+	.flex-wrap(wrap);
+}
+
+.flex-wrap-reverse {
+	.flex-wrap(wrap-reverse);
+}
+
+// Horizontal alignment
+// Default value is `stretch`
+.flex-wrap-top {
+	.align-content(flex-start);
+}
+
+.flex-wrap-middle {
+	.align-content(center);
+}
+
+.flex-wrap-bottom {
+	.align-content(flex-end);
+}
+
+.flex-wrap-space-between {
+	.align-content(space-between);
+}
+
+.flex-wrap-space-around {
+	.align-content(space-around);
+}
+
+// Item ordering
+// ========================================================================
+
+// Default is 0
+.flex-order-first {
+	.order(-1);
+}
+
+.flex-order-last {
+	.order(99);
+}
+
+// Phone landscape and bigger
+@media (min-width: @breakpoint-small) {
+	.flex-order-first-small {
+		.order(-1);
+	}
+	.flex-order-last-small {
+		.order(99);
+	}
+}
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	.flex-order-first-medium {
+		.order(-1);
+	}
+	.flex-order-last-medium {
+		.order(99);
+	}
+}
+
+// Desktop and bigger
+@media (min-width: @breakpoint-large) {
+	.flex-order-first-large {
+		.order(-1);
+	}
+	.flex-order-last-large {
+		.order(99);
+	}
+}
+
+// Large screen and bigger
+@media (min-width: @breakpoint-xlarge) {
+	.flex-order-first-xlarge {
+		.order(-1);
+	}
+	.flex-order-last-xlarge {
+		.order(99);
+	}
+}
+
+// Item dimensions
+// ========================================================================
+
+.flex-item-none {
+	.flex(none);
+}
+
+.flex-item-auto {
+	.flex(auto);
+}
+
+.flex-item-1 {
+	.flex(1);
+}
+
+
+// No Flexbox Support Fallbacks
+// ========================================================================
+
+.noflex {
+	.flex,
+	.flex-inline {
+		display: block;
+		.clearfix();
+		> * {
+			float: left;
+			+ * {
+				padding-left: 30px;
+			}
+		}
+	}
+}

@@ -1,0 +1,151 @@
+// Name:            Comment
+//
+// Description:     Defines styles for comment threads
+//
+// Component:       `comment`
+//
+// Sub-objects:     `comment-header`
+//                  `comment-avatar`
+//                  `comment-title`
+//                  `comment-meta`
+//                  `comment-body`
+//                  `comment-list`
+//                  `comment-primary`
+//
+// Markup:
+// <!-- comment -->
+// <article class="comment">
+//     <header class="comment-header">
+//         <img class="comment-avatar" src="avatar.svg" width="50" height="50" alt="">
+//         <h4 class="comment-title"></h4>
+//         <div class="comment-meta"></div>
+//     </header>
+//     <div class="comment-body">
+//         <p></p>
+//     </div>
+// </article>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@comment-header-margin-bottom: 15px;
+@comment-avatar-margin-right: 15px;
+@comment-avatar-height: 50px;
+@comment-title-margin-top: 5px;
+@comment-title-font-size: 16px;
+@comment-title-line-height: 22px;
+@comment-meta-margin-top: 2px;
+@comment-meta-color: #999;
+@comment-meta-font-size: 11px;
+@comment-meta-line-height: 16px;
+@comment-list-margin-top: 15px;
+@comment-list-padding-left: 100px;
+// New
+@comment-padding: 10px;
+@comment-border: @global-border;
+@comment-background: #fafafa;
+@comment-primary-border: fade(@comment-primary-color, 30%);
+@comment-primary-background: @color-primary-background-light;
+@comment-primary-color: @color-primary-text;
+@comment-primary-text-shadow: @global-text-shadow;
+
+// ========================================================================
+// Component: Comment
+// ========================================================================
+
+// Sub-object `comment-header`
+// ========================================================================
+
+.comment-header {
+	margin-bottom: @comment-header-margin-bottom;
+	padding: @comment-padding;
+	border: 1px solid @comment-border;
+	background-color: @comment-background;
+
+	.micro-clearfix();
+}
+
+// Sub-object `comment-avatar`
+// ========================================================================
+
+.comment-avatar {
+	margin-right: @comment-avatar-margin-right;
+	height: @comment-avatar-height;
+	float: left;
+}
+
+// Sub-object `comment-title`
+// ========================================================================
+
+.comment-title {
+	margin: @comment-title-margin-top 0 0 0;
+	font-size: @comment-title-font-size;
+	line-height: @comment-title-line-height;
+}
+
+// Sub-object `comment-meta`
+// ========================================================================
+
+.comment-meta {
+	margin: @comment-meta-margin-top 0 0 0;
+	font-size: @comment-meta-font-size;
+	line-height: @comment-meta-line-height;
+	color: @comment-meta-color;
+}
+
+// Sub-object `comment-body`
+// ========================================================================
+
+.comment-body {
+	padding-left: @comment-padding;
+	padding-right: @comment-padding;
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+// Sub-object `comment-list`
+// ========================================================================
+
+.comment-list {
+	padding: 0;
+	list-style: none;
+
+	.comment {
+		+ ul {
+			margin: @comment-list-margin-top 0 0 0;
+			list-style: none;
+			@media (min-width: @breakpoint-medium) {
+				padding-left: @comment-list-padding-left;
+			}
+
+			> li {
+				&:nth-child(n+2) {
+					margin-top: @comment-list-margin-top;
+				}
+			}
+		}
+	}
+
+	> li {
+		&:nth-child(n+2) {
+			margin-top: @comment-list-margin-top;
+		}
+	}
+}
+
+// Modifier `comment-primary`
+// ========================================================================
+
+.comment-primary {
+	.comment-header {
+		border-color: @comment-primary-border;
+		background-color: @comment-primary-background;
+		color: @comment-primary-color;
+	}
+}

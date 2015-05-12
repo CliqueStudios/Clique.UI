@@ -1,0 +1,151 @@
+// Name:            Progress
+//
+// Description:     Defines styles for progress bars
+//
+// Component:       `progress`
+//
+// Sub-objects:     `progress-bar`
+//
+// Modifiers:       `progress-mini`
+//                  `progress-small`
+//                  `progress-success`
+//                  `progress-warning`
+//                  `progress-danger`
+//                  `progress-striped`
+//
+// Markup:
+// <!-- progress -->
+// <div class="progress">
+//     <div class="progress-bar" style="width: 40%;"></div>
+// </div>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@progress-height: 20px;
+@progress-mini-height: 6px;
+@progress-small-height: 12px;
+@progress-margin-vertical: 15px;
+@progress-background: #eee;
+@progress-bar-background: @color-primary-background;
+@progress-bar-font-size: 12px;
+@progress-bar-color: #fff;
+@progress-bar-success-background: @color-success-background;
+@progress-bar-warning-background: @color-warning-background;
+@progress-bar-danger-background: @color-danger-background;
+
+// New
+@progress-bar-text-shadow: @global-contrast-text-shadow;
+
+// ========================================================================
+// Component: Progress
+// ========================================================================
+
+.progress {
+	height: @progress-height;
+	margin-bottom: @progress-margin-vertical;
+	background-color: @progress-background;
+	overflow: hidden;
+	line-height: @progress-height;
+	.box-shadow(inset 0 0 0 1px rgba(0, 0, 0, 0.06));
+	.border-radius(@progress-height / 2);
+	* + & {
+		margin-top: @progress-margin-vertical;
+	}
+}
+
+// Sub-object: `progress-bar`
+// ========================================================================
+
+.progress-bar {
+	width: 0;
+	height: 100%;
+	background-color: @progress-bar-background;
+	float: left;
+	.transition(width 600ms ease);
+	font-size: @progress-bar-font-size;
+	color: @progress-bar-color;
+	text-align: center;
+	.box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.05));
+}
+
+// Size modifiers
+// ========================================================================
+
+// Mini
+.progress-mini {
+	height: @progress-mini-height;
+	.border-radius(@progress-mini-height / 2);
+}
+
+// Small
+.progress-small {
+	height: @progress-small-height;
+	.border-radius(@progress-small-height / 2);
+}
+
+// Color modifiers
+// ========================================================================
+
+.progress-success {
+	.progress-bar {
+		background-color: @progress-bar-success-background;
+	}
+}
+
+.progress-warning {
+	.progress-bar {
+		background-color: @progress-bar-warning-background;
+	}
+}
+
+.progress-danger {
+	.progress-bar {
+		background-color: @progress-bar-danger-background;
+	}
+}
+
+
+// Modifier: `progress-striped`
+// ========================================================================
+
+.progress-striped {
+	.progress-bar {
+		.background-image(linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent));
+		.background-size(30px 30px);
+	}
+
+	// Animation
+	&.active {
+		.progress-bar {
+			.animation(progress-bar-stripes 2s linear infinite);
+		}
+	}
+}
+
+@-webkit-keyframes progress-bar-stripes {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 30px 0;
+	}
+}
+
+@keyframes progress-bar-stripes {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 30px 0;
+	}
+}
+
+.progress-mini,
+.progress-small {
+	.border-radius(500px);
+}

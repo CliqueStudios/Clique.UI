@@ -1,0 +1,329 @@
+// Name:            Overlay
+//
+// Description:     Defines styles for image overlays
+//
+// Component:       `overlay`
+//
+// Sub-objects:     `overlay-panel`
+//                  `overlay-hover`
+//                  `overlay-active`
+//                  `overlay-icon`
+//
+
+
+// Modifiers:       `overlay-background`
+//                  `overlay-top`
+//                  `overlay-bottom`
+//                  `overlay-left`
+//                  `overlay-right`
+//                  `overlay-fade`
+//                  `overlay-scale`
+//                  `overlay-spin`
+//                  `overlay-grayscale`
+//                  `overlay-slide-top`
+//                  `overlay-slide-bottom`
+//                  `overlay-slide-left`
+//                  `overlay-slide-right`
+//
+// States:         `hover`
+//                  `active`
+//                  `ignore`
+//
+// Uses:            Icon: `[class*="icon-"]`
+//                  `border-circle`
+//
+// Markup:
+// <!-- overlay -->
+// <a class="overlay" href="">
+//     <img src="" alt="">
+//     <div class="overlay-panel"></div>
+// </a>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@overlay-panel-padding: 20px;
+@overlay-panel-color: @color-white;
+@overlay-panel-background: rgba(0, 0, 0, 0.5);
+@overlay-icon: "\e9be";
+@overlay-icon-size: 50px;
+@overlay-icon-color: @color-white;
+@overlay-fade-in-opacity: 1;
+@overlay-fade-out-opacity: 0.7;
+@overlay-scale-in-scale: 1.1;
+@overlay-scale-out-scale: 1;
+@overlay-spin-in-scale: 1.1;
+@overlay-spin-out-scale: 1;
+@overlay-spin-in-rotate: 3deg;
+@overlay-spin-out-rotate: 0deg;
+@overlay-panel-link-color: inherit;
+@overlay-panel-link-text-decoration: underline;
+// DEPRECATED
+@overlay-area-background: rgba(0, 0, 0, 0.3);
+@overlay-area-icon: "\e9be";
+@overlay-area-icon-size: 50px;
+@overlay-area-icon-color: @color-white;
+@overlay-area-content-font-size: 1rem;
+@overlay-area-content-padding-horizontal: 15px;
+@overlay-area-content-color: @color-white;
+@overlay-area-content-link-color: inherit;
+@overlay-caption-background: rgba(0, 0, 0, 0.5);
+@overlay-caption-padding: 15px;
+@overlay-caption-color: @color-white;
+
+// ========================================================================
+// Component: Overlay
+// ========================================================================
+
+.overlay {
+	display: inline-block;
+	position: relative;
+	max-width: 100%;
+	vertical-align: middle;
+	overflow: hidden;
+	.translateZ(0);
+	margin: 0;
+
+	// Safari fix
+	&.border-circle {
+		-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	}
+
+	> :first-child {
+		margin-bottom: 0;
+	}
+
+	// Sub-object `overlay-panel`
+	// ========================================================================
+
+	&-panel {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: @overlay-panel-padding;
+		color: @overlay-panel-color;
+
+		> :last-child,
+		&.flex > * > :last-child {
+			margin-bottom: 0;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: inherit;
+		}
+
+		a {
+			&:not([class]) {
+				color: @overlay-panel-link-color;
+				text-decoration: @overlay-panel-link-text-decoration;
+			}
+			&[class*="icon-"] {
+				&:not(.icon-button) {
+					color: @overlay-panel-link-color;
+				}
+			}
+		}
+	}
+
+	// Sub-object `overlay-hover` and `overlay-active`
+	// ========================================================================
+
+	&-hover {
+		&:not(:hover) {
+			&:not(.hover) {
+				.overlay-panel {
+					&:not(.ignore) {
+						opacity: 0;
+					}
+				}
+			}
+		}
+	}
+
+	&-active {
+		&:not(.active) {
+			> .overlay-panel {
+				&:not(.ignore) {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	// Modifier `overlay-background`
+	// ========================================================================
+
+	&-background {
+		background-color: @overlay-panel-background;
+	}
+
+	// Position modifiers
+	// ========================================================================
+
+	&-top {
+		bottom: auto;
+	}
+
+	&-bottom {
+		top: auto;
+	}
+
+	&-left {
+		right: auto;
+	}
+
+	&-right {
+		left: auto;
+	}
+
+	// Sub-object `overlay-icon`
+	// ========================================================================
+
+	&-icon {
+		&:before {
+			content: @overlay-icon;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: @overlay-icon-size;
+			height: @overlay-icon-size;
+			margin-top: -(@overlay-icon-size / 2);
+			margin-left: -(@overlay-icon-size / 2);
+			font-size: @overlay-icon-size;
+			line-height: 1;
+			font-family: "icomoon";
+			text-align: center;
+			color: @overlay-icon-color;
+		}
+	}
+}
+
+// Transitions
+// ========================================================================
+
+.overlay-fade,
+.overlay-scale,
+.overlay-spin,
+.overlay-grayscale,
+.overlay-blur,
+[class*="overlay-slide"] {
+	.transition-duration(300ms);
+	.transition-timing-function(ease-out);
+	.transition-property(opacity transform filter);
+}
+
+.overlay-active {
+	.overlay-fade,
+	.overlay-scale,
+	.overlay-spin,
+	.overlay-grayscale,
+	.overlay-blur,
+	[class*="overlay-slide"] {
+		.transition-duration(800ms);
+	}
+}
+
+// Fade
+.overlay-fade {
+	opacity: @overlay-fade-out-opacity;
+}
+
+.overlay-hover {
+	&:hover {
+		.overlay-fade {
+			opacity: @overlay-fade-in-opacity;
+		}
+	}
+}
+
+.overlay-active {
+	.active {
+		> .overlay-fade {
+			opacity: @overlay-fade-in-opacity;
+		}
+	}
+}
+
+// Scale
+.overlay-scale {
+	.scale(@overlay-scale-out-scale);
+}
+
+.overlay-hover {
+	&:hover  {
+		.overlay-scale {
+			.scale(@overlay-scale-in-scale);
+		}
+	}
+}
+
+.overlay-active {
+	.active {
+		> .overlay-scale {
+			.scale(@overlay-scale-in-scale);
+		}
+	}
+}
+
+// Spin
+.overlay-spin {
+	.transform(scale(@overlay-spin-out-scale) rotate(@overlay-spin-out-rotate));
+}
+
+.overlay-hover:hover .overlay-spin,
+.overlay-active .active > .overlay-spin {
+	.transform(scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate));
+}
+
+// Grayscale
+.overlay-grayscale {
+	.grayscale(100%);
+}
+
+.overlay-hover:hover .overlay-grayscale,
+.overlay-active .active > .overlay-grayscale {
+	.grayscale(0%);
+}
+
+// Slide
+[class*="overlay-slide"] {
+	opacity: 0;
+}
+
+// Top
+.overlay-slide-top {
+	.translate(0, -100%);
+}
+
+// Bottom
+.overlay-slide-bottom {
+	.translate(0, 100%);
+}
+
+// Left
+.overlay-slide-left {
+	.translate(-100%, 0);
+}
+
+// Right
+.overlay-slide-right {
+	.translate(100%, 0);
+}
+
+// Hover
+.overlay-hover:hover [class*="overlay-slide"],
+.overlay-active .active > [class*="overlay-slide"] {
+	opacity: 1;
+	.translate(0, 0);
+}

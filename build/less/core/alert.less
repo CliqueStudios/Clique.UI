@@ -1,0 +1,139 @@
+// Name:            Alert
+//
+// Description:     Defines styles for alert messages
+//
+// Component:       `alert`
+//
+// Sub-objects:     `alert-close`
+//
+// Modifiers:       `alert-success`
+//                  `alert-warning`
+//                  `alert-danger`
+//                  `alert-large`
+//
+// Uses:            Close: `close`
+//
+// Markup:
+// <!-- alert -->
+// <div class="alert" data-alert>
+//     <a href="#" class="alert-close close"></a>
+//     <p></p>
+// </div>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@alert-margin-vertical: 15px;
+@alert-padding: 10px;
+@alert-text-shadow: @global-text-shadow;
+
+@alert-background: @color-primary-background-light;
+@alert-color: @color-primary-text;
+@alert-border-color: @color-primary-border;
+
+@alert-success-background: @color-success-background-light;
+@alert-success-color: @color-success-text;
+@alert-success-border: @color-success-border;
+
+@alert-warning-background: @color-warning-background-light;
+@alert-warning-color: @color-warning-text;
+@alert-warning-border: @color-warning-border;
+
+@alert-danger-background: @color-danger-background-light;
+@alert-danger-color: @color-danger-text;
+@alert-danger-border: @color-danger-border;
+
+@alert-large-padding: 20px;
+
+// ========================================================================
+// Component: Alert
+// ========================================================================
+
+.alert {
+	margin-bottom: @alert-margin-vertical;
+	padding: @alert-padding;
+	background-color: @alert-background;
+	color: @alert-color;
+	border: 1px solid @alert-border-color;
+
+	// Add margin if adjacent element
+	* + & {
+		margin-top: @alert-margin-vertical;
+	}
+
+	// Remove margin from the last-child
+	> :last-child {
+		margin-bottom: 0;
+	}
+
+	// Keep color for headings if the default heading color is changed
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: inherit;
+	}
+}
+
+// Close in alert
+// ========================================================================
+
+.alert {
+	> .close {
+		&:first-child {
+			float: right;
+			+ * {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+
+// Modifier: `alert-success`
+// ========================================================================
+
+.alert-success {
+	background-color: @alert-success-background;
+	color: @alert-success-color;
+	border-color: @alert-success-border;
+}
+
+
+// Modifier: `alert-warning`
+// ========================================================================
+
+.alert-warning {
+	background-color: @alert-warning-background;
+	color: @alert-warning-color;
+	border-color: @alert-warning-border;
+}
+
+
+// Modifier: `alert-danger`
+// ========================================================================
+
+.alert-danger {
+	background-color: @alert-danger-background;
+	color: @alert-danger-color;
+	border-color: @alert-danger-border;
+}
+
+
+// Modifier: `alert-large`
+// ========================================================================
+
+.alert-large {
+	padding: @alert-large-padding;
+	> .close {
+		&:first-child {
+			margin: -10px -10px 0 0;
+		}
+	}
+}

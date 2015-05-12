@@ -1,0 +1,66 @@
+// Name:            Description list
+//
+// Description:     Defines styles for description lists
+//
+// Component:       `dl`
+//
+// Modifiers:       `dl-horizontal`
+//                  `dl-line`
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@dl-horizontal-width: 160px;
+@dl-horizontal-margin-left: 180px;
+@dl-line-margin-top: 5px;
+@dl-line-border-width: 1px;
+@dl-line-border: @base-border-color;
+@dl-line-color: #999;
+
+// ========================================================================
+// Component: Description list
+// ========================================================================
+
+// Modifier: `dl-horizontal`
+// ========================================================================
+
+// Tablet and bigger
+@media (min-width: @breakpoint-medium) {
+	.dl-horizontal {
+		overflow: hidden;
+		> dt {
+			width: @dl-horizontal-width;
+			float: left;
+			clear: both;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		> dd {
+			margin-left: @dl-horizontal-margin-left;
+		}
+	}
+}
+
+
+// Modifier: `dl-line`
+// ========================================================================
+
+.dl-line {
+	> dt {
+		> dt {
+			&:nth-child(n+2) {
+				margin-top: @dl-line-margin-top;
+				padding-top: @dl-line-margin-top;
+				border-top: @dl-line-border-width solid @dl-line-border;
+			}
+		}
+		> dd {
+			color: @dl-line-color;
+		}
+	}
+}

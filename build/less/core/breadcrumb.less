@@ -1,0 +1,61 @@
+// Name:            Breadcrumb
+//
+// Description:     Defines styles for a breadcrumb navigation
+//
+// Component:       `breadcrumb`
+//
+// States:          `active`
+//
+// Markup:
+// <!-- breadcrumb -->
+// <ul class="breadcrumb">
+//     <li><a href=""></a></li>
+//     <li><span></span></li>
+//     <li class="active"><span></span></li>
+// </ul>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@breadcrumb-font-size: 1rem;
+@breadcrumb-divider: "/";
+@breadcrumb-divider-margin: 8px;
+@breadcrumb-disabled-color: #999;
+
+// ========================================================================
+// Component: Breadcrumb
+// ========================================================================
+
+.breadcrumb {
+	padding: 0;
+	list-style: none;
+	font-size: 0.001px;
+
+	> li {
+		font-size: @breadcrumb-font-size;
+		vertical-align: top;
+		&,
+		> a,
+		> span {
+			display: inline-block;
+		}
+
+		&:nth-child(n+2) {
+			&:before {
+				content: @breadcrumb-divider;
+				display: inline-block;
+				margin: 0 @breadcrumb-divider-margin;
+			}
+		}
+
+		&:not(.active) {
+			> span {
+				color: @breadcrumb-disabled-color;
+			}
+		}
+	}
+}

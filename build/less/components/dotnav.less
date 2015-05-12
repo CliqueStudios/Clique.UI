@@ -1,0 +1,117 @@
+// Name:            Dotnav
+//
+// Description:     Defines styles for a dot navigation
+//
+// Component:       `dotnav`
+//
+// Modifiers:       `dotnav-contrast`
+//                  `dotnav-vertical`
+//
+// States:          `active`
+//
+// Markup:
+// <!-- dotnav -->
+// <ul class="dotnav">
+//     <li class="active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+
+@import "../mixins/mixins.less";
+@import "../variables/variables.less";
+
+// ========================================================================
+// Variables
+// ========================================================================
+
+@dotnav-margin-horizontal: 15px;
+@dotnav-margin-vertical: @dotnav-margin-horizontal;
+@dotnav-width: 20px;
+@dotnav-height: @dotnav-width;
+@dotnav-background: rgba(50, 50, 50, 0.1);
+@dotnav-hover-background: rgba(50, 50, 50, 0.4);
+@dotnav-onclick-background: rgba(50, 50, 50, 0.6);
+@dotnav-active-background: rgba(50, 50, 50, 0.4);
+@dotnav-contrast-background: rgba(255, 255, 255, 0.4);
+@dotnav-contrast-hover-background: rgba(255, 255, 255, 0.7);
+@dotnav-contrast-onclick-background: rgba(255, 255, 255, 0.9);
+@dotnav-contrast-active-background: rgba(255, 255, 255, 0.9);
+
+// ========================================================================
+// Component: Dotnav
+// ========================================================================
+
+.dotnav {
+	.display(flex);
+	.flex-wrap(wrap);
+	margin-left: -@dotnav-margin-horizontal;
+	margin-top: -@dotnav-margin-vertical;
+	padding: 0;
+	list-style: none;
+	.clearfix();
+
+	> * {
+		.flex(none);
+		padding-left: @dotnav-margin-horizontal;
+		margin-top: @dotnav-margin-vertical;
+		float: left;
+
+		> * {
+			display: block;
+			.box-sizing(content-box);
+			.size(@dotnav-width, @dotnav-height);
+			.border-radius(50%);
+			background-color: @dotnav-background;
+			text-indent: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			.transition(all 200ms ease-in-out);
+
+			// Hover/Focus
+			&:hover,
+			&:focus {
+				background-color: @dotnav-hover-background;
+				outline: none;
+			}
+
+			// Active State
+			&:active {
+				background-color: @dotnav-onclick-background;
+			}
+		}
+
+		// Active
+		&.active {
+			> * {
+				background-color: @dotnav-active-background;
+				.scale(1.3);
+			}
+		}
+	}
+
+	// Modifier: `dotnav-contrast`
+	// ========================================================================
+
+	&-contrast {
+		> * {
+			> * {
+				background-color: @dotnav-contrast-background;
+
+				// Hover
+				&:hover,
+				&:focus {
+					background-color: @dotnav-contrast-hover-background;
+				}
+
+				// Active State
+				&:active {
+					background-color: @dotnav-contrast-onclick-background;
+				}
+			}
+
+			// Active
+			&.active > * {
+				background-color: @dotnav-contrast-active-background;
+			}
+		}
+	}
+}
