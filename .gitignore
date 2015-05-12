@@ -1,0 +1,14 @@
+*~
+*.diff
+*.patch
+.DS_Store
+/dist
+/docs
+/node_modules
+/php
+/.notes
+/unittests/*
+!/unittests/casperjs
+/unittests/casperjs/*
+!/unittests/casperjs/*.js
+results/*
