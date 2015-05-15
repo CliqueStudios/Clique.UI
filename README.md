@@ -1,4 +1,4 @@
-#Creating a Front End Framework
+#Clique.UI - v. 1.0.1
 
 Recently we launched [Clique.UI](http://ui.cliquestudios.com), a lightweight, modular front-end framework for rapid web-interface development. This is the first product that we've publicly released with full-documentation, and couldn't be more excited about it.
 

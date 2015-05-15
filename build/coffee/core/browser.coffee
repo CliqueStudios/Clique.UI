@@ -67,9 +67,8 @@
 
 		init : ->
 			@getProperties()
-			$this = @
-			_c.$win.on 'resize orientationchange', _c.utils.debounce ->
-				$this.getProperties()
+			_c.$win.on 'resize orientationchange', _c.utils.debounce =>
+				@getProperties()
 			, 250
 
 		getProperties : ->

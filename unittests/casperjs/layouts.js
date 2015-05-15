@@ -1,5 +1,5 @@
 
-var viewports = require('./viewports.js');
+var viewports = require('./lib/viewports.js').layouts;
 
 var screenshotUrls = [
 		'http://cliqueui.dev/get-started/layouts/frontpage/',
@@ -24,8 +24,8 @@ casper.each(screenshotUrls, function(casper, url) {
 			this.wait(1000);
 		});
 		this.then(function() {
-			var info = this.getElementInfo('html');
-			this.echo('Screenshot for ' + viewport.name + '; UA: ' + info.attributes.class);
+			// var info = this.getElementInfo('html');
+			this.echo('Screenshot for `' + this.getTitle() + '`');
 			this.capture('unittests/casperjs/results/layouts/' + this.getTitle() + '/' + viewport.name + '-' + viewport.viewport.width + 'x' + viewport.viewport.height + '.png');
 		});
 	});

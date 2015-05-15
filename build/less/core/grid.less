@@ -55,6 +55,26 @@
 @row-divider-border-width: 		1px;
 
 // ========================================================================
+// Mixins
+// ========================================================================
+
+.row-gutter-vertical(@margin) {
+	+ .row,
+	&-margin,
+	> * > .panel + .panel {
+		margin-top: @margin;
+	}
+}
+
+.row-gutter-vertical-subobject(@margin) {
+	& + & ,
+	> .row-margin,
+	> * > .panel + .panel {
+		margin-top: @margin;
+	}
+}
+
+// ========================================================================
 // Component: Grid
 // ========================================================================
 
@@ -92,86 +112,58 @@
 		.flex(none);
 		margin: 0;
 		padding-left: @row-gutter-horizontal;
+		width: 100%;
 		> :last-child {
 			margin-bottom: 0;
 		}
 	}
-}
 
-.row + .row,
-.row-margin,
-.row > * > .panel + .panel {
-	margin-top: @row-gutter-vertical;
-}
+	.row-gutter-vertical(@row-gutter-vertical);
 
-// Large screen and bigger
-@media (min-width: @breakpoint-xlarge) {
-	.row {
+	// Large screen and bigger
+	@media (min-width: @breakpoint-xlarge) {
 		margin-left: -@row-gutter-large-horizontal;
 		> * {
 			padding-left: @row-gutter-large-horizontal;
 		}
+
+		.row-gutter-vertical(@row-gutter-large-vertical);
 	}
-	.row + .row,
-	.row-margin,
-	.row > * > .panel + .panel {
-		margin-top: @row-gutter-large-vertical;
+
+	// `.row-collapse`
+	&-collapse {
+		margin-left: 0;
+		> * {
+			padding-left: 0;
+		}
+
+		.row-gutter-vertical-subobject(0);
+	}
+
+	// `.row-small`
+	&-small {
+		margin-left: -@row-gutter-small-horizontal;
+		> * {
+			padding-left: @row-gutter-small-horizontal;
+		}
+
+		.row-gutter-vertical-subobject(@row-gutter-small-vertical);
+	}
+
+	// `.row-medium`
+	&-medium {
+		margin-left: -@row-gutter-horizontal;
+		> * {
+			padding-left: @row-gutter-horizontal;
+		}
+
+		.row-gutter-vertical-subobject(@row-gutter-vertical);
 	}
 }
-
-.row-collapse {
-	margin-left: 0;
-	> * {
-		padding-left: 0;
-	}
-}
-
-// Vertical
-.row-collapse + .row-collapse,
-.row-collapse > .row-margin,
-.row-collapse > * > .panel + .panel {
-	margin-top: 0;
-}
-
-// Horizontal
-.row-small {
-	margin-left: -@row-gutter-small-horizontal;
-}
-
-.row-small > * {
-	padding-left: @row-gutter-small-horizontal;
-}
-
-// Vertical
-.row-small + .row-small,
-.row-small > .row-margin,
-.row-small > * > .panel + .panel {
-	margin-top: @row-gutter-small-vertical;
-}
-
-// Horizontal
-.row-medium {
-	margin-left: -@row-gutter-horizontal;
-}
-
-.row-medium > * {
-	padding-left: @row-gutter-horizontal;
-}
-
-// Vertical
-.row-medium + .row-medium,
-.row-medium > .row-margin,
-.row-medium > * > .panel + .panel {
-	margin-top: @row-gutter-vertical;
-}
-
 
 // Modifier: `row-divider`
 // ========================================================================
 
-// Horizontal divider
-// Only works with the default gutter. Does not work with gutter collapse, small or large.
-// Does not work with `push-*`, `pull-*` and not if the columns float into the next row.
 .row-divider {
 	&:not(:empty) {
 		margin-left: -@row-gutter-horizontal;
@@ -200,11 +192,9 @@
 			border-left: @row-divider-border-width solid @row-divider-border;
 		}
 	}
-}
 
-// Tablet and bigger
-@media (min-width: @breakpoint-medium) {
-	.row-divider {
+	// Tablet and bigger
+	@media (min-width: @breakpoint-medium) {
 		> [class*="col-medium-"] {
 			&:not(.col-medium-1-1) {
 				&:nth-child(n+2) {
@@ -213,11 +203,9 @@
 			}
 		}
 	}
-}
 
-// Desktop and bigger
-@media (min-width: @breakpoint-large) {
-	.row-divider {
+	// Desktop and bigger
+	@media (min-width: @breakpoint-large) {
 		> [class*="col-large-"] {
 			&:not(.col-large-1-1) {
 				&:nth-child(n+2) {
@@ -226,11 +214,9 @@
 			}
 		}
 	}
-}
 
-// Large screen and bigger
-@media (min-width: @breakpoint-xlarge) {
-	.row-divider {
+	// Large screen and bigger
+	@media (min-width: @breakpoint-xlarge) {
 		&:not(:empty) {
 			margin-left: -@row-gutter-large-horizontal;
 			margin-right: -@row-gutter-large-horizontal;
@@ -244,15 +230,16 @@
 			margin-bottom: @row-gutter-large-vertical;
 		}
 	}
-}
 
-.row-divider {
 	&:empty {
 		margin-top: @row-gutter-vertical;
 		margin-bottom: @row-gutter-vertical;
 		border-top: @row-divider-border-width solid @row-divider-border;
 	}
 }
+
+// Modifier: `row-match`
+// ========================================================================
 
 .row-match {
 	> * {
@@ -264,8 +251,16 @@
 	}
 }
 
+// Sub-objects: `.row-*-cols`
+// ========================================================================
+
 // Base 12 Rows
 .make-row-grid(12);
+
+// Phone landscape and small
+@media (max-width: @breakpoint-small) {
+	.make-row-grid(12, xsmall);
+}
 
 // Phone landscape and bigger
 @media (min-width: @breakpoint-small) {
@@ -287,18 +282,23 @@
 	.make-row-grid(12, xlarge);
 }
 
-
 // Sub-objects: `col-*`
 // ========================================================================
 
-[class*="col"] {
-}
-
-// 12 Column Grid
+// Base 12 Column Grid
 .make-col-grid(12);
 
-// 10 Column Grid
+// Base 10 Column Grid
 .make-col-grid(10);
+
+@media (max-width: @breakpoint-small) {
+
+	// 12 Column Grid
+	.make-col-grid(12, xsmall);
+
+	// 10 Column Grid
+	.make-col-grid(10, xsmall);
+}
 
 @media (min-width: @breakpoint-small) {
 

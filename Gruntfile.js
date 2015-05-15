@@ -14,15 +14,9 @@ module.exports = function(grunt) {
 				sourceMap: true,
 				sourceMapFileInline: true
 			},
-			docs: {
-				files: {
-					"docs/css/docs.css" : ["docs/build/less/docs.less"]
-				}
-			},
-			concat : {
+			main : {
 				files : {
 					"dist/css/clique.css" : ["build/less/clique.less"],
-					"dist/css/clique.full.css" : ["build/less/clique.full.less"],
 				}
 			},
 			core : {
@@ -48,13 +42,13 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			coffee: {
-				files: [ 'build/coffee/**/*.coffee', 'docs/build/coffee/**/*.coffee', 'Gruntfile.js' ],
-				tasks: [ 'build-js' ]
+				files: [ 'build/coffee/**/*.coffee', 'Gruntfile.js' ],
+				tasks: [ 'newer:coffee', 'concat' ]
 			},
 			less: {
-				files: [ 'build/less/**/*.less', 'docs/build/less/*.less', 'Gruntfile.js' ],
-				tasks: [ 'build-css' ]
-			}
+				files: [ 'build/less/**/*.less', 'Gruntfile.js' ],
+				tasks: [ 'less' ]
+			},
 		},
 		concat : {
 			options : {
@@ -88,30 +82,6 @@ module.exports = function(grunt) {
 				],
 				dest: 'dist/js/clique.js',
 			},
-			components : {
-				src: [
-					'dist/js/clique.js',
-					'dist/js/components/accordion.js',
-					'dist/js/components/autocomplete.js',
-					'dist/js/components/datatable.js',
-					'dist/js/components/datepicker.js',
-					'dist/js/components/form-select.js',
-					'dist/js/components/grid.js',
-					'dist/js/components/htmleditor.js',
-					'dist/js/components/lightbox.js',
-					'dist/js/components/nestable.js',
-					'dist/js/components/offcanvas.js',
-					'dist/js/components/parallax.js',
-					'dist/js/components/pagination.js',
-					'dist/js/components/slideshow.js',
-					'dist/js/components/sortable.js',
-					'dist/js/components/sticky.js',
-					'dist/js/components/timepicker.js',
-					'dist/js/components/upload.js',
-					'dist/js/components/switch.js'
-				],
-				dest: 'docs/js/clique.full.js',
-			},
 		},
 		cssmin : {
 			combine: {
@@ -123,8 +93,6 @@ module.exports = function(grunt) {
 				},
 				files : {
 					'dist/css/clique.css': ['dist/css/clique.css'],
-					'dist/css/clique.full.css': ['dist/css/clique.full.css'],
-					'docs/css/docs.css': ['docs/css/docs.css']
 				}
 			}
 		},
@@ -138,14 +106,6 @@ module.exports = function(grunt) {
 					beautify : true,
 					bracketize : true
 				}
-			},
-			dist : {
-				files: [{
-					expand: true,
-					cwd: 'docs/js',
-					src: '**/*.js',
-					dest: 'docs/js'
-				}]
 			},
 			new: {
 				files: [{
@@ -197,20 +157,16 @@ module.exports = function(grunt) {
 				src: [
 					"dist/js/**/*.js",
 					"dist/css/**/*.css",
-					"docs/js/**/*.js",
-					"docs/css/**/*.css"
 				],
 			},
 			css : {
 				src: [
 					"dist/css/**/*.css",
-					"docs/css/**/*.css"
 				],
 			},
 			js : {
 				src: [
 					"dist/js/**/*.js",
-					"docs/js/**/*.js"
 				],
 			}
 		},
@@ -239,25 +195,10 @@ module.exports = function(grunt) {
 					extDot : 'last'
 				}]
 			},
-			docs: {
-				files: [{
-					expand: true,
-					cwd: 'docs/build/coffee',
-					src: ['*.coffee', '!_*.coffee'],
-					dest: 'docs/js',
-					ext: '.js',
-					extDot : 'last'
-				}]
-			},
 		},
 		csscomb: {
 			options: {
 				config: '.csscomb.json'
-			},
-			docs: {
-				files: {
-					'docs/css/docs.css': ['docs/css/docs.css'],
-				}
 			},
 			dist: {
 				expand: true,
@@ -277,22 +218,31 @@ module.exports = function(grunt) {
 			all : ['dist/js/**/*.js', '!dist/js/clique.js']
 		},
 		casperjs: {
-			options: {
+			options : {
 				async: {
-					parallel: false
+					parallel: true
 				}
 			},
-			files: ['unittests/casperjs/*.js', '!unittests/casperjs/viewports.js']
+			all : {
+				src : ['unittests/casperjs/*.js']
+			},
+			tests : {
+				src: ['unittests/casperjs/tests.js'],
+			},
+			layouts : {
+				src: ['unittests/casperjs/layouts.js'],
+			}
 		},
 		clean: {
 			css: ['dist/css'],
+			casper: ['unittests/casperjs/results'],
 			results: ['unittests/**/results'],
 		},
 		cleaner_css: {
 			dist: {
 				files : {
 					'dist/css/clique.css': ['dist/css/clique.css'],
-					'dist/css/clique.full.css': ['dist/css/clique.full.css'],
+					'dist/css/clique.css': ['dist/css/clique.css'],
 				}
 			},
 		},
@@ -300,26 +250,44 @@ module.exports = function(grunt) {
 			options : {
 				dest : 'CHANGELOG.md'
 			}
+		},
+		mocha: {
+			options : {
+				run : true
+			},
+			test: {
+				src: ['unittests/mocha/*.html'],
+			},
+		},
+		browserify: {
+			tests: {
+				files: {
+					'unittests/mocha/suites/core.js': ['unittests/mocha/suites/core.js'],
+				}
+			}
 		}
 	});
 
 	// Development Tasks
+	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
-	grunt.loadNpmTasks('grunt-csscomb');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-cleaner-css');
 
 	// Build Tasks
-	grunt.loadNpmTasks('grunt-shell');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-newer');
+	grunt.loadNpmTasks("grunt-jsbeautifier");
 
 	// Linting Tasks
-	grunt.loadNpmTasks("grunt-jsbeautifier");
+	grunt.loadNpmTasks('grunt-csscomb');
+	grunt.loadNpmTasks('grunt-cleaner-css');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 
 	// Testing Tasks
 	grunt.loadNpmTasks('grunt-casperjs');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-mocha');
+	grunt.loadNpmTasks('grunt-browserify');
 
 	// Production Build Tasks
 	grunt.loadNpmTasks('grunt-contrib-concat');
@@ -327,8 +295,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-conventional-changelog');
 
-	// Default task.
-
+	// Custom Tasks
 	grunt.registerTask(
 		'build-css',
 		'Builds, cleans, and optmiizes the CSS from .less files',
@@ -340,9 +307,19 @@ module.exports = function(grunt) {
 		['coffee', 'concat', 'uglify', 'jsbeautifier:js']
 	);
 	grunt.registerTask(
+		'casper',
+		'Runs casper.js tests',
+		['clean:casper', 'casperjs:all']
+	);
+	grunt.registerTask(
 		'autotest',
 		'Runs all automated tests',
-		['clean:results', 'jshint', 'casperjs']
+		['clean:results', 'jshint', 'casper']
+	);
+	grunt.registerTask(
+		'release',
+		'Runs both the `build-css` and `build-js` commands',
+		['build']
 	);
 
 	grunt.registerTask( 'build', [ 'build-css', 'build-js' ] );

@@ -29,7 +29,7 @@
 
 	_c = {}
 	_cTEMP = window.Clique
-	_c.version = '1.0.0'
+	_c.version = '1.0.1'
 
 	_c.noConflict = ->
 		if _cTEMP
@@ -261,9 +261,9 @@
 					prop = toc.substring((if toc.match(/^(\^|\#|\!|\~|\:)/) then 1 else 0))
 					switch cmd
 						when '~'
-							output.push 'for(var $i=0;$i<' + prop + '.length;$i++) { var $item = ' + prop + '[$i];'
+							output.push 'for(var $i = 0; $i < ' + prop + '.length; $i++) { var $item = ' + prop + '[$i];'
 							openblocks++
-						when ' :'
+						when ':'
 							output.push 'for(var $key in ' + prop + ') { var $val = ' + prop + '[$key];'
 							openblocks++
 						when '#'
@@ -282,16 +282,6 @@
 				else
 					output.push '__ret.push(\'' + toc.replace(/\'/g, '\\\'') + '\');'
 				i = i + 1
-
-			# fn = ($data)->
-			# 	'use strict'
-			# 	__ret = []
-			# 	try
-			# 		with($data)
-			# 			__ret = ["Not all blocks are closed correctly."]
-			# 	catch e
-			# 		# ...
-
 			newFN = Function
 			fn = new newFN "$data", [
 				"var __ret = [];",
