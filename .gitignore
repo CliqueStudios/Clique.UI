@@ -8,9 +8,5 @@
 /node_modules
 /php
 /.notes
-/unittests/*
 !README.md
-!/unittests/casperjs
-/unittests/casperjs/*
-!/unittests/casperjs/*.js
 results/*

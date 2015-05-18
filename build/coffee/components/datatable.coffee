@@ -124,15 +124,15 @@
 	_c.component 'datatable',
 
 		defaults :
-			paginate : true # Whether or not to paginate [bool]
-			paginationWrapper : '.datatable-pagination-number'
-			perPage : 10 # Number of rows per page [int]
-			sortColumn : -1 # Column Index [int]
-			sortOrder : 'asc' # How to order [string] 'asc|desc'
-			hidden : [] # [array [int]] - Indexes of columns to hide
+			paginationWrapper : '.datatable-pagination'
+			perPage : 10
+			infoWrapper : '.datatable-info'
+			infoString : 'Showing rows #{start} through #{end} of #{total}'
+			sortColumn : 0
+			sortOrder : 'asc'
 
+		currentPage : 0
 		columns : []
-
 		elements : {}
 
 		boot : ->
@@ -142,25 +142,37 @@
 					unless ele.data('clique.data.datatable')
 						obj = _c.datatable ele, _c.utils.options(ele.attr('data-datatable'))
 						return
+				return
+			return
 
 		init : ->
-			if @options.paginate
-				@currentPage = 0
 			@setProperties()
 			@bindListeners()
 			@bindEvents()
 			@addObserver()
 			if ! @observerIsTriggered
 				@observerCallback()
-			$this = @
-			setTimeout ->
-				$this.trigger 'init.datatable.clique', [ $this.options ]
+			setTimeout =>
+				@trigger 'init.datatable.clique', [ @options ]
 			, 0
+
+		findElement : (root, selector)->
+			if selector[0] is '#'
+				return $ selector
+			parents = root.parents()
+			output = null
+			parents.each ->
+				if $(@).find(selector).length
+					output = $(@).find(selector)
+					return false
+			return output
 
 		setProperties : ->
 			@elements.tbody = @find '> tbody'
 			@elements.thead = @find '> thead'
 			@elements.th = @elements.thead.find '> tr > th'
+			if @options.paginationWrapper
+				@elements.pagination = @findElement @element, @options.paginationWrapper
 			@setColumns()
 
 		setColumns : ->
@@ -186,7 +198,7 @@
 			if ! @originalData and @data.length
 				@originalData = @data
 			@dataLength = @data.length
-			if ! @options.paginate
+			if ! @options.paginationWrapper
 				@options.perPage = @dataLength
 			@pages = Math.ceil(@dataLength / @options.perPage) - 1
 			return
@@ -202,15 +214,17 @@
 						return false
 			if @pagination.length and ! @pagination.find('> *').length
 				i = 0
+				html = '';
 				while i < @pages + 1
 					if i is @pages
-						@pagination.append "<span>...</span>"
-					@pagination.append "<a href='#' data-datatable-page='#{i}'>#{(i + 1)}</a>"
+						html += "<span>...</span>"
+					html += "<a href='#' data-datatable-page='#{i}'>#{(i + 1)}</a>"
 					if i is 0
-						@pagination.append "<span>...</span>"
+						html += "<span>...</span>"
 					i++
-				setTimeout ->
-					$this.bindPaginationEvents()
+				@pagination.append html
+				setTimeout =>
+					@bindPaginationEvents()
 				, 0
 
 		buildComplexPagination : ->

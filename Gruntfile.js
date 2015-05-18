@@ -1,14 +1,52 @@
+
 /*global module:false*/
 module.exports = function(grunt) {
 
+	// ========================================================================
+	// Grunt variables -
+	// ========================================================================
+
+	// Core & Component JS Files -
+	//   Returns an ordered array of all `.js` files in
+	//   the 'dist/js/core' directory
+	// ========================================================================
+
+	var coreJS = function() {
+		return [
+			'dist/js/core/core.js',
+			'dist/js/core/touch.js',
+			'dist/js/core/events.js',
+			'dist/js/core/browser.js',
+		];
+	};
+
+	var componentJS = function() {
+		var dir = 'dist/js';
+		var subdirs = ['core', 'components'];
+		var output = coreJS();
+		var callback = function(abspath) {
+			if(output.indexOf(abspath) < 0) {
+				output.push(abspath);
+			}
+		};
+		for(var i = 0; i < subdirs.length; i++) {
+			var subdir = subdirs[i];
+			grunt.file.recurse(dir, callback, subdir);
+		}
+		return output;
+	};
+
 	// Project configuration.
 	grunt.initConfig({
+		// Static variables
 		pkg: grunt.file.readJSON('package.json'),
-		banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+		banner : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
 		'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 		'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
 		' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
 		' */\n\n',
+
+		// Compile
 		less: {
 			options: {
 				sourceMap: true,
@@ -40,62 +78,44 @@ module.exports = function(grunt) {
 				}]
 			},
 		},
+		coffee: {
+			options: {
+				join: false,
+				bare: true
+			},
+			core: {
+				files: [{
+					expand: true,
+					cwd: 'build/coffee/components',
+					src: ['*.coffee', '!_*.coffee'],
+					dest: 'build/js/components',
+					ext: '.js',
+					extDot : 'last'
+				}]
+			},
+		},
 		watch: {
 			coffee: {
 				files: [ 'build/coffee/**/*.coffee', 'Gruntfile.js' ],
 				tasks: [ 'newer:coffee', 'concat' ]
+			},
+			js: {
+				files: [ 'build/js/**/*.js', 'Gruntfile.js' ],
+				tasks: [ 'newer:uglify:dist', 'concat' ]
 			},
 			less: {
 				files: [ 'build/less/**/*.less', 'Gruntfile.js' ],
 				tasks: [ 'less' ]
 			},
 		},
-		concat : {
-			options : {
-				stripBanners : {
-					block : true,
-					line : true
-				}
-			},
-			core : {
-				src: [
-					'dist/js/core/core.js',
-					'dist/js/core/touch.js',
-					'dist/js/core/events.js',
-					'dist/js/core/browser.js',
-					'dist/js/core/utility.js',
-					'dist/js/core/smooth-scroll.js',
-					'dist/js/core/scrollspy.js',
-					'dist/js/core/toggle.js',
-					'dist/js/core/alert.js',
-					'dist/js/core/button.js',
-					'dist/js/core/dropdown.js',
-					'dist/js/core/form.js',
-					'dist/js/core/grid.js',
-					'dist/js/core/modal.js',
-					'dist/js/core/nav.js',
-					'dist/js/core/switcher.js',
-					'dist/js/core/select.js',
-					'dist/js/core/tab.js',
-					'dist/js/core/cover.js',
-					'dist/js/core/password.js',
-				],
-				dest: 'dist/js/clique.js',
-			},
+		clean: {
+			css: ['dist/css'],
+			casper: ['unittests/casperjs/results'],
+			results: ['unittests/**/results'],
+			minify: ['dist/**/*.min.js', 'dist/**/*.min.css'],
 		},
-		cssmin : {
-			combine: {
-				options : {
-					compatibility : '*',
-					keepBreaks : true,
-					keepSpecialComments : 0,
-					restructuring : false
-				},
-				files : {
-					'dist/css/clique.css': ['dist/css/clique.css'],
-				}
-			}
-		},
+
+		// Build
 		uglify: {
 			options : {
 				preserveComments : false,
@@ -107,15 +127,88 @@ module.exports = function(grunt) {
 					bracketize : true
 				}
 			},
-			new: {
+			dist: {
+				options: {
+					banner: '/*!\n' +
+					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
+					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
+					' */\n\n',
+				},
 				files: [{
 					expand: true,
-					cwd: 'dist/js',
+					cwd: 'build/js',
 					src: '**/*.js',
 					dest: 'dist/js'
 				}]
+			},
+			core: {
+				options: {
+					banner: '/*!\n' +
+					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
+					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
+					' */\n\n',
+					mangle : {},
+					beautify : false,
+					compress: {
+						warnings: false
+					},
+					beautify: false,
+					expression: false,
+					maxLineLen: 32000,
+					ASCIIOnly: false
+				},
+				files: [{
+					expand: true,
+					cwd: 'dist/js/core',
+					src: ['*.js', '!*.min.js'],
+					dest: 'dist/js/core',
+					ext: '.min.js',
+					extDot : 'last'
+				}]
+			},
+			components: {
+				options: {
+					banner: '/*!\n' +
+					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
+					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
+					' */\n\n',
+					mangle : {},
+					beautify : false,
+					compress: {
+						warnings: false
+					},
+					beautify: false,
+					expression: false,
+					maxLineLen: 32000,
+					ASCIIOnly: false
+				},
+				files: [{
+					expand: true,
+					cwd: 'dist/js/components',
+					src: ['*.js', '!*.min.js'],
+					dest: 'dist/js/components',
+					ext: '.min.js',
+					extDot : 'last'
+				}]
 			}
 		},
+		concat: {
+			options : {
+				stripBanners : {
+					block : true,
+					line : true
+				}
+			},
+			core: {
+				src: coreJS(),
+				dest: 'dist/js/clique.js',
+			},
+		},
+
+		// Lint
 		jsbeautifier: {
 			options: {
 				html: {
@@ -168,46 +261,49 @@ module.exports = function(grunt) {
 				src: [
 					"dist/js/**/*.js",
 				],
+			},
+			html : {
+				src: [
+					"php/pages/tests/core/grid.php"
+				],
 			}
 		},
-		coffee: {
-			options: {
-				join: false,
-				bare: true
-			},
-			core: {
-				files: [{
-					expand: true,
-					cwd: 'build/coffee/core',
-					src: ['*.coffee', '!_*.coffee'],
-					dest: 'dist/js/core',
-					ext: '.js',
-					extDot : 'last'
-				}]
-			},
-			components: {
-				files: [{
-					expand: true,
-					cwd: 'build/coffee/components',
-					src: ['*.coffee', '!_*.coffee'],
-					dest: 'dist/js/components',
-					ext: '.js',
-					extDot : 'last'
-				}]
-			},
-		},
-		csscomb: {
-			options: {
-				config: '.csscomb.json'
+		cleaner_css: {
+			options : {
+				min : {
+					restructuring : false
+				},
+				comb : {
+					config : '.csscomb.json'
+				}
 			},
 			dist: {
-				expand: true,
-				cwd: 'dist/css',
-				src: ['**/*.css'],
-				dest: 'dist/css',
-				ext: '.css'
+				files: [{
+					expand: true,
+					cwd: 'dist/css',
+					src: ['**/*.css'],
+					dest: 'dist/css',
+					ext: '.css',
+					extDot : 'last'
+				}]
 			},
 		},
+		cliqueui_clean_less: {
+			options : {
+				searchIn : 'build/less',
+				log : 'unittests/linting-reports/clean-less.txt',
+				displayOutput : false
+			},
+			default : {
+				files: [{
+					expand: true,
+					cwd: 'build/less',
+					src: ['**/*.less', '!mixins/*.less'],
+				}]
+			}
+		},
+
+		// Test
 		jshint: {
 			options : {
 				jshintrc : 'unittests/jshint/.jshintrc',
@@ -233,24 +329,6 @@ module.exports = function(grunt) {
 				src: ['unittests/casperjs/layouts.js'],
 			}
 		},
-		clean: {
-			css: ['dist/css'],
-			casper: ['unittests/casperjs/results'],
-			results: ['unittests/**/results'],
-		},
-		cleaner_css: {
-			dist: {
-				files : {
-					'dist/css/clique.css': ['dist/css/clique.css'],
-					'dist/css/clique.css': ['dist/css/clique.css'],
-				}
-			},
-		},
-		changelog: {
-			options : {
-				dest : 'CHANGELOG.md'
-			}
-		},
 		mocha: {
 			options : {
 				run : true
@@ -265,7 +343,14 @@ module.exports = function(grunt) {
 					'unittests/mocha/suites/core.js': ['unittests/mocha/suites/core.js'],
 				}
 			}
-		}
+		},
+
+		// Administrative
+		changelog: {
+			options : {
+				dest : 'CHANGELOG.md'
+			}
+		},
 	});
 
 	// Development Tasks
@@ -276,13 +361,13 @@ module.exports = function(grunt) {
 
 	// Build Tasks
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-newer');
-	grunt.loadNpmTasks("grunt-jsbeautifier");
 
 	// Linting Tasks
 	grunt.loadNpmTasks('grunt-csscomb');
 	grunt.loadNpmTasks('grunt-cleaner-css');
+	grunt.loadNpmTasks('grunt-cliqueui-clean-less');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks("grunt-jsbeautifier");
 
 	// Testing Tasks
 	grunt.loadNpmTasks('grunt-casperjs');
@@ -291,20 +376,20 @@ module.exports = function(grunt) {
 
 	// Production Build Tasks
 	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-conventional-changelog');
+	grunt.loadNpmTasks('grunt-cliqueui');
 
 	// Custom Tasks
 	grunt.registerTask(
 		'build-css',
 		'Builds, cleans, and optmiizes the CSS from .less files',
-		['clean:css', 'less', 'cleaner_css', 'cssmin', 'csscomb', 'jsbeautifier:css']
+		['clean:css', 'less', 'cleaner_css']
 	);
 	grunt.registerTask(
 		'build-js',
 		'Builds, cleans, and optmiizes the JS from .coffee files',
-		['coffee', 'concat', 'uglify', 'jsbeautifier:js']
+		['coffee', 'uglify', 'concat', 'jsbeautifier:js']
 	);
 	grunt.registerTask(
 		'casper',
@@ -315,11 +400,6 @@ module.exports = function(grunt) {
 		'autotest',
 		'Runs all automated tests',
 		['clean:results', 'jshint', 'casper']
-	);
-	grunt.registerTask(
-		'release',
-		'Runs both the `build-css` and `build-js` commands',
-		['build']
 	);
 
 	grunt.registerTask( 'build', [ 'build-css', 'build-js' ] );

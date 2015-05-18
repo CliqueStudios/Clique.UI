@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Mocha Tests - Core</title>
+		<link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+	</head>
+	<body>
+		<div id="mocha"></div>
+
+		<script src="../../docs/js/jquery.js"></script>
+		<script src="../../dist/js/core/core.js" data-cover></script>
+
+		<!-- Testing -->
+		<script src="../../node_modules/mocha/mocha.js"></script>
+		<script src="../../node_modules/should/should.js"></script>
+		<script>
+			mocha.setup('bdd')
+			mocha.reporter('html');
+		</script>
+		<script src="suites/core.spec.js"></script>
+		<!-- <script src="suites/lib/blanket.js"></script> -->
+		<!-- <script src="../../node_modules/grunt-blanket-mocha/support/mocha-blanket.js"></script> -->
+		<script>
+			if(navigator.userAgent.indexOf('PhantomJS') < 0) {
+				mocha.run();
+			}
+			// if (window.PHANTOMJS) {
+			// 	blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+			// }
+		</script>
+	</body>
+</html>
