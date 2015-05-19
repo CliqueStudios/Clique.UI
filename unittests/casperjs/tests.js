@@ -27,9 +27,8 @@ casper.then(function() {
 				this.wait(1000);
 			});
 			this.then(function() {
-				// var info = this.getElementInfo('html');
 				this.echo('Screenshot for `' + this.getTitle() + '`');
-				this.capture('unittests/casperjs/results/tests/' + this.getTitle() + '/' + viewport.name + '-' + viewport.viewport.width + 'x' + viewport.viewport.height + '.png');
+				this.capture('unittests/casperjs/results/tests/' + this.getTitle() + '.png');
 			});
 		});
 	});
