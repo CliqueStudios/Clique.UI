@@ -3,8 +3,10 @@
 module.exports = function(grunt) {
 
 	// ========================================================================
-	// Grunt variables -
+	// Grunt modules
 	// ========================================================================
+
+	require('load-grunt-tasks')(grunt);
 
 	// Core & Component JS Files -
 	//   Returns an ordered array of all `.js` files in
@@ -25,7 +27,7 @@ module.exports = function(grunt) {
 		var subdirs = ['core', 'components'];
 		var output = coreJS();
 		var callback = function(abspath) {
-			if(output.indexOf(abspath) < 0) {
+			if(output.indexOf(abspath) < 0 && abspath.indexOf('.min.') < 0) {
 				output.push(abspath);
 			}
 		};
@@ -40,8 +42,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		// Static variables
 		pkg: grunt.file.readJSON('package.json'),
-		banner : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-		'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+		banner: '/*!\n' +
+		' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
 		'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
 		' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
 		' */\n\n',
@@ -83,33 +85,24 @@ module.exports = function(grunt) {
 				join: false,
 				bare: true
 			},
-			core: {
-				files: [{
-					expand: true,
-					cwd: 'build/coffee/components',
-					src: ['*.coffee', '!_*.coffee'],
-					dest: 'build/js/components',
-					ext: '.js',
-					extDot : 'last'
-				}]
-			},
 		},
 		watch: {
 			coffee: {
-				files: [ 'build/coffee/**/*.coffee', 'Gruntfile.js' ],
+				files: [ 'docs/build/coffee/**/*.coffee', 'Gruntfile.js' ],
 				tasks: [ 'newer:coffee', 'concat' ]
 			},
 			js: {
 				files: [ 'build/js/**/*.js', 'Gruntfile.js' ],
-				tasks: [ 'newer:uglify:dist', 'concat' ]
+				tasks: [ 'newer:uglify:build', 'concat:docs' ]
 			},
 			less: {
-				files: [ 'build/less/**/*.less', 'Gruntfile.js' ],
+				files: [ 'build/less/**/*.less', 'docs/build/less/**/*.less', 'Gruntfile.js' ],
 				tasks: [ 'less' ]
 			},
 		},
 		clean: {
 			css: ['dist/css'],
+			js: ['dist/js'],
 			casper: ['unittests/casperjs/results'],
 			results: ['unittests/**/results'],
 			minify: ['dist/**/*.min.js', 'dist/**/*.min.css'],
@@ -117,18 +110,16 @@ module.exports = function(grunt) {
 
 		// Build
 		uglify: {
-			options : {
-				preserveComments : false,
-				mangle : false,
-				compress : false,
-				screwIE8 : true,
-				beautify : {
-					beautify : true,
-					bracketize : true
-				}
-			},
-			dist: {
+			build: {
 				options: {
+					preserveComments : false,
+					mangle : false,
+					compress : false,
+					screwIE8 : true,
+					beautify : {
+						beautify : true,
+						bracketize : true
+					},
 					banner: '/*!\n' +
 					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
 					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
@@ -142,7 +133,7 @@ module.exports = function(grunt) {
 					dest: 'dist/js'
 				}]
 			},
-			core: {
+			dist: {
 				options: {
 					banner: '/*!\n' +
 					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -161,35 +152,9 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: 'dist/js/core',
-					src: ['*.js', '!*.min.js'],
-					dest: 'dist/js/core',
-					ext: '.min.js',
-					extDot : 'last'
-				}]
-			},
-			components: {
-				options: {
-					banner: '/*!\n' +
-					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
-					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-					' */\n\n',
-					mangle : {},
-					beautify : false,
-					compress: {
-						warnings: false
-					},
-					beautify: false,
-					expression: false,
-					maxLineLen: 32000,
-					ASCIIOnly: false
-				},
-				files: [{
-					expand: true,
-					cwd: 'dist/js/components',
-					src: ['*.js', '!*.min.js'],
-					dest: 'dist/js/components',
+					cwd: 'dist/js',
+					src: ['**/*.js', '!**/*.min.js'],
+					dest: 'dist/js',
 					ext: '.min.js',
 					extDot : 'last'
 				}]
@@ -197,6 +162,11 @@ module.exports = function(grunt) {
 		},
 		concat: {
 			options : {
+				banner: '/*!\n' +
+				' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+				'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
+				' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
+				' */\n\n',
 				stripBanners : {
 					block : true,
 					line : true
@@ -206,6 +176,20 @@ module.exports = function(grunt) {
 				src: coreJS(),
 				dest: 'dist/js/clique.js',
 			},
+		},
+		cssmin: {
+			dist : {
+				options: {
+					restructuring : false
+				},
+				files: [{
+					expand: true,
+					cwd: 'dist/css',
+					src: ['**/*.css', '!**/*.min.css'],
+					dest: 'dist/css',
+					ext: '.min.css'
+				}]
+			}
 		},
 
 		// Lint
@@ -270,6 +254,11 @@ module.exports = function(grunt) {
 		},
 		cleaner_css: {
 			options : {
+				banner: '/*!\n' +
+				' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+				'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
+				' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
+				' */\n\n',
 				min : {
 					restructuring : false
 				},
@@ -329,6 +318,28 @@ module.exports = function(grunt) {
 				src: ['unittests/casperjs/layouts.js'],
 			}
 		},
+		pagespeed: {
+			options: {
+				nokey: true,
+				url: "https://developers.google.com"
+			},
+			prod: {
+				options: {
+					url: "https://developers.google.com/speed/docs/insights/v1/getting_started",
+					locale: "en_GB",
+					strategy: "desktop",
+					threshold: 80
+				}
+			},
+			paths: {
+				options: {
+					paths: ["/speed/docs/insights/v1/getting_started", "/speed/docs/about"],
+					locale: "en_GB",
+					strategy: "desktop",
+					threshold: 80
+				}
+			}
+		},
 		mocha: {
 			options : {
 				run : true
@@ -343,53 +354,19 @@ module.exports = function(grunt) {
 					'unittests/mocha/suites/core.js': ['unittests/mocha/suites/core.js'],
 				}
 			}
-		},
-
-		// Administrative
-		changelog: {
-			options : {
-				dest : 'CHANGELOG.md'
-			}
-		},
+		}
 	});
-
-	// Development Tasks
-	grunt.loadNpmTasks('grunt-newer');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-contrib-coffee');
-
-	// Build Tasks
-	grunt.loadNpmTasks('grunt-contrib-clean');
-
-	// Linting Tasks
-	grunt.loadNpmTasks('grunt-csscomb');
-	grunt.loadNpmTasks('grunt-cleaner-css');
-	grunt.loadNpmTasks('grunt-cliqueui-clean-less');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks("grunt-jsbeautifier");
-
-	// Testing Tasks
-	grunt.loadNpmTasks('grunt-casperjs');
-	grunt.loadNpmTasks('grunt-mocha');
-	grunt.loadNpmTasks('grunt-browserify');
-
-	// Production Build Tasks
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-conventional-changelog');
-	grunt.loadNpmTasks('grunt-cliqueui');
 
 	// Custom Tasks
 	grunt.registerTask(
 		'build-css',
 		'Builds, cleans, and optmiizes the CSS from .less files',
-		['clean:css', 'less', 'cleaner_css']
+		['clean:css', 'less', 'cleaner_css', 'cssmin:dist']
 	);
 	grunt.registerTask(
 		'build-js',
 		'Builds, cleans, and optmiizes the JS from .coffee files',
-		['coffee', 'uglify', 'concat', 'jsbeautifier:js']
+		['clean:js', 'uglify:build', 'concat:core', 'jsbeautifier:js', 'uglify:dist']
 	);
 	grunt.registerTask(
 		'casper',
