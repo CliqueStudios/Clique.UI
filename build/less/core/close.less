@@ -47,7 +47,7 @@
 	&:hover,
 	&:focus {
 		opacity: 0.5;
-		outline: none;
+		outline: 0;
 		color: inherit;
 		text-decoration: none;
 		cursor: pointer;
@@ -65,28 +65,28 @@
 		border: 0;
 		padding: 0;
 	}
-}
 
-// Modifier
-// ========================================================================
+	// Modifier
+	// ========================================================================
 
-.close-alt {
-	padding: @close-alt-padding;
-	.border-radius(50%);
-	background-color: @close-alt-background;
-	opacity: 1;
-
-	&:hover,
-	&:focus {
-		opacity: 1;
+	&-alt {
+		padding: @close-alt-padding;
+		.border-radius(50%);
 		background-color: @close-alt-background;
+		opacity: 1;
+
+		&:hover,
+		&:focus {
+			opacity: 1;
+			background-color: @close-alt-background;
+
+			&:after {
+				opacity: 0.8;
+			}
+		}
 
 		&:after {
-			opacity: 0.8;
+			opacity: 0.5;
 		}
-	}
-
-	&:after {
-		opacity: 0.5;
 	}
 }

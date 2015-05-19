@@ -4,7 +4,7 @@
 //
 // Component:       `offcanvas`
 //
-// Sub-objects:     `offcanvas-page`
+// Sub-Objects:     `offcanvas-page`
 //                  `offcanvas-bar`
 //                  `offcanvas-close`
 //
@@ -30,16 +30,15 @@
 
 @offcanvas-z-index: 1000;
 @offcanvas-background: rgba(0, 0, 0, 0.1);
+
 @offcanvas-bar-width: 270px;
 @offcanvas-bar-background: #333;
+
 @offcanvas-panel-margin: 20px 15px;
 @offcanvas-panel-color: #777;
 @offcanvas-panel-link-color: #ccc;
 @offcanvas-panel-link-hover-color: @color-white;
 @offcanvas-panel-title-color: @offcanvas-panel-link-color;
-
-// New
-@offcanvas-panel-text-shadow: rgba(0, 0, 0, 0.5);
 
 // ========================================================================
 // Component: Off-canvas
@@ -55,55 +54,76 @@
 	z-index: @offcanvas-z-index;
 	touch-action: none;
 	background-color: @offcanvas-background;
+
 	&.active {
 		display: block;
 	}
-}
 
-// Sub-object `offcanvas-page`
-// ========================================================================
+	// Sub-Object: `offcanvas-page`
+	// ========================================================================
 
-.offcanvas-page {
-	position: fixed;
-	.transition(margin-left 300ms ease-in-out);
-}
+	&-page {
+		position: fixed;
+		.transition(margin-left 300ms ease-in-out);
+	}
 
-// Sub-object `offcanvas-bar`
-// ========================================================================
+	// Sub-Object: `offcanvas-bar`
+	// ========================================================================
 
-.offcanvas-bar {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	.transform(translateX(-100%));
-	z-index: @offcanvas-z-index + 1;
-	width: @offcanvas-bar-width;
-	max-width: 100%;
-	background-color: @offcanvas-bar-background;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
-	.transition(transform 300ms ease-in-out);
-	-ms-scroll-chaining: none;
-}
+	&-bar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		.translate(-100%, 0);
+		z-index: @offcanvas-z-index + 1;
+		width: @offcanvas-bar-width;
+		max-width: 100%;
+		background-color: @offcanvas-bar-background;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		.transition(transform 300ms ease-in-out);
+		-ms-scroll-chaining: none;
 
-.offcanvas.active .offcanvas-bar.offcanvas-bar-show {
-	.transform(translateX(0%));
-}
+		&:after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			width: 1px;
+			background-color: rgba(0, 0, 0, 0.6);
+			.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
+		}
 
-// Modifier `offcanvas-bar-flip`
-// ========================================================================
+		// Modifier `offcanvas-bar-flip`
+		// ========================================================================
 
-.offcanvas-bar-flip {
-	left: auto;
-	right: 0;
-	.transform(translateX(100%));
-}
+		&-flip {
+			left: auto;
+			right: 0;
+			.translate(100%, 0);
+			&:after {
+				right: auto;
+				left: 0;
+				width: 1px;
+				background-color: rgba(0, 0, 0, 0.6);
+				.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
+			}
+		}
 
-// Panel in offcanvas
-// ========================================================================
+		// State: `offcanvas-bar-show`
+		// ========================================================================
 
-.offcanvas {
+		&-show {
+			.translate(0, 0);
+		}
+	}
+
+	// Panel in offcanvas
+	// ========================================================================
+
 	.panel {
 		margin: @offcanvas-panel-margin;
 		color: @offcanvas-panel-color;
@@ -115,32 +135,9 @@
 				}
 			}
 		}
-	}
-	.panel-title {
-		color: @offcanvas-panel-title-color;
-	}
-}
 
-.offcanvas-bar {
-	&:after {
-		content: "";
-		display: block;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		width: 1px;
-		background-color: rgba(0, 0, 0, 0.6);
-		.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
-	}
-}
-
-.offcanvas-bar-flip {
-	&:after {
-		right: auto;
-		left: 0;
-		width: 1px;
-		background-color: rgba(0, 0, 0, 0.6);
-		.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
+		&-title {
+			color: @offcanvas-panel-title-color;
+		}
 	}
 }

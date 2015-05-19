@@ -4,7 +4,7 @@
 //
 // Component:       `modal`
 //
-// Sub-objects:     `modal-dialog`
+// Sub-Objects:     `modal-dialog`
 //                  `modal-close`
 //                  `modal-header`
 //                  `modal-footer`
@@ -67,92 +67,149 @@
 	.transition(opacity 150ms linear);
 	touch-action: cross-slide-y pinch-zoom double-tap-zoom;
 
-	&.open {
-		opacity: 1;
-	}
-}
-
-// Prevents duplicated scrollbar caused by 4.
-.modal-page {
-	&,
-	body {
-		overflow: hidden;
-	}
-}
-
-// Sub-object: `modal-dialog`
-// ========================================================================
-
-.modal-dialog {
-	position: relative;
-	margin: @modal-dialog-margin-vertical auto;
-	padding: @modal-dialog-padding;
-	width: @modal-dialog-width;
-	max-width: 100%;
-	.calc(max-width, ~"100% - 20px");
-	background-color: @modal-dialog-background;
-	opacity: 0;
-	.translateY(-100px);
-	.transition(opacity 300ms linear, transform 300ms ease-out);
-	.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
-
-	@media (max-width: @breakpoint-small-max) {
-		width: auto;
-		margin: 10px auto;
-	}
-}
-
-// Open state
-.open {
-	.modal-dialog {
-		opacity: 1;
-		.translateY(0);
-	}
-}
-
-// Remove margin from the last-child
-.modal-dialog {
-	> :not([class*="modal-"]) {
-		&:last-child {
-			margin-bottom: 0;
+	// Prevents duplicated scrollbar caused by 4.
+	&-page {
+		&,
+		body {
+			overflow: hidden;
 		}
 	}
-}
 
-//Close in modal
-// ========================================================================
+	// Sub-Object: `modal-dialog`
+	// ========================================================================
 
-.modal-dialog {
-	> .close {
-		&:first-child {
-			margin: -10px -10px 0 0;
-			float: right;
-			+ *:not([class*="modal-"]) {
-				margin-top: 0;
+	&-dialog {
+		position: relative;
+		margin: @modal-dialog-margin-vertical auto;
+		padding: @modal-dialog-padding;
+		width: @modal-dialog-width;
+		max-width: 100%;
+		.calc(max-width, ~"100% - 20px");
+		background-color: @modal-dialog-background;
+		opacity: 0;
+		.translateY(-100px);
+		.transition(opacity 300ms linear, transform 300ms ease-out);
+		.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+
+		@media (max-width: @breakpoint-small-max) {
+			width: auto;
+			margin: 10px auto;
+		}
+
+		// Remove margin from the last-child
+		> :not([class*="modal-"]) {
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		//Close in modal
+		// ========================================================================
+
+		> .close {
+			&:first-child {
+				margin: -10px -10px 0 0;
+				float: right;
+				+ *:not([class*="modal-"]) {
+					margin-top: 0;
+				}
+			}
+		}
+
+		// Modifier: `modal-dialog-lightbox`
+		// ========================================================================
+
+		&-lightbox {
+			margin: 15px auto;
+			padding: 0;
+			min-height: 200px;
+			max-width: 95%;
+			max-width: ~"calc(100% - 30px)";
+
+			// Close button
+			> .close:first-child {
+				position: absolute;
+				top: -12px;
+				right: -12px;
+				margin: 0;
+				float: none;
 			}
 		}
 	}
-}
 
+	// Sub-Object: `modal-header` and `modal-footer`
+	// ========================================================================
 
-// Modifier: `modal-dialog-lightbox`
-// ========================================================================
+	&-header {
+		margin: -20px -20px @modal-header-margin-bottom -20px;
+		padding: 20px;
+		border-bottom: 1px solid #e5e5e5;
+		.border-radius(4px 4px 0 0);
+		background-color: #fafafa;
+	}
 
-.modal-dialog-lightbox {
-	margin: 15px auto;
-	padding: 0;
-	min-height: 200px;
-	max-width: 95%;
-	max-width: ~"calc(100% - 30px)";
-}
+	&-footer {
+		margin: @modal-footer-margin-top -20px -20px -20px;
+		padding: 20px;
+		border-top: 1px solid #e5e5e5;
+		.border-radius(0 0 4px 4px);
+		background-color: #fafafa;
+	}
 
-// Close button
-.modal-dialog-lightbox > .close:first-child {
-	position: absolute;
-	top: -12px;
-	right: -12px;
-	margin: 0;
-	float: none;
+	// Remove margin from the last-child
+	&-header,
+	&-footer {
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Sub-Object: `modal-caption`
+	// ========================================================================
+
+	&-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: (-@modal-dialog-padding);
+		margin-bottom: @modal-caption-margin-bottom;
+		color: @modal-caption-color;
+		text-align: center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	// Sub-Object: `modal-spinner`
+	// ========================================================================
+
+	&-spinner {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		.translate(-50%, -50%);
+		font-size: 25px;
+		color: #ddd;
+		&:after {
+			content: "\e97a";
+			font-family: "icomoon";
+			.animation(rotate 2s infinite linear);
+		}
+	}
+
+	// Sub-Object: `modal-scrollbar`
+	// ========================================================================
+
+	&-scrollbar {
+		// ...
+	}
+
+	// State: `.open`
+	// ========================================================================
+
+	&.open {
+		opacity: 1;
+	}
 }
 
 // Phone landscape and smaller
@@ -181,69 +238,10 @@
 	}
 }
 
-// Sub-Object: `modal-header` and `modal-footer`
-// ========================================================================
-
-.modal-header {
-	margin: -20px -20px @modal-header-margin-bottom -20px;
-	padding: 20px;
-	border-bottom: 1px solid #e5e5e5;
-	.border-radius(4px 4px 0 0);
-	background-color: #fafafa;
-}
-
-.modal-footer {
-	margin: @modal-footer-margin-top -20px -20px -20px;
-	padding: 20px;
-	border-top: 1px solid #e5e5e5;
-	.border-radius(0 0 4px 4px);
-	background-color: #fafafa;
-}
-
-// Remove margin from the last-child
-.modal-header,
-.modal-footer {
-	> :last-child {
-		margin-bottom: 0;
+// Open state
+.open {
+	.modal-dialog {
+		opacity: 1;
+		.translateY(0);
 	}
-}
-
-// Sub-Object: `modal-caption`
-// ========================================================================
-
-.modal-caption {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: (-@modal-dialog-padding);
-	margin-bottom: @modal-caption-margin-bottom;
-	color: @modal-caption-color;
-	text-align: center;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-// Sub-Object: `modal-spinner`
-// ========================================================================
-
-.modal-spinner {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	.translate(-50%, -50%);
-	font-size: 25px;
-	color: #ddd;
-	&:after {
-		content: "\e97a";
-		font-family: "icomoon";
-		.animation(rotate 2s infinite linear);
-	}
-}
-
-// Sub-Object: `modal-scrollbar`
-// ========================================================================
-
-.modal-scrollbar {
-	// ...
 }

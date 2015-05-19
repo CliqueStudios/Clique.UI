@@ -4,7 +4,7 @@
 //
 // Component:       `sortable`
 //
-// Sub-objects:     `sortable-moving`
+// Sub-Objects:     `sortable-moving`
 //
 // Modifiers:       `sortable-dragged`
 //                  `sortable-placeholder`
@@ -34,6 +34,7 @@
 
 .sortable {
 	position: relative;
+
 	> * {
 		.user-select(none);
 		touch-action: none;
@@ -45,38 +46,38 @@
 		-webkit-user-drag: none;
 		user-drag: none;
 	}
-}
 
-// Sub-modifier `sortable-dragged`
-// ========================================================================
+	// Sub-modifier `sortable-dragged`
+	// ========================================================================
 
-.sortable-dragged {
-	position: absolute;
-	z-index: @sortable-dragged-z-index;
-	pointer-events: none;
-}
+	&-dragged {
+		position: absolute;
+		z-index: @sortable-dragged-z-index;
+		pointer-events: none;
+	}
 
-// Sub-modifier `sortable-placeholder`
-// ========================================================================
+	// Sub-modifier `sortable-placeholder`
+	// ========================================================================
 
-.sortable-placeholder {
-	opacity: @sortable-placeholder-opacity;
-}
+	&-placeholder {
+		opacity: @sortable-placeholder-opacity;
+	}
 
-// Sub-modifier `sortable-over`
-// Only if `warp:true`
-// ========================================================================
+	// Sub-modifier `sortable-over`
+	// Only if `warp:true`
+	// ========================================================================
 
-.sortable-over {
-	opacity: @sortable-over-opacity;
-}
+	&-over {
+		opacity: @sortable-over-opacity;
+	}
 
-// Sub-object `sortable-moving`
-// ========================================================================
+	// Sub-Object: `sortable-moving`
+	// ========================================================================
 
-.sortable-moving {
-	&,
-	* {
-		cursor: move;
+	&-moving {
+		&,
+		* {
+			cursor: move;
+		}
 	}
 }

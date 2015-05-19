@@ -51,22 +51,11 @@
 @utility-heading-large-font-size: 52px;
 @utility-heading-large-line-height: 64px;
 
-@utility-link-muted-color: inherit;
-@utility-link-muted-hover-color: @utility-link-muted-color;
-
 @utility-scrollable-text-height: 300px;
 @utility-scrollable-box-height: 170px;
 @utility-scrollable-box-padding: 10px;
-@utility-scrollable-box-border: @base-border-color;
+@utility-scrollable-box-border: @global-border-color;
 @utility-scrollable-box-border-width: 1px;
-
-// ========================================================================
-// Rulesets
-// ========================================================================
-
-@visible: {
-	visibility: visible !important;
-};
 
 // ========================================================================
 // Component: Utility
@@ -105,13 +94,16 @@
 
 // Float blocks
 .float {
+
 	&-left,
 	&-right {
 		max-width: 100%;
 	}
+
 	&-left {
 		float: left;
 	}
+
 	&-right {
 		float: right;
 	}
@@ -126,6 +118,7 @@
 	margin-bottom: @utility-align-vertical;
 }
 .align {
+
 	&-left {
 		margin-right: @utility-align-horizontal;
 		float: left;
@@ -146,6 +139,7 @@
 			margin-bottom: @utility-align-vertical;
 			float: left;
 		}
+
 		&-medium-right {
 			margin-left: @utility-align-horizontal;
 			margin-bottom: @utility-align-vertical;
@@ -203,6 +197,7 @@
 // ========================================================================
 
 .responsive {
+
 	&-width {
 		max-width: 100% !important;
 		height: auto;
@@ -217,6 +212,7 @@
 // ========================================================================
 
 .margin {
+
 	margin-bottom: @utility-margin;
 	* + & {
 		margin-top: @utility-margin;
@@ -316,28 +312,45 @@
 // Headings
 // ========================================================================
 
-.heading-large {
-	font-size: @utility-heading-large-small-font-size;
-	line-height: @utility-heading-large-small-line-height;
+.heading {
+	&-large {
+		font-size: @utility-heading-large-small-font-size;
+		line-height: unit(@utility-heading-large-small-line-height) / unit(@utility-heading-large-small-font-size);
 
-	// Tablet and bigger
-	@media (min-width: @breakpoint-medium) {
-		font-size: @utility-heading-large-font-size;
-		line-height: @utility-heading-large-line-height;
+		// Tablet and bigger
+		@media (min-width: @breakpoint-medium) {
+			font-size: @utility-heading-large-font-size;
+			line-height: unit(@utility-heading-large-line-height) / unit(@utility-heading-large-font-size);
+		}
 	}
 }
 
 // Link
 // ========================================================================
 
-// Reset link style
-.link-reset {
-	&,
-	a {
+.link {
+
+	// Reset link style
+	&-reset {
 		&,
-		&:hover {
-			color: inherit;
-			text-decoration: none;
+		a {
+			&,
+			&:hover {
+				color: inherit;
+				text-decoration: none;
+			}
+		}
+	}
+
+	// Muted link style
+	&-muted {
+		&,
+		a {
+			&,
+			&:hover {
+				color: #ccc;
+				text-decoration: none;
+			}
 		}
 	}
 }
@@ -441,6 +454,7 @@
 // ========================================================================
 
 .display {
+
 	&-block {
 		display: block !important;
 	}
@@ -460,40 +474,52 @@
 
 // Desktop and bigger
 @media (min-width: @breakpoint-large) {
-	.visible-small {
-		display: none !important;
+	.visible {
+		&-small {
+			display: none !important;
+		}
+		&-medium {
+			display: none !important;
+		}
 	}
-	.visible-medium {
-		display: none !important;
-	}
-	.hidden-large {
-		display: none !important;
+	.hidden {
+		&-large {
+			display: none !important;
+		}
 	}
 }
 
 // Tablets portrait
 @media (min-width: @breakpoint-medium) and (max-width: @breakpoint-medium-max) {
-	.visible-small {
-		display: none !important;
+	.visible {
+		&-small {
+			display: none !important;
+		}
+		&-large {
+			display: none !important;
+		}
 	}
-	.visible-large {
-		display: none !important;
-	}
-	.hidden-medium {
-		display: none !important;
+	.hidden {
+		&-medium {
+			display: none !important;
+		}
 	}
 }
 
 // Phone landscape and smaller
 @media (max-width: @breakpoint-small-max) {
-	.visible-medium {
-		display: none !important;
+	.visible {
+		&-medium {
+			display: none !important;
+		}
+		&-large {
+			display: none !important;
+		}
 	}
-	.visible-large {
-		display: none !important;
-	}
-	.hidden-small {
-		display: none !important;
+	.hidden {
+		&-small {
+			display: none !important;
+		}
 	}
 }
 
@@ -509,21 +535,23 @@
 }
 
 // Show on hover
-.visible-hover {
-	&:hover {
-		.hidden,
-		.invisible {
-			display: block !important;
-			@visible();
-		}
-	}
-
-	&-inline {
+.visible {
+	&-hover {
 		&:hover {
 			.hidden,
 			.invisible {
-				display: inline-block !important;
-				@visible();
+				display: block !important;
+				visibility: visible !important;
+			}
+		}
+
+		&-inline {
+			&:hover {
+				.hidden,
+				.invisible {
+					display: inline-block !important;
+					visibility: visible !important;
+				}
 			}
 		}
 	}

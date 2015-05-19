@@ -15,7 +15,10 @@
 // Variables
 // ========================================================================
 
+@datatable-height: 20px;
 
+@datatable-sort-asc-icon: "\e603";
+@datatable-sort-desc-icon: "\e600";
 
 // ========================================================================
 // Component: Autocomplete
@@ -23,14 +26,64 @@
 
 .datatable {
 
-	// Sub-object: `datatable-actionable`
-	// ========================================================================
-	&-actionable {
-		white-space: nowrap;
+	th {
+		position: relative;
 	}
 
-	// Sub-object: `datatable-pagination`
+	// Sub-Object: `datatable-sort`
 	// ========================================================================
+
+	&-sort {
+		position: relative;
+		line-height: 1;
+		font-size: @datatable-height / 2;
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		.translate(0, -50%);
+		opacity: 0.5;
+
+		// Hover/Focus
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+
+		&:before,
+		&:after {
+			display: block;
+			.size(@datatable-height / 2);
+			font-family: "icomoon";
+		}
+
+		&:before {
+			content: @datatable-sort-asc-icon;
+		}
+
+		&:after {
+			content: @datatable-sort-desc-icon;
+		}
+
+		&-active {
+			opacity: 1;
+		}
+
+		&-desc {
+			&:before {
+				opacity: 0;
+			}
+		}
+
+		&-asc {
+			&:after {
+				opacity: 0;
+			}
+		}
+	}
+
+	// Sub-Object: `datatable-pagination`
+	// ========================================================================
+
 	&-pagination {
 		// ...
 

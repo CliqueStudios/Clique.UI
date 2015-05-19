@@ -41,7 +41,7 @@
 @dropdown-font-size: 1rem;
 @dropdown-animation: fade;
 @dropdown-divider-border-width: 1px;
-@dropdown-divider-border: @base-border-color;
+@dropdown-divider-border: @global-border-color;
 @dropdown-small-padding: 5px;
 @dropdown-navbar-margin: 0;
 @dropdown-navbar-background: #f5f5f5;
@@ -76,33 +76,87 @@
 		.animation(@dropdown-animation 200ms ease-in-out);
 		.transform-origin(0 0);
 	}
-}
 
-// Alignment modifiers
-// ========================================================================
+	// Alignment modifiers
+	// ========================================================================
 
-// Modifier `dropdown-flip`
-// ========================================================================
+	// Modifier `dropdown-flip`
+	// ========================================================================
 
-.dropdown-flip {
-	left: auto;
-	right: 0;
-}
+	&-flip {
+		left: auto;
+		right: 0;
+	}
 
-// Modifier `dropdown-up`
-// ========================================================================
+	// Modifier `dropdown-up`
+	// ========================================================================
 
-.dropdown-up {
-	top: auto;
-	bottom: 100%;
-	margin-top: auto;
-	margin-bottom: @dropdown-margin-top;
-}
+	&-up {
+		top: auto;
+		bottom: 100%;
+		margin-top: auto;
+		margin-bottom: @dropdown-margin-top;
+	}
 
-// Nav in dropdown
-// ========================================================================
+	// Modifier `dropdown-small`
+	// ========================================================================
 
-.dropdown {
+	// Set min-width and text expands dropdown if needed
+	&-small {
+		min-width: 150px;
+		width: auto;
+		padding: @dropdown-small-padding;
+		white-space: nowrap;
+		.nav {
+			margin: 0 -@dropdown-small-padding;
+		}
+	}
+
+
+	// Modifier: `dropdown-navbar`
+	// ========================================================================
+
+	&-navbar {
+		margin-top: @dropdown-navbar-margin;
+		background-color: @dropdown-navbar-background;
+		color: @dropdown-navbar-color;
+		left: -1px;
+		border: 1px solid @dropdown-border;
+		.open {
+			> & {
+				.animation(@dropdown-navbar-animation 200ms ease-in-out);
+			}
+		}
+		&.dropdown-flip {
+			left: auto;
+		}
+	}
+
+	// Modifier `dropdown-scrollable`
+	// ========================================================================
+
+	&-scrollable {
+		overflow-y: auto;
+		max-height: @dropdown-scrollable-height;
+	}
+
+	// Modifier `dropdown-stack`
+	// ========================================================================
+
+	&-stack {
+		> .dropdown-grid {
+			> [class*="col-"] {
+				width: 100%;
+				&:nth-child(n+2) {
+					margin-top: @dropdown-padding;
+				}
+			}
+		}
+	}
+
+	// Nav in dropdown
+	// ========================================================================
+
 	.nav {
 		margin: 0 (-@dropdown-padding);
 	}
@@ -113,7 +167,7 @@
 
 .row {
 	.dropdown-grid {
-		+ .dropdown-grid {
+		& + & {
 			margin-top: @dropdown-padding;
 		}
 	}
@@ -190,60 +244,4 @@
 			}
 		}
 	}
-}
-
-.dropdown-stack {
-	> .dropdown-grid {
-		> [class*="col-"] {
-			width: 100%;
-			&:nth-child(n+2) {
-				margin-top: @dropdown-padding;
-			}
-		}
-	}
-}
-
-
-// Modifier `dropdown-small`
-// ========================================================================
-
-// Set min-width and text expands dropdown if needed
-.dropdown-small {
-	min-width: 150px;
-	width: auto;
-	padding: @dropdown-small-padding;
-	white-space: nowrap;
-	.nav {
-		margin: 0 -@dropdown-small-padding;
-	}
-}
-
-
-// Modifier: `dropdown-navbar`
-// ========================================================================
-
-.dropdown-navbar {
-	margin-top: @dropdown-navbar-margin;
-	background-color: @dropdown-navbar-background;
-	color: @dropdown-navbar-color;
-	left: -1px;
-	border: 1px solid @dropdown-border;
-	.open {
-		> & {
-			.animation(@dropdown-navbar-animation 200ms ease-in-out);
-		}
-	}
-}
-
-
-// Modifier `dropdown-scrollable`
-// ========================================================================
-
-.dropdown-scrollable {
-	overflow-y: auto;
-	max-height: @dropdown-scrollable-height;
-}
-
-.dropdown-navbar.dropdown-flip {
-	left: auto;
 }

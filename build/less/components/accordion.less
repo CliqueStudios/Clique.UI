@@ -4,7 +4,7 @@
 //
 // Component:       `accodion`
 //
-// Sub-objects:     `accodion-title`
+// Sub-Objects:     `accodion-title`
 //                  `accodion-content`
 
 @import "../mixins/mixins.less";
@@ -20,6 +20,7 @@
 @accordion-title-font-size: 18px;
 @accordion-title-line-height: 24px;
 @accordion-title-background: #eee;
+
 @accordion-content-padding-horizontal: @accordion-title-padding-horizontal;
 @accordion-content-padding-bottom: @accordion-title-padding-horizontal;
 @accordion-title-border: @global-border;
@@ -30,7 +31,7 @@
 
 .accordion {
 
-	// Sub-object: `accordion-title`
+	// Sub-Object: `accordion-title`
 	// ========================================================================
 
 	&-title {
@@ -39,20 +40,20 @@
 		padding: @accordion-title-padding-vertical @accordion-title-padding-horizontal;
 		background-color: @accordion-title-background;
 		font-size: @accordion-title-font-size;
-		line-height: @accordion-title-line-height;
+		line-height: unit(@accordion-title-line-height) / unit(@accordion-title-font-size);
 		cursor: pointer;
 		border: 1px solid @accordion-title-border;
 	}
 
-	// Sub-object: `accordion-content`
+	// Sub-Object: `accordion-content`
 	// ========================================================================
 
 	&-content {
 		padding: 0 @accordion-content-padding-horizontal @accordion-content-padding-bottom @accordion-content-padding-horizontal;
 		.micro-clearfix();
+
 		> :last-child {
 			margin-bottom: 0;
 		}
 	}
-
 }

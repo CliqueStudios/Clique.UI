@@ -29,7 +29,7 @@
 // Variables
 // ========================================================================
 
-@tab-border: @base-border-color;
+@tab-border: @global-border-color;
 @tab-border-width: 1px;
 @tab-padding-horizontal: 12px;
 @tab-padding-vertical: 8px;
@@ -37,11 +37,11 @@
 @tab-padding-bottom: @tab-padding-vertical;
 @tab-margin-horizontal: 5px;
 @tab-margin-vertical: 5px;
-@tab-color: @link-color;
+@tab-color: @global-link-color;
 @tab-hover-border: #f5f5f5;
 @tab-hover-background: #f5f5f5;
 @tab-hover-color: #059;
-@tab-active-border: @base-border-color;
+@tab-active-border: @global-border-color;
 @tab-active-background: @color-white;
 @tab-active-color: #444;
 @tab-disabled-color: #999;
@@ -79,7 +79,7 @@
 					border-color: @tab-hover-border;
 					background-color: @tab-hover-background;
 					color: @tab-hover-color;
-					outline: none;
+					outline: 0;
 				}
 			}
 		}
@@ -95,7 +95,7 @@
 				border-color: @tab-hover-border;
 				background-color: @tab-hover-background;
 				color: @tab-hover-color;
-				outline: none;
+				outline: 0;
 			}
 
 			// Hover (cont.)

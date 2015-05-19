@@ -4,7 +4,7 @@
 //
 // Component:       `nestable`
 //
-// Sub-objects:     `nestable-list`
+// Sub-Objects:     `nestable-list`
 //                  `nestable-item`
 //                  `nestable-placeholder`
 //                  `nestable-empty`
@@ -41,7 +41,7 @@
 @nestable-item-margin-bottom: 10px;
 @nestable-item-padding: 5px;
 @nestable-item-background: #f5f5f5;
-@nestable-placeholder-border: @base-border-color;
+@nestable-placeholder-border: @global-border-color;
 @nestable-empty-height: 40px;
 @nestable-handle-font-size: 18px;
 @nestable-handle-color: #ddd;
@@ -51,7 +51,6 @@
 @nestable-toggle-icon: "\f147";
 @nestable-toggle-collapsed-icon: "\f196";
 @nestable-border: rgba(0, 0, 0, 0.06);
-@nestable-text-shadow: @global-text-shadow;
 
 // ========================================================================
 // Component: Nestable
@@ -61,7 +60,7 @@
 	padding: 0;
 	list-style: none;
 
-	// Sub-object `nestable-list`
+	// Sub-Object: `nestable-list`
 	// ========================================================================
 
 	&-list {
@@ -80,7 +79,7 @@
 		}
 	}
 
-	// Sub-object `nestable-item`
+	// Sub-Object: `nestable-item`
 	// ========================================================================
 
 	&-item {
@@ -90,7 +89,7 @@
 		border: 1px solid @nestable-border;
 	}
 
-	// Sub-object `nestable-placeholder`
+	// Sub-Object: `nestable-placeholder`
 	// ========================================================================
 
 	&-placeholder {
@@ -98,14 +97,14 @@
 		border: 1px dashed @nestable-placeholder-border;
 	}
 
-	// Sub-object `nestable-empty`
+	// Sub-Object: `nestable-empty`
 	// ========================================================================
 
 	&-empty {
 		min-height: @nestable-empty-height;
 	}
 
-	// Sub-object `nestable-handle`
+	// Sub-Object: `nestable-handle`
 	// ========================================================================
 
 	&-handle {
@@ -126,7 +125,7 @@
 		}
 	}
 
-	// Sub-object `nestable-moving`
+	// Sub-Object: `nestable-moving`
 	// ========================================================================
 
 	&-moving {
@@ -137,7 +136,7 @@
 	}
 }
 
-// Sub-object `[data-action="toggle"]`
+// Sub-Object: `[data-action="toggle"]`
 // ========================================================================
 
 // Hidden by default

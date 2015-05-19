@@ -8,7 +8,7 @@
 //                  `slidenav-next`
 //                  `slidenav-contrast`
 //
-// Sub-objects:     `slidenav-position`
+// Sub-Objects:     `slidenav-position`
 //
 // Uses:            Icon: "icomoon"
 //
@@ -59,8 +59,9 @@
 	text-align: center;
 
 	// Hover
-	&:hover, &:focus {
-		outline: none;
+	&:hover,
+	&:focus {
+		outline: 0;
 		text-decoration: none;
 		color: @slidenav-hover-color;
 		cursor: pointer;
@@ -70,71 +71,74 @@
 	&:active {
 		color: @slidenav-active-color;
 	}
-}
 
-// Icons
-.slidenav-previous,
-.slidenav-next {
-	&:before {
-		font-family: "icomoon";
-	}
-}
-
-.slidenav-previous {
-	&:before {
-		content: @slidenav-previous-icon;
-	}
-}
-
-.slidenav-next {
-	&:before {
-		content: @slidenav-next-icon;
-	}
-}
-
-// Sub-object: `slidenav-position`
-// ========================================================================
-
-// Create position context
-.slidenav-position {
-	position: relative;
-
-	// Center vertically
-	.slidenav {
-		display: none;
-		position: absolute;
-		top: 50%;
-		z-index: 1;
-		margin-top: -(@slidenav-height / 2);
-	}
-	&:hover {
-		.slidenav {
-			display: block;
+	// Icons
+	&-previous,
+	&-next {
+		&:before {
+			font-family: "icomoon";
 		}
 	}
-	.slidenav-previous {
-		left: @slidenav-position-previous;
-	}
-	.slidenav-next {
-		right: @slidenav-position-next;
-	}
-}
 
-
-// Modifier: `slidenav-contrast`
-// ========================================================================
-
-.slidenav-contrast {
-	color: @slidenav-contrast-color;
-
-	// Hover
-	&:hover,
-	&:focus {
-		color: @slidenav-contrast-hover-color;
+	&-previous {
+		&:before {
+			content: @slidenav-previous-icon;
+		}
 	}
 
-	// Active
-	&:active {
-		color: @slidenav-contrast-active-color;
+	&-next {
+		&:before {
+			content: @slidenav-next-icon;
+		}
+	}
+
+	// Sub-Object: `slidenav-position`
+	// ========================================================================
+
+	// Create position context
+	&-position {
+		position: relative;
+
+		// Center vertically
+		.slidenav {
+			display: none;
+			position: absolute;
+			top: 50%;
+			z-index: 1;
+			margin-top: -@slidenav-height / 2;
+
+			&-previous {
+				left: @slidenav-position-previous;
+			}
+
+			&-next {
+				right: @slidenav-position-next;
+			}
+		}
+
+		&:hover {
+			.slidenav {
+				display: block;
+			}
+		}
+	}
+
+
+	// Modifier: `slidenav-contrast`
+	// ========================================================================
+
+	&-contrast {
+		color: @slidenav-contrast-color;
+
+		// Hover
+		&:hover,
+		&:focus {
+			color: @slidenav-contrast-hover-color;
+		}
+
+		// Active
+		&:active {
+			color: @slidenav-contrast-active-color;
+		}
 	}
 }

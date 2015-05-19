@@ -4,7 +4,7 @@
 //
 // Component:       `pagination`
 //
-// Sub-objects:     `pagination-previous`
+// Sub-Objects:     `pagination-previous`
 //                  `pagination-next`
 //
 // Modifiers:       `pagination-left`
@@ -44,11 +44,8 @@
 @pagination-disabled-color: #999;
 @pagination-item-min-width: 28px;
 
-// New
 @pagination-border: rgba(0, 0, 0, 0.06);
-@pagination-text-shadow: @global-text-shadow;
 @pagination-hover-border: rgba(0, 0, 0, 0.16);
-@pagination-contrast-text-shadow: @global-contrast-text-shadow;
 
 // ========================================================================
 // Component: Pagination
@@ -94,7 +91,7 @@
 			&:focus {
 				background-color: @pagination-hover-background;
 				color: @pagination-hover-color;
-				outline: none;
+				outline: 0;
 				border-color: @pagination-hover-border;
 			}
 
@@ -112,34 +109,25 @@
 			margin-left: 5px;
 			line-height: 20 / 10;
 		}
-		// &:not(.pagination-previous) {
-		// 	&:not(.pagination-next) {
-		// 		> a,
-		// 		> span {
-
-		// 			// Icons
-		// 			[class*="icon-"] {
-		// 				position: absolute;
-		// 				.center-vertically();
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 
 	// Active
 	> .active {
-		> span {
-			background-color: @pagination-active-background;
-			color: @pagination-active-color;
-			border-color: transparent;
-			box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+		> * {
+			&,
+			&:hover,
+			&:focus {
+				background-color: @pagination-active-background;
+				color: @pagination-active-color;
+				border-color: transparent;
+				.box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.05));
+			}
 		}
 	}
 
 	// Disabled
 	> .disabled {
-		> span {
+		> * {
 			background-color: @pagination-disabled-background;
 			color: @pagination-disabled-color;
 			border: 1px solid @pagination-border;
@@ -149,18 +137,6 @@
 	// Previous and next navigation
 	// ========================================================================
 
-	// &-previous,
-	// &-next {
-	// 	> a,
-	// 	> span {
-
-	// 		// Icons
-	// 		[class*="icon-"] {
-	// 			position: relative;
-	// 			top: 1px;
-	// 		}
-	// 	}
-	// }
 	&-previous {
 		float: left;
 		> a,

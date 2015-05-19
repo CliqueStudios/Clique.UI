@@ -4,7 +4,7 @@
 //
 // Component:       `form`
 //
-// Sub-objects:     `form-row`
+// Sub-Objects:     `form-row`
 //                  `form-help-inline`
 //                  `form-help-block`
 //                  `form-label`
@@ -42,25 +42,25 @@
 
 @form-height: 30px;
 @form-padding: 4px 6px;
-@form-border-color: @base-border-color;
+@form-border-color: @global-border-color;
 @form-border-width: 1px;
 @form-background: @color-white;
 @form-color: #444;
-@form-font-size: @base-font-size;
+@form-font-size: @global-font-size;
 @form-line-height: unit(@form-height - (@form-border-width * 2)) / unit(@form-font-size);
 
 @form-focus-border: #99baca;
 @form-focus-background: #f5fbfe;
 @form-focus-color: #444;
 
-@form-disabled-border: @base-border-color;
+@form-disabled-border: @global-border-color;
 @form-disabled-background: #f5f5f5;
 @form-disabled-color: #999;
 
 @form-placeholder-color: #999;
 @form-gutter: 15px;
 
-@form-legend-border: @base-border-color;
+@form-legend-border: @global-border-color;
 @form-legend-border-width: 1px;
 @form-legend-font-size: 18px;
 @form-legend-line-height: 30px;
@@ -85,15 +85,6 @@
 @form-success-background: #fafff2;
 @form-success-color: @color-success-text;
 
-// Blank
-@form-blank-border: @base-border-color;
-@form-blank-border-style: dashed;
-
-@form-mini-width: 40px;
-@form-small-width: 130px;
-@form-medium-width: 200px;
-@form-large-width: 500px;
-
 @form-help-inline-margin-left: 10px;
 @form-help-block-margin-top: 5px;
 
@@ -104,18 +95,21 @@
 @form-horizontal-label-width: 200px;
 @form-horizontal-label-margin-top: 5px;
 @form-horizontal-controls-margin-left: 215px;
-@form-horizontal-controls-text-padding-top: 5px;
 
 @form-icon-width: 30px;
 @form-icon-font-size: 14px;
 
-// New
 @distance-to-edges: 4px;
-@input-padding: 0;
 @input-radio-checkbox-size: 18px;
 @input-background-color: @color-white;
 @checkbox-check-color: @color-primary;
 @radio-check-color: @color-primary;
+
+@form-password-font-size: 13px;
+@form-password-line-height: @form-password-font-size;
+@form-password-color: #999;
+@form-password-hover-color: #999;
+@form-password-padding: 50px;
 
 // ========================================================================
 // Component: Form
@@ -163,34 +157,23 @@ input {
 	}
 }
 
-// Remove default style in iOS.
-textarea,
-input:not([type]),
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="number"],
-input[type="datetime"] {}
 
-// Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
 input {
+
+	// Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
 	&[type="search"] {
 		&::-webkit-search-cancel-button,
 		&::-webkit-search-decoration {}
 	}
-}
 
-// Fix the cursor style for Chrome"s increment/decrement buttons. For certain
-// `font-size` values of the `input`, it causes the cursor style of the
-// decrement button to change from `default` to `text`.
-input {
+	// Remove button on `number` input
 	&[type="number"] {
 		&::-webkit-inner-spin-button,
 		&::-webkit-outer-spin-button {
-			height: auto;
+			-moz-appearance: textfield;
+
+			-webkit-appearance: none;
+			margin: 0;
 		}
 	}
 }
@@ -215,7 +198,7 @@ textarea {
 
 // Removes `box-shadow` for invalid controls in Firefox.
 :invalid {
-	box-shadow: none;
+	.box-shadow(none);
 }
 
 ::-ms-clear {
@@ -230,25 +213,25 @@ form > {
 	:last-child {
 		margin-bottom: 0;
 	}
+}
+&:-ms-input-placeholder {
+	color: @form-placeholder-color !important;
+}
+&::-moz-placeholder {
+	color: @form-placeholder-color;
+}
+&::-webkit-input-placeholder {
+	color: @form-placeholder-color;
+}
+&:disabled {
 	&:-ms-input-placeholder {
-		color: @form-placeholder-color !important;
+		color: @form-disabled-color !important;
 	}
 	&::-moz-placeholder {
-		color: @form-placeholder-color;
+		color: @form-disabled-color;
 	}
 	&::-webkit-input-placeholder {
-		color: @form-placeholder-color;
-	}
-	&:disabled {
-		&:-ms-input-placeholder {
-			color: @form-disabled-color !important;
-		}
-		&::-moz-placeholder {
-			color: @form-disabled-color;
-		}
-		&::-webkit-input-placeholder {
-			color: @form-disabled-color;
-		}
+		color: @form-disabled-color;
 	}
 }
 
@@ -319,175 +302,386 @@ legend {
 	}
 }
 
-// Size modifiers
-// NOTE: Higher specificity is used to override defaults
+// Component: `.form`
 // ========================================================================
 
-input,
-textarea,
-select {
-	&.form-small {
-		height: @form-small-height;
-		padding: @form-small-padding;
-		font-size: @form-small-font-size;
-		line-height: @form-small-line-height;
-	}
-}
+.form {
 
-input,
-textarea,
-select {
-	&.form-large {
-		height: @form-large-height;
-		padding: @form-large-padding;
-		font-size: @form-large-font-size;
-		line-height: @form-large-line-height;
-	}
-}
+	// Size modifiers
+	// ========================================================================
 
-// Checkboxes & Radios
-// ========================================================================
-
-.form-checkbox,
-.form-radio {
-	position: relative;
-	display: inline-block;
-	.size(@input-radio-checkbox-size);
-	vertical-align: middle;
-	margin-right: 2px;
-
-	// When the child of a label
-	label > & {
-		top: @input-radio-checkbox-size - @base-line-height;
+	&-small {
+		input&,
+		textarea&,
+		select& {
+			height: @form-small-height;
+			padding: @form-small-padding;
+			font-size: @form-small-font-size;
+			line-height: @form-small-line-height;
+		}
 	}
 
-	input {
-		z-index: 2;
-		opacity: 0;
+	&-large {
+		input&,
+		textarea&,
+		select& {
+			height: @form-large-height;
+			padding: @form-large-padding;
+			font-size: @form-large-font-size;
+			line-height: @form-large-line-height;
+		}
+	}
+
+	// Checkboxes & Radios
+	// ========================================================================
+
+	&-checkbox,
+	&-radio {
+		position: relative;
+		display: inline-block;
 		.size(@input-radio-checkbox-size);
+		vertical-align: middle;
+		margin-right: 2px;
+
+		// When the child of a label
+		label > & {
+			top: @input-radio-checkbox-size - @global-line-height;
+		}
+
+		input {
+			z-index: 2;
+			opacity: 0;
+			.size(@input-radio-checkbox-size);
+			display: inline-block;
+			position: relative;
+
+			// Focus state
+			&:focus {
+				+ span {
+					border-color: @form-focus-border;
+					background-color: @form-focus-background;
+				}
+			}
+
+			// Standardize cusor
+			&:not(:disabled) {
+				cursor: pointer;
+			}
+
+			// Disabled
+			&[disabled] {
+				+ span {
+					opacity: 0.5;
+					background-color: #f5f5f5;
+				}
+			}
+
+			// Shared input mask styles
+			+ span {
+				z-index: 1;
+				position: absolute;
+				.size(@input-radio-checkbox-size);
+				border: 1px solid @form-border-color;
+				background-color: @input-background-color;
+				left: 0;
+				top: 50%;
+				display: inline-block;
+				.translate(0, -50%);
+				.transition(300ms cubic-bezier(0.68, -0.55, 0.265, 1.55));
+
+				&:after {
+					content: "";
+					position: absolute;
+					.transition(300ms cubic-bezier(0.68, -0.55, 0.265, 1.55));
+				}
+			}
+		}
+	}
+
+	&-checkbox {
+		input {
+			+ span {
+				.border-radius(3px);
+
+				// The actual "check"
+				&:after {
+					left: 5px;
+					bottom: 2px;
+					border-bottom: 3px solid @checkbox-check-color;
+					border-right: 3px solid @checkbox-check-color;
+					.border-radius(2px);
+					.size(7, 13);
+					.transform(rotate(45deg) scale(0));
+				}
+			}
+
+			// Checked state
+			&:checked {
+				+ span {
+					&:after {
+						.transform(rotate(45deg) scale(1));
+					}
+				}
+			}
+
+			// Disabled
+			&[disabled] {
+				+ span {
+					&:after {
+						border-color: #999;
+					}
+				}
+			}
+		}
+	}
+
+	&-radio {
+		input {
+			+ span {
+				.border-radius(50%);
+
+				// The actual "check"
+				&:after {
+					top: @distance-to-edges;
+					left: @distance-to-edges;
+					bottom: @distance-to-edges;
+					right: @distance-to-edges;
+					background-color: @radio-check-color;
+					.border-radius(100%);
+					.scale(0);
+				}
+			}
+
+			// Checked state
+			&:checked {
+				+ span {
+					&:after {
+						.scale(1);
+					}
+				}
+			}
+
+			// Disabled
+			&[disabled] {
+				+ span {
+					&:after {
+						background-color: #999;
+					}
+				}
+			}
+		}
+	}
+
+	// Validation states
+	// Using !important to keep the selector simple
+	// ========================================================================
+
+	// Error state
+	&-danger {
+		border-color: @form-danger-border !important;
+		background-color: @form-danger-background !important;
+		color: @form-danger-color !important;
+	}
+
+	// Success state
+	&-success {
+		border-color: @form-success-border !important;
+		background-color: @form-success-background !important;
+		color: @form-success-color !important;
+	}
+
+	&-row {
+		.micro-clearfix();
+		+ .form-row {
+			margin-top: 15px;
+		}
+		label {
+			+ label {
+				margin-left: 15px;
+			}
+		}
+	}
+
+	// Help text
+	// Sub-Object: `form-help-inline`, `form-help-block`
+	// ========================================================================
+
+	&-help-inline {
+		display: inline-block;
+		margin: 0 0 0 @form-help-inline-margin-left;
+		vertical-align: middle;
+	}
+
+	&-help-block {
+		margin: @form-help-block-margin-top 0 0 0;
+	}
+
+	// Controls content
+	// Sub-Object: `form-controls`, `form-controls-condensed`
+	// ========================================================================
+
+	// Remove margins
+	&-controls {
+
+		> :first-child {
+			margin-top: 0;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	// Group controls and text into blocks with a small spacing between blocks
+	&-controls-condensed {
+		margin: @form-controls-condensed-margin-vertical 0;
+	}
+
+
+	// Modifier: `form-stacked`
+	// Requires sub-object: `form-label`
+	// ========================================================================
+
+	&-stacked {
+		.form-label {
+			display: block;
+			margin-bottom: @form-stacked-margin-bottom;
+		}
+	}
+
+
+	// Modifier: `.form-horizontal`
+	// Requires sub-objects: `.form-label`, `.form-controls`
+	// ========================================================================
+
+	&-horizontal {
+		//  Tablet portrait and smaller
+		@media (max-width: @breakpoint-medium-max) {
+			.form-label {
+				display: block;
+				margin-bottom: @form-stacked-margin-bottom;
+				font-weight: @form-stacked-font-weight;
+			}
+		}
+
+		// Desktop and bigger
+		@media (min-width: @breakpoint-large) {
+			.form-label {
+				width: @form-horizontal-label-width;
+				margin-top: @form-horizontal-label-margin-top;
+				float: left;
+			}
+			.form-controls {
+				margin-left: @form-horizontal-controls-margin-left;
+			}
+		}
+	}
+
+	// Sub-Object: `form-icon`
+	// ========================================================================
+
+	&-icon {
 		display: inline-block;
 		position: relative;
+		max-width: 100%;
 
-		// Focus state
-		&:focus {
-			+ span {
-				border-color: @form-focus-border;
-				background-color: @form-focus-background;
-			}
-		}
-
-		// Standardize cusor
-		&:not(:disabled) {
-			cursor: pointer;
-		}
-
-		// Disabled
-		&[disabled] {
-			+ span {
-				opacity: 0.5;
-				background-color: #f5f5f5;
-			}
-		}
-
-		// Shared input mask styles
-		+ span {
-			z-index: 1;
+		> [class*="icon-"] {
 			position: absolute;
-			.size(@input-radio-checkbox-size);
-			border: 1px solid @form-border-color;
-			background-color: @input-background-color;
-			left: 0;
 			top: 50%;
-			display: inline-block;
+			width: @form-icon-width;
+			font-size: @form-icon-font-size;
 			.translate(0, -50%);
-			.transition(300ms @easeInOutBack);
+			text-align: center;
+			pointer-events: none;
+		}
 
-			&:after {
-				content: "";
+		&:not(.form-icon-flip) {
+			> input {
+				padding-left: @form-icon-width !important;
+			}
+		}
+
+		// Sub-modifier: `form-icon-flip`
+		&-flip {
+			> [class*="icon-"] {
+				right: 0;
+			}
+			> input {
+				padding-right: @form-icon-width !important;
+			}
+		}
+	}
+
+	&-select {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		overflow: hidden;
+		.border-radius(3px);
+
+		select {
+			position: absolute;
+			top: 0;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			cursor: pointer;
+			left: 0;
+		}
+	}
+
+	// Modifier: `form-file`
+	// ========================================================================
+
+	&-file {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		overflow: hidden;
+
+		input {
+			&[type="file"] {
 				position: absolute;
-				.transition(300ms @easeInOutBack);
+				top: 0;
+				z-index: 1;
+				width: 100%;
+				opacity: 0;
+				cursor: pointer;
+				left: 0;
+				font-size: 500px;
+			}
+		}
+	}
+
+	// Modifier: `form-password`
+	// ========================================================================
+
+	&-password {
+		display: inline-block;
+		position: relative;
+		max-width: 100%;
+
+		> input {
+			padding-right: @form-password-padding !important;
+		}
+
+		&-toggle {
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			margin-top: -(floor(@form-password-line-height/2));
+			font-size: @form-password-font-size;
+			line-height: @form-password-line-height;
+			color: @form-password-color;
+			&:hover {
+				color: @form-password-hover-color;
+				text-decoration: none;
 			}
 		}
 	}
 }
-
-.form-checkbox {
-
-	input {
-		+ span {
-			.border-radius(3px);
-
-			// The actual "check"
-			&:after {
-				left: 5px;
-				bottom: 2px;
-				border-bottom: 3px solid @checkbox-check-color;
-				border-right: 3px solid @checkbox-check-color;
-				.border-radius(2px);
-				.size(7, 13);
-				.transform(rotate(45deg) scale(0));
-			}
-		}
-
-		// Checked state
-		&:checked {
-			+ span {
-				&:after {
-					.transform(rotate(45deg) scale(1));
-				}
-			}
-		}
-
-		// Disabled
-		&[disabled] {
-			+ span {
-				&:after {
-					border-color: #999;
-				}
-			}
-		}
-	}
-}
-
-.form-radio {
-
-	input {
-		+ span {
-			.border-radius(50%);
-
-			// The actual "check"
-			&:after {
-				top: @distance-to-edges;
-				left: @distance-to-edges;
-				bottom: @distance-to-edges;
-				right: @distance-to-edges;
-				background-color: @radio-check-color;
-				.border-radius(100%);
-				.scale(0);
-			}
-		}
-
-		// Checked state
-		&:checked {
-			+ span {
-				&:after {
-					.scale(1);
-				}
-			}
-		}
-
-		// Disabled
-		&[disabled] {
-			+ span {
-				&:after {
-					background-color: #999;
-				}
-			}
-		}
-	}
-}
-
-
 
 // Reset height
 // Must be after size modifiers
@@ -499,39 +693,7 @@ select[size] {
 	height: auto;
 }
 
-// Validation states
-// Using !important to keep the selector simple
-// ========================================================================
-
-// Error state
-.form-danger {
-	border-color: @form-danger-border !important;
-	background-color: @form-danger-background !important;
-	color: @form-danger-color !important;
-}
-
-// Success state
-.form-success {
-	border-color: @form-success-border !important;
-	background-color: @form-success-background !important;
-	color: @form-success-color !important;
-}
-
-// Style modifiers
-// Using !important to keep the selector simple
-// ========================================================================
-
-// Blank form
-.form-blank {
-	border-color: transparent !important;
-	border-style: @form-blank-border-style !important;
-	background-color: none !important;
-	&:focus {
-		border-color: @form-blank-border !important;
-	}
-}
-
-//  Sub-objects: `form-row`
+// Sub-Objects: `form-row`
 // Groups labels and controls in rows
 // ========================================================================
 
@@ -540,128 +702,4 @@ label {
 	vertical-align: middle;
 	cursor: pointer;
 	position: relative;
-}
-
-.form-row {
-	.micro-clearfix();
-	+ .form-row {
-		margin-top: 15px;
-	}
-	label {
-		+ label {
-			margin-left: 15px;
-		}
-	}
-}
-
-// Help text
-// Sub-object: `form-help-inline`, `form-help-block`
-// ========================================================================
-
-.form-help-inline {
-	display: inline-block;
-	margin: 0 0 0 @form-help-inline-margin-left;
-	vertical-align: middle;
-}
-
-.form-help-block {
-	margin: @form-help-block-margin-top 0 0 0;
-}
-
-// Controls content
-// Sub-object: `form-controls`, `form-controls-condensed`
-// ========================================================================
-
-// Remove margins
-.form-controls {
-
-	> :first-child {
-		margin-top: 0;
-	}
-
-	> :last-child {
-		margin-bottom: 0;
-	}
-}
-
-// Group controls and text into blocks with a small spacing between blocks
-.form-controls-condensed {
-	margin: @form-controls-condensed-margin-vertical 0;
-}
-
-
-// Modifier: `form-stacked`
-// Requires sub-object: `form-label`
-// ========================================================================
-
-.form-stacked {
-	.form-label {
-		display: block;
-		margin-bottom: @form-stacked-margin-bottom;
-	}
-}
-
-
-// Modifier: `form-horizontal`
-// Requires sub-objects: `form-label`, `form-controls`
-// ========================================================================
-
-//  Tablet portrait and smaller
-@media (max-width: @breakpoint-medium-max) {
-	.form-horizontal {
-		.form-label {
-			display: block;
-			margin-bottom: @form-stacked-margin-bottom;
-			font-weight: @form-stacked-font-weight;
-		}
-	}
-}
-
-// Desktop and bigger
-@media (min-width: @breakpoint-large) {
-	.form-horizontal {
-		.form-label {
-			width: @form-horizontal-label-width;
-			margin-top: @form-horizontal-label-margin-top;
-			float: left;
-		}
-		.form-controls {
-			margin-left: @form-horizontal-controls-margin-left;
-		}
-	}
-}
-
-// Sub-object: `form-icon`
-// ========================================================================
-
-.form-icon {
-	display: inline-block;
-	position: relative;
-	max-width: 100%;
-
-	> [class*="icon-"] {
-		position: absolute;
-		top: 50%;
-		width: @form-icon-width;
-		font-size: @form-icon-font-size;
-		.translate(0, -50%);
-		text-align: center;
-		pointer-events: none;
-	}
-
-	&:not(.form-icon-flip) {
-		> input {
-			padding-left: @form-icon-width !important;
-		}
-	}
-}
-
-// Sub-modifier: `form-icon-flip`
-.form-icon-flip {
-	> [class*="icon-"] {
-		right: 0;
-	}
-	> input {
-		padding-right: @form-icon-width !important;
-	}
 }

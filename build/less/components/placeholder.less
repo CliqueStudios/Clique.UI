@@ -15,7 +15,7 @@
 
 @placeholder-margin-vertical: 15px;
 @placeholder-padding: 20px;
-@placeholder-border: @base-border-color;
+@placeholder-border: @global-border-color;
 @placeholder-background: #fafafa;
 @placeholder-color: #444;
 
@@ -38,13 +38,12 @@
 	> :last-child {
 		margin-bottom: 0;
 	}
-}
 
+	// Modifier: `placeholder-large`
+	// ========================================================================
 
-// Modifier: `placeholder-large`
-// ========================================================================
-
-.placeholder-large {
-	padding-top: @placeholder-large-padding-vertical;
-	padding-bottom: @placeholder-large-padding-vertical;
+	&-large {
+		padding-top: @placeholder-large-padding-vertical;
+		padding-bottom: @placeholder-large-padding-vertical;
+	}
 }

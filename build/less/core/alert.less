@@ -4,7 +4,7 @@
 //
 // Component:       `alert`
 //
-// Sub-objects:     `alert-close`
+// Sub-Objects:     `alert-close`
 //
 // Modifiers:       `alert-success`
 //                  `alert-warning`
@@ -29,7 +29,6 @@
 
 @alert-margin-vertical: 15px;
 @alert-padding: 10px;
-@alert-text-shadow: @global-text-shadow;
 
 @alert-background: @color-primary-background-light;
 @alert-color: @color-primary-text;
@@ -54,6 +53,7 @@
 // ========================================================================
 
 .alert {
+
 	margin-bottom: @alert-margin-vertical;
 	padding: @alert-padding;
 	background-color: @alert-background;
@@ -70,21 +70,9 @@
 		margin-bottom: 0;
 	}
 
-	// Keep color for headings if the default heading color is changed
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: inherit;
-	}
-}
+	// Close in alert
+	// ========================================================================
 
-// Close in alert
-// ========================================================================
-
-.alert {
 	> .close {
 		&:first-child {
 			float: right;
@@ -93,47 +81,46 @@
 			}
 		}
 	}
-}
+
+	// Modifier: `alert-success`
+	// ========================================================================
+
+	&-success {
+		background-color: @alert-success-background;
+		color: @alert-success-color;
+		border-color: @alert-success-border;
+	}
 
 
-// Modifier: `alert-success`
-// ========================================================================
+	// Modifier: `alert-warning`
+	// ========================================================================
 
-.alert-success {
-	background-color: @alert-success-background;
-	color: @alert-success-color;
-	border-color: @alert-success-border;
-}
-
-
-// Modifier: `alert-warning`
-// ========================================================================
-
-.alert-warning {
-	background-color: @alert-warning-background;
-	color: @alert-warning-color;
-	border-color: @alert-warning-border;
-}
+	&-warning {
+		background-color: @alert-warning-background;
+		color: @alert-warning-color;
+		border-color: @alert-warning-border;
+	}
 
 
-// Modifier: `alert-danger`
-// ========================================================================
+	// Modifier: `alert-danger`
+	// ========================================================================
 
-.alert-danger {
-	background-color: @alert-danger-background;
-	color: @alert-danger-color;
-	border-color: @alert-danger-border;
-}
+	&-danger {
+		background-color: @alert-danger-background;
+		color: @alert-danger-color;
+		border-color: @alert-danger-border;
+	}
 
 
-// Modifier: `alert-large`
-// ========================================================================
+	// Modifier: `alert-large`
+	// ========================================================================
 
-.alert-large {
-	padding: @alert-large-padding;
-	> .close {
-		&:first-child {
-			margin: -10px -10px 0 0;
+	&-large {
+		padding: @alert-large-padding;
+		> .close {
+			&:first-child {
+				margin: -10px -10px 0 0;
+			}
 		}
 	}
 }

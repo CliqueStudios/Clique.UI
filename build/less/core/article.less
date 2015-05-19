@@ -4,7 +4,7 @@
 //
 // Component:       `article`
 //
-// Sub-objects:     `article-title`
+// Sub-Objects:     `article-title`
 //                  `article-meta`
 //                  `article-lead`
 //                  `hr`
@@ -30,17 +30,18 @@
 @article-margin-top: 25px;
 
 @article-title-font-size: 36px;
-@article-title-line-height: 42px;
-@article-title-font-weight: normal;
-@article-title-text-transform: none;
+@_article-title-line-height: 42px;
+@article-title-line-height: unit(@_article-title-line-height) / unit(@article-title-font-size);
+@article-title-font-weight: 200;
 
 @article-meta-font-size: 14px;
-@article-meta-line-height: 18px;
-@article-meta-color: #999;
+@_article-meta-line-height: 18px;
+@article-meta-line-height: unit(@_article-meta-line-height) / unit(@article-meta-font-size);
 
 @article-lead-font-size: 22px;
-@article-lead-line-height: 24px;
-@article-lead-font-weight: 200;
+@article-lead-font-weight: @article-title-font-weight;
+@_article-lead-line-height: 24px;
+@article-lead-line-height: unit(@_article-lead-line-height) / unit(@article-lead-font-size);
 
 @article-border: @global-border;
 
@@ -48,56 +49,49 @@
 // Component: Article
 // ========================================================================
 
-// Micro clearfix to make articles more robust
 .article {
-
 	.micro-clearfix();
 
-	// Remove margin from the last-child
 	> :last-child {
 		margin-bottom: 0;
 	}
 
 	// Vertical gutter for articles
-	+ .article {
+	& + & {
 		margin-top: @article-margin-top;
 		padding-top: @article-margin-top;
 		border-top: 1px solid @article-border;
 	}
-}
 
+	// Sub-Object: `article-title`
+	// ========================================================================
 
-// Sub-object `article-title`
-// ========================================================================
+	&-title {
+		font-size: @article-title-font-size;
+		line-height: @article-title-line-height;
+		font-weight: @article-title-font-weight;
 
-.article-title {
-	font-size: @article-title-font-size;
-	line-height: @article-title-line-height;
-	font-weight: @article-title-font-weight;
-	text-transform: @article-title-text-transform;
-
-	a {
-		color: inherit;
-		text-decoration: none;
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
 	}
-}
 
+	// Sub-Object: `article-meta`
+	// ========================================================================
 
-// Sub-object `article-meta`
-// ========================================================================
+	&-meta {
+		font-size: @article-meta-font-size;
+		line-height: @article-meta-line-height;
+		// color: @article-meta-color;
+	}
 
-.article-meta {
-	font-size: @article-meta-font-size;
-	line-height: @article-meta-line-height;
-	color: @article-meta-color;
-}
+	// Sub-Object: `article-lead`
+	// ========================================================================
 
-
-// Sub-object `article-lead`
-// ========================================================================
-
-.article-lead {
-	font-size: @article-lead-font-size;
-	line-height: @article-lead-line-height;
-	font-weight: @article-lead-font-weight;
+	&-lead {
+		font-size: @article-lead-font-size;
+		line-height: @article-lead-line-height;
+		font-weight: @article-lead-font-weight;
+	}
 }

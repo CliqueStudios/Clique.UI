@@ -13,6 +13,9 @@
 // Component: Flex
 // ========================================================================
 
+// No Flexbox Support Fallbacks
+// ========================================================================
+
 .flex {
 	.display(flex);
 
@@ -20,153 +23,179 @@
 		display: table;
 		width: 100%;
 	}
-}
 
-.flex-inline {
-	.display(inline-flex);
+	// Modifier: `.flex-inline`
+	// ========================================================================
 
-	.noflex & {
-		display: inline-table;
-		width: auto;
-	}
-}
+	&-inline {
+		.display(inline-flex);
 
-// Fixes initial flex-shrink value in IE10
-.flex,
-.flex-inline {
-	> * {
-		.flex(0 1 auto);
-		-ms-flex-negative: 1;
-	}
-
-	.noflex & {
-		display: table-cell;
-		float: none;
-	}
-
-}
-
-
-// Alignment
-// ========================================================================
-
-// Vertical alignment
-.flex-top {
-	.align-items(flex-start);
-
-	.noflex & {
-		> * {
-			vertical-align: top;
+		.noflex & {
+			display: inline-table;
+			width: auto;
 		}
 	}
-}
 
-.flex-middle {
-	.align-items(center);
+	// Sub-Objects: items
+	// ========================================================================
 
-	.noflex & {
+	// Fixes initial flex-shrink value in IE10
+	&,
+	&-inline {
+
+		// Must remove pseudo-selector values on flex-based elements
+		&:before,
+		&:after {
+			display: none;
+		}
 		> * {
-			vertical-align: middle;
+			.flex(0 1 auto);
+			width: auto;
+			-ms-flex-negative: 1;
+		}
+
+		.noflex & {
+			display: table-cell;
+			float: none;
+		}
+
+	}
+
+	// Alignment
+	// ========================================================================
+
+	// Vertical alignment
+	&-top {
+		.align-items(flex-start);
+
+		.noflex & {
+			> * {
+				vertical-align: top;
+			}
 		}
 	}
-}
 
-.flex-bottom {
-	.align-items(flex-end);
+	&-middle {
+		.align-items(center);
 
-	.noflex & {
-		> * {
-			vertical-align: bottom;
+		.noflex & {
+			> * {
+				vertical-align: middle;
+			}
 		}
 	}
-}
 
-// Horizontal alignment
-.flex-center {
-	.justify-content(center);
+	&-bottom {
+		.align-items(flex-end);
 
-	.noflex & {
-		width: auto;
-		margin-left: auto;
-		margin-right: auto;
+		.noflex & {
+			> * {
+				vertical-align: bottom;
+			}
+		}
 	}
-}
 
-.flex-right {
-	.justify-content(flex-end);
+	&-center {
+		.justify-content(center);
 
-	.noflex & {
-		width: auto;
-		float: right;
+		.noflex & {
+			width: auto;
+			margin-left: auto;
+			margin-right: auto;
+		}
 	}
-}
 
-.flex-space-between {
-	.justify-content(space-between);
-}
+	&-right {
+		.justify-content(flex-end);
 
-.flex-space-around {
-	.justify-content(space-around);
-}
+		.noflex & {
+			width: auto;
+			float: right;
+		}
+	}
 
-// Direction
-// ========================================================================
+	&-space-between {
+		.justify-content(space-between);
+	}
 
-.flex-row-reverse {
-	.flex-direction(row-reverse);
-}
+	&-space-around {
+		.justify-content(space-around);
+	}
 
-.flex-column {
-	.flex-direction(column);
-}
+	// Direction
+	// ========================================================================
 
-.flex-column-reverse {
-	.flex-direction(column-reverse);
-}
+	&-row-reverse {
+		.flex-direction(row-reverse);
+	}
 
-// Wrap
-// ========================================================================
+	&-column {
+		.flex-direction(column);
+	}
 
-.flex-wrap {
-	.flex-wrap(wrap);
-}
+	&-column-reverse {
+		.flex-direction(column-reverse);
+	}
 
-.flex-wrap-reverse {
-	.flex-wrap(wrap-reverse);
-}
+	// Wrap
+	// ========================================================================
 
-// Horizontal alignment
-// Default value is `stretch`
-.flex-wrap-top {
-	.align-content(flex-start);
-}
+	&-wrap {
+		.flex-wrap(wrap);
+	}
 
-.flex-wrap-middle {
-	.align-content(center);
-}
+	&-wrap-reverse {
+		.flex-wrap(wrap-reverse);
+	}
 
-.flex-wrap-bottom {
-	.align-content(flex-end);
-}
+	// Horizontal alignment
+	&-wrap-top {
+		.align-content(flex-start);
+	}
 
-.flex-wrap-space-between {
-	.align-content(space-between);
-}
+	&-wrap-middle {
+		.align-content(center);
+	}
 
-.flex-wrap-space-around {
-	.align-content(space-around);
-}
+	&-wrap-bottom {
+		.align-content(flex-end);
+	}
 
-// Item ordering
-// ========================================================================
+	&-wrap-space-between {
+		.align-content(space-between);
+	}
 
-// Default is 0
-.flex-order-first {
-	.order(-1);
-}
+	&-wrap-space-around {
+		.align-content(space-around);
+	}
 
-.flex-order-last {
-	.order(99);
+	// Item ordering
+	// ========================================================================
+
+	// Default is 0
+	&-order-first {
+		.order(-1);
+	}
+
+	&-order-last {
+		.order(99);
+	}
+
+	// Item dimensions
+	// ========================================================================
+
+	&-item-none {
+		.flex(none);
+	}
+
+	&-item-auto {
+		.flex(auto);
+	}
+
+	&-item-1 {
+		.flex(1);
+	}
+
 }
 
 // Phone landscape and bigger
@@ -206,38 +235,5 @@
 	}
 	.flex-order-last-xlarge {
 		.order(99);
-	}
-}
-
-// Item dimensions
-// ========================================================================
-
-.flex-item-none {
-	.flex(none);
-}
-
-.flex-item-auto {
-	.flex(auto);
-}
-
-.flex-item-1 {
-	.flex(1);
-}
-
-
-// No Flexbox Support Fallbacks
-// ========================================================================
-
-.noflex {
-	.flex,
-	.flex-inline {
-		display: block;
-		.clearfix();
-		> * {
-			float: left;
-			+ * {
-				padding-left: 30px;
-			}
-		}
 	}
 }

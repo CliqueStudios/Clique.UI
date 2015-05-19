@@ -13,14 +13,14 @@
 // Variables
 // ========================================================================
 
-@base-body-background: @color-white;
-@base-body-font-family: @base-font-family;
+@base-body-background: @global-background;
+@base-body-font-family: @global-font-family;
 @base-body-font-weight: normal;
-@base-body-font-size: @base-font-size;
-@base-body-line-height: unit(@base-line-height) / unit(@base-font-size); // (14px / 20px)
-@base-body-color: @base-font-color;
+@base-body-font-size: @global-font-size;
+@base-body-line-height: unit(@global-line-height) / unit(@global-font-size); // (14px / 20px)
+@base-body-color: @global-font-color;
 
-@base-link-color: @link-color;
+@base-link-color: @global-link-color;
 @base-link-text-decoration: none;
 @base-link-hover-color: #059;
 @base-link-hover-text-decoration: underline;
@@ -38,7 +38,7 @@
 
 @base-margin-vertical: 15px;
 
-@base-heading-font-family: @base-font-family;
+@base-heading-font-family: @global-font-family;
 @base-heading-font-weight: normal;
 @base-heading-color: inherit;
 @base-heading-text-transform: none;
@@ -60,11 +60,11 @@
 @base-list-padding-left: 30px;
 
 @base-hr-margin-vertical: @base-margin-vertical;
-@base-hr-border: @base-border-color;
+@base-hr-border: @global-border-color;
 @base-hr-border-width: 1px;
 
 @base-blockquote-padding-left: 15px;
-@base-blockquote-border: @base-border-color;
+@base-blockquote-border: @global-border-color;
 @base-blockquote-border-width: 5px;
 @base-blockquote-font-size: 16px;
 @base-blockquote-line-height: 22px;
@@ -103,6 +103,7 @@ body {
 	font-size: @base-body-font-size;
 	line-height: @base-body-line-height;
 	font-family: @base-body-font-family;
+	background-color: @base-body-background;
 	margin: 0;
 	padding: 0;
 }
@@ -115,6 +116,11 @@ body {
 	}
 }
 
+:hover,
+:focus {
+	outline: 0;
+}
+
 // Links
 // ========================================================================
 
@@ -123,23 +129,23 @@ a {
 	background-color: transparent;
 
 	// Improves readability when focused and also mouse hovered in all browsers.
-	&:hover,
-	&:focus {
-		outline: 0;
-	}
+	// &:hover,
+	// &:focus {
+	// 	outline: 0;
+	// }
 }
 
 a,
 button,
 input {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-tap-highlight-color: transparent;
+	// -webkit-tap-highlight-color: transparent;
 }
 
 // Style
 a,
 .link {
-	color: @link-color;
+	color: @base-link-color;
 	text-decoration: @base-link-text-decoration;
 	cursor: pointer;
 
@@ -154,8 +160,10 @@ a,
 // ========================================================================
 
 // Addresses styling not present in Chrome, Safari, Opera and IE 8/9/10.
-abbr[title] {
-	border-bottom: 1px dotted;
+abbr {
+	&[title] {
+		border-bottom: 1px dotted;
+	}
 }
 
 // Addresses style set to `bolder` in Firefox
@@ -234,8 +242,10 @@ img {
 }
 
 // Correct overflow not hidden in IE 9/10/11.
-svg:not(:root) {
-	overflow: hidden;
+svg {
+	&:not(:root) {
+		overflow: hidden;
+	}
 }
 
 // Block elements

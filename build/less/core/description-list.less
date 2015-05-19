@@ -18,49 +18,52 @@
 @dl-horizontal-margin-left: 180px;
 @dl-line-margin-top: 5px;
 @dl-line-border-width: 1px;
-@dl-line-border: @base-border-color;
+@dl-line-border: @global-border-color;
 @dl-line-color: #999;
 
 // ========================================================================
 // Component: Description list
 // ========================================================================
 
-// Modifier: `dl-horizontal`
-// ========================================================================
+.dl {
 
-// Tablet and bigger
-@media (min-width: @breakpoint-medium) {
-	.dl-horizontal {
-		overflow: hidden;
-		> dt {
-			width: @dl-horizontal-width;
-			float: left;
-			clear: both;
+	// Modifier: `dl-horizontal`
+	// ========================================================================
+
+	// Tablet and bigger
+	@media (min-width: @breakpoint-medium) {
+		&-horizontal {
 			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-		> dd {
-			margin-left: @dl-horizontal-margin-left;
-		}
-	}
-}
-
-
-// Modifier: `dl-line`
-// ========================================================================
-
-.dl-line {
-	> dt {
-		> dt {
-			&:nth-child(n+2) {
-				margin-top: @dl-line-margin-top;
-				padding-top: @dl-line-margin-top;
-				border-top: @dl-line-border-width solid @dl-line-border;
+			> dt {
+				width: @dl-horizontal-width;
+				float: left;
+				clear: both;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			> dd {
+				margin-left: @dl-horizontal-margin-left;
 			}
 		}
-		> dd {
-			color: @dl-line-color;
+	}
+
+
+	// Modifier: `dl-line`
+	// ========================================================================
+
+	&-line {
+		> dt {
+			> dt {
+				&:nth-child(n+2) {
+					margin-top: @dl-line-margin-top;
+					padding-top: @dl-line-margin-top;
+					border-top: @dl-line-border-width solid @dl-line-border;
+				}
+			}
+			> dd {
+				color: @dl-line-color;
+			}
 		}
 	}
 }

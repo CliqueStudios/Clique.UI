@@ -18,7 +18,7 @@
 @list-nested-padding-left: 20px;
 
 @list-line-margin-top: 5px;
-@list-line-border: @base-border-color;
+@list-line-border: @global-border-color;
 @list-line-border-width: 1px;
 
 @list-striped-padding-vertical: 5px;
@@ -34,12 +34,10 @@
 // Component: List
 // ========================================================================
 
-.list-unstyled,
 .list {
 	padding: 0;
 	list-style: none;
 	> li {
-
 		.micro-clearfix();
 
 		> :last-child {
@@ -53,60 +51,53 @@
 		padding-left: @list-nested-padding-left;
 		list-style: none;
 	}
-}
 
+	// Modifier: `list-line`
+	// ========================================================================
 
-// Modifier: `list-line`
-// ========================================================================
+	&-inline {
+		.display(flex);
+		margin: 0;
+		padding: 0;
+		list-style: none;
 
-.list-inline {
-	.display(flex);
-	margin: 0;
-	padding: 0;
-	list-style: none;
-
-	> li {
-		.flex(0 1 auto);
-	}
-}
-
-.list-line {
-	> li {
-		&:nth-child(n+2) {
-			margin-top: @list-line-margin-top;
-			padding-top: @list-line-margin-top;
-			border-top: @list-line-border-width solid @list-line-border;
+		> li {
+			.flex(0 1 auto);
+			&:nth-child(n+2) {
+				margin-top: @list-line-margin-top;
+				padding-top: @list-line-margin-top;
+				border-top: @list-line-border-width solid @list-line-border;
+			}
 		}
 	}
-}
 
+	// Modifier: `list-striped`
+	// ========================================================================
 
-// Modifier: `list-striped`
-// ========================================================================
+	&-striped {
+		> li {
+			padding: @list-striped-padding-vertical @list-striped-padding-horizontal;
+			border-bottom: 1px solid @list-striped-border;
 
-.list-striped {
-	> li {
-		padding: @list-striped-padding-vertical @list-striped-padding-horizontal;
-		border-bottom: 1px solid @list-striped-border;
+			&:first-child {
+				border-top: 1px solid @list-striped-border;
+			}
 
-		&:first-child {
-			border-top: 1px solid @list-striped-border;
-		}
-
-		&:nth-of-type(odd) {
-			background-color: @list-striped-background;
+			&:nth-of-type(odd) {
+				background-color: @list-striped-background;
+			}
 		}
 	}
-}
 
 
-// Modifier: `list-space`
-// ========================================================================
+	// Modifier: `list-space`
+	// ========================================================================
 
-.list-space {
-	> li {
-		&:nth-child(n+2) {
-			margin-top: @list-space-margin-top;
+	&-space {
+		> li {
+			&:nth-child(n+2) {
+				margin-top: @list-space-margin-top;
+			}
 		}
 	}
 }

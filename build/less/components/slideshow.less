@@ -37,20 +37,109 @@
 	list-style: none;
 	overflow: hidden;
 	touch-action: pan-y;
-}
 
-// Sub-object `slides`
-// ========================================================================
+	// Sub-Object: `slides`
+	// ========================================================================
 
-.slideshow {
 	> li {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		opacity: 0;
+
 		> img {
 			visibility: hidden;
+		}
+	}
+
+	// Modifier: `slideshow-fullscreen`
+	// ========================================================================
+
+	&-fullscreen {
+		&,
+		> li {
+			height: 100vh;
+		}
+	}
+
+	// Animations
+	// ========================================================================
+
+	// Fade
+	&-fade {
+		&-out {
+			.animation(fade 0.5s linear reverse);
+		}
+	}
+
+	// Scroll
+	&-scroll {
+
+		// Forward
+		&-forward {
+			&-in {
+				.animation(slide-right 0.5s ease-in-out);
+			}
+			&-out {
+				.animation(slide-left 0.5s ease-in-out reverse);
+			}
+		}
+
+		// Backwards
+		&-backward {
+			&-in {
+				.animation(slide-left 0.5s ease-in-out);
+			}
+			&-out {
+				.animation(slide-right 0.5s ease-in-out reverse);
+			}
+		}
+	}
+
+	// Scale
+	&-scale {
+		&-out {
+			.animation(fade-scale-15 0.5s ease-in-out reverse);
+		}
+	}
+
+	// Swipe
+	&-swipe {
+
+		// Forward
+		&-forward {
+			&-in {
+				.animation(slide-left-33 0.5s ease-in-out);
+			}
+			&-out {
+				.animation(slide-left 0.5s ease-in-out reverse);
+			}
+		}
+
+		// Backwards
+		&-backward {
+			&-in {
+				.animation(slide-right-33 0.5s ease-in-out);
+			}
+			&-out {
+				.animation(slide-right 0.5s ease-in-out reverse);
+			}
+		}
+
+		&-forward,
+		&-backward {
+			&-in {
+				content: "";
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 1;
+				background-color: rgba(0, 0, 0, 0.6);
+				.animation(fade 0.5s ease-in-out reverse);
+			}
 		}
 	}
 
@@ -66,75 +155,8 @@
 	cursor: pointer;
 }
 
-
-// Modifier: `slideshow-fullscreen`
+// Import Statements
 // ========================================================================
 
-.slideshow-fullscreen {
-	&,
-	> li {
-		height: 100vh;
-	}
-}
-
-// Animations
-// ========================================================================
-
-// Fade
-.slideshow-fade-out {
-	.animation(fade 0.5s linear reverse);
-}
-
-// Scroll
-.slideshow-scroll-forward-in {
-	.animation(slide-right 0.5s ease-in-out);
-}
-
-.slideshow-scroll-forward-out {
-	.animation(slide-left 0.5s ease-in-out reverse);
-}
-
-.slideshow-scroll-backward-in {
-	.animation(slide-left 0.5s ease-in-out);
-}
-
-.slideshow-scroll-backward-out {
-	.animation(slide-right 0.5s ease-in-out reverse);
-}
-
-// Scale
-.slideshow-scale-out {
-	.animation(fade-scale-15 0.5s ease-in-out reverse);
-}
-
-// Swipe
-.slideshow-swipe-forward-in {
-	.animation(slide-left-33 0.5s ease-in-out);
-}
-
-.slideshow-swipe-forward-out {
-	.animation(slide-left 0.5s ease-in-out reverse);
-}
-
-.slideshow-swipe-backward-in {
-	.animation(slide-right-33 0.5s ease-in-out);
-}
-
-.slideshow-swipe-backward-out {
-	.animation(slide-right 0.5s ease-in-out reverse);
-}
-
-.slideshow-swipe-forward-in,
-.slideshow-swipe-backward-in {
-	&:before {
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
-		background-color: rgba(0, 0, 0, 0.6);
-		.animation(fade 0.5s ease-in-out reverse);
-	}
-}
+@import "slidenav.less";
+@import "dotnav.less";

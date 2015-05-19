@@ -4,7 +4,7 @@
 //
 // Component:       `thumbnail`
 //
-// Sub-objects:     `thumbnail-caption`
+// Sub-Objects:     `thumbnail-caption`
 //
 // Modifiers:       `thumbnail-mini`
 //                  `thumbnail-small`
@@ -27,7 +27,7 @@
 // ========================================================================
 
 @thumbnail-padding: 4px;
-@thumbnail-border: @base-border-color;
+@thumbnail-border: @global-border-color;
 @thumbnail-border-width: 1px;
 @thumbnail-background: @color-white;
 
@@ -61,11 +61,11 @@
 			border-color: @thumbnail-hover-border;
 			background-color: @thumbnail-hover-background;
 			text-decoration: none;
-			outline: none;
+			outline: 0;
 		}
 	}
 
-	// Sub-object: `.thumbnail-caption`
+	// Sub-Object: `.thumbnail-caption`
 	// ========================================================================
 
 	&-caption {
@@ -74,7 +74,7 @@
 		color: @thumbnail-caption-color;
 	}
 
-	// Sub-objects: `.thumbnail-{mini, small, medium, large}`
+	// Sub-Objects: `.thumbnail-{mini, small, medium, large}`
 	// ========================================================================
 
 	&-mini,
@@ -102,7 +102,7 @@
 		width: @thumbnail-large-width;
 	}
 
-	// Sub-object: `.thumbnail-expand`
+	// Sub-Object: `.thumbnail-expand`
 	// ========================================================================
 
 	&-expand {

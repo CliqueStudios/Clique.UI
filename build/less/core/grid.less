@@ -159,99 +159,99 @@
 
 		.row-gutter-vertical-subobject(@row-gutter-vertical);
 	}
-}
 
-// Modifier: `row-divider`
-// ========================================================================
+	// Modifier: `row-divider`
+	// ========================================================================
 
-.row-divider {
-	&:not(:empty) {
-		margin-left: -@row-gutter-horizontal;
-		margin-right: -@row-gutter-horizontal;
-	}
-	> * {
-		padding-left: @row-gutter-horizontal;
-		padding-right: @row-gutter-horizontal;
-	}
-	> [class*="col-1-"] {
-		&:not(.col-1-1) {
+	&-divider {
+		&:not(:empty) {
+			margin-left: -@row-gutter-horizontal;
+			margin-right: -@row-gutter-horizontal;
+		}
+		> * {
+			padding-left: @row-gutter-horizontal;
+			padding-right: @row-gutter-horizontal;
+		}
+		> [class*="col-1-"] {
+			&:not(.col-1-1) {
+				&:nth-child(n+2) {
+					border-left: @row-divider-border-width solid @row-divider-border;
+				}
+			}
+		}
+		> [class*="col-2-"],
+		> [class*="col-3-"],
+		> [class*="col-4-"],
+		> [class*="col-5-"],
+		> [class*="col-6-"],
+		> [class*="col-7-"],
+		> [class*="col-8-"],
+		> [class*="col-9-"] {
 			&:nth-child(n+2) {
 				border-left: @row-divider-border-width solid @row-divider-border;
 			}
 		}
-	}
-	> [class*="col-2-"],
-	> [class*="col-3-"],
-	> [class*="col-4-"],
-	> [class*="col-5-"],
-	> [class*="col-6-"],
-	> [class*="col-7-"],
-	> [class*="col-8-"],
-	> [class*="col-9-"] {
-		&:nth-child(n+2) {
-			border-left: @row-divider-border-width solid @row-divider-border;
-		}
-	}
 
-	// Tablet and bigger
-	@media (min-width: @breakpoint-medium) {
-		> [class*="col-medium-"] {
-			&:not(.col-medium-1-1) {
-				&:nth-child(n+2) {
-					border-left: @row-divider-border-width solid @row-divider-border;
+		// Tablet and bigger
+		@media (min-width: @breakpoint-medium) {
+			> [class*="col-medium-"] {
+				&:not(.col-medium-1-1) {
+					&:nth-child(n+2) {
+						border-left: @row-divider-border-width solid @row-divider-border;
+					}
 				}
 			}
 		}
-	}
 
-	// Desktop and bigger
-	@media (min-width: @breakpoint-large) {
-		> [class*="col-large-"] {
-			&:not(.col-large-1-1) {
-				&:nth-child(n+2) {
-					border-left: @row-divider-border-width solid @row-divider-border;
+		// Desktop and bigger
+		@media (min-width: @breakpoint-large) {
+			> [class*="col-large-"] {
+				&:not(.col-large-1-1) {
+					&:nth-child(n+2) {
+						border-left: @row-divider-border-width solid @row-divider-border;
+					}
 				}
 			}
 		}
-	}
 
-	// Large screen and bigger
-	@media (min-width: @breakpoint-xlarge) {
-		&:not(:empty) {
-			margin-left: -@row-gutter-large-horizontal;
-			margin-right: -@row-gutter-large-horizontal;
+		// Large screen and bigger
+		@media (min-width: @breakpoint-xlarge) {
+			&:not(:empty) {
+				margin-left: -@row-gutter-large-horizontal;
+				margin-right: -@row-gutter-large-horizontal;
+			}
+			> * {
+				padding-left: @row-gutter-large-horizontal;
+				padding-right: @row-gutter-large-horizontal;
+			}
+			&:empty {
+				margin-top: @row-gutter-large-vertical;
+				margin-bottom: @row-gutter-large-vertical;
+			}
 		}
-		> * {
-			padding-left: @row-gutter-large-horizontal;
-			padding-right: @row-gutter-large-horizontal;
-		}
+
 		&:empty {
-			margin-top: @row-gutter-large-vertical;
-			margin-bottom: @row-gutter-large-vertical;
+			margin-top: @row-gutter-vertical;
+			margin-bottom: @row-gutter-vertical;
+			border-top: @row-divider-border-width solid @row-divider-border;
 		}
 	}
 
-	&:empty {
-		margin-top: @row-gutter-vertical;
-		margin-bottom: @row-gutter-vertical;
-		border-top: @row-divider-border-width solid @row-divider-border;
-	}
-}
+	// Modifier: `row-match`
+	// ========================================================================
 
-// Modifier: `row-match`
-// ========================================================================
-
-.row-match {
-	> * {
-		.display(flex);
+	&-match {
 		> * {
-			.flex(none);
-			width: 100%;
+			.display(flex);
+			> * {
+				.flex(none);
+				width: 100%;
+			}
 		}
 	}
 }
 
-// Sub-objects: `.row-*-cols`
+// Sub-Objects: `.row-*-cols`
 // ========================================================================
 
 // Base 12 Rows
@@ -282,7 +282,7 @@
 	.make-row-grid(12, xlarge);
 }
 
-// Sub-objects: `col-*`
+// Sub-Objects: `col-*`
 // ========================================================================
 
 // Base 12 Column Grid
@@ -327,7 +327,7 @@
 	.make-col-grid(10, large);
 }
 
-// Sub-object: `push-*` and `pull-*`
+// Sub-Object: `push-*` and `pull-*`
 // ========================================================================
 
 // Tablet and bigger
