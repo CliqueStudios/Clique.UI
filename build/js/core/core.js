@@ -34,7 +34,7 @@
 	var hovercls, hoverset, selector, _c, _cTEMP;
 	_c = {};
 	_cTEMP = window.Clique;
-	_c.version = '1.0.1';
+	_c.version = '1.0.2';
 	_c.noConflict = function() {
 		if(_cTEMP) {
 			window.Clique = _cTEMP;

@@ -13,10 +13,10 @@
 })(function(_c) {
 	var $, _target;
 	$ = _c.$;
-	_target = '.btn, button';
+	_target = '.button, button';
 	_c.component('buttonRadio', {
 		defaults: {
-			target: '.btn'
+			target: '.button'
 		},
 		boot: function() {
 			return _c.$html.on('click.buttonRadio.clique', '[data-button-radio]', function(e) {
@@ -45,7 +45,7 @@
 				ele.addClass('active');
 				$this.find(_target).not(ele).attr('aria-checked', 'false');
 				ele.attr('aria-checked', 'true');
-				return $this.trigger('change.clique.btn', [ele]);
+				return $this.trigger('change.clique.button', [ele]);
 			});
 		},
 		getSelected: function() {
@@ -54,7 +54,7 @@
 	});
 	_c.component('buttonCheckbox', {
 		defaults: {
-			target: '.btn'
+			target: '.button'
 		},
 		boot: function() {
 			return _c.$html.on('click.buttonCheckbox.clique', '[data-button-checkbox]', function(e) {
@@ -81,7 +81,7 @@
 				}
 				ele.toggleClass('active').blur();
 				ele.attr('aria-checked', ele.hasClass('active'));
-				return $this.trigger('change.clique.btn', [ele]);
+				return $this.trigger('change.clique.button', [ele]);
 			});
 		},
 		getSelected: function() {
@@ -91,7 +91,7 @@
 	return _c.component('button', {
 		defaults: {},
 		boot: function() {
-			return _c.$html.on('click.btn.clique', '[data-button]', function(e) {
+			return _c.$html.on('click.button.clique', '[data-button]', function(e) {
 				var ele, obj;
 				ele = $(this);
 				if(!ele.data('clique.data.button')) {
@@ -109,7 +109,7 @@
 					e.preventDefault();
 				}
 				$this.toggle();
-				return $this.trigger('change.clique.btn', [$this.element.blur().hasClass('active')]);
+				return $this.trigger('change.clique.button', [$this.element.blur().hasClass('active')]);
 			});
 		},
 		toggle: function() {

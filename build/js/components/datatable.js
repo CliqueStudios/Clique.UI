@@ -71,7 +71,7 @@
     showPageListener: function() {
       var $this;
       $this = this;
-      return this.table.on('didshow.page', function() {
+      return this.table.on('didshowpage.datatable.clique', function() {
         if ($this.datatable.disablePrevious) {
           return $this.element.addClass('disabled');
         } else {
@@ -87,7 +87,7 @@
         if ($(this).hasClass('disabled') || $(this).attr('disabled')) {
           return false;
         }
-        return $this.table.trigger('show.previous');
+        return $this.table.trigger('previous.datatable.clique');
       });
     }
   });
@@ -123,7 +123,7 @@
     showPageListener: function() {
       var $this;
       $this = this;
-      return this.table.on('didshow.page', function() {
+      return this.table.on('didshowpage.datatable.clique', function() {
         if ($this.datatable.disableNext) {
           return $this.element.addClass('disabled');
         } else {
@@ -139,7 +139,7 @@
         if ($(this).hasClass('disabled') || $(this).attr('disabled')) {
           return false;
         }
-        return $this.table.trigger('show.next');
+        return $this.table.trigger('next.datatable.cliquet');
       });
     }
   });
@@ -202,6 +202,9 @@
       if (this.options.paginationWrapper) {
         this.elements.pagination = this.findElement(this.element, this.options.paginationWrapper);
       }
+      if (this.options.infoWrapper) {
+        this.elements.infoWrapper = this.findElement(this.element, this.options.infoWrapper);
+      }
       return this.setColumns();
     },
     setColumns: function() {
@@ -237,7 +240,7 @@
       this.pages = Math.ceil(this.dataLength / this.options.perPage) - 1;
     },
     buildPagination: function() {
-      var $this, html, i, parents, selector;
+      var $this, hasPaginationClass, html, i, parents, selector;
       selector = this.options.paginationWrapper;
       $this = this;
       if (!this.pagination || !this.pagination.length) {
@@ -249,14 +252,17 @@
           }
         });
       }
+      console.log(this.pagination);
       if (this.pagination.length && !this.pagination.find('> *').length) {
+        console.log(this.pagination);
+        hasPaginationClass = this.pagination.hasClass('pagination');
         i = 0;
         html = '';
         while (i < this.pages + 1) {
           if (i === this.pages) {
             html += "<span>...</span>";
           }
-          html += "<a href='#' data-datatable-page='" + i + "'>" + (i + 1) + "</a>";
+          html += hasPaginationClass ? "<li><a href='#' data-datatable-page='" + i + "'>" + (i + 1) + "</a></li>" : "<a href='#' data-datatable-page='" + i + "'>" + (i + 1) + "</a>";
           if (i === 0) {
             html += "<span>...</span>";
           }
@@ -296,28 +302,29 @@
       });
     },
     updatePaginationVisibility: function() {
-      var i, _results;
+      var i, link, _results;
       i = 0;
-      this.pagination.find('> a, > span').hide();
+      this.pagination.find("[data-datatable-page]").hide();
       _results = [];
       while (i < this.pages + 1) {
-        this.pagination.find("> [data-datatable-page='" + i + "']").css('display', 'inline-block');
+        link = this.pagination.find("[data-datatable-page='" + i + "']");
+        link.css('display', 'inline-block');
         _results.push(i++);
       }
       return _results;
     },
     bindPaginationEvents: function() {
-      var $this;
-      $this = this;
-      return this.pagination.on('click', '> a', function(e) {
-        var idx;
-        e.preventDefault();
-        idx = $(this).data('datatable-page');
-        return $this.showPage(idx);
-      });
+      return this.pagination.on('click', '[data-datatable-page]', (function(_this) {
+        return function(e) {
+          var idx;
+          e.preventDefault();
+          idx = $(e.target).data('datatable-page');
+          return _this.trigger('showpage.datatable.clique', [idx]);
+        };
+      })(this));
     },
     updatePagination: function() {
-      if (!this.options.paginate) {
+      if (!this.options.paginationWrapper || !this.elements.pagination || !this.elements.pagination.length) {
         return;
       }
       this.buildPagination();
@@ -327,25 +334,24 @@
         this.updatePaginationVisibility();
       }
       if (this.pagination && this.pagination.length) {
-        this.pagination.find('> a').removeClass('current');
-        return this.pagination.find("> [data-datatable-page='" + this.currentPage + "']").addClass('current');
+        if (this.pagination.hasClass('pagination')) {
+          this.pagination.find('[data-datatable-page]').parent().removeClass('active');
+          return this.pagination.find("[data-datatable-page='" + this.currentPage + "']").parent().addClass('active');
+        } else {
+          this.pagination.find('[data-datatable-page]').removeClass('active');
+          return this.pagination.find("[data-datatable-page='" + this.currentPage + "']").addClass('active');
+        }
       }
     },
     bindEvents: function() {
-      var $this;
-      $this = this;
-      this.elements.thead.on('click', '[data-datatable-sort]', function(e) {
-        var idx;
-        e.preventDefault();
-        idx = $(this).closest('th').index();
-        return $this.sortEventHandler(idx);
-      });
-      return this.elements.thead.on('click', '[data-datatable-hide]', function(e) {
-        var idx;
-        e.preventDefault();
-        idx = $(this).closest('th').index();
-        return $this.hideEventHandler(idx);
-      });
+      return this.elements.thead.on('click', '.datatable-sort', (function(_this) {
+        return function(e) {
+          var idx;
+          e.preventDefault();
+          idx = $(e.target).closest('th').index();
+          return _this.sortEventHandler(idx);
+        };
+      })(this));
     },
     sortEventHandler: function(idx) {
       if (this.options.sortColumn === idx) {
@@ -357,40 +363,40 @@
         this.options.sortColumn = idx;
         this.options.sortOrder = 'asc';
       }
-      return this.trigger('sort', [this.options.sortColumn, this.options.sortOrder]);
-    },
-    hideEventHandler: function(idx) {
-      var info;
-      if (this.options.hidden.indexOf(idx) > -1) {
-        return;
-      }
-      info = this.columnInfo(idx);
-      return this.trigger('hide.column', [info]);
+      return this.trigger('sort.datatable.clique', [this.options.sortColumn, this.options.sortOrder]);
     },
     bindListeners: function() {
-      var $this;
-      $this = this;
-      this.on('show.page', function(e, pageIndex) {
-        return $this.showPage(pageIndex);
-      });
-      this.on('show.next', function() {
-        return $this.showNextPage();
-      });
-      this.on('show.previous', function() {
-        return $this.showPreviousPage();
-      });
-      this.on('sort', function(e, columnIndex, sortOrder) {
-        return $this.sortByColumn(columnIndex, sortOrder);
-      });
-      this.on('hide.column', function(e, columnInfo) {
-        return $this.hideColumn(columnInfo);
-      });
-      this.on('hide.columns', function(e, columnIndexes) {
-        return $this.hideColumns(columnIndexes);
-      });
-      return this.on('show.column', function(e, columnIndex) {
-        return $this.showColumn(columnIndex);
-      });
+      this.on('showpage.datatable.clique', (function(_this) {
+        return function(e, pageIndex) {
+          return _this.showPage(pageIndex);
+        };
+      })(this));
+      this.on('didshowpage.datatable.clique', (function(_this) {
+        return function(e, currentPage, start, end, dataLength) {
+          return _this.didShowPage(currentPage, start, end, dataLength);
+        };
+      })(this));
+      this.on('next.datatable.clique', (function(_this) {
+        return function() {
+          return _this.showNextPage();
+        };
+      })(this));
+      this.on('previous.datatable.clique', (function(_this) {
+        return function() {
+          return _this.showPreviousPage();
+        };
+      })(this));
+      return this.on('sort.datatable.clique', (function(_this) {
+        return function(e, columnIndex, sortOrder) {
+          return _this.sortByColumn(columnIndex, sortOrder);
+        };
+      })(this));
+    },
+    didShowPage: function(currentPage, start, end, dataLength) {
+      if (this.elements.paginationWrapper && !this.elements.paginationWrapper.find('> *').length) {
+        console.log(this.elements);
+        return this.buildPagination();
+      }
     },
     addObserver: function() {
       var tbody;
@@ -416,21 +422,14 @@
       if (this.options.sortColumn > -1) {
         setTimeout((function(_this) {
           return function() {
-            return _this.trigger('sort', [_this.options.sortColumn, _this.options.sortOrder]);
+            return _this.trigger('sort.datatable.clique', [_this.options.sortColumn, _this.options.sortOrder]);
           };
         })(this), 0);
       }
       if (this.options.paginate && this.options.sortColumn < 0) {
         setTimeout((function(_this) {
           return function() {
-            return _this.trigger('show.page', [_this.currentPage]);
-          };
-        })(this), 0);
-      }
-      if (this.options.hidden.length) {
-        setTimeout((function(_this) {
-          return function() {
-            return _this.trigger('hide.columns', [_this.options.hidden]);
+            return _this.trigger('showpage.datatable.clique', [_this.currentPage]);
           };
         })(this), 0);
       }
@@ -521,52 +520,19 @@
       }
       this.setDataProperties(newData);
       this.addSortClass(columnIndex, sortOrder);
-      return this.trigger('show.page', [this.currentPage]);
+      return this.trigger('showpage.datatable.clique', [this.currentPage]);
     },
     printOriginalData: function() {
       this.setDataProperties(this.originalData);
       this.removeSortClass();
-      return this.trigger('show.page', [this.currentPage]);
+      return this.trigger('showpage.datatable.clique', [this.currentPage]);
     },
     addSortClass: function(columnIndex, sortOrder) {
       this.removeSortClass();
-      return this.elements.th.eq(columnIndex).addClass("sort-" + sortOrder);
+      return this.elements.th.eq(columnIndex).find('.datatable-sort').addClass("datatable-sort-active datatable-sort-" + sortOrder);
     },
     removeSortClass: function() {
-      return this.elements.th.removeClass('sort-asc sort-desc');
-    },
-    hideColumns: function(columnIndexes) {
-      var idx, info, _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = columnIndexes.length; _i < _len; _i++) {
-        idx = columnIndexes[_i];
-        info = this.columnInfo(idx);
-        _results.push(this.trigger('hide.column', [info]));
-      }
-      return _results;
-    },
-    hideColumn: function(columnInfo) {
-      var hidden;
-      this.find('> * > tr').each(function() {
-        return $(this).find('> *').eq(columnInfo.index).hide();
-      });
-      hidden = this.options.hidden;
-      hidden.push(columnInfo.index);
-      hidden = $.unique(hidden);
-      this.options.hidden = hidden;
-    },
-    showColumn: function(columnIndex) {
-      var hidden, optionIndex;
-      hidden = this.options.hidden;
-      optionIndex = hidden.indexOf(columnIndex);
-      if (optionIndex > -1) {
-        this.find('> * > tr').each(function() {
-          return $(this).find('> *').eq(columnIndex).show();
-        });
-        hidden.splice(optionIndex, 1);
-        hidden = $.unique(hidden);
-        this.options.hidden = hidden;
-      }
+      return this.elements.th.find('.datatable-sort').removeClass('datatable-sort-active datatable-sort-asc datatable-sort-desc');
     },
     showNextPage: function() {
       var pageIndex;
@@ -602,23 +568,17 @@
         $this.disablePrevious = start === 0 ? true : false;
         $this.disableNext = $this.currentPage === $this.pages ? true : false;
         $this.updatePagination();
-        table.trigger('didshow.page', [$this.currentPage, (start === 0 ? 1 : start), end, $this.dataLength]);
+        table.trigger('didshowpage.datatable.clique', [$this.currentPage, (start === 0 ? 1 : start), end, $this.dataLength]);
         return $this.addObserver();
       }, 0);
     },
     addRow: function(rowData) {
-      var cellData, content, hidden, setHidden, td, tr, _i, _len;
+      var cellData, content, td, tr, _i, _len;
       tr = $('<tr />');
-      hidden = this.options.hidden;
-      setHidden = !!hidden.length;
       for (_i = 0, _len = rowData.length; _i < _len; _i++) {
         cellData = rowData[_i];
         content = cellData.text;
-        if (setHidden && hidden.indexOf(cellData.index) > -1) {
-          td = $("<td style='display:none;'>" + content + "</td>");
-        } else {
-          td = $("<td>" + content + "</td>");
-        }
+        td = $("<td>" + content + "</td>");
         tr.append(td);
       }
       return this.elements.tbody.append(tr);
@@ -729,8 +689,7 @@
       return this.pagination.find('> *').remove();
     },
     unbindEvents: function() {
-      this.find('[data-datatable-hide]').off('click');
-      this.find('[data-datatable-sort]').off('click');
+      this.find('.datatable-sort').off('click');
       this.previousButton.off('click');
       return this.nextButton.off('click');
     },
