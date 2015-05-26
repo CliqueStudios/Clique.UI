@@ -2,20 +2,14 @@
 //
 // Description:     Defines styles for sortable grids and lists
 //
-// Component:       `sortable`
+// Component:       `.sortable`
 //
-// Sub-Objects:     `sortable-moving`
+// Sub-objects:     `.sortable-moving`
 //
-// Modifiers:       `sortable-dragged`
-//                  `sortable-placeholder`
-//                  `sortable-over`
+// Modifiers:       `.sortable-dragged`
+//                  `.sortable-placeholder`
+//                  `.sortable-over`
 //
-// Markup:
-// <!-- sortable -->
-// <ul class="sortable" data-sortable>
-//     <li></li>
-//     <li></li>
-// </ul>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -47,7 +41,7 @@
 		user-drag: none;
 	}
 
-	// Sub-modifier `sortable-dragged`
+	// Sub-modifier `.sortable-dragged`
 	// ========================================================================
 
 	&-dragged {
@@ -56,22 +50,22 @@
 		pointer-events: none;
 	}
 
-	// Sub-modifier `sortable-placeholder`
+	// Sub-modifier `.sortable-placeholder`
 	// ========================================================================
 
 	&-placeholder {
 		opacity: @sortable-placeholder-opacity;
 	}
 
-	// Sub-modifier `sortable-over`
-	// Only if `warp:true`
+	// Sub-modifier `.sortable-over`
+	// Only if `.warp:true`
 	// ========================================================================
 
 	&-over {
 		opacity: @sortable-over-opacity;
 	}
 
-	// Sub-Object: `sortable-moving`
+	// Sub-object: `.sortable-moving`
 	// ========================================================================
 
 	&-moving {

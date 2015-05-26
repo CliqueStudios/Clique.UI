@@ -2,24 +2,18 @@
 //
 // Description:     Defines styles for an off-canvas sidebar that slides in and out of the page
 //
-// Component:       `offcanvas`
+// Component:       `.offcanvas`
 //
-// Sub-Objects:     `offcanvas-page`
-//                  `offcanvas-bar`
-//                  `offcanvas-close`
+// Sub-objects:     `.offcanvas-page`
+//                  `.offcanvas-bar`
+//                  `.offcanvas-close`
 //
-// Modifiers:       `offcanvas-bar-flip`
+// Modifiers:       `.offcanvas-bar-flip`
 //
-// States:          `active`
+// States:          `.active`
 //
-// Uses:            Panel: `panel`
+// Uses:            Panel: `.panel`
 //
-// Markup:
-// <!-- offcanvas -->
-// <a href="#offcanvas" data-offcanvas>Open</a>
-// <div id="offcanvas" class="offcanvas">
-//     <div class="offcanvas-bar"></div>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -29,12 +23,12 @@
 // ========================================================================
 
 @offcanvas-z-index: 1000;
-@offcanvas-background: rgba(0, 0, 0, 0.1);
+@offcanvas-background: fade(#000, 10%);
 
 @offcanvas-bar-width: 270px;
 @offcanvas-bar-background: #333;
 
-@offcanvas-panel-margin: 20px 15px;
+@offcanvas-panel-margin: 20px @global-margin;
 @offcanvas-panel-color: #777;
 @offcanvas-panel-link-color: #ccc;
 @offcanvas-panel-link-hover-color: @color-white;
@@ -59,7 +53,7 @@
 		display: block;
 	}
 
-	// Sub-Object: `offcanvas-page`
+	// Sub-object: `.offcanvas-page`
 	// ========================================================================
 
 	&-page {
@@ -67,7 +61,7 @@
 		.transition(margin-left 300ms ease-in-out);
 	}
 
-	// Sub-Object: `offcanvas-bar`
+	// Sub-object: `.offcanvas-bar`
 	// ========================================================================
 
 	&-bar {
@@ -81,8 +75,8 @@
 		max-width: 100%;
 		background-color: @offcanvas-bar-background;
 		overflow-y: auto;
-		-webkit-overflow-scrolling: touch;
 		.transition(transform 300ms ease-in-out);
+		-webkit-overflow-scrolling: touch;
 		-ms-scroll-chaining: none;
 
 		&:after {
@@ -93,27 +87,28 @@
 			bottom: 0;
 			right: 0;
 			width: 1px;
-			background-color: rgba(0, 0, 0, 0.6);
-			.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
+			background-color: fade(#000, 60%);
+			.box-shadow(0 0 5px 2px fade(#000, 60%));
 		}
 
-		// Modifier `offcanvas-bar-flip`
+		// Modifier `.offcanvas-bar-flip`
 		// ========================================================================
 
 		&-flip {
 			left: auto;
 			right: 0;
 			.translate(100%, 0);
+
 			&:after {
 				right: auto;
 				left: 0;
 				width: 1px;
-				background-color: rgba(0, 0, 0, 0.6);
-				.box-shadow(0 0 5px 2px rgba(0, 0, 0, 0.6));
+				background-color: fade(#000, 60%);
+				.box-shadow(0 0 5px 2px fade(#000, 60%));
 			}
 		}
 
-		// State: `offcanvas-bar-show`
+		// State: `.offcanvas-bar-show`
 		// ========================================================================
 
 		&-show {
@@ -127,9 +122,11 @@
 	.panel {
 		margin: @offcanvas-panel-margin;
 		color: @offcanvas-panel-color;
+
 		a {
 			&:not([class]) {
 				color: @offcanvas-panel-link-color;
+
 				&:hover {
 					color: @offcanvas-panel-link-hover-color;
 				}

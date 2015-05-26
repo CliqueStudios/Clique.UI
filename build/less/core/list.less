@@ -2,11 +2,11 @@
 //
 // Description:     Defines styles for ordered and unordered lists
 //
-// Component:       `list`
+// Component:       `.list`
 //
-// Modifiers:       `list-line`
-//                  `list-striped`
-//                  `list-space`
+// Modifiers:       `.list-line`
+//                  `.list-striped`
+//                  `.list-space`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -19,7 +19,7 @@
 
 @list-line-margin-top: 5px;
 @list-line-border: @global-border-color;
-@list-line-border-width: 1px;
+@list-line-border-width: @global-border-width;
 
 @list-striped-padding-vertical: 5px;
 @list-striped-padding-horizontal: 5px;
@@ -27,8 +27,8 @@
 
 @list-space-margin-top: 10px;
 
-// New
-@list-striped-border: @global-border;
+@list-striped-border-width: @list-line-border-width;
+@list-striped-border: @global-border-color;
 
 // ========================================================================
 // Component: List
@@ -52,7 +52,7 @@
 		list-style: none;
 	}
 
-	// Modifier: `list-line`
+	// Modifier: `.list-line`
 	// ========================================================================
 
 	&-inline {
@@ -71,16 +71,16 @@
 		}
 	}
 
-	// Modifier: `list-striped`
+	// Modifier: `.list-striped`
 	// ========================================================================
 
 	&-striped {
 		> li {
 			padding: @list-striped-padding-vertical @list-striped-padding-horizontal;
-			border-bottom: 1px solid @list-striped-border;
+			border-bottom: @list-striped-border-width solid @list-striped-border;
 
 			&:first-child {
-				border-top: 1px solid @list-striped-border;
+				border-top: @list-striped-border-width solid @list-striped-border;
 			}
 
 			&:nth-of-type(odd) {
@@ -90,7 +90,7 @@
 	}
 
 
-	// Modifier: `list-space`
+	// Modifier: `.list-space`
 	// ========================================================================
 
 	&-space {

@@ -2,9 +2,9 @@
 //
 // Description:     Make elements remain at the top of the viewport
 //
-// Component:       `data-sticky`
+// Component:       `.data-sticky`
 //
-// States:          `active`
+// States:          `.active`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -26,7 +26,9 @@
 	&[class*="animation-"] {
 		.animation-duration(150ms);
 	}
-	&.animation-reverse {
-		.animation-duration(40ms);
+	&.animation {
+		&-reverse {
+			.animation-duration(40ms);
+		}
 	}
 }

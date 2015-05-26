@@ -2,16 +2,10 @@
 //
 // Description:     Defines styles for the Select Component
 //
-// Component:       `select`
+// Component:       `.select`
 //
-// Sub-Objects:     `select-link`
+// Sub-objects:     `.select-link`
 //
-// Markup:
-// <select data-select>
-//     <option value="">...</option>
-//     <option value="">...</option>
-//     <option value="">...</option>
-// </select>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -20,46 +14,68 @@
 // Variables
 // ========================================================================
 
+@select-height: 30px;
+@select-font-size: @global-font-size;
+@select-line-height: @global-line-height;
+@select-padding-vertical: 4px;
+@select-padding-horizontal: 6px;
+@select-border-width: @global-border-width;
+@select-border-color: @global-border-color;
+
+@select-transition-duration: 200ms;
+@select-transition-timing-function: linear;
+
+@select-icon: @global-icon-chevron-down;
+@select-open-icon: @global-icon-chevron-up;
+
+@select-hover-color: @global-font-color;
+
+@select-open-background: #f5fbfe;
+@select-open-border-color: #99baca;
+
 // ========================================================================
 // Component: Select
 // ========================================================================
 
 .select {
 	position: relative;
+
 	> .dropdown {
 		width: 100%;
 	}
 
 	&-link {
-		height: 30px;
-		line-height: 22px;
+		height: @select-height;
+		line-height: unit(@select-line-height) / unit(@select-font-size);
 		max-width: 100%;
-		padding: 4px 6px;
-		border: 1px solid #ddd;
-		background: #fff;
+		padding: @select-padding-vertical @select-padding-horizontal;
+		border: @select-border-width solid @select-border-color;
 		width: 100%;
 		display: block;
-		.transition(linear 200ms);
+		.transition(@select-transition-duration @select-transition-timing-function);
 
 		&:after {
-			content: "\e9be";
+			content: @select-icon;
 			font-family: "icomoon";
 			position: absolute;
 			right: 15px;
 			top: 50%;
-			transform: translate(0, -50%);
+			.translate(0, -50%);
+			.open & {
+				content: @select-open-icon;
+			}
 		}
 
 		&,
 		&:hover,
 		&:focus {
-			color: #444;
+			color: @select-hover-color;
 			text-decoration: none;
 		}
 
 		.open & {
-			border-color: #99baca;
-			background: #f5fbfe;
+			background-color: @select-open-background;
+			border-color: @select-open-border-color;
 		}
 	}
 }

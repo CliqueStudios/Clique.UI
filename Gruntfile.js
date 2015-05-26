@@ -120,11 +120,6 @@ module.exports = function(grunt) {
 						beautify : true,
 						bracketize : true
 					},
-					banner: '/*!\n' +
-					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
-					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-					' */\n\n',
 				},
 				files: [{
 					expand: true,
@@ -135,11 +130,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				options: {
-					banner: '/*!\n' +
-					' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-					'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
-					' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-					' */\n\n',
+					banner: '<%= banner %>',
 					mangle : {},
 					beautify : false,
 					compress: {
@@ -162,11 +153,7 @@ module.exports = function(grunt) {
 		},
 		concat: {
 			options : {
-				banner: '/*!\n' +
-				' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-				'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
-				' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-				' */\n\n',
+				banner: '<%= banner %>',
 				stripBanners : {
 					block : true,
 					line : true
@@ -192,7 +179,7 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Lint
+		// Beautifying
 		jsbeautifier: {
 			options: {
 				html: {
@@ -254,11 +241,6 @@ module.exports = function(grunt) {
 		},
 		cleaner_css: {
 			options : {
-				banner: '/*!\n' +
-				' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-				'<%= pkg.homepage ? " *  " + pkg.homepage + "\\n" : "" %>' +
-				' *  Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;\n' +
-				' */\n\n',
 				min : {
 					restructuring : false
 				},
@@ -277,10 +259,13 @@ module.exports = function(grunt) {
 				}]
 			},
 		},
+
+		// Linting
 		cliqueui_clean_less: {
 			options : {
 				searchIn : 'build/less',
-				log : 'unittests/linting-reports/clean-less.txt',
+				log : 'unittests/linting-reports/unused-less-vars.txt',
+				logRepeating : 'unittests/linting-reports/repeating-less-vars.json',
 				displayOutput : false
 			},
 			default : {
@@ -291,8 +276,19 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-
-		// Test
+		csslint: {
+			options: {
+				csslintrc: '.csslintrc',
+				quiet: true,
+				formatters: [{
+					id: 'text',
+					dest: 'unittests/linting-reports/csslint.txt'
+				}]
+			},
+			dist: {
+				src: ['dist/**/*.css', '!dist/css/clique.css', '!dist/**/*.min.css']
+			}
+		},
 		jshint: {
 			options : {
 				jshintrc : 'unittests/jshint/.jshintrc',
@@ -302,6 +298,8 @@ module.exports = function(grunt) {
 			},
 			all : ['dist/js/**/*.js', '!dist/js/clique.js']
 		},
+
+		// Test
 		casperjs: {
 			options : {
 				async: {
@@ -340,21 +338,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		mocha: {
-			options : {
-				run : true
-			},
-			test: {
-				src: ['unittests/mocha/*.html'],
-			},
-		},
-		browserify: {
-			tests: {
-				files: {
-					'unittests/mocha/suites/core.js': ['unittests/mocha/suites/core.js'],
-				}
-			}
-		}
 	});
 
 	// Custom Tasks
@@ -362,6 +345,11 @@ module.exports = function(grunt) {
 		'build-css',
 		'Builds, cleans, and optmiizes the CSS from .less files',
 		['clean:css', 'less', 'cleaner_css', 'cssmin:dist']
+	);
+	grunt.registerTask(
+		'lint-css',
+		'Lints all CSS & Less files, looking for possible improvements',
+		['build-css', 'cliqueui_clean_less', 'csslint']
 	);
 	grunt.registerTask(
 		'build-js',

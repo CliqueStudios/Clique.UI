@@ -2,9 +2,9 @@
 //
 // Description:     Defines styles for a close button
 //
-// Component:       `close`
+// Component:       `.close`
 //
-// Modifiers:       `close-alt`
+// Modifiers:       `.close-alt`
 //
 // Uses:            Icon: "icomoon"
 //
@@ -18,9 +18,12 @@
 // Variables
 // ========================================================================
 
+// Component-wide declarations
+
 @close-size: 20px;
+
 @close-alt-padding: 2px;
-@close-alt-background: #eee;
+@close-alt-background: @global-default-background;
 
 // ========================================================================
 // Component: Close
@@ -28,7 +31,7 @@
 
 .close {
 	margin: 0;
-	border: none;
+	border: 0;
 	overflow: visible;
 	font: inherit;
 	color: inherit;

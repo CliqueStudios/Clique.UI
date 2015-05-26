@@ -1,6 +1,12 @@
 
-var helpers = require('./lib/helpers');
-
+var getParamNames = function(func) {
+	var fnStr = func.toString().replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg, '');
+	var result = fnStr.slice(fnStr.indexOf('(')+1, fnStr.indexOf(')')).match(/([^\s,]+)/g);
+	if(result === null) {
+		result = [];
+	}
+	return result;
+}
 var currentVersion = '1.0.3';
 
 describe('Clique.core', function(){
@@ -226,7 +232,7 @@ describe('Clique.core', function(){
 		describe('#ready', function() {
 			it('core.ready is type `function`', function() {
 				var type = typeof _c.ready;
-				console.log(helpers.getParamNames(_c.ready));
+				console.log(getParamNames(_c.ready));
 				(type === 'function').should.be.true;
 			});
 			// check for parameters

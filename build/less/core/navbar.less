@@ -2,31 +2,23 @@
 //
 // Description:     Defines styles for the navigation bar
 //
-// Component:       `navbar`
+// Component:       `.navbar`
 //
-// Sub-Objects:     `navbar-nav`
-//                  `navbar-nav-subtitle`
-//                  `navbar-content`
-//                  `navbar-brand`
-//                  `navbar-toggle`
-//                  `navbar-toggle-alt`
-//                  `navbar-center`
-//                  `navbar-flip`
+// Sub-objects:     `.navbar-nav`
+//                  `.navbar-nav-subtitle`
+//                  `.navbar-content`
+//                  `.navbar-brand`
+//                  `.navbar-toggle`
+//                  `.navbar-toggle-alt`
+//                  `.navbar-center`
+//                  `.navbar-flip`
 //
-// States:          `active`
-//                  `parent`
-//                  `open`
+// States:          `.active`
+//                  `.parent`
+//                  `.open`
 //
 // Used by:         Dropdown
 //
-// Markup:
-// <!-- navbar -->
-// <nav class="navbar">
-//     <ul class="navbar-nav">
-//         <li class="active"><a href=""></a></li>
-//         <li><a href=""></a></li>
-//     </ul>
-// </nav>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -35,40 +27,34 @@
 // Variables
 // ========================================================================
 
-@navbar-background: #eee;
-@navbar-color: @global-body-color;
-@navbar-border: 1px solid fade(@color-black, 10%);
+// Component-wide declarations
+
+@navbar-background: @global-default-background;
+@navbar-color: @global-font-color;
+@navbar-border: @global-border-width solid fade(@color-black, 10%);
 
 @navbar-link-color: @global-link-color;
-@navbar-link-hover-color: #059;
+@navbar-link-hover-color: @global-link-color-hover;
 
 @navbar-nav-height: 40px;
 @navbar-nav-line-height: @navbar-nav-height;
 @navbar-nav-padding-horizontal: 15px;
-@navbar-nav-color: @global-body-color;
-@navbar-nav-font-size: 14px;
+@navbar-nav-font-size: @global-font-size;
 @navbar-nav-hover-background: #f5f5f5;
-@navbar-nav-hover-color: #444;
 @navbar-nav-onclick-background: #ddd;
-@navbar-nav-onclick-color: #444;
 @navbar-nav-active-background: #f5f5f5;
-@navbar-nav-active-color: #444;
 @navbar-nav-subtitle-font-size: 10px;
 @navbar-nav-subtitle-offset: 2px;
 
-@navbar-brand-font-size: 18px;
-@navbar-brand-color: #444;
-@navbar-brand-hover-color: #444;
+@navbar-brand-font-size: @global-font-size-block-title;
 
-@navbar-toggle-font-size: 18px;
-@navbar-toggle-color: #444;
-@navbar-toggle-hover-color: #444;
+@navbar-toggle-font-size: @global-font-size-block-title;
 @navbar-toggle-icon: "\e9bd";
 @navbar-toggle-icon-alt: "\e9be";
 
-@navbar-nav-hover-border: rgba(0, 0, 0, 0.1);
-@navbar-nav-hover-border-top: rgba(0, 0, 0, 0.1);
-@navbar-nav-onclick-border-top: rgba(0, 0, 0, 0.2);
+@navbar-nav-hover-border: fade(#000, 10%);
+@navbar-nav-hover-border-top: fade(#000, 10%);
+@navbar-nav-onclick-border-top: fade(#000, 20%);
 
 // ========================================================================
 // Component: Navbar
@@ -76,12 +62,14 @@
 
 .navbar {
 	background-color: @navbar-background;
-	color: @navbar-color;
 	border: @navbar-border;
 	.micro-clearfix();
+	// .display(flex);
 
 	a {
-		color: inherit;
+		&:not(.button) {
+			color: inherit;
+		}
 	}
 	> a {
 		&:hover {
@@ -89,20 +77,36 @@
 		}
 	}
 
-	// Sub-Object: `navbar-nav`
+	// Sub-object: `.navbar-nav`
 	// ========================================================================
+
+	// Ruleset: `.navbar > li > a:hover`
+	// Written this way to avoid repition and ensure consistency
+	// ========================================================================
+
+	.navbar-item-active() {
+		background-color: @navbar-nav-hover-background;
+		outline: 0;
+		position: relative;
+		z-index: 1;
+		border-left-color: @navbar-nav-hover-border;
+		border-right-color: @navbar-nav-hover-border;
+		border-top-color: @navbar-nav-hover-border-top;
+		text-decoration: none;
+	}
 
 	&-nav {
 		margin: 0;
 		padding: 0;
 		list-style: none;
 		float: left;
+
 		> li {
 			float: left;
 			position: relative;
+
 			> a {
 				display: block;
-				text-decoration: none;
 				height: @navbar-nav-height;
 				padding: 0 @navbar-nav-padding-horizontal;
 				line-height: unit(@navbar-nav-line-height) / unit(@navbar-nav-font-size);
@@ -111,41 +115,35 @@
 				border: 1px solid transparent;
 				border-bottom-width: 0;
 
-				// Active State
-				&:active {
-					background-color: @navbar-nav-onclick-background;
-					border-left-color: @navbar-nav-hover-border;
-					border-right-color: @navbar-nav-hover-border;
-					border-top-color: @navbar-nav-onclick-border-top;
+				// Hover
+				&:active,
+				&:hover,
+				&:focus {
+					.navbar-item-active();
 				}
-			}
-
-			// Active
-			&.active > a {
-				background-color: @navbar-nav-active-background;
-				border-left-color: @navbar-nav-hover-border;
-				border-right-color: @navbar-nav-hover-border;
-				border-top-color: @navbar-nav-hover-border-top;
-			}
-
-			&:hover > a,
-			> a:focus,
-			&.open > a {
-				background-color: @navbar-nav-hover-background;
-				outline: 0;
-				position: relative;
-				z-index: 1;
-				border-left-color: @navbar-nav-hover-border;
-				border-right-color: @navbar-nav-hover-border;
-				border-top-color: @navbar-nav-hover-border-top;
 			}
 		}
 
-		// Sub-Object: `navbar-nav-subtitle`
+		// Active
+		> .active {
+			> a {
+				.navbar-item-active();
+			}
+		}
+
+		// Open
+		> .open {
+			a {
+				.navbar-item-active();
+			}
+		}
+
+		// Sub-object: `.navbar-nav-subtitle`
 		// ========================================================================
 
 		.navbar-nav-subtitle {
 			line-height: unit(@navbar-nav-line-height - @navbar-nav-subtitle-font-size - @navbar-nav-subtitle-offset) / unit(@navbar-nav-font-size);
+
 			> div {
 				margin-top: ((@navbar-nav-line-height - @navbar-nav-subtitle-font-size - @navbar-nav-font-size) / -2) + @navbar-nav-subtitle-offset;
 				font-size: @navbar-nav-subtitle-font-size;
@@ -154,7 +152,7 @@
 		}
 	}
 
-	// Sub-Objects: `navbar-content`, `navbar-brand`, `navbar-toggle`
+	// Sub-objects: `.navbar-content`, `.navbar-brand`, `.navbar-toggle`
 	// ========================================================================
 
 	// Imitate navbar items
@@ -167,35 +165,34 @@
 		float: left;
 		margin-top: -1px;
 
-		.container > & {
-			padding-left: 0;
-			padding-right: 0;
-		}
-
 		&:before {
 			content: "";
 			display: inline-block;
 			height: 100%;
 			vertical-align: middle;
 		}
+
+		.container > & {
+			padding-left: 0;
+			padding-right: 0;
+		}
 	}
 
 
-	// Sub-Objects: `navbar-content`
+	// Sub-objects: `.navbar-content`
 	// ========================================================================
 
-	// Better sibling spacing
 	&-content {
-		+ .navbar-content {
+		& + & {
 			&:not(.navbar-center) {
 				padding-left: 0;
 			}
 		}
 
-		// Link colors
 		> a {
 			&:not([class]) {
 				color: @navbar-link-color;
+
 				&:hover {
 					color: @navbar-link-hover-color;
 				}
@@ -204,7 +201,7 @@
 	}
 
 
-	// Sub-Objects: `navbar-brand`
+	// Sub-objects: `.navbar-brand`
 	// ========================================================================
 
 	&-brand {
@@ -213,7 +210,7 @@
 	}
 
 
-	// Sub-Object: `navbar-toggle`
+	// Sub-object: `.navbar-toggle`
 	// ========================================================================
 
 	&-toggle {
@@ -224,15 +221,15 @@
 			font-family: "icomoon";
 			vertical-align: middle;
 		}
-	}
 
-	&-toggle-alt {
-		&:after {
-			content: @navbar-toggle-icon-alt;
+		&-alt {
+			&:after {
+				content: @navbar-toggle-icon-alt;
+			}
 		}
 	}
 
-	// Sub-Object: `navbar-center`
+	// Sub-object: `.navbar-center`
 	// ========================================================================
 
 	// The element with this class needs to be last child in the navbar
@@ -244,19 +241,23 @@
 		margin-right: auto;
 	}
 
-	// Sub-Object: `navbar-flip`
+	// Sub-object: `.navbar-flip`
 	// ========================================================================
 
 	&-flip {
 		float: right;
 		margin-right: -1px;
+		// .flex(1 0 auto);
+		// .justify-content(flex-end);
 
 		// Collapse border
-		.navbar-nav {
-			> li {
-				> a {
-					margin-left: 0;
-					margin-right: -1px;
+		.navbar {
+			&-nav {
+				> li {
+					> a {
+						margin-left: 0;
+						margin-right: -1px;
+					}
 				}
 			}
 		}

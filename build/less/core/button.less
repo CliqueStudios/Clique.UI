@@ -4,7 +4,7 @@
 //
 // Component:       .button`
 //
-// Sub-Objects:     .button-group`
+// Sub-objects:     .button-group`
 //                  .button-dropdown`
 //
 // Modifiers:       .button-block`
@@ -16,25 +16,9 @@
 //                  .button-small`
 //                  .button-large`
 //
-// States:          `active`
-//                  `disabled`
+// States:          `.active`
+//                  `.disabled`
 //
-// Markup:
-// <!-- button-group -->
-// <div class=.button-group">
-//     <button class=.button"></button>
-//     <button class=.button"></button>
-// </div>
-//
-// <!-- button-dropdown -->
-// <div class=.button-dropdown" data-dropdown>
-//     <button class=.button"></button>
-//     <div class="dropdown dropdown-small">
-//         <ul class="nav nav-dropdown">
-//             <li><a href=""></a></li>
-//         </ul>
-//     </div>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -43,68 +27,72 @@
 // Variables
 // ========================================================================
 
-@button-height: 30px;
-@button-mini-height: 20px;
-@button-small-height: 25px;
-@button-large-height: 40px;
+// Component-wide declarations
 
-@button-line-height: 28px;
-@button-mini-line-height: 20px;
-@button-small-line-height: 25px;
-@button-large-line-height: 40px;
+@button-height: @global-height;
+@button-mini-height: @global-height-mini;
+@button-small-height: @global-height-small;
+@button-large-height: @global-height-large;
 
-@button-mini-font-size: 11px;
-@button-small-font-size: 12px;
-@button-large-font-size: 16px;
+@button-line-height: @button-height;
+@button-mini-line-height: @button-mini-height;
+@button-small-line-height: @button-small-height;
+@button-large-line-height: @button-large-height;
+
+@button-font-size: @global-font-size;
+@button-mini-font-size: @global-font-size-mini;
+@button-small-font-size: @global-font-size-small;
+@button-large-font-size: @global-font-size-large;
 
 @button-padding-horizontal: 12px;
 @button-mini-padding-horizontal: 6px;
 @button-small-padding-horizontal: 10px;
 @button-large-padding-horizontal: 15px;
 
-@button-font-size: 1rem;
-@button-background: #eee;
-@button-color: #444;
+@button-background: @global-default-background;
+@button-color: @global-font-color;
 
 @button-hover-background: darken(@button-background, 4%);
-@button-hover-color: #444;
+@button-hover-color: darken(@button-color, 4%);
 
-@button-active-background: darken(@button-background, 4%);
-@button-active-color: #444;
+@button-active-background: @button-hover-background;
+@button-active-color: @button-hover-color;
 
 @button-primary-background: @color-primary-background;
 @button-primary-color: @color-white;
 @button-primary-hover-background: darken(@button-primary-background, 4%);
-@button-primary-hover-color: @color-white;
-@button-primary-active-background: darken(@button-primary-background, 2%);
-@button-primary-active-color: @color-white;
+@button-primary-hover-color: @button-primary-color;
+@button-primary-active-background: @button-primary-hover-background;
+@button-primary-active-color: @button-primary-color;
 
 @button-success-background: @color-success-background;
 @button-success-color: @color-white;
 @button-success-hover-background: darken(@button-success-background, 4%);
-@button-success-hover-color: @color-white;
-@button-success-active-background: darken(@button-success-background, 2%);
-@button-success-active-color: @color-white;
+@button-success-hover-color: @button-success-color;
+@button-success-active-background: @button-success-hover-background;
+@button-success-active-color: @button-success-color;
 
 @button-danger-background: @color-danger-background;
 @button-danger-color: @color-white;
 @button-danger-hover-background: darken(@button-danger-background, 4%);
-@button-danger-hover-color: @color-white;
-@button-danger-active-background: darken(@button-danger-background, 2%);
-@button-danger-active-color: @color-white;
+@button-danger-hover-color: @button-danger-color;
+@button-danger-active-background: @button-danger-hover-background;
+@button-danger-active-color: @button-danger-color;
 
 @button-disabled-background: #f5f5f5;
-@button-disabled-color: #999;
+@button-disabled-color: @global-muted-color;
 
 @button-link-color: @global-link-color;
-@button-link-hover-color: #059;
-@button-link-hover-text-decoration: underline;
-@button-link-disabled-color: #999;
+@button-link-hover-color: @global-link-color-hover;
+@button-link-hover-text-decoration: @global-link-decoration-hover;
+@button-link-disabled-color: @global-muted-color;
 
-// New
-@button-border-width: 1px;
-@button-border: rgba(0, 0, 0, 0.06);
-@button-hover-border: rgba(0, 0, 0, 0.16);
+@button-border-width: @global-border-width;
+@button-border: fade(#000, 6%);
+@button-hover-border: fade(#000, 16%);
+
+@button-transition-duration: @global-transition-duration;
+@button-transition-timing-function: @global-transition-timing-function;
 
 // ========================================================================
 // Component: Button
@@ -112,25 +100,24 @@
 
 .button {
 	margin: 0;
-	border: none;
+	border: 0;
 	overflow: visible;
-	font: inherit;
+	font-family: inherit;
 	color: @button-color;
 	display: inline-block;
 	padding: 0 @button-padding-horizontal;
 	background-color: @button-background;
 	vertical-align: middle;
-	line-height: @button-line-height;
-	height: (@button-height - (@button-border-width * 2));
 	font-size: @button-font-size;
+	line-height: unit(@button-line-height) / unit(@button-font-size);
+	height: @button-height;
 	text-decoration: none;
 	text-align: center;
 	border: @button-border-width solid @button-border;
-
-	&:not(:disabled),
-	&:not(.disabled) {
-		cursor: pointer;
-	}
+	cursor: pointer;
+	.transition-property(background-color, border-color, color);
+	.transition-duration(@button-transition-duration);
+	.transition-timing-function(@button-transition-timing-function);
 
 	&:hover,
 	&:focus {
@@ -145,8 +132,9 @@
 	&.active {
 		background-color: @button-active-background;
 		color: @button-active-color;
-		border-color: rgba(0, 0, 0, .3) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
-		.box-shadow(inset 0 2px 4px rgba(0, 0, 0, .1));
+		border-color: fade(#000, 30%) fade(#000, 20%) fade(#000, 20%);
+		.box-shadow(inset 0 2px 4px fade(#000, 10%));
+		.transition-duration(00;)
 	}
 
 	&::-moz-focus-inner {
@@ -158,12 +146,15 @@
 	&.disabled {
 		background-color: @button-disabled-background !important;
 		color: @button-disabled-color !important;
-		border-color: rgba(0, 0, 0, 0.06);
-		.box-shadow(none);
+		border-color: fade(#000, 6%);
+		cursor: default;
+		&:active,
+		&.active {
+			.box-shadow(none);
+		}
 	}
 
-
-	// Modifier: .button-block`
+	// Modifier: `.button-block`
 	// ========================================================================
 
 	&-block {
@@ -171,73 +162,54 @@
 		width: 100%;
 	}
 
-	// Modifier: .button-primary`
+	// State Modifiers: `.button-{primary|success|danger}`
+	// ========================================================================
+
+	.button-state-modifier(@color, @background-color) {
+		background-color: @background-color;
+		color: @color;
+
+		&:hover,
+		&:focus,
+		&:active,
+		&.active {
+			background-color: darken(@background-color, 4%);
+			color: @color;
+		}
+	}
+
+	&-primary,
+	&-success,
+	&-danger {
+		&:active,
+		&.active {
+			border-color: fade(#000, 40%) fade(#000, 20%) fade(#000, 20%);
+			.box-shadow(inset 0 2px 4px fade(#000, 20%));
+		}
+	}
+
+	// Modifier: `.button-primary`
 	// ========================================================================
 
 	&-primary {
-		background-color: @button-primary-background;
-		color: @button-primary-color;
-
-		&:hover,
-		&:focus {
-			background-color: @button-primary-hover-background;
-			color: @button-primary-hover-color;
-		}
-
-		&:active,
-		&.active {
-			background-color: @button-primary-active-background;
-			color: @button-primary-active-color;
-			border-color: rgba(0, 0, 0, .4) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
-			.box-shadow(inset 0 2px 4px rgba(0, 0, 0, .2));
-		}
+		.button-state-modifier(@button-primary-color, @button-primary-background);
 	}
 
-	// Modifier: .button-success`
+	// Modifier: `.button-success`
 	// ========================================================================
 
 	&-success {
-		background-color: @button-success-background;
-		color: @button-success-color;
-
-		&:hover,
-		&:focus {
-			background-color: @button-success-hover-background;
-			color: @button-success-hover-color;
-		}
-
-		&:active,
-		&.active {
-			background-color: @button-success-active-background;
-			color: @button-success-active-color;
-			border-color: rgba(0, 0, 0, .4) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
-			.box-shadow(inset 0 2px 4px rgba(0, 0, 0, .2));
-		}
+		.button-state-modifier(@button-success-color, @button-success-background);
 	}
 
-	// Modifier: .button-danger`
+	// Modifier: `.button-danger`
 	// ========================================================================
 
 	&-danger {
-		background-color: @button-danger-background;
-		color: @button-danger-color;
-
-		&:hover,
-		&:focus {
-			background-color: @button-danger-hover-background;
-			color: @button-danger-hover-color;
-		}
-
-		&:active,
-		&.active {
-			background-color: @button-danger-active-background;
-			color: @button-danger-active-color;
-			border-color: rgba(0, 0, 0, .4) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
-			.box-shadow(inset 0 2px 4px rgba(0, 0, 0, .2));
-		}
+		.button-state-modifier(@button-danger-color, @button-danger-background);
 	}
 
-	// Modifier: .button-link`
+	// Modifier: `.button-link`
 	// ========================================================================
 
 	// Reset
@@ -265,40 +237,33 @@
 
 		&:disabled {
 			color: @button-link-disabled-color;
-			.box-shadow(none);
-		}
-
-		&:focus {
-			outline: 1px dotted;
 		}
 	}
 
-	// Size modifiers
+	// Size Modifiers: `.button-{mini|small|large}`
 	// ========================================================================
 
+	.button-size-modifier(@height, @padding, @font-size, @line-height) {
+		height: @height;
+		padding: 0 @padding;
+		line-height: unit(@line-height) / unit(@font-size);
+		font-size: @font-size;
+	}
+
 	&-mini {
-		height: @button-mini-height;
-		padding: 0 @button-mini-padding-horizontal;
-		line-height: @button-mini-line-height;
-		font-size: @button-mini-font-size;
+		.button-size-modifier(@button-mini-height, @button-mini-padding-horizontal, @button-mini-font-size, @button-mini-line-height);
 	}
 
 	&-small {
-		height: @button-small-height;
-		padding: 0 @button-small-padding-horizontal;
-		line-height: @button-small-line-height;
-		font-size: @button-small-font-size;
+		.button-size-modifier(@button-small-height, @button-small-padding-horizontal, @button-small-font-size, @button-small-line-height);
 	}
 
 	&-large {
-		height: @button-large-height;
-		padding: 0 @button-large-padding-horizontal;
-		line-height: @button-large-line-height;
-		font-size: @button-large-font-size;
+		.button-size-modifier(@button-large-height, @button-large-padding-horizontal, @button-large-font-size, @button-large-line-height);
 	}
 
 
-	// Sub-Object .button-group`
+	// Sub-object .button-group`
 	// ========================================================================
 
 	&-group {
@@ -310,16 +275,13 @@
 
 		> * {
 			display: inline-block;
-
-			+ * {
+			&:nth-child(n+2) {
 				margin-left: -1px;
 			}
 		}
 
-		.button,
-		button,
-		input[type="submit"],
-		input[type="button"] {
+		.button {
+
 			vertical-align: top;
 			z-index: 1;
 			position: relative;
@@ -336,7 +298,7 @@
 		}
 	}
 
-	// Sub-Object: .button-dropdown`
+	// Sub-object: .button-dropdown`
 	// ========================================================================
 
 	&-dropdown {
@@ -344,10 +306,4 @@
 		vertical-align: middle;
 		position: relative;
 	}
-}
-
-button,
-input[type="submit"],
-input[type="button"] {
-	&:extend(.button);
 }

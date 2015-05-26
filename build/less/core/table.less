@@ -2,12 +2,12 @@
 //
 // Description:     Defines styles for tables
 //
-// Component:       `table`
+// Component:       `.table`
 //
-// Modifiers:       `table-middle`
-//                  `table-striped`
-//                  `table-condensed`
-//                  `table-hover`
+// Modifiers:       `.table-middle`
+//                  `.table-striped`
+//                  `.table-condensed`
+//                  `.table-hover`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -16,8 +16,8 @@
 // Variables
 // ========================================================================
 
-@table-border: @global-border;
-@table-margin-vertical: 15px;
+@table-border: @global-border-color;
+@table-margin-vertical: @global-margin;
 @table-padding-vertical: 8px;
 @table-padding-horizontal: 8px;
 @table-caption-color: #999;
@@ -37,44 +37,55 @@ table {
 	width: 100%;
 	margin-bottom: @table-margin-vertical;
 	border-bottom: 1px solid @table-border;
+
 	&:last-child {
 		margin-bottom: 0;
 	}
+
 	.sep {
 		td {
 			border-top: 1px solid #e5e5e5;
 		}
 	}
+
 	td,
 	th {
 		padding: @table-padding-vertical @table-padding-horizontal;
 		border-bottom: 1px solid #e5e5e5;
 	}
+
 	th {
 		text-align: left;
 	}
+
 	td {
 		vertical-align: top;
 	}
+
 	thead {
 		th {
 			vertical-align: bottom;
 		}
 	}
+
 	caption,
 	footer {
 		font-size: @table-caption-font-size;
 		font-style: italic;
 	}
+
 	caption {
 		text-align: left;
 		color: @table-caption-color;
 	}
+
 	table {
 		border-bottom: 0;
+
 		td {
 			padding: (@table-padding-vertical / 2) (@table-padding-horizontal / 2);
 			border-bottom: 0;
+
 			&:first-child {
 				padding-left: 0;
 			}
@@ -83,6 +94,7 @@ table {
 			}
 		}
 	}
+
 	* + & {
 		margin-top: @table-margin-vertical;
 	}
@@ -90,8 +102,9 @@ table {
 
 .table {
 
-	// Sub-modifier: `table-middle`
+	// Sub-modifier: `.table-middle`
 	// ========================================================================
+
 	&-middle {
 		&,
 		td {
@@ -100,7 +113,7 @@ table {
 	}
 
 
-	// Modifier: `table-striped`
+	// Modifier: `.table-striped`
 	// ========================================================================
 
 	&-striped {
@@ -109,6 +122,7 @@ table {
 				&:nth-of-type(odd) {
 					background-color: @table-striped-background;
 				}
+
 				&:only-child {
 					background-color: transparent;
 				}
@@ -117,7 +131,7 @@ table {
 	}
 
 
-	// Modifier: `table-condensed`
+	// Modifier: `.table-condensed`
 	// ========================================================================
 
 	&-condensed {
@@ -127,7 +141,7 @@ table {
 	}
 
 
-	// Modifier: `table-hover`
+	// Modifier: `.table-hover`
 	// ========================================================================
 
 	&-hover {

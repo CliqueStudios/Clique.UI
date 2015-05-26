@@ -2,28 +2,16 @@
 //
 // Description:     Defines styles for comment threads
 //
-// Component:       `comment`
+// Component:       `.comment`
 //
-// Sub-Objects:     `comment-header`
-//                  `comment-avatar`
-//                  `comment-title`
-//                  `comment-meta`
-//                  `comment-body`
-//                  `comment-list`
-//                  `comment-primary`
+// Sub-objects:     `.comment-header`
+//                  `.comment-avatar`
+//                  `.comment-title`
+//                  `.comment-meta`
+//                  `.comment-body`
+//                  `.comment-list`
+//                  `.comment-primary`
 //
-// Markup:
-// <!-- comment -->
-// <article class="comment">
-//     <header class="comment-header">
-//         <img class="comment-avatar" src="avatar.svg" width="50" height="50" alt="">
-//         <h4 class="comment-title"></h4>
-//         <div class="comment-meta"></div>
-//     </header>
-//     <div class="comment-body">
-//         <p></p>
-//     </div>
-// </article>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -32,21 +20,28 @@
 // Variables
 // ========================================================================
 
-@comment-header-margin-bottom: 15px;
-@comment-avatar-margin-right: 15px;
+// Component-wide declarations
+
+@comment-header-margin-bottom: @global-margin;
+
+@comment-avatar-margin-right: @global-margin;
 @comment-avatar-height: 50px;
+
 @comment-title-margin-top: 5px;
-@comment-title-font-size: 16px;
+@comment-title-font-size: @global-font-size-large;
 @comment-title-line-height: 22px;
+
 @comment-meta-margin-top: 2px;
-@comment-meta-color: #999;
-@comment-meta-font-size: 11px;
-@comment-meta-line-height: 16px;
-@comment-list-margin-top: 15px;
+@comment-meta-color: @global-muted-color;
+@comment-meta-font-size: @global-font-size-mini;
+@comment-meta-line-height: @global-line-height-mini;
+
+@comment-list-margin-top: @global-margin;
 @comment-list-padding-left: 100px;
 
 @comment-padding: 10px;
-@comment-border: @global-border;
+@comment-border-width: @global-border-width;
+@comment-border: @global-border-color;
 @comment-background: #fafafa;
 @comment-primary-border: fade(@comment-primary-color, 30%);
 @comment-primary-background: @color-primary-background-light;
@@ -58,19 +53,18 @@
 
 .comment {
 
-	// Sub-Object: `comment-header`
+	// Sub-object: `.comment-header`
 	// ========================================================================
 
 	&-header {
 		margin-bottom: @comment-header-margin-bottom;
 		padding: @comment-padding;
-		border: 1px solid @comment-border;
+		border: @comment-border-width solid @comment-border;
 		background-color: @comment-background;
-
 		.micro-clearfix();
 	}
 
-	// Sub-Object: `comment-avatar`
+	// Sub-object: `.comment-avatar`
 	// ========================================================================
 
 	&-avatar {
@@ -79,26 +73,26 @@
 		float: left;
 	}
 
-	// Sub-Object: `comment-title`
+	// Sub-object: `.comment-title`
 	// ========================================================================
 
 	&-title {
 		margin: @comment-title-margin-top 0 0 0;
 		font-size: @comment-title-font-size;
-		line-height: @comment-title-line-height;
+		line-height: unit(@comment-title-line-height) / unit(@comment-title-font-size);
 	}
 
-	// Sub-Object: `comment-meta`
+	// Sub-object: `.comment-meta`
 	// ========================================================================
 
 	&-meta {
 		margin: @comment-meta-margin-top 0 0 0;
 		font-size: @comment-meta-font-size;
-		line-height: @comment-meta-line-height;
+		line-height: unit(@comment-meta-line-height) / unit(@comment-meta-font-size);
 		color: @comment-meta-color;
 	}
 
-	// Sub-Object: `comment-body`
+	// Sub-object: `.comment-body`
 	// ========================================================================
 
 	&-body {
@@ -110,7 +104,7 @@
 		}
 	}
 
-	// Sub-Object: `comment-list`
+	// Sub-object: `.comment-list`
 	// ========================================================================
 
 	&-list {
@@ -140,7 +134,7 @@
 		}
 	}
 
-	// Modifier `comment-primary`
+	// Modifier `.comment-primary`
 	// ========================================================================
 
 	&-primary {

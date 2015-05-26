@@ -2,10 +2,10 @@
 //
 // Description:     Defines styles for description lists
 //
-// Component:       `dl`
+// Component:       `.dl`
 //
-// Modifiers:       `dl-horizontal`
-//                  `dl-line`
+// Modifiers:       `.dl-horizontal`
+//                  `.dl-line`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -16,10 +16,10 @@
 
 @dl-horizontal-width: 160px;
 @dl-horizontal-margin-left: 180px;
+
 @dl-line-margin-top: 5px;
-@dl-line-border-width: 1px;
+@dl-line-border-width: @global-border-width;
 @dl-line-border: @global-border-color;
-@dl-line-color: #999;
 
 // ========================================================================
 // Component: Description list
@@ -27,7 +27,7 @@
 
 .dl {
 
-	// Modifier: `dl-horizontal`
+	// Modifier: `.dl-horizontal`
 	// ========================================================================
 
 	// Tablet and bigger
@@ -38,9 +38,7 @@
 				width: @dl-horizontal-width;
 				float: left;
 				clear: both;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
+				.text-overflow();
 			}
 			> dd {
 				margin-left: @dl-horizontal-margin-left;
@@ -49,20 +47,15 @@
 	}
 
 
-	// Modifier: `dl-line`
+	// Modifier: `.dl-line`
 	// ========================================================================
 
 	&-line {
 		> dt {
-			> dt {
-				&:nth-child(n+2) {
-					margin-top: @dl-line-margin-top;
-					padding-top: @dl-line-margin-top;
-					border-top: @dl-line-border-width solid @dl-line-border;
-				}
-			}
-			> dd {
-				color: @dl-line-color;
+			&:nth-child(n+2) {
+				margin-top: @dl-line-margin-top;
+				padding-top: @dl-line-margin-top;
+				border-top: @dl-line-border-width solid @dl-line-border;
 			}
 		}
 	}

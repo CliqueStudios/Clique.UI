@@ -1,12 +1,16 @@
-// Name:            Autocomplete
+// Name:            Datatable
 //
-// Description:     Provides suggestions while you type into an input field
+// Description:     Creates a styleable table with pagination and data sorting
 //
-// Component:       `autocomplete`
+// Component:       `.datatable`
 //
-// Modifier:	    `nav-autocomplete`
+// Sub-objects:	    `.datatable-sort`
+//					`.datatable-sort-active`
+//					`.datatable-sort-asc`
+//					`.datatable-sort-desc`
+//					`.datatable-pagination`
+//					`.datatable-pagination-number`
 //
-// States:          `active`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -30,7 +34,7 @@
 		position: relative;
 	}
 
-	// Sub-Object: `datatable-sort`
+	// Sub-object: `.datatable-sort`
 	// ========================================================================
 
 	&-sort {
@@ -81,7 +85,7 @@
 		}
 	}
 
-	// Sub-Object: `datatable-pagination`
+	// Sub-object: `.datatable-pagination`
 	// ========================================================================
 
 	&-pagination {

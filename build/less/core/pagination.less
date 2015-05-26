@@ -2,23 +2,17 @@
 //
 // Description:     Defines styles for a navigation between pages
 //
-// Component:       `pagination`
+// Component:       `.pagination`
 //
-// Sub-Objects:     `pagination-previous`
-//                  `pagination-next`
+// Sub-objects:     `.pagination-previous`
+//                  `.pagination-next`
 //
-// Modifiers:       `pagination-left`
-//                  `pagination-right`
+// Modifiers:       `.pagination-left`
+//                  `.pagination-right`
 //
-// States:          `active`
-//                  `disabled`
+// States:          `.active`
+//                  `.disabled`
 //
-// Markup:
-// <!-- pagination -->
-// <ul class="pagination">
-//     <li class="active"><span></span></li>
-//     <li><a href=""></a></li>
-// </ul>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -27,25 +21,38 @@
 // Variables
 // ========================================================================
 
-@pagination-font-size: 1rem;
+
 @pagination-margin-left: 5px;
 @pagination-padding-vertical: 3px;
 @pagination-padding-horizontal: 5px;
-@pagination-line-height: 20px;
-@pagination-background: #eee;
-@pagination-color: #444;
+@pagination-background: @global-default-background;
+@pagination-color: @global-font-color;
+
 @pagination-hover-background: #f5f5f5;
-@pagination-hover-color: #444;
+@pagination-hover-color: @pagination-color;
+
 @pagination-onclick-background: #ddd;
-@pagination-onclick-color: #444;
+@pagination-onclick-color: @pagination-color;
+
 @pagination-active-background: @color-primary-background;
 @pagination-active-color: @color-white;
+
 @pagination-disabled-background: #f5f5f5;
 @pagination-disabled-color: #999;
+
 @pagination-item-min-width: 28px;
 
-@pagination-border: rgba(0, 0, 0, 0.06);
-@pagination-hover-border: rgba(0, 0, 0, 0.16);
+@pagination-border: fade(#000, 6%);
+@pagination-border-width: @global-border-width;
+@pagination-hover-border: fade(#000, 16%);
+
+@pagination-font-size: @global-font-size;
+@pagination-line-height: @global-line-height + (@pagination-border-width * 2);
+
+@pagination-calculated-height: @pagination-line-height + (@pagination-padding-vertical * 2) + (@pagination-border-width * 2);
+
+@pagination-icon-font-size: @global-font-size-small;
+@pagination-icon-line-height: @pagination-calculated-height - (@pagination-padding-vertical * 2);
 
 // ========================================================================
 // Component: Pagination
@@ -55,29 +62,28 @@
 	padding: 0;
 	list-style: none;
 	text-align: center;
-	font-size: 0.001px;
-	.micro-clearfix();
+	.display(flex);
+	.justify-content(center);
+	line-height: unit(@pagination-line-height) / unit(@pagination-font-size);
 
 	// Items
 	// ========================================================================
 
 	> li {
-		display: inline-block;
 		font-size: @pagination-font-size;
-		vertical-align: top;
-		&:nth-child(n+2) {
+
+		+ li {
 			margin-left: @pagination-margin-left;
 		}
-		> a,
-		> span {
-			display: inline-block;
+
+		> * {
+			display: block;
 			min-width: @pagination-item-min-width;
 			height: @pagination-item-min-width;
 			padding: @pagination-padding-vertical @pagination-padding-horizontal;
-			line-height: @pagination-line-height;
 			text-decoration: none;
 			text-align: center;
-			border: 1px solid @pagination-border;
+			border: @pagination-border-width solid @pagination-border;
 			position: relative;
 		}
 
@@ -90,24 +96,18 @@
 			&:hover,
 			&:focus {
 				background-color: @pagination-hover-background;
-				color: @pagination-hover-color;
-				outline: 0;
 				border-color: @pagination-hover-border;
 			}
 
 			// Active State
 			&:active {
 				background-color: @pagination-onclick-background;
-				color: @pagination-onclick-color;
 			}
 		}
+
 		[class*="icon-"] {
-			height: 10px;
-			width: 10px;
 			display: inline-block;
-			font-size: 10px;
-			margin-left: 5px;
-			line-height: 20 / 10;
+			font-size: @pagination-icon-font-size;
 		}
 	}
 
@@ -120,7 +120,7 @@
 				background-color: @pagination-active-background;
 				color: @pagination-active-color;
 				border-color: transparent;
-				.box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.05));
+				.box-shadow(inset 0 0 5px fade(#000, 5%));
 			}
 		}
 	}
@@ -130,7 +130,7 @@
 		> * {
 			background-color: @pagination-disabled-background;
 			color: @pagination-disabled-color;
-			border: 1px solid @pagination-border;
+			border: @pagination-border-width solid @pagination-border;
 		}
 	}
 
@@ -138,7 +138,7 @@
 	// ========================================================================
 
 	&-previous {
-		float: left;
+
 		> a,
 		> span {
 
@@ -150,7 +150,7 @@
 	}
 
 	&-next {
-		float: right;
+
 		> a,
 		> span {
 
@@ -165,10 +165,10 @@
 	// ========================================================================
 
 	&-left {
-		text-align: left;
+		.justify-content(flex-start);
 	}
 
 	&-right {
-		text-align: right;
+		.justify-content(flex-end);
 	}
 }

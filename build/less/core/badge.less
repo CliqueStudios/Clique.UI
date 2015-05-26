@@ -2,11 +2,11 @@
 //
 // Description:     Defines styles for badges
 //
-// Component:       `badge`
+// Component:       `.badge`
 //
-// Modifiers:       `badge-notification`
-//                  `badge-success`
-//                  `badge-danger`
+// Modifiers:       `.badge-notification`
+//                  `.badge-success`
+//                  `.badge-danger`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -15,20 +15,24 @@
 // Variables
 // ========================================================================
 
+// Component-wide declarations
+
 @badge-background: @color-primary-background;
-@badge-padding-horizontal: 5px;
+@badge-padding-horizontal: @global-gutter-mini;
 @badge-padding-vertical: 2px;
 @badge-font-size: 10px;
 @badge-font-weight: bold;
 @badge-line-height: 14px;
 @badge-color: @color-white;
-@badge-text-transform: none;
 @badge-hover-color: @color-white;
 @badge-notification-font-size: 12px;
 @badge-notification-line-height: 16px;
 @badge-success-background: @color-success-background;
 @badge-warning-background: @color-warning-background;
 @badge-danger-background: @color-danger-background;
+
+@badge-border-width: @global-border-width;
+@badge-border-color: fade(#000, 10%);
 
 // ========================================================================
 // Component: Badge
@@ -45,41 +49,39 @@
 	color: @badge-color;
 	text-align: center;
 	vertical-align: middle;
-	text-transform: @badge-text-transform;
-	border: 1px solid fade(#000, 10%);
+	border: @badge-border-width solid @badge-border-color;
+
 	a& {
 		&:hover {
 			color: @badge-hover-color;
 		}
 	}
-}
 
+	// Modifier: `.badge-notification`
+	// ========================================================================
 
-// Modifier: `badge-notification`;
-// ========================================================================
+	&-notification {
+		min-width: 22px;
+		.border-radius(24px / 2);
+		font-size: @badge-notification-font-size;
+		line-height: @badge-notification-line-height;
+	}
 
-.badge-notification {
-	min-width: 22px;
-	.border-radius(24px / 2);
-	font-size: @badge-notification-font-size;
-	line-height: @badge-notification-line-height;
-}
+	// Modifier: `.badge-success`
+	// ========================================================================
+	&-success {
+		background-color: @badge-success-background;
+	}
 
+	// Modifier: `.badge-warning`
+	// ========================================================================
+	&-warning {
+		background-color: @badge-warning-background;
+	}
 
-// Color modifier
-// ========================================================================
-
-// Modifier: `badge-success`
-.badge-success {
-	background-color: @badge-success-background;
-}
-
-// Modifier: `badge-warning`
-.badge-warning {
-	background-color: @badge-warning-background;
-}
-
-// Modifier: `badge-danger`
-.badge-danger {
-	background-color: @badge-danger-background;
+	// Modifier: `.badge-danger`
+	// ========================================================================
+	&-danger {
+		background-color: @badge-danger-background;
+	}
 }

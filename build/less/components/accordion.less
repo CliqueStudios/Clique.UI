@@ -2,10 +2,10 @@
 //
 // Description:     Defines styles for the accodion
 //
-// Component:       `accodion`
+// Component:       `.accodion`
 //
-// Sub-Objects:     `accodion-title`
-//                  `accodion-content`
+// Sub-objects:     `.accodion-title`
+//                  `.accodion-content`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -14,16 +14,17 @@
 // Variables
 // ========================================================================
 
-@accordion-title-margin-bottom: 15px;
-@accordion-title-padding-vertical: 5px;
-@accordion-title-padding-horizontal: 15px;
-@accordion-title-font-size: 18px;
-@accordion-title-line-height: 24px;
-@accordion-title-background: #eee;
+@accordion-title-margin-bottom: @global-margin;
+@accordion-title-padding-vertical: @global-gutter-mini;
+@accordion-title-padding-horizontal: @global-margin;
+@accordion-title-font-size: @global-font-size-block-title;
+@accordion-title-line-height: @global-line-height-block-title;
+@accordion-title-background: @global-default-background;
+@accordion-title-border-width: @global-border-width;
+@accordion-title-border: @global-border-color;
 
 @accordion-content-padding-horizontal: @accordion-title-padding-horizontal;
 @accordion-content-padding-bottom: @accordion-title-padding-horizontal;
-@accordion-title-border: @global-border;
 
 // ========================================================================
 // Component: Accordion
@@ -31,7 +32,7 @@
 
 .accordion {
 
-	// Sub-Object: `accordion-title`
+	// Sub-object: `.accordion-title`
 	// ========================================================================
 
 	&-title {
@@ -42,10 +43,10 @@
 		font-size: @accordion-title-font-size;
 		line-height: unit(@accordion-title-line-height) / unit(@accordion-title-font-size);
 		cursor: pointer;
-		border: 1px solid @accordion-title-border;
+		border: @accordion-title-border-width solid @accordion-title-border;
 	}
 
-	// Sub-Object: `accordion-content`
+	// Sub-object: `.accordion-content`
 	// ========================================================================
 
 	&-content {

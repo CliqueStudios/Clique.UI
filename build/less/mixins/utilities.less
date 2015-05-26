@@ -1,6 +1,6 @@
 //
-// Mixin:           Clearfix
-// Description:     Creates a micro-clearfix
+// Mixin:           Utilities
+// Description:     Custom mixins used at utility functions
 //
 // ========================================================================
 
@@ -27,4 +27,17 @@
 	&:after {
 		clear: both;
 	}
+}
+
+.center-vertically() {
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	.translate(-50%, -50%);
+}
+
+.text-overflow() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

@@ -2,32 +2,21 @@
 //
 // Description:     Defines styles for nestable lists
 //
-// Component:       `nestable`
+// Component:       `.nestable`
 //
-// Sub-Objects:     `nestable-list`
-//                  `nestable-item`
-//                  `nestable-placeholder`
-//                  `nestable-empty`
-//                  `nestable-handle`
-//                  `nestable-moving`
-//                  `[data-nestable-action="toggle"]`
+// Sub-objects:     `.nestable-list`
+//                  `.nestable-item`
+//                  `.nestable-placeholder`
+//                  `.nestable-empty`
+//                  `.nestable-handle`
+//                  `.nestable-moving`
+//                  `.[data-nestable-action="toggle"]`
 //
-// Modifiers:       `nestable-list-dragged`
+// Modifiers:       `.nestable-list-dragged`
 //
-// States:          `parent`
-//                  `collapsed`
+// States:          `.parent`
+//                  `.collapsed`
 //
-// Markup:
-// <!-- nestable -->
-// <ul class="nestable" data-nestable>
-//     <li>
-//         <div class="nestable-item">
-//             <div class="nestable-handle"></div>
-//             <div data-nestable-action="toggle"></div>
-//             <span></span>
-//         </div>
-//     </li>
-// </ul>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -39,18 +28,20 @@
 @nestable-padding-left: 40px;
 @nestable-dragged-z-index: 1050;
 @nestable-item-margin-bottom: 10px;
-@nestable-item-padding: 5px;
+@nestable-item-padding: @global-gutter-mini;
 @nestable-item-background: #f5f5f5;
 @nestable-placeholder-border: @global-border-color;
 @nestable-empty-height: 40px;
 @nestable-handle-font-size: 18px;
 @nestable-handle-color: #ddd;
 @nestable-handle-icon: "\e9bd";
-@nestable-toggle-color: #999;
-@nestable-toggle-hover-color: #444;
+@nestable-toggle-color: @global-muted-color;
+@nestable-toggle-hover-color: @global-font-color;
 @nestable-toggle-icon: "\f147";
 @nestable-toggle-collapsed-icon: "\f196";
-@nestable-border: rgba(0, 0, 0, 0.06);
+
+@nestable-border-width: @global-border-width;
+@nestable-border: fade(#000, 6%);
 
 // ========================================================================
 // Component: Nestable
@@ -60,7 +51,7 @@
 	padding: 0;
 	list-style: none;
 
-	// Sub-Object: `nestable-list`
+	// Sub-object: `.nestable-list`
 	// ========================================================================
 
 	&-list {
@@ -68,7 +59,7 @@
 		padding-left: @nestable-padding-left;
 		list-style: none;
 
-		// Sub-modifier `nestable-list-dragged`
+		// Sub-modifier `.nestable-list-dragged`
 		// ========================================================================
 
 		&-dragged {
@@ -77,34 +68,50 @@
 			padding-left: 0;
 			pointer-events: none;
 		}
+
+		.collapse & {
+			display: none;
+		}
 	}
 
-	// Sub-Object: `nestable-item`
+	// Sub-object: `.nestable-item`
 	// ========================================================================
 
 	&-item {
 		margin-bottom: @nestable-item-margin-bottom;
 		padding: @nestable-item-padding;
 		background-color: @nestable-item-background;
-		border: 1px solid @nestable-border;
+		border: @nestable-border-width solid @nestable-border;
+
+		[data-nestable-action="toggle"] {
+			.parent > & {
+				visibility: visible;
+			}
+
+			.collapse > & {
+				&:after {
+					content: @nestable-toggle-collapsed-icon;
+				}
+			}
+		}
 	}
 
-	// Sub-Object: `nestable-placeholder`
+	// Sub-object: `.nestable-placeholder`
 	// ========================================================================
 
 	&-placeholder {
 		margin-bottom: @nestable-item-margin-bottom;
-		border: 1px dashed @nestable-placeholder-border;
+		border: @nestable-border-width dashed @nestable-placeholder-border;
 	}
 
-	// Sub-Object: `nestable-empty`
+	// Sub-object: `.nestable-empty`
 	// ========================================================================
 
 	&-empty {
 		min-height: @nestable-empty-height;
 	}
 
-	// Sub-Object: `nestable-handle`
+	// Sub-object: `.nestable-handle`
 	// ========================================================================
 
 	&-handle {
@@ -125,7 +132,7 @@
 		}
 	}
 
-	// Sub-Object: `nestable-moving`
+	// Sub-object: `.nestable-moving`
 	// ========================================================================
 
 	&-moving {
@@ -136,7 +143,7 @@
 	}
 }
 
-// Sub-Object: `[data-action="toggle"]`
+// Sub-object: `.[data-action="toggle"]`
 // ========================================================================
 
 // Hidden by default
@@ -155,28 +162,5 @@
 	&:after {
 		content: @nestable-toggle-icon;
 		font-family: "icomoon";
-	}
-}
-
-// Show if nested
-.parent {
-	> .nestable-item {
-		[data-nestable-action="toggle"] {
-			visibility: visible;
-		}
-	}
-}
-
-// Collapsed
-.collapsed {
-	> .nestable-item {
-		[data-nestable-action="toggle"] {
-			&:after {
-				content: @nestable-toggle-collapsed-icon;
-			}
-		}
-	}
-	.nestable-list {
-		display: none;
 	}
 }

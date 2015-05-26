@@ -2,23 +2,17 @@
 //
 // Description:     Defines styles for alert messages
 //
-// Component:       `alert`
+// Component:       `.alert`
 //
-// Sub-Objects:     `alert-close`
+// Sub-objects:     `.alert-close`
 //
-// Modifiers:       `alert-success`
-//                  `alert-warning`
-//                  `alert-danger`
-//                  `alert-large`
+// Modifiers:       `.alert-success`
+//                  `.alert-warning`
+//                  `.alert-danger`
+//                  `.alert-large`
 //
-// Uses:            Close: `close`
+// Uses:            Close: `.close`
 //
-// Markup:
-// <!-- alert -->
-// <div class="alert" data-alert>
-//     <a href="#" class="alert-close close"></a>
-//     <p></p>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -27,11 +21,15 @@
 // Variables
 // ========================================================================
 
-@alert-margin-vertical: 15px;
+// Component-wide declarations
+
+@alert-margin-vertical: @global-margin;
 @alert-padding: 10px;
 
 @alert-background: @color-primary-background-light;
 @alert-color: @color-primary-text;
+
+@alert-border-width: @global-border-width;
 @alert-border-color: @color-primary-border;
 
 @alert-success-background: @color-success-background-light;
@@ -58,7 +56,7 @@
 	padding: @alert-padding;
 	background-color: @alert-background;
 	color: @alert-color;
-	border: 1px solid @alert-border-color;
+	border: @alert-border-width solid @alert-border-color;
 
 	// Add margin if adjacent element
 	* + & {
@@ -82,7 +80,7 @@
 		}
 	}
 
-	// Modifier: `alert-success`
+	// Modifier: `.alert-success`
 	// ========================================================================
 
 	&-success {
@@ -92,7 +90,7 @@
 	}
 
 
-	// Modifier: `alert-warning`
+	// Modifier: `.alert-warning`
 	// ========================================================================
 
 	&-warning {
@@ -102,7 +100,7 @@
 	}
 
 
-	// Modifier: `alert-danger`
+	// Modifier: `.alert-danger`
 	// ========================================================================
 
 	&-danger {
@@ -112,14 +110,14 @@
 	}
 
 
-	// Modifier: `alert-large`
+	// Modifier: `.alert-large`
 	// ========================================================================
 
 	&-large {
 		padding: @alert-large-padding;
 		> .close {
 			&:first-child {
-				margin: -10px -10px 0 0;
+				margin: -(@alert-large-padding / 2) -(@alert-large-padding / 2) 0 0;
 			}
 		}
 	}

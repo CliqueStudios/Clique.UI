@@ -2,16 +2,10 @@
 //
 // Description:     Defines styles for a thumbnail navigation
 //
-// Component:       `thumbnav`
+// Component:       `.thumbnav`
 //
-// States:          `active`
+// States:          `.active`
 //
-// Markup:
-// <!-- thumbnav -->
-// <ul class="thumbnav">
-//     <li class="active"><a href=""></a></li>
-//     <li><a href=""></a></li>
-// </ul>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -23,9 +17,7 @@
 @thumbnav-margin-horizontal: 10px;
 @thumbnav-margin-vertical: @thumbnav-margin-horizontal;
 @thumbnav-background: @color-white;
-@thumbnav-opacity: 0.7;
-@thumbnav-hover-opacity: 1;
-@thumbnav-active-opacity: 1;
+@thumbnav-opacity: @global-inactive-opacity;
 
 // ========================================================================
 // Component: Thumbnav
@@ -58,7 +50,7 @@
 			&:hover,
 			&:focus {
 				> img {
-					opacity: @thumbnav-hover-opacity;
+					opacity: 1;
 				}
 			}
 		}
@@ -68,7 +60,7 @@
 	> .active {
 		> * {
 			> img {
-				opacity: @thumbnav-active-opacity;
+				opacity: 1;
 			}
 		}
 	}

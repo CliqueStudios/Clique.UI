@@ -2,22 +2,22 @@
 //
 // Description:     Defines styles for a slideshow
 //
-// Component:       `slideshow`
+// Component:       `.slideshow`
 //
-// Modifiers:       `slideshow-fullscreen`
+// Modifiers:       `.slideshow-fullscreen`
 //
-// Sub-modifier:    `slideshow-fade-out`
-//                  `slideshow-scroll-forward-in`
-//                  `slideshow-scroll-forward-out`
-//                  `slideshow-scroll-backward-in`
-//                  `slideshow-scroll-backward-out`
-//                  `slideshow-scale-out`
-//                  `slideshow-swipe-forward-in`
-//                  `slideshow-swipe-forward-out`
-//                  `slideshow-swipe-backward-in`
-//                  `slideshow-swipe-backward-out`
+// Sub-modifier:    `.slideshow-fade-out`
+//                  `.slideshow-scroll-forward-in`
+//                  `.slideshow-scroll-forward-out`
+//                  `.slideshow-scroll-backward-in`
+//                  `.slideshow-scroll-backward-out`
+//                  `.slideshow-scale-out`
+//                  `.slideshow-swipe-forward-in`
+//                  `.slideshow-swipe-forward-out`
+//                  `.slideshow-swipe-backward-in`
+//                  `.slideshow-swipe-backward-out`
 //
-// States:          `active`
+// States:          `.active`
 //
 // Uses:            Cover (JS)
 
@@ -38,7 +38,7 @@
 	overflow: hidden;
 	touch-action: pan-y;
 
-	// Sub-Object: `slides`
+	// Sub-object: `.slides`
 	// ========================================================================
 
 	> li {
@@ -53,7 +53,7 @@
 		}
 	}
 
-	// Modifier: `slideshow-fullscreen`
+	// Modifier: `.slideshow-fullscreen`
 	// ========================================================================
 
 	&-fullscreen {
@@ -68,6 +68,7 @@
 
 	// Fade
 	&-fade {
+
 		&-out {
 			.animation(fade 0.5s linear reverse);
 		}
@@ -78,6 +79,7 @@
 
 		// Forward
 		&-forward {
+
 			&-in {
 				.animation(slide-right 0.5s ease-in-out);
 			}
@@ -99,6 +101,7 @@
 
 	// Scale
 	&-scale {
+
 		&-out {
 			.animation(fade-scale-15 0.5s ease-in-out reverse);
 		}
@@ -119,6 +122,7 @@
 
 		// Backwards
 		&-backward {
+
 			&-in {
 				.animation(slide-right-33 0.5s ease-in-out);
 			}
@@ -129,6 +133,7 @@
 
 		&-forward,
 		&-backward {
+
 			&-in {
 				content: "";
 				position: absolute;
@@ -137,7 +142,7 @@
 				left: 0;
 				right: 0;
 				z-index: 1;
-				background-color: rgba(0, 0, 0, 0.6);
+				background-color: fade(#000, 60%);
 				.animation(fade 0.5s ease-in-out reverse);
 			}
 		}

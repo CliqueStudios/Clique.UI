@@ -1,8 +1,8 @@
-#Clique.UI - v1.0.2
+#Clique.UI - v1.0.3
 
 Recently we launched [Clique.UI](http://ui.cliquestudios.com), a lightweight, modular front-end framework for rapid web-interface development. This is the first product that we've publicly released with full-documentation, and couldn't be more excited about it.
 
-After a lot of work and even more testing, we're calling this release version 1.0.2 - and there will be many more to come. What's even more exciting about Clique.UI is that we've decided to open it up to the public, and make it a completely open-source under the [MIT license](http://opensource.org/licenses/MIT) and [hosted on GitHub](https://github.com/CliqueStudios/Clique.UI). We'll be monitoring this repository closely, so if you find any bugs or want to see a new feature, log it in the [repo's issue tracker](https://github.com/CliqueStudios/Clique.UI/issues).
+After a lot of work and even more testing, we're calling this release version 1.0.3 - and there will be many more to come. What's even more exciting about Clique.UI is that we've decided to open it up to the public, and make it a completely open-source under the [MIT license](http://opensource.org/licenses/MIT) and [hosted on GitHub](https://github.com/CliqueStudios/Clique.UI). We'll be monitoring this repository closely, so if you find any bugs or want to see a new feature, log it in the [repo's issue tracker](https://github.com/CliqueStudios/Clique.UI/issues).
 
 ##What's included
 

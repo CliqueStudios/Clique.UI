@@ -2,36 +2,26 @@
 //
 // Description:     Defines styles for forms
 //
-// Component:       `form`
+// Component:       `.form`
 //
-// Sub-Objects:     `form-row`
-//                  `form-help-inline`
-//                  `form-help-block`
-//                  `form-label`
-//                  `form-controls`
-//                  `form-controls-condensed`
-//                  `form-icon`
+// Sub-objects:     `.form-row`
+//                  `.form-help-inline`
+//                  `.form-help-block`
+//                  `.form-label`
+//                  `.form-controls`
+//                  `.form-controls-condensed`
+//                  `.form-icon`
 //
-// Modifiers:       `form-stacked`
-//                  `form-horizontal`
+// Modifiers:       `.form-stacked`
+//                  `.form-horizontal`
 //
-// Sub-modifiers:   `form-danger`
-//                  `form-success`
-//                  `form-small`
-//                  `form-large`
-//                  `form-blank`
-//                  `form-controls-text`
+// Sub-modifiers:   `.form-danger`
+//                  `.form-success`
+//                  `.form-small`
+//                  `.form-large`
+//                  `.form-blank`
+//                  `.form-controls-text`
 //
-// Markup:
-// <!-- form -->
-// <form class="form">
-//     <div class="form-row">
-//         <label class="form-label" for="form-input-1"></label>
-//         <div class="form-controls">
-//             <input type="text" id="form-input-1" placeholder="Text">
-//         </div>
-//     </div>
-// </form>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -43,36 +33,36 @@
 @form-height: 30px;
 @form-padding: 4px 6px;
 @form-border-color: @global-border-color;
-@form-border-width: 1px;
+@form-border-width: @global-border-width;
 @form-background: @color-white;
-@form-color: #444;
+@form-color: @global-font-color;
 @form-font-size: @global-font-size;
 @form-line-height: unit(@form-height - (@form-border-width * 2)) / unit(@form-font-size);
 
 @form-focus-border: #99baca;
 @form-focus-background: #f5fbfe;
-@form-focus-color: #444;
+@form-focus-color: @form-color;
 
-@form-disabled-border: @global-border-color;
-@form-disabled-background: #f5f5f5;
-@form-disabled-color: #999;
+@form-disabled-border: #dbdbdb;
+@form-disabled-background: #fcfcfc;
+@form-disabled-color: @form-disabled-border;
 
-@form-placeholder-color: #999;
+@form-placeholder-color: @global-muted-color;
 @form-gutter: 15px;
 
 @form-legend-border: @global-border-color;
-@form-legend-border-width: 1px;
-@form-legend-font-size: 18px;
-@form-legend-line-height: 30px;
+@form-legend-border-width: @global-border-width;
+@form-legend-font-size: @global-font-size-block-title;
+@form-legend-line-height: @global-line-height-block-title;
 
 // Size Modifiers
 @form-large-height: 40px;
-@form-large-font-size: 16px;
+@form-large-font-size: @global-font-size-large;
 @form-large-line-height: unit(@form-large-height - (@form-border-width * 2)) / unit(@form-large-font-size);
 @form-large-padding: 8px 6px;
 
 @form-small-height: 24px;
-@form-small-font-size: 12px;
+@form-small-font-size: @global-font-size-small;
 @form-small-line-height: unit(@form-small-height - (@form-border-width * 2)) / unit(@form-small-font-size);
 @form-small-padding: 3px 3px;
 
@@ -97,7 +87,7 @@
 @form-horizontal-controls-margin-left: 215px;
 
 @form-icon-width: 30px;
-@form-icon-font-size: 14px;
+@form-icon-font-size: @global-font-size;
 
 @distance-to-edges: 4px;
 @input-radio-checkbox-size: 18px;
@@ -107,8 +97,8 @@
 
 @form-password-font-size: 13px;
 @form-password-line-height: @form-password-font-size;
-@form-password-color: #999;
-@form-password-hover-color: #999;
+@form-password-color: @global-muted-color;
+@form-password-hover-color: @form-password-color;
 @form-password-padding: 50px;
 
 // ========================================================================
@@ -137,7 +127,7 @@ select {
 	vertical-align: middle;
 }
 
-// Address inconsistent `text-transform` inheritance which is only inherit in Firefox
+// Address inconsistent `.text-transform` inheritance which is only inherit in Firefox
 select {
 	text-transform: none;
 }
@@ -166,7 +156,7 @@ input {
 		&::-webkit-search-decoration {}
 	}
 
-	// Remove button on `number` input
+	// Remove button on `.number` input
 	&[type="number"] {
 		&::-webkit-inner-spin-button,
 		&::-webkit-outer-spin-button {
@@ -180,7 +170,7 @@ input {
 
 // Define consistent border, margin, and padding.
 fieldset {
-	border: none;
+	border: 0;
 	margin: 0;
 	padding: 0;
 }
@@ -196,7 +186,7 @@ textarea {
 	opacity: 1;
 }
 
-// Removes `box-shadow` for invalid controls in Firefox.
+// Removes `.box-shadow` for invalid controls in Firefox.
 :invalid {
 	.box-shadow(none);
 }
@@ -293,7 +283,7 @@ legend {
 	padding: 0;
 	padding-bottom: @form-gutter;
 	font-size: @form-legend-font-size;
-	line-height: @form-legend-line-height;
+	line-height: unit(@form-legend-line-height) / unit(@form-legend-font-size);
 	&:after {
 		content: "";
 		display: block;
@@ -381,7 +371,7 @@ legend {
 				z-index: 1;
 				position: absolute;
 				.size(@input-radio-checkbox-size);
-				border: 1px solid @form-border-color;
+				border: @form-border-width solid @form-border-color;
 				background-color: @input-background-color;
 				left: 0;
 				top: 50%;
@@ -428,8 +418,28 @@ legend {
 			&[disabled] {
 				+ span {
 					&:after {
-						border-color: #999;
+						border-color: @form-disabled-border;
 					}
+				}
+			}
+		}
+
+		// Validation States
+		// ========================================================================
+
+		.form {
+
+			&-danger {
+				+ span {
+					border-color: @form-danger-border !important;
+					background-color: @form-danger-background !important;
+				}
+			}
+
+			&-success {
+				+ span {
+					border-color: @form-success-border !important;
+					background-color: @form-success-background !important;
 				}
 			}
 		}
@@ -465,15 +475,34 @@ legend {
 			&[disabled] {
 				+ span {
 					&:after {
-						background-color: #999;
+						background-color: @form-disabled-border;
 					}
+				}
+			}
+		}
+
+		// Validation States
+		// ========================================================================
+
+		.form {
+
+			&-danger {
+				+ span {
+					border-color: @form-danger-border !important;
+					background-color: @form-danger-background !important;
+				}
+			}
+
+			&-success {
+				+ span {
+					border-color: @form-success-border !important;
+					background-color: @form-success-background !important;
 				}
 			}
 		}
 	}
 
 	// Validation states
-	// Using !important to keep the selector simple
 	// ========================================================================
 
 	// Error state
@@ -492,8 +521,10 @@ legend {
 
 	&-row {
 		.micro-clearfix();
-		+ .form-row {
-			margin-top: 15px;
+		+ .form {
+			&-row {
+				margin-top: 15px;
+			}
 		}
 		label {
 			+ label {
@@ -503,21 +534,23 @@ legend {
 	}
 
 	// Help text
-	// Sub-Object: `form-help-inline`, `form-help-block`
+	// Sub-object: `.form-help-inline`, `.form-help-block`
 	// ========================================================================
 
-	&-help-inline {
-		display: inline-block;
-		margin: 0 0 0 @form-help-inline-margin-left;
-		vertical-align: middle;
-	}
+	&-help {
+		&-inline {
+			display: inline-block;
+			margin: 0 0 0 @form-help-inline-margin-left;
+			vertical-align: middle;
+		}
 
-	&-help-block {
-		margin: @form-help-block-margin-top 0 0 0;
+		&-block {
+			margin: @form-help-block-margin-top 0 0 0;
+		}
 	}
 
 	// Controls content
-	// Sub-Object: `form-controls`, `form-controls-condensed`
+	// Sub-object: `.form-controls`, `.form-controls-condensed`
 	// ========================================================================
 
 	// Remove margins
@@ -530,54 +563,61 @@ legend {
 		> :last-child {
 			margin-bottom: 0;
 		}
-	}
 
-	// Group controls and text into blocks with a small spacing between blocks
-	&-controls-condensed {
-		margin: @form-controls-condensed-margin-vertical 0;
-	}
-
-
-	// Modifier: `form-stacked`
-	// Requires sub-object: `form-label`
-	// ========================================================================
-
-	&-stacked {
-		.form-label {
-			display: block;
-			margin-bottom: @form-stacked-margin-bottom;
+		&-condensed {
+			margin: @form-controls-condensed-margin-vertical 0;
 		}
 	}
 
 
-	// Modifier: `.form-horizontal`
+	// Modifier: `.form-stacked`
+	// Requires sub-object: `.form-label`
+	// ========================================================================
+
+	&-stacked {
+		.form {
+			&-label {
+				display: block;
+				margin-bottom: @form-stacked-margin-bottom;
+			}
+		}
+	}
+
+
+	// Modifier: `..form-horizontal`
 	// Requires sub-objects: `.form-label`, `.form-controls`
 	// ========================================================================
 
 	&-horizontal {
 		//  Tablet portrait and smaller
 		@media (max-width: @breakpoint-medium-max) {
-			.form-label {
-				display: block;
-				margin-bottom: @form-stacked-margin-bottom;
-				font-weight: @form-stacked-font-weight;
+			.form {
+				&-label {
+					display: block;
+					margin-bottom: @form-stacked-margin-bottom;
+					font-weight: @form-stacked-font-weight;
+				}
 			}
 		}
 
 		// Desktop and bigger
 		@media (min-width: @breakpoint-large) {
-			.form-label {
-				width: @form-horizontal-label-width;
-				margin-top: @form-horizontal-label-margin-top;
-				float: left;
+			.form {
+				&-label {
+					width: @form-horizontal-label-width;
+					margin-top: @form-horizontal-label-margin-top;
+					float: left;
+				}
 			}
-			.form-controls {
-				margin-left: @form-horizontal-controls-margin-left;
+			.form {
+				&-controls {
+					margin-left: @form-horizontal-controls-margin-left;
+				}
 			}
 		}
 	}
 
-	// Sub-Object: `form-icon`
+	// Sub-object: `.form-icon`
 	// ========================================================================
 
 	&-icon {
@@ -589,7 +629,6 @@ legend {
 			position: absolute;
 			top: 50%;
 			width: @form-icon-width;
-			font-size: @form-icon-font-size;
 			.translate(0, -50%);
 			text-align: center;
 			pointer-events: none;
@@ -601,7 +640,7 @@ legend {
 			}
 		}
 
-		// Sub-modifier: `form-icon-flip`
+		// Sub-modifier: `.form-icon-flip`
 		&-flip {
 			> [class*="icon-"] {
 				right: 0;
@@ -631,7 +670,7 @@ legend {
 		}
 	}
 
-	// Modifier: `form-file`
+	// Modifier: `.form-file`
 	// ========================================================================
 
 	&-file {
@@ -654,7 +693,7 @@ legend {
 		}
 	}
 
-	// Modifier: `form-password`
+	// Modifier: `.form-password`
 	// ========================================================================
 
 	&-password {
@@ -671,9 +710,9 @@ legend {
 			position: absolute;
 			top: 50%;
 			right: 10px;
-			margin-top: -(floor(@form-password-line-height/2));
+			margin-top: -( floor( @form-password-line-height / 2 ) );
 			font-size: @form-password-font-size;
-			line-height: @form-password-line-height;
+			line-height: unit(@form-password-line-height) / unit(@form-password-font-size);
 			color: @form-password-color;
 			&:hover {
 				color: @form-password-hover-color;
@@ -693,8 +732,7 @@ select[size] {
 	height: auto;
 }
 
-// Sub-Objects: `form-row`
-// Groups labels and controls in rows
+// Sub-objects: `.label`
 // ========================================================================
 
 label {

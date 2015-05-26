@@ -2,7 +2,7 @@
 //
 // Description:     Defines styles to create layouts with flexbox
 //
-// Component:       `flex-*`
+// Component:       `.flex-*`
 //
 // Used by:         Caption
 
@@ -24,7 +24,7 @@
 		width: 100%;
 	}
 
-	// Modifier: `.flex-inline`
+	// Modifier: `..flex-inline`
 	// ========================================================================
 
 	&-inline {
@@ -36,7 +36,7 @@
 		}
 	}
 
-	// Sub-Objects: items
+	// Sub-objects: items
 	// ========================================================================
 
 	// Fixes initial flex-shrink value in IE10
@@ -50,7 +50,7 @@
 		}
 		> * {
 			.flex(0 1 auto);
-			width: auto;
+			// width: auto;
 			-ms-flex-negative: 1;
 		}
 
@@ -114,27 +114,30 @@
 		}
 	}
 
-	&-space-between {
-		.justify-content(space-between);
-	}
-
-	&-space-around {
-		.justify-content(space-around);
+	&-space {
+		&-between {
+			.justify-content(space-between);
+		}
+		&-around {
+			.justify-content(space-around);
+		}
 	}
 
 	// Direction
 	// ========================================================================
 
-	&-row-reverse {
-		.flex-direction(row-reverse);
+	&-row {
+		&-reverse {
+			.flex-direction(row-reverse);
+		}
 	}
 
 	&-column {
 		.flex-direction(column);
-	}
 
-	&-column-reverse {
-		.flex-direction(column-reverse);
+		&-reverse {
+			.flex-direction(column-reverse);
+		}
 	}
 
 	// Wrap
@@ -142,98 +145,114 @@
 
 	&-wrap {
 		.flex-wrap(wrap);
-	}
 
-	&-wrap-reverse {
-		.flex-wrap(wrap-reverse);
-	}
+		&-reverse {
+			.flex-wrap(wrap-reverse);
+		}
 
-	// Horizontal alignment
-	&-wrap-top {
-		.align-content(flex-start);
-	}
+		// Horizontal alignment
+		&-top {
+			.align-content(flex-start);
+		}
 
-	&-wrap-middle {
-		.align-content(center);
-	}
+		&-middle {
+			.align-content(center);
+		}
 
-	&-wrap-bottom {
-		.align-content(flex-end);
-	}
+		&-bottom {
+			.align-content(flex-end);
+		}
 
-	&-wrap-space-between {
-		.align-content(space-between);
-	}
-
-	&-wrap-space-around {
-		.align-content(space-around);
+		&-space {
+			&-between {
+				.align-content(space-between);
+			}
+			&-around {
+				.align-content(space-around);
+			}
+		}
 	}
 
 	// Item ordering
 	// ========================================================================
 
-	// Default is 0
-	&-order-first {
-		.order(-1);
-	}
+	&-order {
+		&-first {
+			.order(-1);
 
-	&-order-last {
-		.order(99);
+			// Phone landscape and bigger
+			@media (min-width: @breakpoint-small) {
+				&-small {
+					.order(-1);
+				}
+			}
+
+			// Tablet and bigger
+			@media (min-width: @breakpoint-medium) {
+				&-medium {
+					.order(-1);
+				}
+			}
+
+			// Desktop and bigger
+			@media (min-width: @breakpoint-large) {
+				&-large {
+					.order(-1);
+				}
+			}
+
+			// Large screen and bigger
+			@media (min-width: @breakpoint-xlarge) {
+				&-xlarge {
+					.order(-1);
+				}
+			}
+		}
+		&-last {
+			.order(99);
+
+			// Phone landscape and bigger
+			@media (min-width: @breakpoint-small) {
+				&-small {
+					.order(99);
+				}
+			}
+
+			// Tablet and bigger
+			@media (min-width: @breakpoint-medium) {
+				&-medium {
+					.order(-1);
+				}
+			}
+
+			// Desktop and bigger
+			@media (min-width: @breakpoint-large) {
+				&-large {
+					.order(-1);
+				}
+			}
+
+			// Large screen and bigger
+			@media (min-width: @breakpoint-xlarge) {
+				&-xlarge {
+					.order(-1);
+				}
+			}
+		}
 	}
 
 	// Item dimensions
 	// ========================================================================
 
-	&-item-none {
-		.flex(none);
-	}
-
-	&-item-auto {
-		.flex(auto);
-	}
-
-	&-item-1 {
-		.flex(1);
-	}
-
-}
-
-// Phone landscape and bigger
-@media (min-width: @breakpoint-small) {
-	.flex-order-first-small {
-		.order(-1);
-	}
-	.flex-order-last-small {
-		.order(99);
-	}
-}
-
-// Tablet and bigger
-@media (min-width: @breakpoint-medium) {
-	.flex-order-first-medium {
-		.order(-1);
-	}
-	.flex-order-last-medium {
-		.order(99);
-	}
-}
-
-// Desktop and bigger
-@media (min-width: @breakpoint-large) {
-	.flex-order-first-large {
-		.order(-1);
-	}
-	.flex-order-last-large {
-		.order(99);
-	}
-}
-
-// Large screen and bigger
-@media (min-width: @breakpoint-xlarge) {
-	.flex-order-first-xlarge {
-		.order(-1);
-	}
-	.flex-order-last-xlarge {
-		.order(99);
+	&-item {
+		&-none {
+			.flex(none);
+		}
+		&-auto {
+			.flex(auto);
+		}
+		&-1 {
+			.flex(1);
+		}
 	}
 }

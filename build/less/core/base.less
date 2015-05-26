@@ -2,9 +2,9 @@
 //
 // Description:     Sets default values for HTML elements
 //
-// Component:       `h1`, `h2`, `h3`, `h4`, `h5`, `h6`
-//                  `link`
-//                  `img-preserve`
+// Component:       `.h1`, `.h2`, `.h3`, `.h4`, `.h5`, `.h6`
+//                  `.link`
+//                  `.img-preserve`
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -15,76 +15,73 @@
 
 @base-body-background: @global-background;
 @base-body-font-family: @global-font-family;
-@base-body-font-weight: normal;
 @base-body-font-size: @global-font-size;
 @base-body-line-height: unit(@global-line-height) / unit(@global-font-size); // (14px / 20px)
 @base-body-color: @global-font-color;
 
 @base-link-color: @global-link-color;
-@base-link-text-decoration: none;
-@base-link-hover-color: #059;
-@base-link-hover-text-decoration: underline;
+@base-link-color-hover: @global-link-color-hover;
+@base-link-text-decoration: @global-link-decoration;
+@base-link-text-decoration-hover: @global-link-decoration-hover;
 
-@base-code-color: #D05;
+@base-code-color: @global-emphasis-color;
 @base-code-font-size: 12px;
 @base-code-font-family: Consolas, monospace, serif;
+@base-code-border-width: @global-border-width;
+@base-code-border: @global-border-color;
+@base-code-padding: 4px;
+@base-code-background: #fafafa;
 
-@base-em-color: #D05;
-@base-ins-background: #ffa;
-@base-ins-color: #444;
-@base-mark-background: #ffa;
-@base-mark-color: #444;
-@base-quote-font-style: italic;
+@base-em-color: @global-emphasis-color;
+@base-ins-background: @global-highlight-color;
+@base-ins-color: @global-font-color;
+@base-mark-background: @global-highlight-color;
+@base-mark-color: @global-font-color;
 
-@base-margin-vertical: 15px;
+@base-margin-vertical: @global-margin;
 
 @base-heading-font-family: @global-font-family;
 @base-heading-font-weight: normal;
 @base-heading-color: inherit;
-@base-heading-text-transform: none;
 @base-heading-margin-top: 25px;
 
 @base-h1-font-size: 36px;
 @base-h1-line-height: 42px;
 @base-h2-font-size: 24px;
 @base-h2-line-height: 30px;
-@base-h3-font-size: 18px;
-@base-h3-line-height: 24px;
-@base-h4-font-size: 16px;
+@base-h3-font-size: @global-font-size-block-title;
+@base-h3-line-height: @global-line-height-block-title;
+@base-h4-font-size: @global-font-size-large;
 @base-h4-line-height: 22px;
-@base-h5-font-size: 14px;
+@base-h5-font-size: @global-font-size;
 @base-h5-line-height: 20px;
-@base-h6-font-size: 12px;
-@base-h6-line-height: 18px;
+@base-h6-font-size: @global-font-size-small;
+@base-h6-line-height: @global-line-height-small;
 
 @base-list-padding-left: 30px;
 
 @base-hr-margin-vertical: @base-margin-vertical;
 @base-hr-border: @global-border-color;
-@base-hr-border-width: 1px;
+@base-hr-border-width: @global-border-width;
 
 @base-blockquote-padding-left: 15px;
 @base-blockquote-border: @global-border-color;
 @base-blockquote-border-width: 5px;
-@base-blockquote-font-size: 16px;
+@base-blockquote-font-size: @global-font-size-large;
 @base-blockquote-line-height: 22px;
-@base-blockquote-font-style: italic;
 
 @base-pre-padding: 10px;
 @base-pre-background: #f5f5f5;
 @base-pre-color: #444;
-@base-pre-font-size: 12px;
-@base-pre-line-height: 18px;
+@base-pre-font-size: @global-font-size-small;
+@base-pre-line-height: @global-line-height-small;
 @base-pre-font-family: @base-code-font-family;
 @base-pre-tab-size: 4;
+@base-pre-border-width: @base-code-border-width;
+@base-pre-border: @global-border-color;
 
 @base-selection-background: #39f;
 @base-selection-color: @color-white;
-
-// New
-@base-code-border: @global-border;
-@base-code-background: #fafafa;
-@base-pre-border: @global-border;
 
 // ========================================================================
 // Component: Base
@@ -94,16 +91,15 @@ html {
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 	background-color: @base-body-background;
-	color: @base-body-color;
 }
 
 html,
 body {
-	font-weight: @base-body-font-weight;
 	font-size: @base-body-font-size;
 	line-height: @base-body-line-height;
 	font-family: @base-body-font-family;
 	background-color: @base-body-background;
+	color: @base-body-color;
 	margin: 0;
 	padding: 0;
 }
@@ -116,7 +112,6 @@ body {
 	}
 }
 
-:hover,
 :focus {
 	outline: 0;
 }
@@ -128,18 +123,11 @@ a {
 	// Remove the gray background color from active links in IE 10.
 	background-color: transparent;
 
-	// Improves readability when focused and also mouse hovered in all browsers.
-	// &:hover,
-	// &:focus {
-	// 	outline: 0;
-	// }
-}
-
-a,
-button,
-input {
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	// -webkit-tap-highlight-color: transparent;
+	&,
+	input,
+	button {
+		-webkit-tap-highlight-color: fade(#000, 0%);
+	}
 }
 
 // Style
@@ -151,8 +139,8 @@ a,
 
 	// Hover
 	&:hover {
-		color: @base-link-hover-color;
-		text-decoration: @base-link-hover-text-decoration;
+		color: @base-link-color-hover;
+		text-decoration: @base-link-text-decoration-hover;
 	}
 }
 
@@ -166,22 +154,22 @@ abbr {
 	}
 }
 
-// Addresses style set to `bolder` in Firefox
+// Addresses style set to `.bolder` in Firefox
 b,
 strong {
 	font-weight: bold;
 }
 
-:not(pre) {
-	> code,
-	> kbd,
-	> samp {
+code,
+kbd,
+samp {
+	:not(pre) > & {
 		font-size: @base-code-font-size;
 		font-family: @base-code-font-family;
 		color: @base-code-color;
 		white-space: nowrap;
-		padding: 0 4px;
-		border: 1px solid @base-code-border;
+		padding: 0 @base-code-padding;
+		border: @base-code-border-width solid @base-code-border;
 		background-color: @base-code-background;
 	}
 }
@@ -206,7 +194,7 @@ mark {
 
 // Quote
 q {
-	font-style: @base-quote-font-style;
+	font-style: italic;
 }
 
 // Addresses inconsistent and variable font size in all browsers.
@@ -214,7 +202,7 @@ small {
 	font-size: 80%;
 }
 
-// Prevents `sub` and `sup` affecting `line-height` in all browsers.
+// Prevents `.sub` and `.sup` affecting `.line-height` in all browsers.
 sub,
 sup {
 	font-size: 75%;
@@ -288,7 +276,6 @@ h6 {
 	font-family: @base-heading-font-family;
 	font-weight: @base-heading-font-weight;
 	color: @base-heading-color;
-	text-transform: @base-heading-text-transform;
 
 	// Add margin-top for adjacent elements
 	* + & {
@@ -389,8 +376,8 @@ blockquote {
 	padding-left: @base-blockquote-padding-left;
 	border-left: @base-blockquote-border-width solid @base-blockquote-border;
 	font-size: @base-blockquote-font-size;
-	line-height: @base-blockquote-line-height;
-	font-style: @base-blockquote-font-style;
+	line-height: unit(@base-blockquote-line-height) / unit(@base-blockquote-font-size);
+	font-style: italic;
 }
 
 // Preformatted text
@@ -403,7 +390,8 @@ pre {
 	color: @base-pre-color;
 	.tab-size(@base-pre-tab-size);
 	overflow: auto;
-	border: 1px solid @base-pre-border;
+	border: @base-pre-border-width solid @base-pre-border;
+
 	> code {
 		margin: -@base-pre-padding;
 		padding: @base-pre-padding;
@@ -428,7 +416,7 @@ pre {
 // HTML5 elements
 // ========================================================================
 
-// Corrects `block` display not defined in IE 8/9.
+// Corrects `.block` display not defined in IE 8/9.
 article,
 aside,
 details,
@@ -443,18 +431,20 @@ summary {
 	display: block;
 }
 
-// Addresses inconsistent vertical alignment of `progress` in Chrome, Firefox and Opera.
+// Addresses inconsistent vertical alignment of `.progress` in Chrome, Firefox and Opera.
 progress {
 	vertical-align: baseline;
 }
 
-// Prevent displaying `audio` without controls in Chrome, Safari and Opera
-audio:not([controls]) {
-	display: none;
+// Prevent displaying `.audio` without controls in Chrome, Safari and Opera
+audio {
+	&:not([controls]) {
+		display: none;
+	}
 }
 
-// Address `[hidden]` styling not present in IE 8/9.
-// Hide the `template` element in IE and Safari
+// Address `.[hidden]` styling not present in IE 8/9.
+// Hide the `.template` element in IE and Safari
 [hidden],
 template {
 	display: none;

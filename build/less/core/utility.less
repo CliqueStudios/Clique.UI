@@ -2,24 +2,24 @@
 //
 // Description:     Collection of useful utility classes to style your content
 //
-// Component:       `container-*`
-//                  `clearfix`
-//                  `float-*`
-//                  `align-*`
-//                  `vertical-align-*`
-//                  `height-*`
-//                  `responsive-*`
-//                  `margin-*`
-//                  `border-*`
-//                  `heading-*`
-//                  `link-*`
-//                  `scrollable-*`
-//                  `overflow-container`
-//                  `position-*`
-//                  `display-*`
-//                  `visible-*`
-//                  `hidden-*`
-//                  `invisible`
+// Component:       `.container-*`
+//                  `.clearfix`
+//                  `.float-*`
+//                  `.align-*`
+//                  `.vertical-align-*`
+//                  `.height-*`
+//                  `.responsive-*`
+//                  `.margin-*`
+//                  `.border-*`
+//                  `.heading-*`
+//                  `.link-*`
+//                  `.scrollable-*`
+//                  `.overflow-container`
+//                  `.position-*`
+//                  `.display-*`
+//                  `.visible-*`
+//                  `.hidden-*`
+//                  `.invisible`
 //
 // Used by:         Overlay
 
@@ -33,14 +33,14 @@
 @utility-container-max-width: 980px;
 @utility-container-padding-horizontal: 25px;
 @utility-container-large-max-width: 1200px;
-@utility-container-large-padding-horizontal: 35px;
+@utility-container-large-padding-horizontal: @global-grid-gutter-large;
 
 @utility-align-horizontal: 15px;
 @utility-align-vertical: 15px;
 
 @utility-height-viewport-min-height: 600px;
 
-@utility-margin: 15px;
+@utility-margin: @global-margin;
 @utility-margin-small: 5px;
 @utility-margin-large: 50px;
 
@@ -55,7 +55,7 @@
 @utility-scrollable-box-height: 170px;
 @utility-scrollable-box-padding: 10px;
 @utility-scrollable-box-border: @global-border-color;
-@utility-scrollable-box-border-width: 1px;
+@utility-scrollable-box-border-width: @global-border-width;
 
 // ========================================================================
 // Component: Utility
@@ -151,7 +151,7 @@
 // Vertical alignment
 // ========================================================================
 
-// Remove whitespace between child elements when using `inline-block`
+// Remove whitespace between child elements when using `.inline-block`
 .vertical-align {
 	font-size: 0.001px;
 
@@ -179,7 +179,7 @@
 // Height
 // ========================================================================
 
-// Useful to extend the `html` and `body` element to the full height of the page.
+// Useful to extend the `.html` and `.body` element to the full height of the page.
 .height {
 
 	&-1-1 {
@@ -202,6 +202,7 @@
 		max-width: 100% !important;
 		height: auto;
 	}
+
 	&-height {
 		max-height: 100%;
 		width: auto;
@@ -212,8 +213,8 @@
 // ========================================================================
 
 .margin {
-
 	margin-bottom: @utility-margin;
+
 	* + & {
 		margin-top: @utility-margin;
 	}
@@ -234,65 +235,65 @@
 		margin-right: @utility-margin !important;
 	}
 
-	// Larger margins
 	&-large {
 		margin-bottom: @utility-margin-large;
+
 		* + & {
 			margin-top: @utility-margin-large;
 		}
-	}
 
-	&-large-top {
-		margin-top: @utility-margin-large !important;
-	}
+		&-top {
+			margin-top: @utility-margin-large !important;
+		}
 
-	&-large-bottom {
-		margin-bottom: @utility-margin-large !important;
-	}
+		&-bottom {
+			margin-bottom: @utility-margin-large !important;
+		}
 
-	&-large-left {
-		margin-left: @utility-margin-large !important;
-	}
+		&-left {
+			margin-left: @utility-margin-large !important;
+		}
 
-	&-large-right {
-		margin-right: @utility-margin-large !important;
-	}
-
-	// Smaller margins
-	&-small {
-		margin-bottom: @utility-margin-small;
-		* + & {
-			margin-top: @utility-margin-small;
+		&-right {
+			margin-right: @utility-margin-large !important;
 		}
 	}
 
-	&-small-top {
-		margin-top: @utility-margin-small !important;
-	}
+	&-small {
+		margin-bottom: @utility-margin-small;
 
-	&-small-bottom {
-		margin-bottom: @utility-margin-small !important;
-	}
+		* + & {
+			margin-top: @utility-margin-small;
+		}
 
-	&-small-left {
-		margin-left: @utility-margin-small !important;
-	}
+		&-top {
+			margin-top: @utility-margin-small !important;
+		}
 
-	&-small-right {
-		margin-right: @utility-margin-small !important;
+		&-bottom {
+			margin-bottom: @utility-margin-small !important;
+		}
+
+		&-left {
+			margin-left: @utility-margin-small !important;
+		}
+
+		&-right {
+			margin-right: @utility-margin-small !important;
+		}
 	}
 
 	// Remove margins
 	&-remove {
 		margin: 0 !important;
-	}
 
-	&-top-remove {
-		margin-top: 0 !important;
-	}
+		&-top {
+			margin-top: 0 !important;
+		}
 
-	&-bottom-remove {
-		margin-bottom: 0 !important;
+		&-bottom {
+			margin-bottom: 0 !important;
+		}
 	}
 }
 
@@ -313,6 +314,7 @@
 // ========================================================================
 
 .heading {
+
 	&-large {
 		font-size: @utility-heading-large-small-font-size;
 		line-height: unit(@utility-heading-large-small-line-height) / unit(@utility-heading-large-small-font-size);
@@ -388,6 +390,7 @@
 .overflow-container {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+
 	> :last-child {
 		margin-bottom: 0;
 	}
@@ -396,9 +399,8 @@
 // Position
 // ========================================================================
 
-.position-absolute,
-[class*="position-top"],
-[class*="position-bottom"] {
+[class*="position-top-"],
+[class*="position-bottom-"] {
 	position: absolute !important;
 }
 
@@ -443,11 +445,15 @@
 		right: 0;
 	}
 
+	// Absolute
+	&-absolute {
+		position: absolute !important;
+	}
+
 	// Relative
 	&-relative {
 		position: relative !important;
 	}
-
 }
 
 // Display
@@ -475,14 +481,18 @@
 // Desktop and bigger
 @media (min-width: @breakpoint-large) {
 	.visible {
+
 		&-small {
 			display: none !important;
 		}
+
 		&-medium {
 			display: none !important;
 		}
 	}
+
 	.hidden {
+
 		&-large {
 			display: none !important;
 		}
@@ -492,14 +502,18 @@
 // Tablets portrait
 @media (min-width: @breakpoint-medium) and (max-width: @breakpoint-medium-max) {
 	.visible {
+
 		&-small {
 			display: none !important;
 		}
+
 		&-large {
 			display: none !important;
 		}
 	}
+
 	.hidden {
+
 		&-medium {
 			display: none !important;
 		}
@@ -509,14 +523,18 @@
 // Phone landscape and smaller
 @media (max-width: @breakpoint-small-max) {
 	.visible {
+
 		&-medium {
 			display: none !important;
 		}
+
 		&-large {
 			display: none !important;
 		}
 	}
+
 	.hidden {
+
 		&-small {
 			display: none !important;
 		}
@@ -560,7 +578,9 @@
 // Hide on touch
 .touch,
 .notouch {
-	.hidden-notouch {
-		display: none !important;
+	.hidden {
+		&-notouch {
+			display: none !important;
+		}
 	}
 }

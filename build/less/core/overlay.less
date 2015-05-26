@@ -2,42 +2,36 @@
 //
 // Description:     Defines styles for image overlays
 //
-// Component:       `overlay`
+// Component:       `.overlay`
 //
-// Sub-Objects:     `overlay-panel`
-//                  `overlay-hover`
-//                  `overlay-active`
-//                  `overlay-icon`
+// Sub-objects:     `.overlay-panel`
+//                  `.overlay-hover`
+//                  `.overlay-active`
+//                  `.overlay-icon`
 //
 
 
-// Modifiers:       `overlay-background`
-//                  `overlay-top`
-//                  `overlay-bottom`
-//                  `overlay-left`
-//                  `overlay-right`
-//                  `overlay-fade`
-//                  `overlay-scale`
-//                  `overlay-spin`
-//                  `overlay-grayscale`
-//                  `overlay-slide-top`
-//                  `overlay-slide-bottom`
-//                  `overlay-slide-left`
-//                  `overlay-slide-right`
+// Modifiers:       `.overlay-background`
+//                  `.overlay-top`
+//                  `.overlay-bottom`
+//                  `.overlay-left`
+//                  `.overlay-right`
+//                  `.overlay-fade`
+//                  `.overlay-scale`
+//                  `.overlay-spin`
+//                  `.overlay-grayscale`
+//                  `.overlay-slide-top`
+//                  `.overlay-slide-bottom`
+//                  `.overlay-slide-left`
+//                  `.overlay-slide-right`
 //
-// States:         `hover`
-//                  `active`
-//                  `ignore`
+// States:         `.hover`
+//                  `.active`
+//                  `.ignore`
 //
-// Uses:            Icon: `[class*="icon-"]`
-//                  `border-circle`
+// Uses:            Icon
+//                  `.border-circle`
 //
-// Markup:
-// <!-- overlay -->
-// <a class="overlay" href="">
-//     <img src="" alt="">
-//     <div class="overlay-panel"></div>
-// </a>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -46,22 +40,30 @@
 // Variables
 // ========================================================================
 
+@overlay-base-scale-in: 1.1;
+@overlay-base-scale-out: 1;
+
 @overlay-panel-padding: 20px;
 @overlay-panel-color: @color-white;
-@overlay-panel-background: rgba(0, 0, 0, 0.5);
-@overlay-icon: "\e9be";
+@overlay-panel-background: fade(#000, 50%);
+
+@overlay-icon: @global-icon-menu;
 @overlay-icon-size: 50px;
 @overlay-icon-color: @color-white;
+
 @overlay-fade-in-opacity: 1;
-@overlay-fade-out-opacity: 0.7;
-@overlay-scale-in-scale: 1.1;
-@overlay-scale-out-scale: 1;
-@overlay-spin-in-scale: 1.1;
-@overlay-spin-out-scale: 1;
+@overlay-fade-out-opacity: @global-inactive-opacity;
+
+@overlay-scale-in-scale: @overlay-base-scale-in;
+@overlay-scale-out-scale: @overlay-base-scale-out;
+
+@overlay-spin-in-scale: @overlay-base-scale-in;
+@overlay-spin-out-scale: @overlay-base-scale-out;
 @overlay-spin-in-rotate: 3deg;
 @overlay-spin-out-rotate: 0deg;
+
 @overlay-panel-link-color: inherit;
-@overlay-panel-link-text-decoration: underline;
+@overlay-panel-link-text-decoration: @global-link-decoration-hover;
 
 // ========================================================================
 // Component: Overlay
@@ -76,16 +78,17 @@
 	.translateZ(0);
 	margin: 0;
 
-	// Safari fix
-	&.border-circle {
-		-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	&.border {
+		&-circle {
+			-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+		}
 	}
 
 	> :first-child {
 		margin-bottom: 0;
 	}
 
-	// Sub-Object: `overlay-panel`
+	// Sub-object: `.overlay-panel`
 	// ========================================================================
 
 	&-panel {
@@ -115,15 +118,17 @@
 		}
 	}
 
-	// Sub-Object: `overlay-hover` and `overlay-active`
+	// Sub-object: `.overlay-hover` and `.overlay-active`
 	// ========================================================================
 
 	&-hover {
 		&:not(:hover) {
 			&:not(.hover) {
-				.overlay-panel {
-					&:not(.ignore) {
-						opacity: 0;
+				.overlay {
+					&-panel {
+						&:not(.ignore) {
+							opacity: 0;
+						}
 					}
 				}
 			}
@@ -132,15 +137,17 @@
 
 	&-active {
 		&:not(.active) {
-			> .overlay-panel {
-				&:not(.ignore) {
-					opacity: 0;
+			> .overlay {
+				&-panel {
+					&:not(.ignore) {
+						opacity: 0;
+					}
 				}
 			}
 		}
 	}
 
-	// Modifier `overlay-background`
+	// Modifier `.overlay-background`
 	// ========================================================================
 
 	&-background {
@@ -166,7 +173,7 @@
 		left: auto;
 	}
 
-	// Sub-Object: `overlay-icon`
+	// Sub-object: `.overlay-icon`
 	// ========================================================================
 
 	&-icon {
@@ -220,11 +227,26 @@
 	// Hover
 	&-hover {
 		&:hover {
-			.overlay-fade {
-				opacity: @overlay-fade-in-opacity;
+			.overlay {
+				&-fade {
+					opacity: @overlay-fade-in-opacity;
+				}
+
+				&-scale {
+					.scale(@overlay-scale-in-scale);
+				}
+
+				&-spin {
+					.transform(scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate));
+				}
+
+				&-grayscale {
+					.grayscale(0%);
+				}
 			}
-			.overlay-scale {
-				.scale(@overlay-scale-in-scale);
+			[class*="overlay-slide"] {
+				opacity: 1;
+				.translate(0, 0);
 			}
 		}
 	}
@@ -232,11 +254,26 @@
 	// Active
 	&-active {
 		.active {
-			> .overlay-fade {
-				opacity: @overlay-fade-in-opacity;
+			> .overlay {
+				&-fade {
+					opacity: @overlay-fade-in-opacity;
+				}
+
+				&-scale {
+					.scale(@overlay-scale-in-scale);
+				}
+
+				&-spin {
+					.transform(scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate));
+				}
+
+				&-grayscale {
+					.grayscale(0%);
+				}
 			}
-			> .overlay-scale {
-				.scale(@overlay-scale-in-scale);
+			> [class*="overlay-slide-"] {
+				opacity: 1;
+				.translate(0, 0);
 			}
 		}
 	}
@@ -251,24 +288,9 @@
 		.transform(scale(@overlay-spin-out-scale) rotate(@overlay-spin-out-rotate));
 	}
 
-	&-hover:hover .overlay-spin,
-	&-active .active > .overlay-spin {
-		.transform(scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate));
-	}
-
 	// Grayscale
 	&-grayscale {
 		.grayscale(100%);
-	}
-
-	&-hover:hover .overlay-grayscale,
-	&-active .active > .overlay-grayscale {
-		.grayscale(0%);
-	}
-
-	// Slide
-	[class*="overlay-slide-"] {
-		opacity: 0;
 	}
 
 	&-slide {
@@ -293,11 +315,9 @@
 			.translate(100%, 0);
 		}
 	}
+}
 
-	// Hover
-	&-hover:hover [class*="overlay-slide"],
-	&-active .active > [class*="overlay-slide"] {
-		opacity: 1;
-		.translate(0, 0);
-	}
+// Slide
+[class*="overlay-slide-"] {
+	opacity: 0;
 }

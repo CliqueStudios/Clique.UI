@@ -2,38 +2,23 @@
 //
 // Description:     Provides a responsive, fluid and nestable row
 //
-// Component:       `row`
-//                  `col-*`
-//                  `push-*`
-//                  `pull-*`
+// Component:       `.row`
+//                  `.col-*`
+//                  `.push-*`
+//                  `.pull-*`
 //
-// Modifiers:       `row-collapse`
-//                  `row-small`
-//                  `row-medium`
-//                  `row-divider`
-//                  `row-margin`
-//                  `row-match`
-//                  `row-col-*`
+// Modifiers:       `.row-collapse`
+//                  `.row-small`
+//                  `.row-medium`
+//                  `.row-divider`
+//                  `.row-margin`
+//                  `.row-match`
+//                  `.row-col-*`
 //
-// Uses:            Panel: `panel`
+// Uses:            Panel: `.panel`
 //
 // Used by:         Dropdown
 //
-// Markup:
-// <div class="row">
-//     <div class="col-1-2"></div>
-//     <div class="col-1-2"></div>
-// </div>
-// <!-- row-divider -->
-// <div class="row row-divider">
-//     <div class="col-1-2"></div>
-//     <div class="col-1-2"></div>
-// </div>
-// <hr class="row-divider">
-// <div class="row row-divider">
-//     <div class="col-1-2"></div>
-//     <div class="col-1-2"></div>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -51,8 +36,8 @@
 @row-gutter-small-horizontal: 	10px;
 @row-gutter-small-vertical: 	10px;
 
-@row-divider-border: 			#ddd;
-@row-divider-border-width: 		1px;
+@row-divider-border: 			@global-border-color;
+@row-divider-border-width: 		@global-border-width;
 
 // ========================================================================
 // Mixins
@@ -90,8 +75,10 @@
 	padding: 0;
 	list-style: none;
 	margin-left: -@row-gutter-horizontal;
+
 	.noflex & {
 		display: block;
+
 		&:before,
 		&:after {
 			content: "";
@@ -160,7 +147,7 @@
 		.row-gutter-vertical-subobject(@row-gutter-vertical);
 	}
 
-	// Modifier: `row-divider`
+	// Modifier: `.row-divider`
 	// ========================================================================
 
 	&-divider {
@@ -237,7 +224,7 @@
 		}
 	}
 
-	// Modifier: `row-match`
+	// Modifier: `.row-match`
 	// ========================================================================
 
 	&-match {
@@ -251,7 +238,7 @@
 	}
 }
 
-// Sub-Objects: `.row-*-cols`
+// Sub-objects: `.row-*-cols`
 // ========================================================================
 
 // Base 12 Rows
@@ -282,7 +269,7 @@
 	.make-row-grid(12, xlarge);
 }
 
-// Sub-Objects: `col-*`
+// Sub-objects: `.col-*`
 // ========================================================================
 
 // Base 12 Column Grid
@@ -327,7 +314,7 @@
 	.make-col-grid(10, large);
 }
 
-// Sub-Object: `push-*` and `pull-*`
+// Sub-object: `.push-*` and `.pull-*`
 // ========================================================================
 
 // Tablet and bigger

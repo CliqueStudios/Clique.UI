@@ -2,19 +2,13 @@
 //
 // Description:     Defines styles for a dot navigation
 //
-// Component:       `dotnav`
+// Component:       `.dotnav`
 //
-// Modifiers:       `dotnav-contrast`
-//                  `dotnav-vertical`
+// Modifiers:       `.dotnav-contrast`
+//                  `.dotnav-vertical`
 //
-// States:          `active`
+// States:          `.active`
 //
-// Markup:
-// <!-- dotnav -->
-// <ul class="dotnav">
-//     <li class="active"><a href=""></a></li>
-//     <li><a href=""></a></li>
-// </ul>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -23,18 +17,20 @@
 // Variables
 // ========================================================================
 
-@dotnav-margin-horizontal: 15px;
+@dotnav-margin-horizontal: @global-margin;
 @dotnav-margin-vertical: @dotnav-margin-horizontal;
 @dotnav-width: 20px;
 @dotnav-height: @dotnav-width;
-@dotnav-background: rgba(50, 50, 50, 0.1);
-@dotnav-hover-background: rgba(50, 50, 50, 0.4);
-@dotnav-onclick-background: rgba(50, 50, 50, 0.6);
-@dotnav-active-background: rgba(50, 50, 50, 0.4);
-@dotnav-contrast-background: rgba(255, 255, 255, 0.4);
-@dotnav-contrast-hover-background: rgba(255, 255, 255, 0.7);
-@dotnav-contrast-onclick-background: rgba(255, 255, 255, 0.9);
-@dotnav-contrast-active-background: rgba(255, 255, 255, 0.9);
+@dotnav-background: fade(#333, 10%);
+@dotnav-hover-background: fade(#333, 40%);
+@dotnav-onclick-background: fade(#333, 60%);
+@dotnav-active-background: fade(#333, 40%);
+@dotnav-contrast-background: fade(#fff, 40%);
+@dotnav-contrast-hover-background: fade(#fff, 70%);
+@dotnav-contrast-onclick-background: fade(#fff, 90%);
+@dotnav-contrast-active-background: fade(#fff, 90%);
+
+@dotnav-scale-in: @global-scale-in;
 
 // ========================================================================
 // Component: Dotnav
@@ -78,17 +74,17 @@
 				background-color: @dotnav-onclick-background;
 			}
 		}
+	}
 
-		// Active
-		&.active {
-			> * {
-				background-color: @dotnav-active-background;
-				.scale(1.3);
-			}
+	// Active
+	> .active {
+		> * {
+			background-color: @dotnav-active-background;
+			.scale(@dotnav-scale-in);
 		}
 	}
 
-	// Modifier: `dotnav-contrast`
+	// Modifier: `.dotnav-contrast`
 	// ========================================================================
 
 	&-contrast {
@@ -107,9 +103,11 @@
 					background-color: @dotnav-contrast-onclick-background;
 				}
 			}
+		}
 
-			// Active
-			&.active > * {
+		// Active
+		> .active {
+			> * {
 				background-color: @dotnav-contrast-active-background;
 			}
 		}

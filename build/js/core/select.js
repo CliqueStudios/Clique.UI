@@ -21,12 +21,12 @@
 			inheritClasses: true
 		},
 		boot: function() {
-			return _c.on('ready', function(context) {
-				return $('[data-select]', context).each(function() {
+			_c.ready(function(context) {
+				$('[data-select]', context).each(function() {
 					var ele, obj;
 					ele = $(this);
 					if(!ele.is('select')) {
-						return ele.find('select').each(function() {
+						ele.find('select').each(function() {
 							var obj;
 							if(!ele.data('clique.data.select')) {
 								obj = _c.select(ele);

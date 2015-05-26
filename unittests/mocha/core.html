@@ -17,16 +17,11 @@
 			mocha.setup('bdd')
 			mocha.reporter('html');
 		</script>
-		<script src="suites/core.spec.js"></script>
-		<!-- <script src="suites/lib/blanket.js"></script> -->
-		<!-- <script src="../../node_modules/grunt-blanket-mocha/support/mocha-blanket.js"></script> -->
+		<script src="suites/core.js"></script>
 		<script>
 			if(navigator.userAgent.indexOf('PhantomJS') < 0) {
 				mocha.run();
 			}
-			// if (window.PHANTOMJS) {
-			// 	blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
-			// }
 		</script>
 	</body>
 </html>

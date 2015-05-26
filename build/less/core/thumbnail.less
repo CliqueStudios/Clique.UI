@@ -2,22 +2,16 @@
 //
 // Description:     Defines styles for image thumbnails
 //
-// Component:       `thumbnail`
+// Component:       `.thumbnail`
 //
-// Sub-Objects:     `thumbnail-caption`
+// Sub-objects:     `.thumbnail-caption`
 //
-// Modifiers:       `thumbnail-mini`
-//                  `thumbnail-small`
-//                  `thumbnail-medium`
-//                  `thumbnail-large`
-//                  `thumbnail-expand`
+// Modifiers:       `.thumbnail-mini`
+//                  `.thumbnail-small`
+//                  `.thumbnail-medium`
+//                  `.thumbnail-large`
+//                  `.thumbnail-expand`
 //
-// Markup:
-// <!-- thumbnail -->
-// <figure class="thumbnail">
-//     <img src="" alt="">
-//     <figcaption class="thumbnail-caption"></figcaption>
-// </figure>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -28,14 +22,14 @@
 
 @thumbnail-padding: 4px;
 @thumbnail-border: @global-border-color;
-@thumbnail-border-width: 1px;
+@thumbnail-border-width: @global-border-width;
 @thumbnail-background: @color-white;
 
 @thumbnail-hover-border: #aaa;
 @thumbnail-hover-background: @color-white;
 
 @thumbnail-caption-padding: @thumbnail-padding;
-@thumbnail-caption-color: #444;
+@thumbnail-caption-color: @global-font-color;
 
 @thumbnail-mini-width: 150px;
 @thumbnail-small-width: 200px;
@@ -65,7 +59,7 @@
 		}
 	}
 
-	// Sub-Object: `.thumbnail-caption`
+	// Sub-object: `.thumbnail-caption`
 	// ========================================================================
 
 	&-caption {
@@ -74,7 +68,7 @@
 		color: @thumbnail-caption-color;
 	}
 
-	// Sub-Objects: `.thumbnail-{mini, small, medium, large}`
+	// Sub-objects: `.thumbnail-{mini, small, medium, large}`
 	// ========================================================================
 
 	&-mini,
@@ -102,7 +96,7 @@
 		width: @thumbnail-large-width;
 	}
 
-	// Sub-Object: `.thumbnail-expand`
+	// Sub-object: `.thumbnail-expand`
 	// ========================================================================
 
 	&-expand {

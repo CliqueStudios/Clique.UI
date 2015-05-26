@@ -2,23 +2,13 @@
 //
 // Description:     Defines styles for articles within your page
 //
-// Component:       `article`
+// Component:       `.article`
 //
-// Sub-Objects:     `article-title`
-//                  `article-meta`
-//                  `article-lead`
-//                  `hr`
+// Sub-objects:     `.article-title`
+//                  `.article-meta`
+//                  `.article-lead`
+//                  `.hr`
 //
-// Markup:
-// <!-- article -->
-// <div class="article">
-//     <h1 class="article-title"></h1>
-//     <p class="article-meta"></p>
-//     <p class="article-lead"></p>
-//     <p></p>
-//     <hr>
-//     <p></p>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -27,6 +17,8 @@
 // Variables
 // ========================================================================
 
+// Component-wide declarations
+
 @article-margin-top: 25px;
 
 @article-title-font-size: 36px;
@@ -34,16 +26,17 @@
 @article-title-line-height: unit(@_article-title-line-height) / unit(@article-title-font-size);
 @article-title-font-weight: 200;
 
-@article-meta-font-size: 14px;
-@_article-meta-line-height: 18px;
+@article-meta-font-size: @global-font-size;
+@_article-meta-line-height: @global-line-height-small;
 @article-meta-line-height: unit(@_article-meta-line-height) / unit(@article-meta-font-size);
 
 @article-lead-font-size: 22px;
 @article-lead-font-weight: @article-title-font-weight;
-@_article-lead-line-height: 24px;
+@_article-lead-line-height: 30px;
 @article-lead-line-height: unit(@_article-lead-line-height) / unit(@article-lead-font-size);
 
-@article-border: @global-border;
+@article-border-width: @global-border-width;
+@article-border: @global-border-color;
 
 // ========================================================================
 // Component: Article
@@ -60,10 +53,10 @@
 	& + & {
 		margin-top: @article-margin-top;
 		padding-top: @article-margin-top;
-		border-top: 1px solid @article-border;
+		border-top: @article-border-width solid @article-border;
 	}
 
-	// Sub-Object: `article-title`
+	// Sub-object: `.article-title`
 	// ========================================================================
 
 	&-title {
@@ -77,16 +70,14 @@
 		}
 	}
 
-	// Sub-Object: `article-meta`
+	// Sub-object: `.article-meta`
 	// ========================================================================
 
 	&-meta {
-		font-size: @article-meta-font-size;
 		line-height: @article-meta-line-height;
-		// color: @article-meta-color;
 	}
 
-	// Sub-Object: `article-lead`
+	// Sub-object: `.article-lead`
 	// ========================================================================
 
 	&-lead {

@@ -25,36 +25,38 @@
 
 @color-white: #fff;
 @color-black: #111;
-
-// Modifier: Base Colors
-// ========================================================================
-
-@global-border-color: #ddd;
-
-// Modifier: Theme Colors
-// ========================================================================
-
 @color-primary: #1fa5db;
+@color-success: #8cc14c;
+@color-warning: #faa732;
+@color-danger: #da314b;
+
+// Sub-modifier: Text State Colors
+// ========================================================================
+
+@global-text-shadow: @color-white;
+@global-link-color-hover: #059;
+@global-muted-color: #999;
+
+// Modifier: `.heme Colors
+// ========================================================================
+
 @color-primary-text: #2d7091;
 @color-primary-background: #00a8e6;
 @color-primary-background-light: #ebf7fd;
 @color-primary-border: fade(@color-primary-text, 30%);
 
-@color-success: #8cc14c;
 @color-success-text: #659f13;
-@color-success-background: #8cc14c;
+@color-success-background: @color-success;
 @color-success-background-light: #f2fae3;
 @color-success-border: fade(@color-success-text, 30%);
 
-@color-warning: #faa732;
 @color-warning-text: #e28327;
-@color-warning-background: #faa732;
+@color-warning-background: @color-warning;
 @color-warning-background-light: #fffceb;
 @color-warning-border: fade(@color-warning-text, 30%);
 
-@color-danger: #da314b;
 @color-danger-text: #d85030;
-@color-danger-background: #da314b;
+@color-danger-background: @color-danger;
 @color-danger-background-light: #fff1f0;
 @color-danger-border: fade(@color-danger-text, 30%);
 
@@ -62,17 +64,36 @@
 // Component: Font
 // ========================================================================
 
-@global-font-color: #888;
+@global-font-color: #555;
 @global-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 @global-font-size: 14px;
 @global-line-height: 20px;
 @global-link-color: #07d;
 
-@global-body-color: #444;
+// Modifier: `.ont
+// ========================================================================
+
+@global-font-color-darker: darken(@global-font-color, 8%);
+@global-highlight-color: #ffa;
+@global-emphasis-color: #d05;
+@global-link-color: #07D;
 
 // ========================================================================
 // Component: Button
 // ========================================================================
+
+// Backgrounds
+// ========================================================================
+
+@global-background: @color-white;
+@global-default-background: #eee;
+
+// Borders
+// ========================================================================
+
+@global-border-color: #ddd;
+@global-border-radius: 4px;
+@global-border-width: 1px;
 
 // ========================================================================
 // Component: Scaffolding
@@ -86,46 +107,32 @@
 // Component: Other
 // ========================================================================
 
-// Spacings
-// ========================================================================
-
-@zindex-navbar: 1000;
-@zindex-dropdown: 1000;
-@zindex-popover: 1060;
-@zindex-tooltip: 1070;
-@zindex-navbar-fixed: 1030;
-@zindex-modal: 1040;
-@inline-left-padding: 10px;
-
 // Text
 // ========================================================================
 
-@global-muted-color: #999;
-@global-text-shadow: #fff;
-@global-link-color: #07D;
-@global-link-hover-color: #059;
-@global-contrast-color: #fff;
-@global-contrast-text-shadow: rgba(0, 0, 0, 0.1);
+@global-font-size-mini: 11px;
+@global-font-size-small: 12px;
+@global-font-size-large: 16px;
+@global-font-size-block-title: 18px;
 
-// Backgrounds & Borders
-// ========================================================================
-
-@global-background: @color-white;
-@global-border: #ddd;
-@global-border-radius: 4px;
-@global-default-background: #f5f5f5;
-@global-default-hover-background: #fafafa;
-@global-default-active-background: #eee;
-@global-primary-background: #00a8e6;
-@global-success-background: #8cc14c;
-@global-warning-background: #faa732;
-@global-danger-background: #da314b;
+@global-line-height-mini: 16px;
+@global-line-height-small: 18px;
+@global-line-height-large: 24px;
+@global-line-height-block-title: 24px;
 
 // Spacings
 // ========================================================================
 
+@global-gutter: 20px;
+@global-gutter-large: @global-gutter + 10;
+@global-gutter-small: @global-gutter - 10px;
+@global-gutter-mini: @global-gutter-small - 5px;
+
 @global-margin: 15px;
-@global-margin-large: 25px;
+@global-margin-large: @global-margin + 10px;
+@global-margin-small: @global-margin - 10px;
+@global-margin-mini: @global-gutter-small - 5px;
+
 @global-grid-gutter: 25px;
 @global-grid-gutter-large: 35px;
 
@@ -134,8 +141,34 @@
 
 @global-height: 30px;
 @global-height-mini: 20px;
-@global-height-small: 25px;
+@global-height-small: 26px;
 @global-height-large: 40px;
 
-// Imports
+// Icons
 // ========================================================================
+
+@global-icon-menu: "\e9be";
+@global-icon-chevron-down: "\e600";
+@global-icon-chevron-up: "\e603";
+@global-icon-chevron-left: "\e601";
+@global-icon-spinner: "\e97a";
+
+// Modifier Variables
+// ========================================================================
+
+@global-inactive-opacity: 0.7;
+@global-active-opacity: 1;
+
+@global-link-decoration: none;
+@global-link-decoration-hover: underline;
+
+// Transform Values
+// ========================================================================
+
+@global-scale-in: 1.3;
+
+// Transitions
+// ========================================================================
+
+@global-transition-duration: 150ms;
+@global-transition-timing-function: ease-in-out;

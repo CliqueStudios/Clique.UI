@@ -2,22 +2,17 @@
 //
 // Description:     Defines styles for progress bars
 //
-// Component:       `progress`
+// Component:       `.progress`
 //
-// Sub-Objects:     `progress-bar`
+// Sub-objects:     `.progress-bar`
 //
-// Modifiers:       `progress-mini`
-//                  `progress-small`
-//                  `progress-success`
-//                  `progress-warning`
-//                  `progress-danger`
-//                  `progress-striped`
+// Modifiers:       `.progress-mini`
+//                  `.progress-small`
+//                  `.progress-success`
+//                  `.progress-warning`
+//                  `.progress-danger`
+//                  `.progress-striped`
 //
-// Markup:
-// <!-- progress -->
-// <div class="progress">
-//     <div class="progress-bar" style="width: 40%;"></div>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -29,10 +24,12 @@
 @progress-height: 20px;
 @progress-mini-height: 6px;
 @progress-small-height: 12px;
-@progress-margin-vertical: 15px;
-@progress-background: #eee;
+@progress-margin-vertical: @global-margin;
+@progress-background: @global-default-background;
+
 @progress-bar-background: @color-primary-background;
-@progress-bar-font-size: 12px;
+@progress-bar-font-size: @global-font-size-small;
+@progress-bar-line-height: unit(@global-line-height-small) / unit(@progress-bar-font-size);
 @progress-bar-color: #fff;
 @progress-bar-success-background: @color-success-background;
 @progress-bar-warning-background: @color-warning-background;
@@ -49,14 +46,14 @@
 	margin-bottom: @progress-margin-vertical;
 	background-color: @progress-background;
 	overflow: hidden;
-	.box-shadow(inset 0 0 0 1px rgba(0, 0, 0, 0.06));
+	.box-shadow(inset 0 0 0 1px fade(#000, 6%));
 	.border-radius(@progress-height / 2);
 
 	* + & {
 		margin-top: @progress-margin-vertical;
 	}
 
-	// Sub-Object: `progress-bar`
+	// Sub-object: `.progress-bar`
 	// ========================================================================
 
 	&-bar {
@@ -66,62 +63,46 @@
 		float: left;
 		.transition(width 600ms ease);
 		font-size: @progress-bar-font-size;
+		line-height: @progress-bar-line-height;
 		color: @progress-bar-color;
 		text-align: center;
-		.box-shadow(inset 0 0 5px rgba(0, 0, 0, 0.05));
+		.box-shadow(inset 0 0 5px fade(#000, 5%));
+
+		// Color modifiers
+		// ========================================================================
+
+		&-success {
+			background-color: @progress-bar-success-background;
+		}
+
+		&-warning {
+			background-color: @progress-bar-warning-background;
+		}
+
+		&-danger {
+			background-color: @progress-bar-danger-background;
+		}
+
+		&-striped {
+			.background-image(linear-gradient(-45deg, fade(#fff, 15%) 25%, transparent 25%, transparent 50%, fade(#fff, 15%) 50%, fade(#fff, 15%) 75%, transparent 75%, transparent));
+			.background-size(30px 30px);
+
+			&.active {
+				.animation(progress-bar-stripes 2s linear infinite);
+			}
+		}
 	}
 
 	// Size modifiers
 	// ========================================================================
 
-	// Mini
 	&-mini {
 		height: @progress-mini-height;
 		.border-radius(@progress-mini-height / 2);
 	}
 
-	// Small
 	&-small {
 		height: @progress-small-height;
 		.border-radius(@progress-small-height / 2);
-	}
-
-	// Color modifiers
-	// ========================================================================
-
-	&-success {
-		.progress-bar {
-			background-color: @progress-bar-success-background;
-		}
-	}
-
-	&-warning {
-		.progress-bar {
-			background-color: @progress-bar-warning-background;
-		}
-	}
-
-	&-danger {
-		.progress-bar {
-			background-color: @progress-bar-danger-background;
-		}
-	}
-
-
-	// Modifier: `progress-striped`
-	// ========================================================================
-
-	&-striped {
-		.progress-bar {
-			.background-image(linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent));
-			.background-size(30px 30px);
-		}
-
-		// Animation
-		&.active {
-			.progress-bar {
-				.animation(progress-bar-stripes 2s linear infinite);
-			}
-		}
 	}
 }

@@ -2,29 +2,29 @@
 //
 // Description:     Provides a useful set of keyframe animations
 //
-// Component:       `animation-*`
+// Component:       `.animation-*`
 //
-// Modifiers:       `animation-fade`
-//                  `animation-scale-up`
-//                  `animation-scale-down`
-//                  `animation-slide-top`
-//                  `animation-slide-bottom`
-//                  `animation-slide-left`
-//                  `animation-slide-right`
-//                  `animation-scale`
-//                  `animation-shake`
-//                  `animation-reverse`
-//                  `animation-15`
-//                  `animation-top-left`
-//                  `animation-top-center`
-//                  `animation-top-right`
-//                  `animation-middle-left`
-//                  `animation-middle-right`
-//                  `animation-bottom-left`
-//                  `animation-bottom-center`
-//                  `animation-bottom-right`
+// Modifiers:       `.animation-fade`
+//                  `.animation-scale-up`
+//                  `.animation-scale-down`
+//                  `.animation-slide-top`
+//                  `.animation-slide-bottom`
+//                  `.animation-slide-left`
+//                  `.animation-slide-right`
+//                  `.animation-scale`
+//                  `.animation-shake`
+//                  `.animation-reverse`
+//                  `.animation-15`
+//                  `.animation-top-left`
+//                  `.animation-top-center`
+//                  `.animation-top-right`
+//                  `.animation-middle-left`
+//                  `.animation-middle-right`
+//                  `.animation-bottom-left`
+//                  `.animation-bottom-center`
+//                  `.animation-bottom-right`
 //
-// Sub-Objects:     `animation-hover`
+// Sub-objects:     `.animation-hover`
 //
 // Uses:            Scrollspy
 //
@@ -261,15 +261,17 @@
 	}
 
 
-	// Sub-Object: `animation-hover`
+	// Sub-object: `.animation-hover`
 	// ========================================================================
 
-	&-hover:not(:hover) {
-		&,
-		[class*="animation-"] {
+	&-hover {
+		&:not(:hover) {
 			&,
-			.touch & {
-				.animation-name(none);
+			[class*="animation-"] {
+				&,
+				.touch & {
+					.animation-name(none);
+				}
 			}
 		}
 	}

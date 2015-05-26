@@ -2,31 +2,22 @@
 //
 // Description:     Defines styles for modal dialogs
 //
-// Component:       `modal`
+// Component:       `.modal`
 //
-// Sub-Objects:     `modal-dialog`
-//                  `modal-close`
-//                  `modal-header`
-//                  `modal-footer`
-//                  `modal-caption`
-//                  `modal-spinner`
+// Sub-objects:     `.modal-dialog`
+//                  `.modal-close`
+//                  `.modal-header`
+//                  `.modal-footer`
+//                  `.modal-caption`
+//                  `.modal-spinner`
 //
-// Modifiers:       `modal-dialog-lightbox`
-//                  `modal-dialog-large`
+// Modifiers:       `.modal-dialog-lightbox`
+//                  `.modal-dialog-large`
 //
-// States:          `open`
+// States:          `.open`
 //
-// Uses:            Close: `close`
+// Uses:            Close: `.close`
 //
-// Markup:
-// <!-- modal -->
-// <a href="#modal" data-modal=""></a>
-// <div id="modal" class="modal">
-//     <div class="modal-dialog">
-//         <a href="" class="modal-close close"></a>
-//         <p></p>
-//     </div>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -36,7 +27,7 @@
 // ========================================================================
 
 @modal-z-index: 1010;
-@modal-background: rgba(0, 0, 0, 0.6);
+@modal-background: fade(#000, 60%);
 @modal-dialog-margin-vertical: 50px;
 @modal-dialog-padding: 20px;
 @modal-dialog-width: 600px;
@@ -47,6 +38,8 @@
 @modal-footer-margin-top: 15px;
 @modal-caption-margin-bottom: -10px;
 @modal-caption-color: @color-white;
+
+@modal-spinner-icon: @global-icon-spinner;
 
 // ========================================================================
 // Component: Modal
@@ -75,7 +68,7 @@
 		}
 	}
 
-	// Sub-Object: `modal-dialog`
+	// Sub-object: `.modal-dialog`
 	// ========================================================================
 
 	&-dialog {
@@ -89,7 +82,7 @@
 		opacity: 0;
 		.translateY(-100px);
 		.transition(opacity 300ms linear, transform 300ms ease-out);
-		.box-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+		.box-shadow(0 0 10px fade(#000, 30%));
 
 		@media (max-width: @breakpoint-small-max) {
 			width: auto;
@@ -103,6 +96,34 @@
 			}
 		}
 
+		.open & {
+			opacity: 1;
+			.translateY(0);
+		}
+
+		&-large {
+			// Tablet and bigger
+			@media (min-width: @breakpoint-medium) {
+				width: @modal-dialog-large-width;
+			}
+
+			// Large screen and bigger
+			@media (min-width: @breakpoint-xlarge) {
+				width: @modal-dialog-large-col-large;
+			}
+		}
+
+		&-lightbox {
+			@media (max-width: @breakpoint-small-max) {
+				> .close {
+					&:first-child {
+						top: -7px;
+						right: -7px;
+					}
+				}
+			}
+		}
+
 		//Close in modal
 		// ========================================================================
 
@@ -110,13 +131,15 @@
 			&:first-child {
 				margin: -10px -10px 0 0;
 				float: right;
-				+ *:not([class*="modal-"]) {
-					margin-top: 0;
+				+ * {
+					&:not([class*="modal-"]) {
+						margin-top: 0;
+					}
 				}
 			}
 		}
 
-		// Modifier: `modal-dialog-lightbox`
+		// Modifier: `.modal-dialog-lightbox`
 		// ========================================================================
 
 		&-lightbox {
@@ -127,17 +150,19 @@
 			max-width: ~"calc(100% - 30px)";
 
 			// Close button
-			> .close:first-child {
-				position: absolute;
-				top: -12px;
-				right: -12px;
-				margin: 0;
-				float: none;
+			> .close {
+				&:first-child {
+					position: absolute;
+					top: -12px;
+					right: -12px;
+					margin: 0;
+					float: none;
+				}
 			}
 		}
 	}
 
-	// Sub-Object: `modal-header` and `modal-footer`
+	// Sub-object: `.modal-header` and `.modal-footer`
 	// ========================================================================
 
 	&-header {
@@ -164,23 +189,21 @@
 		}
 	}
 
-	// Sub-Object: `modal-caption`
+	// Sub-object: `.modal-caption`
 	// ========================================================================
 
 	&-caption {
 		position: absolute;
 		left: 0;
 		right: 0;
-		bottom: (-@modal-dialog-padding);
+		bottom: -@modal-dialog-padding;
 		margin-bottom: @modal-caption-margin-bottom;
 		color: @modal-caption-color;
 		text-align: center;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		.text-overflow();
 	}
 
-	// Sub-Object: `modal-spinner`
+	// Sub-object: `.modal-spinner`
 	// ========================================================================
 
 	&-spinner {
@@ -191,13 +214,13 @@
 		font-size: 25px;
 		color: #ddd;
 		&:after {
-			content: "\e97a";
+			content: @modal-spinner-icon;
 			font-family: "icomoon";
 			.animation(rotate 2s infinite linear);
 		}
 	}
 
-	// Sub-Object: `modal-scrollbar`
+	// Sub-object: `.modal-scrollbar`
 	// ========================================================================
 
 	&-scrollbar {
@@ -209,39 +232,5 @@
 
 	&.open {
 		opacity: 1;
-	}
-}
-
-// Phone landscape and smaller
-@media (max-width: @breakpoint-small-max) {
-	.modal-dialog-lightbox > .close:first-child {
-		top: -7px;
-		right: -7px;
-	}
-}
-
-
-// Modifier: `modal-dialog-large`
-// ========================================================================
-
-// Tablet and bigger
-@media (min-width: @breakpoint-medium) {
-	.modal-dialog-large {
-		width: @modal-dialog-large-width;
-	}
-}
-
-// Large screen and bigger
-@media (min-width: @breakpoint-xlarge) {
-	.modal-dialog-large {
-		width: @modal-dialog-large-col-large;
-	}
-}
-
-// Open state
-.open {
-	.modal-dialog {
-		opacity: 1;
-		.translateY(0);
 	}
 }

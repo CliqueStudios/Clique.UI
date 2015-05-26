@@ -2,7 +2,7 @@
 	"name": "CliqueUI",
 	"title": "CliqueUI",
 	"description": "Clique.UI is a lightweight, modular front-end framework for rapid web-interface development.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"homepage": "http://ui.cliquestudios.com",
 	"author": {
 		"name": "Clique Studios",
@@ -22,32 +22,26 @@
 	"bugs": {
 		"url": "https://github.com/CliqueStudios/Clique.UI/issues"
 	},
-	"dependencies": {
-		"node-promise": "^0.5.10"
-	},
 	"devDependencies": {
-		"casperjs": "^1.1.0-beta3",
 		"grunt": "~0.4.5",
-		"grunt-browserify": "^3.8.0",
 		"grunt-casperjs": "^2.1.0",
-		"grunt-cleaner-css": "^0.2.1",
-		"grunt-cliqueui-clean-less": "^0.1.1",
+		"grunt-cleaner-css": "^0.2.4",
+		"grunt-cliqueui-clean-less": "^0.1.3",
 		"grunt-contrib-clean": "^0.6.0",
-		"grunt-contrib-coffee": "~0.12.0",
-		"grunt-contrib-concat": "^0.5.0",
-		"grunt-contrib-cssmin": "^0.12.1",
-		"grunt-contrib-jshint": "~0.11.0",
-		"grunt-contrib-less": "~1.0.0",
-		"grunt-contrib-uglify": "^0.7.0",
-		"grunt-contrib-watch": "~0.6.1",
-		"grunt-csscomb": "^3.0.0",
-		"grunt-jsbeautifier": "^0.2.8",
-		"grunt-mocha": "^0.4.12",
+		"grunt-contrib-coffee": "^0.13.0",
+		"grunt-contrib-concat": "^0.5.1",
+		"grunt-contrib-csslint": "^0.4.0",
+		"grunt-contrib-cssmin": "^0.12.3",
+		"grunt-contrib-jshint": "^0.11.2",
+		"grunt-contrib-less": "^1.0.1",
+		"grunt-contrib-uglify": "^0.9.1",
+		"grunt-contrib-watch": "^0.6.1",
+		"grunt-jsbeautifier": "^0.2.10",
 		"grunt-newer": "^1.1.0",
 		"grunt-pagespeed": "^1.0.0",
-		"jshint-html-reporter": "^0.2.3",
+		"jshint-html-reporter": "^0.2.4",
 		"load-grunt-tasks": "^3.1.0",
 		"mocha": "^2.2.5",
-		"should": "^6.0.1"
+		"should": "^6.0.3"
 	}
 }

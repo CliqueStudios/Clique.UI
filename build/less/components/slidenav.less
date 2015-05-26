@@ -2,26 +2,16 @@
 //
 // Description:     Defines styles for a previous/next navigation between slides
 //
-// Component:       `slidenav`
+// Component:       `.slidenav`
 //
-// Modifiers:       `slidenav-previous`
-//                  `slidenav-next`
-//                  `slidenav-contrast`
+// Modifiers:       `.slidenav-previous`
+//                  `.slidenav-next`
+//                  `.slidenav-contrast`
 //
-// Sub-Objects:     `slidenav-position`
+// Sub-objects:     `.slidenav-position`
 //
 // Uses:            Icon: "icomoon"
 //
-// Markup:
-// <!-- slidenav -->
-// <a href="" class="slidenav slidenav-previous"></a>
-// <a href="" class="slidenav slidenav-next"></a>
-// <!-- slidenav-position -->
-// <div class="slidenav-position">
-//     <img src="" alt="">
-//     <a href="" class="slidenav slidenav-previous"></a>
-//     <a href="" class="slidenav slidenav-next"></a>
-// </div>
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
@@ -32,18 +22,18 @@
 
 @slidenav-width: 60px;
 @slidenav-height: @slidenav-width;
-@slidenav-color: rgba(50, 50, 50, 0.4);
+@slidenav-color: fade(#333, 40%);
 @slidenav-font-size: 60px;
 @slidenav-line-height: @slidenav-height;
 @slidenav-previous-icon: "\e601";
 @slidenav-next-icon: "\e602";
-@slidenav-hover-color: rgba(50, 50, 50, 0.7);
-@slidenav-active-color: rgba(50, 50, 50, 0.9);
+@slidenav-hover-color: fade(#333, 70%);
+@slidenav-active-color: fade(#333, 90%);
 @slidenav-position-previous: 20px;
 @slidenav-position-next: @slidenav-position-previous;
-@slidenav-contrast-color: rgba(255, 255, 255, 0.5);
-@slidenav-contrast-hover-color: rgba(255, 255, 255, 0.7);
-@slidenav-contrast-active-color: rgba(255, 255, 255, 0.9);
+@slidenav-contrast-color: fade(#fff, 50%);
+@slidenav-contrast-hover-color: fade(#fff, 70%);
+@slidenav-contrast-active-color: fade(#fff, 90%);
 
 // ========================================================================
 // Component: Slidenav
@@ -92,14 +82,12 @@
 		}
 	}
 
-	// Sub-Object: `slidenav-position`
+	// Sub-object: `.slidenav-position`
 	// ========================================================================
 
-	// Create position context
 	&-position {
 		position: relative;
 
-		// Center vertically
 		.slidenav {
 			display: none;
 			position: absolute;
@@ -124,7 +112,7 @@
 	}
 
 
-	// Modifier: `slidenav-contrast`
+	// Modifier: `.slidenav-contrast`
 	// ========================================================================
 
 	&-contrast {
