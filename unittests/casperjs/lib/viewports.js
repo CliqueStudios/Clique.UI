@@ -34,22 +34,22 @@ module.exports = {
 		}, {
 			'name': 'Chrome (small)',
 			'viewport': {width: 1280, height: 800},
-			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.3228.0 Safari/537.36',
+			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.4228.0 Safari/537.36',
 			'classes' : 'chrome desktop mac portrait screen-xlarge notouch'
 		}, {
 			'name': 'Chrome (medium)',
 			'viewport': {width: 1440, height: 900},
-			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.3228.0 Safari/537.36',
+			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.4228.0 Safari/537.36',
 			'classes' : 'chrome desktop mac portrait screen-xlarge notouch'
 		}, {
 			'name': 'Chrome (large)',
 			'viewport': {width: 1600, height: 1200},
-			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.3228.0 Safari/537.36',
+			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.4228.0 Safari/537.36',
 			'classes' : 'chrome desktop mac portrait screen-xlarge notouch'
 		}, {
 			'name': 'Chrome (xlarge)',
 			'viewport': {width: 2048, height: 1536},
-			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.3228.0 Safari/537.36',
+			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.4228.0 Safari/537.36',
 			'classes' : 'chrome desktop mac portrait screen-xlarge notouch'
 		}, {
 			'name': 'Firefox',
@@ -87,7 +87,7 @@ module.exports = {
 		{
 			'name': 'Chrome (medium)',
 			'viewport': {width: 1440, height: 900},
-			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.3228.0 Safari/537.36',
+			'useragent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.4228.0 Safari/537.36',
 			'classes' : 'chrome desktop mac portrait screen-xlarge notouch'
 		}
 	]

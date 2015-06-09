@@ -17,7 +17,7 @@
 	return _c.component('toggle', {
 		defaults: {
 			target: false,
-			cls: 'hidden',
+			class: 'hidden',
 			animation: false,
 			duration: 400
 		},
@@ -40,7 +40,7 @@
 		init: function() {
 			var $this;
 			$this = this;
-			this.aria = this.options.cls.indexOf('hidden') !== -1;
+			this.aria = this.options.class.indexOf('hidden') !== -1;
 			this.getToggles();
 			this.on('click', function(e) {
 				if($this.element.is('a[href="#"]')) {
@@ -64,8 +64,8 @@
 				animations[0] = animations[0].trim();
 				animations[1] = animations[1].trim();
 				this.totoggle.css('animation-duration', this.options.duration + 'ms');
-				if(this.totoggle.hasClass(this.options.cls)) {
-					this.totoggle.toggleClass(this.options.cls);
+				if(this.totoggle.hasClass(this.options.class)) {
+					this.totoggle.toggleClass(this.options.class);
 					this.totoggle.each(function() {
 						return _c.utils.animate(this, animations[0]).then(function() {
 							$(this).css('animation-duration', '');
@@ -76,14 +76,14 @@
 					this.totoggle.each(function() {
 						return _c.utils.animate(this, animations[1] + ' animation-reverse').then((function(_this) {
 							return function() {
-								$(_this).toggleClass($this.options.cls).css('animation-duration', '');
+								$(_this).toggleClass($this.options.class).css('animation-duration', '');
 								return _c.utils.checkDisplay(_this);
 							};
 						})(this));
 					});
 				}
 			} else {
-				this.totoggle.toggleClass(this.options.cls);
+				this.totoggle.toggleClass(this.options.class);
 				evt = _c.$.Event({
 					type: 'toggle.clique',
 					relatedTarget: this.element

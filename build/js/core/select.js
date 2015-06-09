@@ -21,8 +21,8 @@
 			inheritClasses: true
 		},
 		boot: function() {
-			_c.ready(function(context) {
-				$('[data-select]', context).each(function() {
+			_c.$doc.on('ready', function() {
+				$('[data-select]').each(function() {
 					var ele, obj;
 					ele = $(this);
 					if(!ele.is('select')) {

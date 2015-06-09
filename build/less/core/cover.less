@@ -16,12 +16,17 @@
 .cover {
 	overflow: hidden;
 
-	// Background image always covers and centers its element
+	// Sub-object: `.cover-background`
+	// ========================================================================
+
 	&-background {
-		background-position: 50% 50%;
+		background-position: center;
 		.background-size(cover);
 		background-repeat: no-repeat;
 	}
+
+	// Sub-object: `.cover-object`
+	// ========================================================================
 
 	&-object {
 		width: auto;
@@ -32,14 +37,14 @@
 		position: relative;
 		left: 50%;
 		top: 50%;
-		.transform(translate(-50%, -50%));
+		.translate(-50%, -50%);
 	}
 }
 
-// To center iframes use `.data-cover` JavaScript
+// To center iframes use `[data-cover]`
 [data-cover] {
 	position: relative;
 	left: 50%;
 	top: 50%;
-	.transform(translate(-50%, -50%));
+	.translate(-50%, -50%);
 }

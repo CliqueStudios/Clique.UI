@@ -11,7 +11,6 @@
 //                  `.responsive-*`
 //                  `.margin-*`
 //                  `.border-*`
-//                  `.heading-*`
 //                  `.link-*`
 //                  `.scrollable-*`
 //                  `.overflow-container`
@@ -46,10 +45,10 @@
 
 @utility-border-rounded: @global-border-radius;
 
-@utility-heading-large-small-font-size: 36px;
-@utility-heading-large-small-line-height: 42px;
-@utility-heading-large-font-size: 52px;
-@utility-heading-large-line-height: 64px;
+@base-link-color: @global-link-color;
+@base-link-color-hover: @global-link-color-hover;
+@base-link-text-decoration: @global-link-decoration;
+@base-link-text-decoration-hover: @global-link-decoration-hover;
 
 @utility-scrollable-text-height: 300px;
 @utility-scrollable-box-height: 170px;
@@ -122,29 +121,32 @@
 	&-left {
 		margin-right: @utility-align-horizontal;
 		float: left;
+
+		// Tablet and bigger
+		@media (min-width: @breakpoint-medium) {
+			&-medium {
+				margin-right: @utility-align-horizontal;
+				margin-bottom: @utility-align-vertical;
+				float: left;
+			}
+		}
 	}
 	&-right {
 		margin-left: @utility-align-horizontal;
 		float: right;
+
+		// Tablet and bigger
+		@media (min-width: @breakpoint-medium) {
+			&-medium {
+				margin-left: @utility-align-horizontal;
+				margin-bottom: @utility-align-vertical;
+				float: right;
+			}
+		}
 	}
 	&-center {
 		margin-left: auto;
 		margin-right: auto;
-	}
-
-	// Tablet and bigger
-	@media (min-width: @breakpoint-medium) {
-		&-medium-left {
-			margin-right: @utility-align-horizontal;
-			margin-bottom: @utility-align-vertical;
-			float: left;
-		}
-
-		&-medium-right {
-			margin-left: @utility-align-horizontal;
-			margin-bottom: @utility-align-vertical;
-			float: right;
-		}
 	}
 }
 
@@ -310,27 +312,19 @@
 	}
 }
 
-// Headings
-// ========================================================================
-
-.heading {
-
-	&-large {
-		font-size: @utility-heading-large-small-font-size;
-		line-height: unit(@utility-heading-large-small-line-height) / unit(@utility-heading-large-small-font-size);
-
-		// Tablet and bigger
-		@media (min-width: @breakpoint-medium) {
-			font-size: @utility-heading-large-font-size;
-			line-height: unit(@utility-heading-large-line-height) / unit(@utility-heading-large-font-size);
-		}
-	}
-}
-
 // Link
 // ========================================================================
 
 .link {
+	color: @base-link-color;
+	text-decoration: @base-link-text-decoration;
+	cursor: pointer;
+
+	// Hover
+	&:hover {
+		color: @base-link-color-hover;
+		text-decoration: @base-link-text-decoration-hover;
+	}
 
 	// Reset link style
 	&-reset {

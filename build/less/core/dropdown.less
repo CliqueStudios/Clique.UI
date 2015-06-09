@@ -4,17 +4,10 @@
 //
 // Component:       `.dropdown`
 //
-// Modifiers:       `.dropdown-flip`
+// Modifiers:       `.dropdown-right`
 //                  `.dropdown-center`
 //                  `.dropdown-justify`
 //                  `.dropdown-up`
-//                  `.dropdown-grid`
-//                  `.dropdown-col-2`
-//                  `.dropdown-col-3`
-//                  `.dropdown-col-4`
-//                  `.dropdown-col-5`
-//                  `.dropdown-stack`
-//                  `.dropdown-small`
 //                  `.dropdown-navbar`
 //                  `.dropdown-scrollable`
 //
@@ -84,18 +77,32 @@
 		margin: 0 -@dropdown-padding;
 	}
 
-	// Alignment modifiers
+	// Modifier: `.dropdown-flip`
 	// ========================================================================
 
-	// Modifier `.dropdown-flip`
-	// ========================================================================
-
-	&-flip {
+	&-right {
 		left: auto;
 		right: 0;
 	}
 
-	// Modifier `.dropdown-up`
+	// Modifier: `.dropdown-center`
+	// ========================================================================
+
+	&-center {
+		left: 50%;
+		.translate(-50%, 0);
+	}
+
+	// Modifier: `.dropdown-justify`
+	// ========================================================================
+
+	&-justify {
+		left: 0;
+		right: 0;
+		width: auto;
+	}
+
+	// Modifier: `.dropdown-up`
 	// ========================================================================
 
 	&-up {
@@ -103,20 +110,6 @@
 		bottom: 100%;
 		margin-top: auto;
 		margin-bottom: @dropdown-margin-top;
-	}
-
-	// Modifier `.dropdown-small`
-	// ========================================================================
-
-	// Set min-width and text expands dropdown if needed
-	&-small {
-		min-width: 150px;
-		width: auto;
-		padding: @dropdown-small-padding;
-		white-space: nowrap;
-		.nav {
-			margin: 0 -@dropdown-small-padding;
-		}
 	}
 
 
@@ -129,127 +122,31 @@
 		color: @dropdown-navbar-color;
 		left: -1px;
 		border: @dropdown-border-width solid @dropdown-border;
+
 		> .open {
 			.animation(@dropdown-navbar-animation 200ms ease-in-out);
 		}
+
 		&.dropdown-flip {
 			left: auto;
 		}
 	}
 
-	// Modifier `.dropdown-scrollable`
+	// Modifier: `.dropdown-scrollable`
 	// ========================================================================
 
 	&-scrollable {
-		overflow-y: auto;
+		overflow-x: hidden;
+		height: auto;
 		max-height: @dropdown-scrollable-height;
 	}
 
-	// Modifier `.dropdown-stack`
+	// Sub-object: `.dropdown-scrollable`
 	// ========================================================================
 
-	&-stack {
-		> .dropdown-grid {
-			> [class*="col-"] {
-				width: 100%;
-				&:nth-child(n+2) {
-					margin-top: @dropdown-padding;
-				}
-			}
-		}
-	}
-
-	// Modifier `.dropdown-grid`
-	// ========================================================================
-
-	&-grid {
-		.row & {
-			& + & {
-				margin-top: @dropdown-padding;
-			}
-		}
-
-		> [class*="col-"] {
-			> .panel {
-				+ .panel {
-					margin-top: @dropdown-padding;
-				}
-			}
-		}
-	}
-}
-
-// Tablet and bigger
-@media (min-width: @breakpoint-medium) {
-	// * Horizontal gutter
-	:not(.dropdown-stack) {
-		.dropdown& {
-			> .dropdown {
-				&-grid {
-					margin-left: -@dropdown-padding;
-					margin-right: -@dropdown-padding;
-
-					> [class*="col-"] {
-						padding-left: @dropdown-padding;
-						padding-right: @dropdown-padding;
-
-						&:nth-child(n+2) {
-							border-left: @dropdown-divider-border-width solid @dropdown-divider-border;
-						}
-					}
-				}
-			}
-		}
-		.dropdown& {
-			> .dropdown {
-				&-grid {
-					margin-left: -@dropdown-padding;
-					margin-right: -@dropdown-padding;
-
-					> [class*="col-"] {
-						padding-left: @dropdown-padding;
-						padding-right: @dropdown-padding;
-
-						&:nth-child(n+2) {
-							border-left: @dropdown-divider-border-width solid @dropdown-divider-border;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-// Width multiplier for dropdown columns
-:not(.dropdown-stack) {
-	&.dropdown {
-		&-col {
-			&-2 {
-				width: (@dropdown-width * 2);
-			}
-			&-3 {
-				width: (@dropdown-width * 3);
-			}
-			&-4 {
-				width: (@dropdown-width * 4);
-			}
-			&-5 {
-				width: (@dropdown-width * 5);
-			}
-		}
-	}
-}
-
-// Phone landscape and smaller
-@media (max-width: @breakpoint-small-max) {
-	.dropdown {
-		&-grid {
-			> [class*="col-"] {
-				width: 100%;
-				&:nth-child(n+2) {
-					margin-top: @dropdown-padding;
-				}
-			}
-		}
+	&-button {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
 	}
 }

@@ -22,7 +22,7 @@
 @breadcrumb-divider-margin: 8px;
 @breadcrumb-divider-color: @global-muted-color;
 
-@breadcrumb-disabled-color: @global-muted-color;
+@breadcrumb-disabled-color: @global-font-color;
 
 // ========================================================================
 // Component: Breadcrumb
@@ -43,11 +43,11 @@
 				color: @breadcrumb-divider-color;
 			}
 		}
+	}
 
-		&:not(.active) {
-			> span {
-				color: @breadcrumb-disabled-color;
-			}
+	> .active {
+		> * {
+			color: @breadcrumb-disabled-color;
 		}
 	}
 }

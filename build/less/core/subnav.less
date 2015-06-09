@@ -67,10 +67,24 @@
 		padding-left: @subnav-margin-horizontal;
 	}
 
-	// Active
+	// State: `.active`
+	// ========================================================================
+
 	> .active {
 		> * {
 			color: @subnav-active-color;
+		}
+	}
+
+	// State: `.disbabled`
+	// ========================================================================
+
+	> .disabled {
+		> * {
+			background-color: transparent;
+			color: @subnav-disabled-color;
+			text-decoration: none;
+			cursor: default;
 		}
 	}
 
@@ -113,18 +127,6 @@
 				background-color: @subnav-pill-active-background;
 				color: @subnav-pill-active-color;
 			}
-		}
-	}
-
-	// Disabled state
-	// ========================================================================
-
-	> .disabled {
-		> * {
-			background-color: transparent;
-			color: @subnav-disabled-color;
-			text-decoration: none;
-			cursor: default;
 		}
 	}
 }

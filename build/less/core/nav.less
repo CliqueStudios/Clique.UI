@@ -17,7 +17,6 @@
 // States:          `.active`
 //                  `.parent`
 //                  `.open`
-//                  `.touch`
 //
 // Uses:            Icon: "icomoon"
 //
@@ -126,23 +125,9 @@
 	// Links
 	a {
 		color: inherit;
-	}
-
-	// Items
-	li {
-		> a {
-			display: block;
-			text-decoration: none;
-			padding: @nav-padding-vertical @nav-padding-horizontal;
-		}
-	}
-
-	// Nested items
-	ul {
-		padding-left: @nav-nested-padding-left;
-		a {
-			padding: @nav-nested-padding-vertical @nav-nested-padding-horizontal;
-		}
+		display: block;
+		text-decoration: none;
+		padding: @nav-padding-vertical @nav-padding-horizontal;
 	}
 
 	// Item subtitle
@@ -181,8 +166,11 @@
 	// ========================================================================
 
 	&-sub {
-		ul& {
-			padding: @nav-sub-padding-vertical 0 @nav-sub-padding-vertical @nav-sub-padding-left;
+		ul {
+			padding-left: @nav-nested-padding-left;
+		}
+		a {
+			padding-left: @nav-nested-padding-left * 2;
 		}
 	}
 
@@ -218,7 +206,7 @@
 		}
 	}
 
-	// Modifier `.nav-side`
+	// Modifier: `.nav-side`
 	// ========================================================================
 
 	// Items
@@ -262,7 +250,7 @@
 		}
 	}
 
-	// Modifier `.nav-dropdown`
+	// Modifier: `.nav-dropdown`
 	// ========================================================================
 
 	// Items
@@ -297,7 +285,7 @@
 	}
 
 
-	// Modifier `.nav-navbar`
+	// Modifier: `.nav-navbar`
 	// ========================================================================
 
 	// Items
@@ -334,7 +322,7 @@
 		}
 	}
 
-	// Modifier `.nav-offcanvas`
+	// Modifier: `.nav-offcanvas`
 	// ========================================================================
 
 	// Items
@@ -401,7 +389,7 @@
 			&-divider {
 				border-top: @nav-offcanvas-divider-border-width solid @nav-offcanvas-divider-border;
 				margin: 0;
-				height: 4px;
+				height: 2px;
 				background-color: @nav-offcanvas-divider-background;
 			}
 

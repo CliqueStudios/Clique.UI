@@ -7,7 +7,7 @@ var getParamNames = function(func) {
 	}
 	return result;
 }
-var currentVersion = '1.0.3';
+var currentVersion = '1.0.4';
 
 describe('Clique.core', function(){
 	var _c = window.Clique;

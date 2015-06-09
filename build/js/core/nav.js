@@ -61,14 +61,13 @@
 				return $this.open((ele.parent()[0] === $this.element[0] ? ele : ele.parent('li')));
 			});
 			return this.find(this.options.lists).each(function() {
-				var $ele, active, parent;
+				var $ele, parent;
 				$ele = $(this);
 				parent = $ele.parent();
-				active = parent.hasClass('active');
 				$ele.wrap('<div style="overflow :hidden;height :0;position :relative;"></div>');
 				parent.data('list-container', $ele.parent());
 				parent.attr('aria-expanded', parent.hasClass('open'));
-				if(active) {
+				if(parent.hasClass('active') || parent.hasClass('open')) {
 					return $this.open(parent, true);
 				}
 			});

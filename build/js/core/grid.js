@@ -97,9 +97,10 @@
 			});
 		},
 		init: function() {
-			var stackMargin;
-			stackMargin = _c.stackMargin(this.element, this.options);
-			return this.element.trigger('init.clique.grid');
+			var firstChild = this.find('> *').first();
+			var leftSpacing = parseInt(firstChild.css('padding-left'), 10);
+			this.element.css('margin-bottom', -leftSpacing);
+			this.find('> *').css('margin-bottom', leftSpacing);
 		}
 	});
 	_c.utils.matchHeights = function(elements, options) {

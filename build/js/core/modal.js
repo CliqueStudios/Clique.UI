@@ -35,14 +35,14 @@
 	};
 	active = false;
 	_c.component('modal', {
+		scrollable: false,
+		transition: false,
 		defaults: {
 			keyboard: true,
 			bgclose: true,
 			minScrollHeight: 150,
 			center: false
 		},
-		scrollable: false,
-		transition: false,
 		init: function() {
 			var $this;
 			$this = this;

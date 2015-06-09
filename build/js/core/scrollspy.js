@@ -29,7 +29,7 @@
 	_c.component('scrollspy', {
 		defaults: {
 			target: false,
-			cls: 'scrollspy-inview',
+			class: 'scrollspy-inview',
 			initcls: 'scrollspy-init-inview',
 			topoffset: 0,
 			leftoffset: 0,
@@ -52,7 +52,7 @@
 		init: function() {
 			var $this, fn, togglecls;
 			$this = this;
-			togglecls = this.options.cls.split(/,/);
+			togglecls = this.options.class.split(/,/);
 			fn = function() {
 				var delayIdx, elements, toggleclsIdx;
 				elements = $this.options.target ? $this.element.find($this.options.target) : $this.element;
@@ -108,7 +108,7 @@
 	};
 	return _c.component('scrollspynav', {
 		defaults: {
-			cls: 'active',
+			class: 'active',
 			closest: false,
 			topoffset: 0,
 			leftoffset: 0,
@@ -134,7 +134,7 @@
 				return ids.push($(this).attr('href'));
 			});
 			targets = $(ids.join(','));
-			clsActive = this.options.cls;
+			clsActive = this.options.class;
 			clsClosest = this.options.closest || this.options.closest;
 			$this = this;
 			fn = function() {

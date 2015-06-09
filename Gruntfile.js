@@ -16,7 +16,6 @@ module.exports = function(grunt) {
 	var coreJS = function() {
 		return [
 			'dist/js/core/core.js',
-			'dist/js/core/touch.js',
 			'dist/js/core/events.js',
 			'dist/js/core/browser.js',
 		];
@@ -27,6 +26,7 @@ module.exports = function(grunt) {
 		var subdirs = ['core', 'components'];
 		var output = coreJS();
 		var callback = function(abspath) {
+			console.log(abspath);
 			if(output.indexOf(abspath) < 0 && abspath.indexOf('.min.') < 0) {
 				output.push(abspath);
 			}
@@ -354,7 +354,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'build-js',
 		'Builds, cleans, and optmiizes the JS from .coffee files',
-		['clean:js', 'uglify:build', 'concat:core', 'jsbeautifier:js', 'uglify:dist']
+		['clean:js', 'uglify:build', 'concat', 'jsbeautifier:js', 'uglify:dist']
 	);
 	grunt.registerTask(
 		'casper',

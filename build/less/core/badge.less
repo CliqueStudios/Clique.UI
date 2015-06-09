@@ -6,6 +6,7 @@
 //
 // Modifiers:       `.badge-notification`
 //                  `.badge-success`
+//                  `.badge-warning`
 //                  `.badge-danger`
 
 @import "../mixins/mixins.less";
@@ -25,14 +26,14 @@
 @badge-line-height: 14px;
 @badge-color: @color-white;
 @badge-hover-color: @color-white;
-@badge-notification-font-size: 12px;
-@badge-notification-line-height: 16px;
+@badge-border-width: @global-border-width;
+@badge-border-color: fade(#000, 10%);
+
+@badge-notification-height: 22px;
+
 @badge-success-background: @color-success-background;
 @badge-warning-background: @color-warning-background;
 @badge-danger-background: @color-danger-background;
-
-@badge-border-width: @global-border-width;
-@badge-border-color: fade(#000, 10%);
 
 // ========================================================================
 // Component: Badge
@@ -61,26 +62,27 @@
 	// ========================================================================
 
 	&-notification {
-		min-width: 22px;
-		.border-radius(24px / 2);
-		font-size: @badge-notification-font-size;
-		line-height: @badge-notification-line-height;
+		min-width: @badge-notification-height;
+		.border-radius((@badge-notification-height + (@badge-border-width * 2)) / 2);
 	}
 
 	// Modifier: `.badge-success`
 	// ========================================================================
+
 	&-success {
 		background-color: @badge-success-background;
 	}
 
 	// Modifier: `.badge-warning`
 	// ========================================================================
+
 	&-warning {
 		background-color: @badge-warning-background;
 	}
 
 	// Modifier: `.badge-danger`
 	// ========================================================================
+
 	&-danger {
 		background-color: @badge-danger-background;
 	}

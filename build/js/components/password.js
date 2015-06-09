@@ -1,11 +1,11 @@
 (function(addon) {
 	if(typeof define === 'function' && define.amd) {
-		define('clique-form.password', ['clique'], function() {
+		define('clique-password', ['clique'], function() {
 			return addon(Clique);
 		});
 	}
 	if(!window.Clique) {
-		throw new Error('Clique.form.password requires Clique.core');
+		throw new Error('Clique.password requires Clique.core');
 	}
 	if(window.Clique) {
 		addon(Clique);
@@ -13,18 +13,18 @@
 })(function(_c) {
 	var $;
 	$ = _c.$;
-	_c.component('formPassword', {
+	_c.component('password', {
 		defaults: {
 			lblShow: 'Show',
 			lblHide: 'Hide'
 		},
 		boot: function() {
-			return _c.$html.on('click.formpassword.clique', '[data-form-password]', function(e) {
+			return _c.$html.on('click.password.clique', '[data-password]', function(e) {
 				var ele, obj;
 				ele = _c.$(this);
-				if(!ele.data('clique.data.formPassword')) {
+				if(!ele.data('clique.data.password')) {
 					e.preventDefault();
-					obj = _c.formPassword(ele, _c.utils.options(ele.attr('data-form-password')));
+					obj = _c.password(ele, _c.utils.options(ele.attr('data-password')));
 					return ele.trigger('click');
 				}
 			});
@@ -45,8 +45,8 @@
 			})(this));
 			this.input = (this.element.next('input').length ? this.element.next('input') : this.element.prev('input'));
 			this.element.text(this.options[(this.input.is('[type=\'password\']') ? 'lblShow' : 'lblHide')]);
-			return this.element.data('formPassword', this);
+			return this.element.data('password', this);
 		}
 	});
-	return _c.formPassword;
+	return _c.password;
 });

@@ -1,11 +1,11 @@
 (function(addon) {
 	if(typeof define === 'function' && define.amd) {
-		define('clique-form', ['clique'], function() {
+		define('clique-radioCheckboxes', ['clique'], function() {
 			return addon(Clique);
 		});
 	}
 	if(!window.Clique) {
-		throw new Error('Clique.form requires Clique.core');
+		throw new Error('Clique.radioCheckboxes requires Clique.core');
 	}
 	if(window.Clique) {
 		addon(Clique);
@@ -13,60 +13,57 @@
 })(function(_c) {
 	var $;
 	$ = _c.$;
-	_c.component('checkbox', {
-		boot: function() {
-			return _c.on('ready', function(context) {
-				return $('input[type="checkbox"]:not([data-switch])').each(function() {
+	_c.component('radioCheckboxes', {
+		boot : function() {
+			_c.$doc.on('ready', function() {
+				_c.$('input[type="checkbox"]:not([data-switch]), input[type="radio"]').each(function() {
 					var ele;
 					ele = $(this);
-					if(!$(this).data('clique.data.checkbox')) {
-						return _c.checkbox(ele);
+					if(!ele.data('clique.data.radioCheckboxes')) {
+						_c.radioCheckboxes(ele);
 					}
 				});
 			});
 		},
-		init: function() {
-			if(!$(this.element).closest('.form-checkbox').length) {
-				$(this.element).wrap("<span class='form-checkbox' />");
-				$(this.element).after("<span />");
+		init : function() {
+			var ele = $(this.element);
+			this.type = ele.attr('type');
+			if(!ele.closest('.form-' + this.type).length) {
+				ele.wrap("<span class='form-" + this.type + "' />");
+				ele.after("<span class='form-" + this.type + "-check' />");
 			}
-			return this.triggerEvents();
+
+			this.updateClasses();
+			this.bindListeners();
+			this.bindEvents();
 		},
-		triggerEvents: function() {
-			return $(this.element).on('change', function(e) {
-				if($(this.element).is(':checked')) {
-					return $(this.element).trigger('clique.checkbox.checked');
-				} else {
-					return $(this.element).trigger('clique.checkbox.unchecked');
-				}
-			});
-		}
-	});
-	return _c.component('radio', {
-		boot: function() {
-			return _c.on('ready', function(context) {
-				return $('input[type="radio"]').each(function() {
-					var ele;
-					ele = $(this);
-					if(!$(this).data('clique.data.radio')) {
-						return _c.radio(ele);
-					}
-				});
-			});
-		},
-		init: function() {
-			if(!$(this.element).closest('.form-radio').length) {
-				$(this.element).wrap("<span class='form-radio' />");
-				$(this.element).after("<span />");
+		updateClasses : function() {
+			var ele = $(this.element);
+			var wrapper = ele.closest('.form-' + this.type);
+			if(ele.is(':disabled')) {
+				wrapper.addClass('disabled');
+			} else {
+				wrapper.removeClass('disabled');
 			}
-			return this.triggerEvents();
+			if(ele.is(':checked')) {
+				wrapper.removeClass('unchecked').addClass('checked');
+			} else {
+				wrapper.removeClass('checked').addClass('unchecked');
+			}
 		},
-		triggerEvents: function() {
-			return $(this.element).on('change', function(e) {
-				if($(this.element).is(':checked')) {
-					return $(this.element).trigger('clique.radio.checked');
+		bindListeners : function() {
+			var $this = this;
+			this.on('clique.' + this.type + '.checked clique.' + this.type + '.unchecked', function() {
+				$this.updateClasses();
+			});
+		},
+		bindEvents : function() {
+			var ele = $(this.element);
+			ele.on('change', function() {
+				if(ele.is(':checked')) {
+					ele.trigger('clique.' + this.type + '.checked');
 				} else {
-					return $(this.element).trigger('clique.radio.unchecked');
+					ele.trigger('clique.' + this.type + '.unchecked');
 				}
 			});
 		}

@@ -5,11 +5,9 @@
 // Component:       `.modal`
 //
 // Sub-objects:     `.modal-dialog`
-//                  `.modal-close`
 //                  `.modal-header`
 //                  `.modal-footer`
 //                  `.modal-caption`
-//                  `.modal-spinner`
 //
 // Modifiers:       `.modal-dialog-lightbox`
 //                  `.modal-dialog-large`
@@ -21,6 +19,12 @@
 
 @import "../mixins/mixins.less";
 @import "../variables/variables.less";
+
+// ========================================================================
+// Imports
+// ========================================================================
+
+@import "close.less";
 
 // ========================================================================
 // Variables
@@ -38,8 +42,6 @@
 @modal-footer-margin-top: 15px;
 @modal-caption-margin-bottom: -10px;
 @modal-caption-color: @color-white;
-
-@modal-spinner-icon: @global-icon-spinner;
 
 // ========================================================================
 // Component: Modal
@@ -201,23 +203,6 @@
 		color: @modal-caption-color;
 		text-align: center;
 		.text-overflow();
-	}
-
-	// Sub-object: `.modal-spinner`
-	// ========================================================================
-
-	&-spinner {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		.translate(-50%, -50%);
-		font-size: 25px;
-		color: #ddd;
-		&:after {
-			content: @modal-spinner-icon;
-			font-family: "icomoon";
-			.animation(rotate 2s infinite linear);
-		}
 	}
 
 	// Sub-object: `.modal-scrollbar`

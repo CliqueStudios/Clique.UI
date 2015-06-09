@@ -22,7 +22,10 @@
 
 @close-size: 20px;
 
+@close-font-size: @global-font-size;
+
 @close-alt-padding: 2px;
+@close-alt-font-size: @close-font-size - (@close-alt-padding * 2);
 @close-alt-background: @global-default-background;
 
 // ========================================================================
@@ -46,6 +49,7 @@
 	vertical-align: middle;
 	opacity: 0.3;
 	position: relative;
+	font-size: @close-font-size;
 
 	&:hover,
 	&:focus {
@@ -77,6 +81,7 @@
 		.border-radius(50%);
 		background-color: @close-alt-background;
 		opacity: 1;
+		font-size: @close-alt-font-size;
 
 		&:hover,
 		&:focus {
