@@ -39,7 +39,14 @@
 // Component: Progress
 // ========================================================================
 
-.keyframes(progress-bar-stripes, ~"0% { background-position: 0 0; } 100% { background-position: 30px 0; }");
+@keyframes progress-bar-stripes {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 30px 0;
+	}
+}
 
 .progress {
 	height: @progress-height;

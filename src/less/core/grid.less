@@ -10,7 +10,6 @@
 // Modifiers:       `.row-collapse`
 //                  `.row-small`
 //                  `.row-medium`
-//                  `.row-divider`
 //                  `.row-match`
 //
 // Sub-objects:     `.row-*-cols`
@@ -63,11 +62,6 @@
 // Component: `.row`
 // ========================================================================
 
-[class*="row"] {
-	> * {
-		max-width: 100%;
-	}
-}
 .row {
 	display: flex;
 	flex-wrap: wrap;
@@ -150,83 +144,6 @@
 		}
 
 		.row-gutter-vertical-subobject(@row-gutter-vertical);
-	}
-
-	// Modifier: `.row-divider`
-	// ========================================================================
-
-	&-divider {
-		&:not(:empty) {
-			margin-left: -@row-gutter-horizontal;
-			margin-right: -@row-gutter-horizontal;
-		}
-		> * {
-			padding-left: @row-gutter-horizontal;
-			padding-right: @row-gutter-horizontal;
-		}
-		> [class*="col-1-"] {
-			&:not(.col-1-1) {
-				&:nth-child(n+2) {
-					border-left: @row-divider-border-width solid @row-divider-border;
-				}
-			}
-		}
-		> [class*="col-2-"],
-		> [class*="col-3-"],
-		> [class*="col-4-"],
-		> [class*="col-5-"],
-		> [class*="col-6-"],
-		> [class*="col-7-"],
-		> [class*="col-8-"],
-		> [class*="col-9-"] {
-			&:nth-child(n+2) {
-				border-left: @row-divider-border-width solid @row-divider-border;
-			}
-		}
-
-		// Tablet and bigger
-		@media (min-width: @breakpoint-medium) {
-			> [class*="col-medium-"] {
-				&:not(.col-medium-1-1) {
-					&:nth-child(n+2) {
-						border-left: @row-divider-border-width solid @row-divider-border;
-					}
-				}
-			}
-		}
-
-		// Desktop and bigger
-		@media (min-width: @breakpoint-large) {
-			> [class*="col-large-"] {
-				&:not(.col-large-1-1) {
-					&:nth-child(n+2) {
-						border-left: @row-divider-border-width solid @row-divider-border;
-					}
-				}
-			}
-		}
-
-		// Large screen and bigger
-		@media (min-width: @breakpoint-xlarge) {
-			&:not(:empty) {
-				margin-left: -@row-gutter-large-horizontal;
-				margin-right: -@row-gutter-large-horizontal;
-			}
-			> * {
-				padding-left: @row-gutter-large-horizontal;
-				padding-right: @row-gutter-large-horizontal;
-			}
-			&:empty {
-				margin-top: @row-gutter-large-vertical;
-				margin-bottom: @row-gutter-large-vertical;
-			}
-		}
-
-		&:empty {
-			margin-top: @row-gutter-vertical;
-			margin-bottom: @row-gutter-vertical;
-			border-top: @row-divider-border-width solid @row-divider-border;
-		}
 	}
 
 	// Modifier: `.row-match`

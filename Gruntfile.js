@@ -56,14 +56,14 @@ module.exports = function(grunt) {
 			},
 			main : {
 				files : {
-					"dist/css/clique.css" : ["build/less/clique.less"],
+					"dist/css/clique.css" : ["src/less/clique.less"],
 				}
 			},
 			dist : {
 				files: [{
 					expand: true,
-					cwd: 'build/less',
-					src: ['**/*.less', '!_**/*.less'],
+					cwd: 'src/less',
+					src: ['**/*.less', '!_**/*.less', '!mixins/*.less', '!variables/*.less'],
 					dest: 'dist/css',
 					ext: '.css',
 					extDot : 'last'
@@ -72,13 +72,24 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			js: {
-				files: [ 'build/js/**/*.js', 'Gruntfile.js' ],
+				files: [ 'src/js/**/*.js', 'Gruntfile.js' ],
 				tasks: [ 'newer:uglify:build', 'concat:docs' ]
 			},
 			less: {
-				files: [ 'build/less/**/*.less', 'docs/build/less/**/*.less', 'Gruntfile.js' ],
-				tasks: [ 'less' ]
+				files: [ 'src/less/**/*.less', 'docs/build/less/**/*.less', 'Gruntfile.js' ],
+				tasks: [ 'newer:less' ]
 			},
+		},
+		newer: {
+			options: {
+				override: function(details, include) {
+					if (details.task === 'less') {
+						checkForNewerImports(details.path, details.time, include);
+					} else {
+						include(false);
+					}
+				}
+			}
 		},
 		clean: {
 			css: ['dist/css'],
@@ -103,7 +114,7 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					cwd: 'build/js',
+					cwd: 'src/js',
 					src: '**/*.js',
 					dest: 'dist/js'
 				}]
@@ -230,7 +241,7 @@ module.exports = function(grunt) {
 		// Linting
 		cliqueui_clean_less: {
 			options : {
-				searchIn : 'build/less',
+				searchIn : 'src/less',
 				log : 'test/linting-reports/unused-less-vars.txt',
 				logRepeating : 'test/reports/less.json',
 				displayOutput : false
@@ -238,7 +249,7 @@ module.exports = function(grunt) {
 			default : {
 				files: [{
 					expand: true,
-					cwd: 'build/less',
+					cwd: 'src/less',
 					src: ['**/*.less', '!mixins/*.less'],
 				}]
 			}
@@ -258,7 +269,7 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			options : {
-				jshintrc : 'test/jshint/.jshintrc',
+				jshintrc : '.jshintrc',
 				reporter: require('jshint-html-reporter'),
 				reporterOutput: 'test/results/jshint.html',
 				force: true
@@ -284,6 +295,32 @@ module.exports = function(grunt) {
 			}
 		},
 	});
+
+	// functions
+	function checkForNewerImports(lessFile, mTime, include) {
+		var fs = require('fs'),
+			path = require('path');
+
+		fs.readFile(lessFile, 'utf8', function(err, data) {
+			var lessDir = path.dirname(lessFile),
+				regex = /@import "(.+?)(\.less)?";/g,
+				shouldInclude = false,
+				match;
+
+			while ((match = regex.exec(data)) !== null) {
+				var importFile = lessDir + '/' + match[1] + '.less';
+				if (fs.existsSync(importFile)) {
+					var stat = fs.statSync(importFile);
+					if (stat.mtime > mTime) {
+						shouldInclude = true;
+						break;
+					}
+				}
+			}
+
+			include(shouldInclude);
+		});
+	}
 
 	// Custom Tasks
 	grunt.registerTask(
