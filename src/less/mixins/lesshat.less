@@ -171,12 +171,6 @@
 	border-top-right-radius: @process; background-clip: padding-box;
 }
 
-.box-shadow(...) {
-	@process: ~`(function(e){e=e||"0";var t=/\d/gi,r=/(?:\s|^)(\.?\d+\.?\d*)(?![^(]*\)|\w|%|\.)/gi;return/^[^, ]*,/.test(e)&&(e=e.replace(/(?:,)(?![^(]*\))/g,"")),t.test(e)&&(e=e.replace(r,function(e){return 0==e&&e||e+"px"})),e})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
-	-webkit-box-shadow: @process;
-	box-shadow: @process;
-}
-
 .box-sizing(...) {
 	@process: ~`(function(e){return e=e||"content-box"})((function(){var e="@{arguments}";return e=e.replace(/^\[|\]$/g,"")})())`;
 	-webkit-box-sizing: @process;
