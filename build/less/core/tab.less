@@ -54,7 +54,7 @@
 	padding: 0;
 	list-style: none;
 	border-bottom: @tab-border-width solid @tab-border;
-	.display(flex);
+	display: flex;
 
 	// Items
 	> li {
@@ -162,7 +162,7 @@
 	// ========================================================================
 
 	&-flip {
-		.flex-direction(row-reverse);
+		flex-direction: row-reverse;
 
 		> li {
 			&:nth-child(n+2) {
@@ -178,7 +178,7 @@
 	// ========================================================================
 
 	&-center {
-		.justify-content(center);
+		justify-content: center;
 	}
 
 	// Modifier: `.tab-bottom`
@@ -242,7 +242,7 @@
 	@media (min-width: @breakpoint-medium) {
 		&-left,
 		&-right {
-			.flex-direction(column);
+			flex-direction: column;
 			border-bottom: none;
 
 			> li {

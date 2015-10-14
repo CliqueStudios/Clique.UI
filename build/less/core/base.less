@@ -112,7 +112,7 @@ body {
 	&,
 	&:before,
 	&:after {
-		.box-sizing(border-box);
+		box-sizing: border-box;
 	}
 }
 
@@ -124,14 +124,13 @@ body {
 // ========================================================================
 
 a {
-	// Remove the gray background color from active links in IE 10.
 	background-color: transparent;
+}
 
-	&,
-	input,
-	button {
-		-webkit-tap-highlight-color: fade(#000, 0%);
-	}
+a,
+input,
+button {
+	-webkit-tap-highlight-color: fade(#000, 0%);
 }
 
 // Style
@@ -354,7 +353,7 @@ dd {
 // ========================================================================
 
 hr {
-	.box-sizing(content-box);
+	box-sizing: content-box;
 	height: 0;
 	margin: @base-hr-margin-vertical 0;
 	border: 0;
@@ -391,7 +390,7 @@ pre {
 	background-color: @base-pre-background;
 	font: @base-pre-font-size e("/") @base-pre-line-height @base-pre-font-family;
 	color: @base-pre-color;
-	.tab-size(@base-pre-tab-size);
+	tab-size: @base-pre-tab-size;
 	overflow: auto;
 	border: @base-pre-border-width solid @base-pre-border;
 

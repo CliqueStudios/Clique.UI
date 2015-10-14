@@ -181,7 +181,7 @@ textarea {
 
 // Removes `.box-shadow` for invalid controls in Firefox.
 :invalid {
-	.box-shadow(none);
+	box-shadow: none;
 }
 
 ::-ms-clear {
@@ -369,7 +369,7 @@ legend {
 				left: 0;
 				top: 50%;
 				display: inline-block;
-				.translate(0, -50%);
+				transform: translate(0, -50%);
 				.transition(300ms cubic-bezier(0.68, -0.55, 0.265, 1.55));
 
 				&:after {
@@ -622,7 +622,7 @@ legend {
 			position: absolute;
 			top: 50%;
 			width: @form-icon-width;
-			.translate(0, -50%);
+			transform: translate(0, -50%);
 			text-align: center;
 			pointer-events: none;
 		}

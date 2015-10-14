@@ -69,8 +69,8 @@
 	}
 }
 .row {
-	.display(flex);
-	.flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -96,7 +96,7 @@
 		}
 	}
 	> * {
-		.flex(none);
+		flex: none;
 		margin: 0;
 		padding-left: @row-gutter-horizontal;
 		> :last-child {
@@ -234,9 +234,9 @@
 
 	&-match {
 		> * {
-			.display(flex);
+			display: flex;
 			> * {
-				.flex(none);
+				flex: none;
 				width: 100%;
 			}
 		}

@@ -17,12 +17,7 @@
 // ========================================================================
 
 .flex {
-	.display(flex);
-
-	.noflex & {
-		display: table;
-		width: 100%;
-	}
+	display: flex;
 
 	// Modifier: `..flex-inline`
 	// ========================================================================
@@ -96,7 +91,7 @@
 	}
 
 	&-center {
-		.justify-content(center);
+		justify-content: center;
 
 		.noflex & {
 			width: auto;
@@ -106,7 +101,7 @@
 	}
 
 	&-right {
-		.justify-content(flex-end);
+		justify-content: flex-end;
 
 		.noflex & {
 			width: auto;
@@ -128,12 +123,12 @@
 
 	&-row {
 		&-reverse {
-			.flex-direction(row-reverse);
+			flex-direction: row-reverse;
 		}
 	}
 
 	&-column {
-		.flex-direction(column);
+		flex-direction: column;
 
 		&-reverse {
 			.flex-direction(column-reverse);
@@ -144,7 +139,7 @@
 	// ========================================================================
 
 	&-wrap {
-		.flex-wrap(wrap);
+		flex-wrap: wrap;
 
 		&-reverse {
 			.flex-wrap(wrap-reverse);

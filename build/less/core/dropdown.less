@@ -66,7 +66,7 @@
 
 	.open > & {
 		display: block;
-		.animation(@dropdown-animation 200ms ease-in-out);
+		animation: @dropdown-animation 200ms ease-in-out;
 		.transform-origin(0 0);
 	}
 
@@ -90,7 +90,7 @@
 
 	&-center {
 		left: 50%;
-		.translate(-50%, 0);
+		transform: translate(-50%, 0);
 	}
 
 	// Modifier: `.dropdown-justify`
@@ -124,7 +124,7 @@
 		border: @dropdown-border-width solid @dropdown-border;
 
 		> .open {
-			.animation(@dropdown-navbar-animation 200ms ease-in-out);
+			animation: @dropdown-navbar-animation 200ms ease-in-out;
 		}
 
 		&.dropdown-flip {

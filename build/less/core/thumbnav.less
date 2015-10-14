@@ -24,8 +24,8 @@
 // ========================================================================
 
 .thumbnav {
-	.display(flex);
-	.flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 	margin-left: -@thumbnav-margin-horizontal;
 	margin-top: -@thumbnav-margin-vertical;
 	padding: 0;
@@ -35,7 +35,7 @@
 	// ========================================================================
 
 	> * {
-		.flex(none);
+		flex: none;
 		padding-left: @thumbnav-margin-horizontal;
 		margin-top: @thumbnav-margin-vertical;
 		> * {
@@ -43,7 +43,7 @@
 			background-color: @thumbnav-background;
 			> img {
 				opacity: @thumbnav-opacity;
-				.transition(opacity 150ms linear);
+				transition: opacity 150ms linear;
 			}
 
 			// Hover

@@ -52,7 +52,7 @@
 		border: @select-border-width solid @select-border-color;
 		width: 100%;
 		display: block;
-		.transition(@select-transition-duration @select-transition-timing-function);
+		transition: @select-transition-duration @select-transition-timing-function;
 
 		&:after {
 			content: @select-icon;
@@ -60,7 +60,7 @@
 			position: absolute;
 			right: 15px;
 			top: 50%;
-			.translate(0, -50%);
+			transform: translate(0, -50%);
 			.open & {
 				content: @select-open-icon;
 			}

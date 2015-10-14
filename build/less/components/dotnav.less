@@ -37,8 +37,8 @@
 // ========================================================================
 
 .dotnav {
-	.display(flex);
-	.flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 	margin-left: -@dotnav-margin-horizontal;
 	margin-top: -@dotnav-margin-vertical;
 	padding: 0;
@@ -46,7 +46,7 @@
 	.clearfix();
 
 	> * {
-		.flex(none);
+		flex: none;
 		padding-left: @dotnav-margin-horizontal;
 		margin-top: @dotnav-margin-vertical;
 		float: left;

@@ -69,7 +69,7 @@
 		top: 0;
 		bottom: 0;
 		left: 0;
-		.translate(-100%, 0);
+		transform: translate(-100%, 0);
 		z-index: @offcanvas-z-index + 1;
 		width: @offcanvas-bar-width;
 		max-width: 100%;
@@ -97,7 +97,7 @@
 		&-flip {
 			left: auto;
 			right: 0;
-			.translate(100%, 0);
+			transform: translate(100%, 0);
 
 			&:after {
 				right: auto;
@@ -112,7 +112,7 @@
 		// ========================================================================
 
 		&-show {
-			.translate(0, 0);
+			transform: translate(0, 0);
 		}
 	}
 

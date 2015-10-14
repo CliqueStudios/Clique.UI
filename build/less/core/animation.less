@@ -45,81 +45,243 @@
 // Used by dropdown, datepicker and slideshow component
 // ========================================================================
 
-.keyframes(fade, ~"0% { opacity: 0; } 100% { opacity: 1; }");
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 
 
 // Keyframes: Fade with slide
 // ========================================================================
 
 // Top
-.keyframes(fade-top, ~"0% { opacity: 0; transform: translateY(-100%); } 100% { opacity: 1; transform: translateY(0); }");
+@keyframes fade-top {
+	0% {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 // Bottom
-.keyframes(fade-bottom, ~"0% { opacity: 0; transform: translateY(100%); } 100% { opacity: 1; transform: translateY(0); }");
+@keyframes fade-bottom {
+	0% {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 // Left
-.keyframes(fade-left, ~"0% { opacity: 0; transform: translateX(-100%); } 100% { opacity: 1; transform: translateX(0); }");
+@keyframes fade-left {
+	0% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
 
 // Right
-.keyframes(fade-right, ~"0% { opacity: 0; transform: translateX(100%); } 100% { opacity: 1; transform: translateX(0); }");
+@keyframes fade-right {
+	0% {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
 
 
 // Keyframes: Fade with scale
 // ========================================================================
 
 // Scale by 0.2
-.keyframes(fade-scale-02, ~"0% { opacity: 0; transform: scale(0.2); } 100% { opacity: 1; transform: scale(1); }");
+@keyframes fade-scale-02 {
+	0% {
+		opacity: 0;
+		transform: scale(0.2);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
 
 // Scale by 1.5
 // Used by slideshow component
-.keyframes(fade-scale-15, ~"0% { opacity: 0; transform: scale(1.5); } 100% { opacity: 1; transform: scale(1); }");
+@keyframes fade-scale-15 {
+	0% {
+		opacity: 0;
+		transform: scale(1.5);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
 
 // Scale by 1.8
-.keyframes(fade-scale-18, ~"0% { opacity: 0; transform: scale(1.8); } 100% { opacity: 1; transform: scale(1); }");
+@keyframes fade-scale-18 {
+	0% {
+		opacity: 0;
+		transform: scale(1.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
 
 
 // Keyframes: Slide
 // ========================================================================
 
 // Left
-.keyframes(slide-left, ~"0% { transform: translateX(-100%); } 100% { transform: translateX(0); }");
+@keyframes slide-left {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
 
 // Right
-.keyframes(slide-right, ~"0% { transform: translateX(100%); } 100% { transform: translateX(0); }");
+@keyframes slide-right {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
 
 // Left third
-.keyframes(slide-left-33, ~"0% { transform: translateX(33%); } 100% { transform: translateX(0); }");
+@keyframes slide-left-33 {
+	0% {
+		transform: translateX(33%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
 
 // Right third
-.keyframes(slide-right-33, ~"0% { transform: translateX(-33%); } 100% { transform: translateX(0); }");
+@keyframes slide-right-33 {
+	0% {
+		transform: translateX(-33%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
 
 
 // Keyframes: Scale
 // ========================================================================
 
-.keyframes(scale-12, ~"0% { transform: scale(1.2); } 100% { transform: scale(1); }");
+@keyframes scale-12 {
+	0% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
 
 
 // Keyframes: Rotate
 // ========================================================================
 
-.keyframes(rotate, ~"0% { transform: rotate(0deg); } 100% { transform: rotate(359deg); }");
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
 
 
 // Keyframes: Shake
 // ========================================================================
 
-.keyframes(shake, ~"0%, 100% { transform: translateX(0); } 10% { transform: translateX(-9px); } 20% { transform: translateX(8px); } 30% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 50% { transform: translateX(-5px); } 60% { transform: translateX(4px); } 70% { transform: translateX(-3px); } 80% { transform: translateX(2px); } 90% { transform: translateX(-1px); }");
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	10% {
+		transform: translateX(-9px);
+	}
+	20% {
+		transform: translateX(8px);
+	}
+	30% {
+		transform: translateX(-7px);
+	}
+	40% {
+		transform: translateX(6px);
+	}
+	50% {
+		transform: translateX(-5px);
+	}
+	60% {
+		transform: translateX(4px);
+	}
+	70% {
+		transform: translateX(-3px);
+	}
+	80% {
+		transform: translateX(2px);
+	}
+	90% {
+		transform: translateX(-1px);
+	}
+}
 
 
 // Keyframes: Fade with slide fixed
 // ========================================================================
 
 // Top fixed
-.keyframes(slide-top-fixed, ~"0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); }");
+@keyframes slide-top-fixed {
+	0% {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 // Bottom fixed
-.keyframes(slide-bottom-fixed, ~"0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); }");
+@keyframes slide-bottom-fixed {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 
 [class*="animation-"] {
