@@ -1,0 +1,197 @@
+.button {
+	display: inline-block;
+	overflow: visible;
+	height: 30px;
+	margin: 0;
+	padding: 0 12px;
+	cursor: pointer;
+	-webkit-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+	-webkit-transition-duration: 150ms;
+	transition-duration: 150ms;
+	-webkit-transition-property: background-color, border-color, color;
+	transition-property: background-color, border-color, color;
+	vertical-align: middle;
+	text-decoration: none;
+	color: #555;
+	border: 0;
+	border: 1px solid rgba(0, 0, 0, .06);
+	background-color: #eee;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 2.14285714;
+	text-align: center;
+}
+
+.button:hover,
+.button:focus {
+	text-decoration: none;
+	color: #4b4b4b;
+	border-color: rgba(0, 0, 0, .16);
+	outline: 0;
+	background-color: #e4e4e4;
+}
+
+.button:active,
+.button.active {
+	-webkit-transition-duration: 0ms;
+	transition-duration: 0ms;
+	color: #4b4b4b;
+	border-color: rgba(0, 0, 0, .3) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
+	background-color: #e4e4e4;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+.button:disabled,
+.button.disabled {
+	cursor: default;
+	color: #999 !important;
+	border-color: rgba(0, 0, 0, .06);
+	background-color: #f5f5f5 !important;
+}
+
+.button:disabled:active,
+.button.disabled:active,
+.button:disabled.active,
+.button.disabled.active {
+	box-shadow: none;
+}
+
+.button-block {
+	display: block;
+	width: 100%;
+}
+
+.button-primary:active,
+.button-success:active,
+.button-danger:active,
+.button-primary.active,
+.button-success.active,
+.button-danger.active {
+	border-color: rgba(0, 0, 0, .4) rgba(0, 0, 0, .2) rgba(0, 0, 0, .2);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.button-primary {
+	color: #fff;
+	background-color: #00a8e6;
+}
+
+.button-primary:hover,
+.button-primary:focus,
+.button-primary:active,
+.button-primary.active {
+	color: #fff;
+	background-color: #0099d2;
+}
+
+.button-success {
+	color: #fff;
+	background-color: #8cc14c;
+}
+
+.button-success:hover,
+.button-success:focus,
+.button-success:active,
+.button-success.active {
+	color: #fff;
+	background-color: #82b940;
+}
+
+.button-danger {
+	color: #fff;
+	background-color: #da314b;
+}
+
+.button-danger:hover,
+.button-danger:focus,
+.button-danger:active,
+.button-danger.active {
+	color: #fff;
+	background-color: #d12640;
+}
+
+.button-link {
+	color: #07d;
+	box-shadow: none;
+}
+
+.button-link,
+.button-link:hover,
+.button-link:focus,
+.button-link:active,
+.button-link.active,
+.button-link:disabled {
+	border-color: transparent;
+	background-color: transparent;
+}
+
+.button-link:hover,
+.button-link:focus,
+.button-link:active,
+.button-link.active {
+	text-decoration: underline;
+	color: #059;
+}
+
+.button-link:disabled {
+	color: #999;
+}
+
+.button-mini {
+	height: 20px;
+	padding: 0 6px;
+	font-size: 11px;
+	line-height: 1.81818182;
+}
+
+.button-small {
+	height: 26px;
+	padding: 0 10px;
+	font-size: 12px;
+	line-height: 2.16666667;
+}
+
+.button-large {
+	height: 40px;
+	padding: 0 15px;
+	font-size: 16px;
+	line-height: 2.5;
+}
+
+.button-group {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+	font-size: .001px;
+}
+
+.button-group > * {
+	display: inline-block;
+}
+
+.button-group > *:nth-child(n+2) {
+	margin-left: -1px;
+}
+
+.button-group .button {
+	position: relative;
+	z-index: 1;
+	vertical-align: top;
+}
+
+.button-group .button:hover,
+.button-group .button:focus,
+.button-group .button:active {
+	z-index: 2;
+}
+
+.button-group .button.active {
+	z-index: 3;
+}

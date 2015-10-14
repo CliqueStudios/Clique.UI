@@ -1,0 +1,93 @@
+.offcanvas {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: none;
+	background-color: rgba(0, 0, 0, .1);
+	touch-action: none;
+
+	-ms-touch-action: none;
+}
+
+.offcanvas.active {
+	display: block;
+}
+
+.offcanvas-page {
+	position: fixed;
+	-webkit-transition: margin-left 300ms ease-in-out;
+	transition: margin-left 300ms ease-in-out;
+}
+
+.offcanvas-bar {
+	position: fixed;
+	z-index: 1001;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	width: 270px;
+	max-width: 100%;
+	-webkit-transition: -webkit-transform 300ms ease-in-out;
+	transition: transform 300ms ease-in-out;
+	-webkit-transform: translate(-100%, 0);
+	-ms-transform: translate(-100%, 0);
+	transform: translate(-100%, 0);
+	background-color: #333;
+	-ms-scroll-chaining: none;
+}
+
+.offcanvas-bar:after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: block;
+	width: 1px;
+	content: '';
+	background-color: rgba(0, 0, 0, .6);
+	box-shadow: 0 0 5px 2px rgba(0, 0, 0, .6);
+}
+
+.offcanvas-bar-flip {
+	right: 0;
+	left: auto;
+	-webkit-transform: translate(100%, 0);
+	-ms-transform: translate(100%, 0);
+	transform: translate(100%, 0);
+}
+
+.offcanvas-bar-flip:after {
+	right: auto;
+	left: 0;
+	width: 1px;
+	background-color: rgba(0, 0, 0, .6);
+	box-shadow: 0 0 5px 2px rgba(0, 0, 0, .6);
+}
+
+.offcanvas-bar-show {
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+
+.offcanvas .panel {
+	margin: 20px 15px;
+	color: #777;
+}
+
+.offcanvas .panel a:not([class]) {
+	color: #ccc;
+}
+
+.offcanvas .panel a:not([class]):hover {
+	color: #fff;
+}
+
+.offcanvas .panel-title {
+	color: #ccc;
+}

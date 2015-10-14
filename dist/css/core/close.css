@@ -1,0 +1,71 @@
+.close {
+	position: relative;
+	display: inline-block;
+	overflow: visible;
+	width: 20px;
+	height: 20px;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	text-transform: none;
+	opacity: .3;
+	color: inherit;
+	border: 0;
+	background-color: transparent;
+	font: inherit;
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+}
+
+.close:hover,
+.close:focus {
+	cursor: pointer;
+	text-decoration: none;
+	opacity: .5;
+	color: inherit;
+	outline: 0;
+	background-color: transparent;
+}
+
+.close:after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: block;
+	content: '\ea0f';
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	font-family: 'icomoon';
+}
+
+.close::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+.close-alt {
+	padding: 2px;
+	opacity: 1;
+	border-radius: 50%;
+	background-color: #eee;
+	background-clip: padding-box;
+	font-size: 10px;
+}
+
+.close-alt:hover,
+.close-alt:focus {
+	opacity: 1;
+	background-color: #eee;
+}
+
+.close-alt:hover:after,
+.close-alt:focus:after {
+	opacity: .8;
+}
+
+.close-alt:after {
+	opacity: .5;
+}

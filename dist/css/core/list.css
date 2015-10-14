@@ -1,0 +1,67 @@
+.list {
+	padding: 0;
+	list-style: none;
+}
+
+.list > li:before,
+.list > li:after {
+	display: table;
+	content: '';
+}
+
+.list > li:after {
+	clear: both;
+}
+
+.list > li > :last-child {
+	margin-bottom: 0;
+}
+
+.list ul {
+	margin: 0;
+	padding-left: 20px;
+	list-style: none;
+}
+
+.list-inline {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.list-inline > li {
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+
+	-webkit-box-flex: 0;
+}
+
+.list-inline > li:nth-child(n+2) {
+	margin-left: 5px;
+	padding-left: 5px;
+}
+
+.list-line > li + li {
+	margin-top: 5px;
+	padding-top: 5px;
+	border-top: 1px solid #ddd;
+}
+
+.list-striped > li {
+	padding: 5px 5px;
+	border-bottom: 1px solid #ddd;
+}
+
+.list-striped > li:first-child {
+	border-top: 1px solid #ddd;
+}
+
+.list-striped > li:nth-of-type(odd) {
+	background-color: #f5f5f5;
+}
+
+.list-space > li:nth-child(n+2) {
+	margin-top: 10px;
+}

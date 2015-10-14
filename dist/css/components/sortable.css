@@ -1,0 +1,37 @@
+.sortable {
+	position: relative;
+}
+
+.sortable > * {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	touch-action: none;
+
+	-ms-touch-action: none;
+}
+
+.sortable * {
+	-webkit-user-drag: none;
+	user-drag: none;
+}
+
+.sortable-dragged {
+	position: absolute;
+	z-index: 1050;
+	pointer-events: none;
+}
+
+.sortable-placeholder {
+	opacity: 0;
+}
+
+.sortable-over {
+	opacity: .3;
+}
+
+.sortable-moving,
+.sortable-moving * {
+	cursor: move;
+}

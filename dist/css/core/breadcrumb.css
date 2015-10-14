@@ -1,0 +1,19 @@
+.breadcrumb {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0;
+	list-style: none;
+}
+
+.breadcrumb > li + li:before {
+	display: inline-block;
+	margin: 0 8px;
+	content: '/';
+	color: #999;
+}
+
+.breadcrumb > .active > * {
+	color: #555;
+}

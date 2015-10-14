@@ -1,0 +1,12 @@
+.switcher {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	touch-action: cross-slide-y pinch-zoom double-tap-zoom;
+
+	-ms-touch-action: cross-slide-y pinch-zoom double-tap-zoom;
+}
+
+.switcher > *:not(.active) {
+	display: none;
+}

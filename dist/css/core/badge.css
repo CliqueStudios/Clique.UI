@@ -1,0 +1,35 @@
+.badge {
+	display: inline-block;
+	margin-top: -2px;
+	padding: 2px 5px;
+	vertical-align: middle;
+	color: #fff;
+	border: 1px solid rgba(0, 0, 0, .1);
+	background-color: #00a8e6;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 14px;
+	text-align: center;
+}
+
+a.badge:hover {
+	color: #fff;
+}
+
+.badge-notification {
+	min-width: 22px;
+	border-radius: 12px;
+	background-clip: padding-box;
+}
+
+.badge-success {
+	background-color: #8cc14c;
+}
+
+.badge-warning {
+	background-color: #faa732;
+}
+
+.badge-danger {
+	background-color: #da314b;
+}

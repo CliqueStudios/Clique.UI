@@ -1,0 +1,137 @@
+.text-small {
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.text-large {
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+.text-bold {
+	font-weight: bold;
+}
+
+.text-muted {
+	color: #999 !important;
+}
+
+.text-primary {
+	color: #2d7091 !important;
+}
+
+.text-success {
+	color: #659f13 !important;
+}
+
+.text-warning {
+	color: #e28327 !important;
+}
+
+.text-danger {
+	color: #d85030 !important;
+}
+
+.text-contrast {
+	color: #fff !important;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+@media (max-width: 959px) {
+	.text-left-medium {
+		text-align: left !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.text-left-small {
+		text-align: left !important;
+	}
+}
+
+.text-right {
+	text-align: right !important;
+}
+
+@media (max-width: 959px) {
+	.text-right-medium {
+		text-align: right !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.text-right-small {
+		text-align: right !important;
+	}
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+@media (max-width: 959px) {
+	.text-center-medium {
+		text-align: center !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.text-center-small {
+		text-align: center !important;
+	}
+}
+
+.text-justify {
+	text-align: justify !important;
+}
+
+.text-top {
+	vertical-align: top !important;
+}
+
+.text-middle {
+	vertical-align: middle !important;
+}
+
+.text-bottom {
+	vertical-align: bottom !important;
+}
+
+.text-nowrap {
+	white-space: nowrap;
+}
+
+.text-truncate {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.text-break {
+	word-wrap: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+	-ms-hyphens: auto;
+}
+
+.text-uppercase {
+	text-transform: uppercase !important;
+}
+
+.text-lowercase {
+	text-transform: lowercase !important;
+}
+
+.text-capitalize {
+	text-transform: capitalize !important;
+}
+
+.text-reset {
+	text-transform: none !important;
+	font-size: 100% !important;
+	font-weight: normal !important;
+}
