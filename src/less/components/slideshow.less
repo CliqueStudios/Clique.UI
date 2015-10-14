@@ -164,4 +164,105 @@
 // ========================================================================
 
 @import "slidenav.less";
-@import "dotnav.less";
+
+
+// ========================================================================
+// Dotnav Variables
+// ========================================================================
+
+@dotnav-margin-horizontal: @global-margin;
+@dotnav-margin-vertical: @dotnav-margin-horizontal;
+@dotnav-width: 20px;
+@dotnav-height: @dotnav-width;
+@dotnav-background: fade(#333, 10%);
+@dotnav-hover-background: fade(#333, 40%);
+@dotnav-onclick-background: fade(#333, 60%);
+@dotnav-active-background: fade(#333, 40%);
+@dotnav-contrast-background: fade(#fff, 40%);
+@dotnav-contrast-hover-background: fade(#fff, 70%);
+@dotnav-contrast-onclick-background: fade(#fff, 90%);
+@dotnav-contrast-active-background: fade(#fff, 90%);
+
+@dotnav-scale-in: @global-scale-in;
+
+// ========================================================================
+// Component: Dotnav
+// ========================================================================
+
+.dotnav {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -@dotnav-margin-horizontal;
+	margin-top: -@dotnav-margin-vertical;
+	padding: 0;
+	list-style: none;
+	.clearfix();
+
+	> * {
+		flex: none;
+		padding-left: @dotnav-margin-horizontal;
+		margin-top: @dotnav-margin-vertical;
+		float: left;
+
+		> * {
+			display: block;
+			box-sizing: content-box;
+			.size(@dotnav-width, @dotnav-height);
+			.border-radius(50%);
+			background-color: @dotnav-background;
+			text-indent: 100%;
+			overflow: hidden;
+			white-space: nowrap;
+			transition: all 200ms ease-in-out;
+
+			// Hover/Focus
+			&:hover,
+			&:focus {
+				background-color: @dotnav-hover-background;
+				outline: 0;
+			}
+
+			// Active State
+			&:active {
+				background-color: @dotnav-onclick-background;
+			}
+		}
+	}
+
+	// Active
+	> .active {
+		> * {
+			background-color: @dotnav-active-background;
+			transform: scale(@dotnav-scale-in);
+		}
+	}
+
+	// Modifier: `.dotnav-contrast`
+	// ========================================================================
+
+	&-contrast {
+		> * {
+			> * {
+				background-color: @dotnav-contrast-background;
+
+				// Hover
+				&:hover,
+				&:focus {
+					background-color: @dotnav-contrast-hover-background;
+				}
+
+				// Active State
+				&:active {
+					background-color: @dotnav-contrast-onclick-background;
+				}
+			}
+		}
+
+		// Active
+		> .active {
+			> * {
+				background-color: @dotnav-contrast-active-background;
+			}
+		}
+	}
+}
