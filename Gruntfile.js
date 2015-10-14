@@ -59,38 +59,18 @@ module.exports = function(grunt) {
 					"dist/css/clique.css" : ["build/less/clique.less"],
 				}
 			},
-			core : {
+			dist : {
 				files: [{
 					expand: true,
-					cwd: 'build/less/core',
-					src: ['*.less', '!_*.less'],
-					dest: 'dist/css/core',
+					cwd: 'build/less',
+					src: ['**/*.less', '!_**/*.less'],
+					dest: 'dist/css',
 					ext: '.css',
 					extDot : 'last'
 				}]
-			},
-			components : {
-				files: [{
-					expand: true,
-					cwd: 'build/less/components',
-					src: ['*.less', '!_*.less'],
-					dest: 'dist/css/components',
-					ext: '.css',
-					extDot : 'last'
-				}]
-			},
-		},
-		coffee: {
-			options: {
-				join: false,
-				bare: true
 			},
 		},
 		watch: {
-			coffee: {
-				files: [ 'docs/build/coffee/**/*.coffee', 'Gruntfile.js' ],
-				tasks: [ 'newer:coffee', 'concat' ]
-			},
 			js: {
 				files: [ 'build/js/**/*.js', 'Gruntfile.js' ],
 				tasks: [ 'newer:uglify:build', 'concat:docs' ]
@@ -179,83 +159,70 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Beautifying
-		jsbeautifier: {
+		// Find/Replace Within Files
+		autoprefixer: {
 			options: {
-				html: {
-					fileTypes: [".php"],
-					braceStyle: "collapse",
+				browsers: [ '> 1%', 'last 5 versions', 'ie 9' ]
+			},
+			dist: {
+				files: [{
+					expand: true,
+					cwd: 'dist',
+					src: ['**/*.css', '!**/*.min.css'],
+					dest: 'dist',
+					ext: '.css'
+				}]
+			},
+		},
+
+		// Beautifying
+		jsbeautifier : {
+			options : {
+				js : {
 					indentChar: "\t",
+					indentLevel : 0,
 					indentSize: 1,
-					maxPreserveNewlines: 10,
-					preserveNewlines: true,
-					unformatted: ["a", "sub", "sup", "b", "u", "pre", "code"],
-					wrapLineLength: 0
+					indentWithTabs : true,
+					maxPreserveNewlines : 2,
+					spaceAfterAnonFunction : false,
+					spaceBeforeConditional : false,
 				},
 				css: {
 					fileTypes: [".less"],
 					indentChar: "\t",
 					indentSize: 1
 				},
-				js: {
-					braceStyle: "collapse",
-					breakChainedMethods: false,
-					e4x: false,
-					evalCode: false,
-					indentLevel: 0,
-					indentWithTabs: true,
-					jslintHappy: false,
-					keepArrayIndentation: false,
-					keepFunctionIndentation: false,
-					spaceAfterAnonFunction: false,
-					maxPreserveNewlines: 10,
-					preserveNewlines: true,
-					spaceBeforeConditional: false,
-					spaceInParen: false,
-					unescapeStrings: false,
-					wrapLineLength: 0,
-					endWithNewline: true
-				}
-			},
-			all : {
-				src: [
-					"dist/js/**/*.js",
-					"dist/css/**/*.css",
-				],
-			},
-			css : {
-				src: [
-					"dist/css/**/*.css",
-				],
 			},
 			js : {
-				src: [
-					"dist/js/**/*.js",
-				],
-			},
-			html : {
-				src: [
-					"php/pages/tests/core/grid.php"
-				],
-			}
-		},
-		cleaner_css: {
-			options : {
-				min : {
-					restructuring : false
-				},
-				comb : {
-					config : '.csscomb.json'
-				}
-			},
-			dist: {
 				files: [{
 					expand: true,
-					cwd: 'dist/css',
-					src: ['**/*.css'],
-					dest: 'dist/css',
-					ext: '.css',
-					extDot : 'last'
+					cwd: 'dist',
+					src: ['**/*.js', '!**/*.min.js'],
+					dest: 'dist',
+					ext : '.js',
+				}]
+			},
+			css : {
+				files: [{
+					expand: true,
+					cwd: 'dist',
+					src: ['**/*.css', '!**/*.min.css'],
+					dest: 'dist',
+					ext : '.css',
+				}]
+			},
+		},
+		csscomb: {
+			options: {
+				config: '.csscomb.json'
+			},
+			css: {
+				files: [{
+					expand: true,
+					cwd: 'dist',
+					src: ['**/*.css', '!**/*.min.css'],
+					dest: 'dist',
+					ext : '.css',
 				}]
 			},
 		},
@@ -344,7 +311,7 @@ module.exports = function(grunt) {
 	grunt.registerTask(
 		'build-css',
 		'Builds, cleans, and optmiizes the CSS from .less files',
-		['clean:css', 'less', 'cleaner_css', 'cssmin:dist']
+		['clean:css', 'less', 'autoprefixer', 'jsbeautifier:css', 'csscomb', 'cssmin']
 	);
 	grunt.registerTask(
 		'lint-css',
