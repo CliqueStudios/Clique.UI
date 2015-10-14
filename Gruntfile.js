@@ -83,8 +83,8 @@ module.exports = function(grunt) {
 		clean: {
 			css: ['dist/css'],
 			js: ['dist/js'],
-			casper: ['unittests/casperjs/results'],
-			results: ['unittests/**/results'],
+			casper: ['test/casperjs/results'],
+			results: ['test/**/results'],
 			minify: ['dist/**/*.min.js', 'dist/**/*.min.css'],
 		},
 
@@ -231,8 +231,8 @@ module.exports = function(grunt) {
 		cliqueui_clean_less: {
 			options : {
 				searchIn : 'build/less',
-				log : 'unittests/linting-reports/unused-less-vars.txt',
-				logRepeating : 'unittests/linting-reports/repeating-less-vars.json',
+				log : 'test/linting-reports/unused-less-vars.txt',
+				logRepeating : 'test/reports/less.json',
 				displayOutput : false
 			},
 			default : {
@@ -249,7 +249,7 @@ module.exports = function(grunt) {
 				quiet: true,
 				formatters: [{
 					id: 'text',
-					dest: 'unittests/linting-reports/csslint.txt'
+					dest: 'test/reports/csslint.txt'
 				}]
 			},
 			dist: {
@@ -258,9 +258,9 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			options : {
-				jshintrc : 'unittests/jshint/.jshintrc',
+				jshintrc : 'test/jshint/.jshintrc',
 				reporter: require('jshint-html-reporter'),
-				reporterOutput: 'unittests/jshint/results/jshint-report.html',
+				reporterOutput: 'test/results/jshint.html',
 				force: true
 			},
 			all : ['dist/js/**/*.js', '!dist/js/clique.js']
@@ -274,35 +274,13 @@ module.exports = function(grunt) {
 				}
 			},
 			all : {
-				src : ['unittests/casperjs/*.js']
+				src : ['test/casperjs/*.js']
 			},
 			tests : {
-				src: ['unittests/casperjs/tests.js'],
+				src: ['test/casperjs/tests.js'],
 			},
 			layouts : {
-				src: ['unittests/casperjs/layouts.js'],
-			}
-		},
-		pagespeed: {
-			options: {
-				nokey: true,
-				url: "https://developers.google.com"
-			},
-			prod: {
-				options: {
-					url: "https://developers.google.com/speed/docs/insights/v1/getting_started",
-					locale: "en_GB",
-					strategy: "desktop",
-					threshold: 80
-				}
-			},
-			paths: {
-				options: {
-					paths: ["/speed/docs/insights/v1/getting_started", "/speed/docs/about"],
-					locale: "en_GB",
-					strategy: "desktop",
-					threshold: 80
-				}
+				src: ['test/casperjs/layouts.js'],
 			}
 		},
 	});

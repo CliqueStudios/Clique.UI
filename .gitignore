@@ -9,4 +9,4 @@
 /php
 /.notes
 !README.md
-results/*
+test/results/*
