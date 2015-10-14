@@ -1,0 +1,15 @@
+
+body,
+html {
+	font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.main {
+	padding: 100px 0;
+}
+
+.article-title {
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #dedede;
+}

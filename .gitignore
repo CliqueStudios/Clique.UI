@@ -8,5 +8,5 @@
 /node_modules
 /php
 /.notes
-!README.md
 test/results/*
+test/static/index.php
