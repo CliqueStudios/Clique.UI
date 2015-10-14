@@ -22,6 +22,8 @@
 @breadcrumb-divider-margin: 8px;
 @breadcrumb-divider-color: @global-muted-color;
 
+@breadcrumb-inactive-color: @breadcrumb-divider-color;
+
 @breadcrumb-disabled-color: @global-font-color;
 
 // ========================================================================
@@ -32,6 +34,7 @@
 	padding: 0;
 	list-style: none;
 	display: flex;
+	color: @breadcrumb-inactive-color;
 
 	> li {
 
