@@ -169,6 +169,15 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		copy: {
+			fonts: {
+				files: [{
+					expand: true,
+					src: ['src/fonts/*'],
+					dest: 'dist/fonts/',
+				}],
+			},
+		},
 
 		// Find/Replace Within Files
 		autoprefixer: {
