@@ -53,14 +53,14 @@
 
 		> * {
 			display: block;
-			.box-sizing(content-box);
+			box-sizing: content-box;
 			.size(@dotnav-width, @dotnav-height);
 			.border-radius(50%);
 			background-color: @dotnav-background;
 			text-indent: 100%;
 			overflow: hidden;
 			white-space: nowrap;
-			.transition(all 200ms ease-in-out);
+			transition: all 200ms ease-in-out;
 
 			// Hover/Focus
 			&:hover,
@@ -80,7 +80,7 @@
 	> .active {
 		> * {
 			background-color: @dotnav-active-background;
-			.scale(@dotnav-scale-in);
+			transform: scale(@dotnav-scale-in);
 		}
 	}
 

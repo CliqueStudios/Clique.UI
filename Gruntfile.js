@@ -73,24 +73,24 @@ module.exports = function(grunt) {
 		watch: {
 			js: {
 				files: [ 'src/js/**/*.js', 'Gruntfile.js' ],
-				tasks: [ 'newer:uglify:build', 'concat:docs' ]
+				tasks: [ 'newer:uglify:build' ]
 			},
 			less: {
 				files: [ 'src/less/**/*.less', 'docs/build/less/**/*.less', 'Gruntfile.js' ],
-				tasks: [ 'newer:less' ]
+				tasks: [ 'less' ]
 			},
 		},
-		newer: {
-			options: {
-				override: function(details, include) {
-					if (details.task === 'less') {
-						checkForNewerImports(details.path, details.time, include);
-					} else {
-						include(false);
-					}
-				}
-			}
-		},
+		// newer: {
+		// 	options: {
+		// 		override: function(details, include) {
+		// 			if (details.task === 'less') {
+		// 				checkForNewerImports(details.path, details.time, include);
+		// 			} else {
+		// 				include(false);
+		// 			}
+		// 		}
+		// 	}
+		// },
 		clean: {
 			css: ['dist/css'],
 			js: ['dist/js'],

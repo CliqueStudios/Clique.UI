@@ -285,9 +285,9 @@
 
 
 [class*="animation-"] {
-	.animation-duration(500ms);
-	.animation-timing-function(ease-out);
-	.animation-fill-mode(both);
+	animation-duration: 500ms;
+	animation-timing-function: ease-out;
+	animation-fill-mode: both;
 }
 
 // Hide animated element if scrollspy is used
@@ -303,58 +303,58 @@
 
 	// Fade
 	&-fade {
-		.animation-name(fade);
-		.animation-duration(800ms);
-		.animation-timing-function(linear) !important;
+		animation-name: fade;
+		animation-duration: 800ms;
+		animation-timing-function: linear !important;
 	}
 
 	// Scale
 	&-scale {
-		.animation-name(scale-12);
+		animation-name: scale-12;
 
 		// Fade with scale
 		&-up {
-			.animation-name(fade-scale-02);
+			animation-name: fade-scale-02;
 		}
 		&-down {
-			.animation-name(fade-scale-18);
+			animation-name: fade-scale-18;
 		}
 	}
 
 	// Fade with slide
 	&-slide {
 		&-top {
-			.animation-name(fade-top);
+			animation-name: fade-top;
 		}
 		&-bottom {
-			.animation-name(fade-bottom);
+			animation-name: fade-bottom;
 		}
 		&-left {
-			.animation-name(fade-left);
+			animation-name: fade-left;
 		}
 		&-right {
-			.animation-name(fade-right);
+			animation-name: fade-right;
 		}
 	}
 
 	// Shake
 	&-shake {
-		.animation-name(shake);
+		animation-name: shake;
 	}
 
 	// Direction modifiers
 	// ========================================================================
 
 	&-reverse {
-		.animation-direction(reverse);
-		.animation-timing-function(ease-in);
+		animation-direction: reverse;
+		animation-timing-function: ease-in;
 	}
 
 	// Duration modifiers
 	// ========================================================================
 
 	&-15 {
-		.animation-duration(15s);
+		animation-duration: 15s;
 	}
 
 	// Delay modifiers
@@ -362,27 +362,27 @@
 
 	&-delay {
 		&-100 {
-			.animation-delay(100ms);
+			animation-delay: 100ms;
 		}
 	}
 	&-delay {
 		&-200 {
-			.animation-delay(200ms);
+			animation-delay: 200ms;
 		}
 	}
 	&-delay {
 		&-300 {
-			.animation-delay(300ms);
+			animation-delay: 300ms;
 		}
 	}
 	&-delay {
 		&-400 {
-			.animation-delay(400ms);
+			animation-delay: 400ms;
 		}
 	}
 	&-delay {
 		&-500 {
-			.animation-delay(500ms);
+			animation-delay: 500ms;
 		}
 	}
 
@@ -391,34 +391,34 @@
 
 	&-top {
 		&-left {
-			.transform-origin(0 0);
+			transform-origin: 0 0;
 		}
 		&-center {
-			.transform-origin(50% 0);
+			transform-origin: 50% 0;
 		}
 		&-right {
-			.transform-origin(100% 0);
+			transform-origin: 100% 0;
 		}
 	}
 
 	&-middle {
 		&-left {
-			.transform-origin(0 50%);
+			transform-origin: 0 50%;
 		}
 		&-right {
-			.transform-origin(100% 50%);
+			transform-origin: 100% 50%;
 		}
 	}
 
 	&-bottom {
 		&-left {
-			.transform-origin(0 100%);
+			transform-origin: 0 100%;
 		}
 		&-center {
-			.transform-origin(50% 100%);
+			transform-origin: 50% 100%;
 		}
 		&-right {
-			.transform-origin(100% 100%);
+			transform-origin: 100% 100%;
 		}
 	}
 
@@ -432,7 +432,7 @@
 			[class*="animation-"] {
 				&,
 				.touch & {
-					.animation-name(none);
+					animation-name: none;
 				}
 			}
 		}

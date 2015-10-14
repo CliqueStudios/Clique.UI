@@ -59,7 +59,7 @@
 	-webkit-overflow-scrolling: touch;
 	background-color: @modal-background;
 	opacity: 0;
-	.transition(opacity 150ms linear);
+	transition: opacity 150ms linear;
 	touch-action: cross-slide-y pinch-zoom double-tap-zoom;
 
 	// Prevents duplicated scrollbar caused by 4.
@@ -79,11 +79,11 @@
 		padding: @modal-dialog-padding;
 		width: @modal-dialog-width;
 		max-width: 100%;
-		.calc(max-width, ~"100% - 20px");
+		max-width: calc(~"100% - 20px");
 		background-color: @modal-dialog-background;
 		opacity: 0;
-		.translateY(-100px);
-		.transition(opacity 300ms linear, transform 300ms ease-out);
+		transform: translateY(-100px);
+		transition: opacity 300ms linear, transform 300ms ease-out;
 		box-shadow: 0 0 10px fade(#000, 30%);
 
 		@media (max-width: @breakpoint-small-max) {
@@ -100,7 +100,7 @@
 
 		.open & {
 			opacity: 1;
-			.translateY(0);
+			transform: translateY(0);
 		}
 
 		&-large {

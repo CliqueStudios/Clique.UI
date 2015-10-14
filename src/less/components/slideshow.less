@@ -70,7 +70,7 @@
 	&-fade {
 
 		&-out {
-			.animation(fade 0.5s linear reverse);
+			animation: fade 0.5s linear reverse;
 		}
 	}
 
@@ -81,20 +81,20 @@
 		&-forward {
 
 			&-in {
-				.animation(slide-right 0.5s ease-in-out);
+				animation: slide-right 0.5s ease-in-out;
 			}
 			&-out {
-				.animation(slide-left 0.5s ease-in-out reverse);
+				animation: slide-left 0.5s ease-in-out reverse;
 			}
 		}
 
 		// Backwards
 		&-backward {
 			&-in {
-				.animation(slide-left 0.5s ease-in-out);
+				animation: slide-left 0.5s ease-in-out;
 			}
 			&-out {
-				.animation(slide-right 0.5s ease-in-out reverse);
+				animation: slide-right 0.5s ease-in-out reverse;
 			}
 		}
 	}
@@ -103,7 +103,7 @@
 	&-scale {
 
 		&-out {
-			.animation(fade-scale-15 0.5s ease-in-out reverse);
+			animation: fade-scale-15 0.5s ease-in-out reverse;
 		}
 	}
 
@@ -113,10 +113,10 @@
 		// Forward
 		&-forward {
 			&-in {
-				.animation(slide-left-33 0.5s ease-in-out);
+				animation: slide-left-33 0.5s ease-in-out;
 			}
 			&-out {
-				.animation(slide-left 0.5s ease-in-out reverse);
+				animation: slide-left 0.5s ease-in-out reverse;
 			}
 		}
 
@@ -124,10 +124,10 @@
 		&-backward {
 
 			&-in {
-				.animation(slide-right-33 0.5s ease-in-out);
+				animation: slide-right-33 0.5s ease-in-out;
 			}
 			&-out {
-				.animation(slide-right 0.5s ease-in-out reverse);
+				animation: slide-right 0.5s ease-in-out reverse;
 			}
 		}
 
@@ -143,7 +143,7 @@
 				right: 0;
 				z-index: 1;
 				background-color: fade(#000, 60%);
-				.animation(fade 0.5s ease-in-out reverse);
+				animation: fade 0.5s ease-in-out reverse;
 			}
 		}
 	}

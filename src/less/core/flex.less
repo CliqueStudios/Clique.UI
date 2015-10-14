@@ -23,7 +23,7 @@
 	// ========================================================================
 
 	&-inline {
-		.display(inline-flex);
+		display: inline-flex;
 
 		.noflex & {
 			display: inline-table;
@@ -45,7 +45,7 @@
 		}
 
 		> * {
-			.flex(0 1 auto);
+			flex: 0 1 auto;
 			-ms-flex-negative: 1;
 		}
 
@@ -61,7 +61,7 @@
 
 	// Vertical alignment
 	&-top {
-		.align-items(flex-start);
+		align-items: flex-start;
 
 		.noflex & {
 			> * {
@@ -71,7 +71,7 @@
 	}
 
 	&-middle {
-		.align-items(center);
+		align-items: center;
 
 		.noflex & {
 			> * {
@@ -81,7 +81,7 @@
 	}
 
 	&-bottom {
-		.align-items(flex-end);
+		align-items: flex-end;
 
 		.noflex & {
 			> * {
@@ -111,10 +111,10 @@
 
 	&-space {
 		&-between {
-			.justify-content(space-between);
+			justify-content: space-between;
 		}
 		&-around {
-			.justify-content(space-around);
+			justify-content: space-around;
 		}
 	}
 
@@ -131,7 +131,7 @@
 		flex-direction: column;
 
 		&-reverse {
-			.flex-direction(column-reverse);
+			flex-direction: column-reverse;
 		}
 	}
 
@@ -142,7 +142,7 @@
 		flex-wrap: wrap;
 
 		&-reverse {
-			.flex-wrap(wrap-reverse);
+			flex-wrap: wrap-reverse;
 		}
 	}
 
@@ -151,64 +151,64 @@
 
 	&-order {
 		&-first {
-			.order(-1);
+			order: -1;
 
 			// Phone landscape and bigger
 			@media (min-width: @breakpoint-small) {
 				&-small {
-					.order(-1);
+					order: -1;
 				}
 			}
 
 			// Tablet and bigger
 			@media (min-width: @breakpoint-medium) {
 				&-medium {
-					.order(-1);
+					order: -1;
 				}
 			}
 
 			// Desktop and bigger
 			@media (min-width: @breakpoint-large) {
 				&-large {
-					.order(-1);
+					order: -1;
 				}
 			}
 
 			// Large screen and bigger
 			@media (min-width: @breakpoint-xlarge) {
 				&-xlarge {
-					.order(-1);
+					order: -1;
 				}
 			}
 		}
 		&-last {
-			.order(99);
+			order: 99;
 
 			// Phone landscape and bigger
 			@media (min-width: @breakpoint-small) {
 				&-small {
-					.order(99);
+					order: 99;
 				}
 			}
 
 			// Tablet and bigger
 			@media (min-width: @breakpoint-medium) {
 				&-medium {
-					.order(-1);
+					order: 99;
 				}
 			}
 
 			// Desktop and bigger
 			@media (min-width: @breakpoint-large) {
 				&-large {
-					.order(-1);
+					order: 99;
 				}
 			}
 
 			// Large screen and bigger
 			@media (min-width: @breakpoint-xlarge) {
 				&-xlarge {
-					.order(-1);
+					order: 99;
 				}
 			}
 		}
@@ -220,65 +220,65 @@
 	&-item {
 
 		&-shrink {
-			.flex(0 1 auto);
+			flex: 0 1 auto;
 
 			// Phone landscape and bigger
 			@media (min-width: @breakpoint-small) {
 				&-small {
-					.flex(0 1 auto);
+					flex: 0 1 auto;
 				}
 			}
 
 			// Tablet and bigger
 			@media (min-width: @breakpoint-medium) {
 				&-medium {
-					.flex(0 1 auto);
+					flex: 0 1 auto;
 				}
 			}
 
 			// Desktop and bigger
 			@media (min-width: @breakpoint-large) {
 				&-large {
-					.flex(0 1 auto);
+					flex: 0 1 auto;
 				}
 			}
 
 			// Large screen and bigger
 			@media (min-width: @breakpoint-xlarge) {
 				&-xlarge {
-					.flex(0 1 auto);
+					flex: 0 1 auto;
 				}
 			}
 		}
 
 		&-grow {
-			.flex(1 0 auto);
+			flex: 1 0 auto;
 
 			// Phone landscape and bigger
 			@media (min-width: @breakpoint-small) {
 				&-small {
-					.flex(1 0 auto);
+					flex: 1 0 auto;
 				}
 			}
 
 			// Tablet and bigger
 			@media (min-width: @breakpoint-medium) {
 				&-medium {
-					.flex(1 0 auto);
+					flex: 1 0 auto;
 				}
 			}
 
 			// Desktop and bigger
 			@media (min-width: @breakpoint-large) {
 				&-large {
-					.flex(1 0 auto);
+					flex: 1 0 auto;
 				}
 			}
 
 			// Large screen and bigger
 			@media (min-width: @breakpoint-xlarge) {
 				&-xlarge {
-					.flex(1 0 auto);
+					flex: 1 0 auto;
 				}
 			}
 		}

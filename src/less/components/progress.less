@@ -68,7 +68,7 @@
 		height: 100%;
 		background-color: @progress-bar-background;
 		float: left;
-		.transition(width 600ms ease);
+		transition: width 600ms ease;
 		font-size: @progress-bar-font-size;
 		line-height: @progress-bar-line-height;
 		color: @progress-bar-color;
@@ -92,10 +92,10 @@
 
 		&-striped {
 			.background-image(linear-gradient(-45deg, fade(#fff, 15%) 25%, transparent 25%, transparent 50%, fade(#fff, 15%) 50%, fade(#fff, 15%) 75%, transparent 75%, transparent));
-			.background-size(30px 30px);
+			background-size: 30px 30px;
 
 			&.active {
-				.animation(progress-bar-stripes 2s linear infinite);
+				animation: progress-bar-stripes 2s linear infinite;
 			}
 		}
 	}
