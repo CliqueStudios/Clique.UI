@@ -17,8 +17,33 @@
 					<h2 class="article-title">Dropdown</h2>
 				</header>
 				<section class="article-body">
-					<div class="alert">
-						<p>Add content here</p>
+					<div class="dropdown-button" data-dropdown>
+						<button class="button">Hover</button>
+						<div class="dropdown">
+							<ul class="nav nav-dropdown">
+								<li><a href="#">Item</a></li>
+								<li><a href="#">Another item</a></li>
+								<li class="nav-header">Header</li>
+								<li><a href="#">Item</a></li>
+								<li><a href="#">Another item</a></li>
+								<li class="nav-divider"></li>
+								<li><a href="#">Separated item</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="dropdown-button" data-dropdown="{trigger:'click'}">
+						<button class="button">On Click</button>
+						<div class="dropdown">
+							<ul class="nav nav-dropdown">
+								<li><a href="#">Item</a></li>
+								<li><a href="#">Another item</a></li>
+								<li class="nav-header">Header</li>
+								<li><a href="#">Item</a></li>
+								<li><a href="#">Another item</a></li>
+								<li class="nav-divider"></li>
+								<li><a href="#">Separated item</a></li>
+							</ul>
+						</div>
 					</div>
 				</section>
 			</article>
@@ -27,5 +52,6 @@
 
 	<script src="../resources/js/jquery.js"></script>
 	<script src="../../../dist/js/clique.js"></script>
+	<script src="../../../dist/js/core/dropdown.js"></script>
 </body>
 </html>
