@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 	<link rel="stylesheet" href="../../../dist/css/clique.css">
+	<link rel="stylesheet" href="../../../dist/css/components/nestable.css">
 	<link rel="stylesheet" href="../resources/css/tests.css">
 </head>
 <body>
@@ -17,9 +18,29 @@
 					<h2 class="article-title">Nestable</h2>
 				</header>
 				<section class="article-body">
-					<div class="alert">
-						<p>Add content here</p>
-					</div>
+					<ul class="nestable" data-nestable>
+						<li>
+							<div class="nestable-item">
+								<div class="nestable-handle"></div>
+								<div data-nestable-action="toggle"></div>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, eum.
+							</div>
+						</li>
+						<li>
+							<div class="nestable-item">
+								<div class="nestable-handle"></div>
+								<div data-nestable-action="toggle"></div>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, eum.
+							</div>
+						</li>
+						<li>
+							<div class="nestable-item">
+								<div class="nestable-handle"></div>
+								<div data-nestable-action="toggle"></div>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, eum.
+							</div>
+						</li>
+					</ul>
 				</section>
 			</article>
 		</div>
@@ -27,5 +48,6 @@
 
 	<script src="../resources/js/jquery.js"></script>
 	<script src="../../../dist/js/clique.js"></script>
+	<script src="../../../dist/js/components/nestable.js"></script>
 </body>
 </html>

@@ -17,8 +17,12 @@
 					<h2 class="article-title">Modal</h2>
 				</header>
 				<section class="article-body">
-					<div class="alert">
-						<p>Add content here</p>
+					<button class="button" data-modal="{target:'#modal'}">Open from a button</button>
+					<div id="modal" class="modal">
+						<div class="modal-dialog">
+							<a href="#" class="modal-close close"></a>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia nam eius impedit, harum, ducimus dolore ratione iste quis iure, magni porro ipsam delectus laborum vitae!
+						</div>
 					</div>
 				</section>
 			</article>
@@ -27,5 +31,6 @@
 
 	<script src="../resources/js/jquery.js"></script>
 	<script src="../../../dist/js/clique.js"></script>
+	<script src="../../../dist/js/core/modal.js"></script>
 </body>
 </html>
