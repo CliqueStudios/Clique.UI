@@ -7,3 +7,6 @@
 4. Better/more unit & functional tests
 5. Continuous integration (via [Travis CI](https://travis-ci.org/))
 6. Drop IE9 Support
+
+###New Modules:
+1. SVG (based on [D3](http://d3js.org/), [SVGJS](http://svgjs.com/), [SnapSVG](http://snapsvg.io/))
