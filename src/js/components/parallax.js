@@ -93,16 +93,15 @@ checkParallaxes = function() {
 	scrolltop = _c.$win.scrollTop();
 	return _c.support.requestAnimationFrame.apply(window, [
 		function() {
-			var i, _results;
-			i = 0;
-			_results = [];
+			var i = 0;
+			var _results = [];
 			while (i < parallaxes.length) {
 				parallaxes[i].process();
 				_results.push(i++);
 			}
 			return _results;
 		}
-		]);
+	]);
 };
 _c.component('parallax', {
 	defaults: {
